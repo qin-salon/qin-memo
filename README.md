@@ -1,9 +1,7 @@
-# Next.js starter template.
+# Qin Memo
 
 - Next.js
 - TypeScript
 - ESLint
 - Prettier
 - Jest
-- Sass
-- ress (CSS reset)
