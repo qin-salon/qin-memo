@@ -1,4 +1,7 @@
 # Qin Memo
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
 
@@ -112,3 +115,23 @@ yarn start // localhost:3000 で立ち上がります。dev中はportを変え�
 - 例: feature/lightsound-add-about-page
 
 `main`, `develop`, `hotfix` に直接 push してはいけません。基本的に皆さんが触って良いのは `feature/あなたのGitHub名_*` ブランチだけです。
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://youtube.com/c/shimabu_it"><img src="https://avatars2.githubusercontent.com/u/8220973?v=4?s=100" width="100px;" alt=""/><br /><sub><b>しまぶー</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=lightsound" title="Documentation">📖</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
