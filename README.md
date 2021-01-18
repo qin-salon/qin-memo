@@ -2,13 +2,22 @@
 
 ## 使用技術
 
-- React
-- Next.js
-- TypeScript
-- ESLint
-- Prettier
-- Jest
-- GitMoji 😜
+- [React](https://ja.reactjs.org/)
+  - 言わずとしれた Facebook 製 UI ライブラリ。
+- [Next.js](https://nextjs.org/)
+  - React のフレームワーク。純粋な React だけで構築するとしんどい部分を簡単にしてくれます。最も将来性が高いと思っている技術です。
+- [TypeScript](https://www.typescriptlang.org/)
+  - 型を使うことでバグを防いだり、ドキュメント代わりになったり、チーム開発がスムースになります。
+- [ESLint](https://eslint.org/)
+  - コードを分析し問題点を指摘してくれるツールです。これがあることでメンバー同士のコード差異が少なくなったり、独自ルールを追加して書き方を統一できます。
+- [Prettier](https://prettier.io/)
+  - コードフォーマッターです。改行やクォーテーションなどを統一できます。ESLint とあわせて使うのが一般的で、ESLint だけでは実現できない部分をカバーします。
+- [Jest](https://jestjs.io/ja/)
+  - Facebook 製の JavaScript のテスティングフレームワークです。テストに関する様々な機能を提供しており、ドキュメントも豊富かつ実績もあるため、採用しています。
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+  - React "Components"をテストするためのものです。[Jest 公式](https://jestjs.io/docs/ja/tutorial-react#dom-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)でもコンポーネントをテストしたい場合に使えるものだと言及されています。
+- [GitMoji](https://gitmoji.dev/) 😜
+  - Commit メッセージに絵文字を使うことでパッと見で分かりやすくするものです。
 
 ## セットアップ
 
@@ -32,12 +41,16 @@ npm -v
 npm install -g yarn
 ```
 
-npm が入っていなかった方は Node.js も入っていないと思うので、[こちら](https://www.npmjs.com/get-npm)から Node.js をインストールしてください。npm は Node.js とともに配布されるため、Node.js をインストールしたら npm も自動的にインストールされます。その後、yarn をインストールしてください。
+npm が入っていなかった方は Node.js も入っていないと思うので、まずは Node.js をインストールしてください。インストール方法はたくさんありますが、[VOLTA](https://volta.sh/)をオススメしております。VOLTA のサイトを参考に Node.js をインストールしてください。
+
+npm は Node.js とともに配布されるため、Node.js をインストールしたら npm も自動的にインストールされます。その後、yarn をインストールしてください。
 
 ### ② VS Code 拡張機能のインストール
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 - [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+
+上記の拡張機能をいれることで、保存時に自動で ESLint(+Prettier) が走り、コードを整形してくれます。
 
 ### ③ リポジトリのクローン
 
@@ -74,10 +87,28 @@ yarn build
 yarn start // localhost:3000 で立ち上がります。dev中はportを変える必要があります。
 ```
 
-## Git ブランチ戦略
+## Git ブランチルール
 
-考え中。
+`main`
 
-## 貢献者
+- マージされると本番に自動反映されます。
 
-考え中。
+`develop`
+
+- 本番反映前に確認するための環境（ステージング環境）。
+- 常駐しているブランチで、feature からの変更を受け付け、main にマージする。
+
+`hotfix`
+
+- 本番で発生した緊急のバグに対処するためのブランチ。
+- 必ず main から分岐し、main と develop にマージする。
+
+`feature/あなたのGitHub名_*`
+
+- 開発にはここを用いる。
+- 必ず develop から分岐し、develop にマージする。
+- 「あなたの GitHub 名」にはアカウント名を入力。
+- `*` は開発するものを簡易的に記入。
+- 例: feature/lightsound_add_about_page
+
+`main`, `develop`, `hotfix` に直接 push してはいけません。基本的に皆さんが触って良いのは `feature/あなたのGitHub名_*` ブランチだけです。
