@@ -125,7 +125,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://youtube.com/c/shimabu_it"><img src="https://avatars2.githubusercontent.com/u/8220973?v=4?s=100" width="100px;" alt=""/><br /><sub><b>しまぶー</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=lightsound" title="Documentation">📖</a> <a href="#projectManagement-lightsound" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://youtube.com/c/shimabu_it"><img src="https://avatars2.githubusercontent.com/u/8220973?v=4?s=100" width="100px;" alt=""/><br /><sub><b>しまぶー</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=lightsound" title="Documentation">📖</a> <a href="#projectManagement-lightsound" title="Project Management">📆</a> <a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Alightsound" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/satoru-hirai"><img src="https://avatars2.githubusercontent.com/u/62086450?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sa hi</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=satoru-hirai" title="Code">💻</a></td>
   </tr>
 </table>
