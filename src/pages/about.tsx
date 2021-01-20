@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { Layout } from "src/components/layout";
+import { ClsxSample } from "src/components/sample/clsxSample";
 
 const About = () => {
   return (
@@ -9,6 +10,8 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2>About</h2>
+      <ClsxSample>clsxサンプル</ClsxSample>
+      <ClsxSample bold>clsxサンプル(propsに応じてスタイル変更)</ClsxSample>
     </Layout>
   );
 };
