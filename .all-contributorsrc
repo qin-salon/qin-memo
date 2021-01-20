@@ -13,6 +13,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "satoru-hirai",
+      "name": "sa hi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/62086450?v=4",
+      "profile": "https://github.com/satoru-hirai",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
