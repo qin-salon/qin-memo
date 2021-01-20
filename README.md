@@ -1,6 +1,6 @@
 # Qin Memo
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -126,6 +126,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://youtube.com/c/shimabu_it"><img src="https://avatars2.githubusercontent.com/u/8220973?v=4?s=100" width="100px;" alt=""/><br /><sub><b>しまぶー</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=lightsound" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/satoru-hirai"><img src="https://avatars2.githubusercontent.com/u/62086450?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sa hi</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=satoru-hirai" title="Code">💻</a></td>
   </tr>
 </table>
 
