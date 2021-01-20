@@ -24,6 +24,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "ippo012",
+      "name": "Ippo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/9071515?v=4",
+      "profile": "https://github.com/ippo012",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
