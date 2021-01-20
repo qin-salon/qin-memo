@@ -9,3 +9,16 @@ body {
 main {
   background-color: peachpuff;
 }
+select {
+  font-size: 30px;
+}
+
+/* Dark Mode確認用 */
+[data-theme="dark"] body {
+  margin: 0;
+  color: #fff;
+  background: #303030;
+}
+[data-theme="dark"] main {
+  background-color: #424242;
+}
