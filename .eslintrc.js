@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: { ecmaVersion: 2021, sourceType: "module", ecmaFeatures: { jsx: true } },
   settings: { react: { version: "detect" } },
   env: { es2021: true, browser: true, jest: true, node: true },
-  plugins: ["import", "simple-import-sort", "react-hooks"],
+  plugins: ["import", "simple-import-sort", "react-hooks", "prefer-arrow"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -38,6 +38,14 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": [
       "error",
       { components: ["Link"], specialLink: ["hrefLeft", "hrefRight"], aspects: ["invalidHref", "preferButton"] },
+    ],
+    "prefer-arrow/prefer-arrow-functions": [
+      "error",
+      {
+        disallowPrototype: true,
+        singleReturnOnly: false,
+        classPropertiesAllowed: false,
+      },
     ],
   },
   overrides: [
