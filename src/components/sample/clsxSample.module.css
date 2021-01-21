@@ -1,0 +1,12 @@
+/* cslxの動作確認用なのでtailwindが導入されたら書き換えて削除 */
+.sample {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 9999px;
+  background-color: #3d75fc;
+  color: #fff;
+}
+
+.bold {
+  font-weight: bold;
+}

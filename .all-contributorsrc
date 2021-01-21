@@ -33,6 +33,24 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "reachscript-jak",
+      "name": "Takumi Okada",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/44320334?v=4",
+      "profile": "https://freelance-jak.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mike3104",
+      "name": "mike",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/64879464?v=4",
+      "profile": "https://github.com/mike3104",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

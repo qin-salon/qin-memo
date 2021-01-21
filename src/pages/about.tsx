@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Layout } from "src/components/layout";
+import { ClsxSample } from "src/components/sample/clsxSample";
 
 const About = () => {
   const [mounted, setMounted] = useState(false);
@@ -23,6 +24,7 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2>About</h2>
+
       <p>the current theme is: {theme}</p>
       <select
         onBlur={(selectedOptinon) => {
@@ -39,6 +41,8 @@ const About = () => {
           Light
         </option>
       </select>
+      <ClsxSample>clsxサンプル</ClsxSample>
+      <ClsxSample bold>clsxサンプル(propsに応じてスタイル変更)</ClsxSample>
     </Layout>
   );
 };

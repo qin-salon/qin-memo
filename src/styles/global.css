@@ -1,24 +1,21 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
 #__next {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
-body {
-  margin: 0;
-}
-main {
-  background-color: peachpuff;
-}
-select {
-  font-size: 30px;
-}
 
-/* Dark Mode確認用 */
-[data-theme="dark"] body {
-  margin: 0;
-  color: #fff;
-  background: #303030;
-}
-[data-theme="dark"] main {
-  background-color: #424242;
-}
+/* Write your own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
