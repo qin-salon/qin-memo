@@ -1,11 +1,21 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+@tailwind components;
+/* Stop purging. */
+
 #__next {
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
-body {
-  margin: 0;
-}
-main {
-  background-color: peachpuff;
-}
+
+/* Write your own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */
