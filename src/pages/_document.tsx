@@ -12,7 +12,7 @@ class MyDocument extends Document {
         <Head>
           <meta name="description" content="Hello, World!" />
         </Head>
-        <body>
+        <body className="bg-white text-black dark:bg-black dark:text-white">
           <Main />
           <NextScript />
         </body>

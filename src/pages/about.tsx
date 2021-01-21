@@ -1,22 +1,9 @@
 import Head from "next/head";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { Layout } from "src/components/layout";
 import { ClsxSample } from "src/components/sample/clsxSample";
+import { ThermeChangerSample } from "src/components/sample/themeChangerSample";
 
 const About = () => {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => {
-    return setMounted(true);
-  }, []);
-
-  const handleThemeChange = (value: string) => {
-    setTheme(value);
-  };
-  if (!mounted) return null;
-
   return (
     <Layout>
       <Head>
@@ -24,25 +11,9 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2>About</h2>
-
-      <p>the current theme is: {theme}</p>
-      <select
-        onBlur={(selectedOptinon) => {
-          return handleThemeChange(selectedOptinon.target.value);
-        }}
-        onChange={(selectedOptinon) => {
-          return handleThemeChange(selectedOptinon.target.value);
-        }}
-      >
-        <option selected={theme === "dark"} value="dark">
-          Dark
-        </option>
-        <option selected={theme === "light"} value="light">
-          Light
-        </option>
-      </select>
       <ClsxSample>clsxサンプル</ClsxSample>
       <ClsxSample bold>clsxサンプル(propsに応じてスタイル変更)</ClsxSample>
+      <ThermeChangerSample />
     </Layout>
   );
 };
