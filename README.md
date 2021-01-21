@@ -1,6 +1,6 @@
 # Qin Memo
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -129,6 +129,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/satoru-hirai"><img src="https://avatars2.githubusercontent.com/u/62086450?v=4?s=100" width="100px;" alt=""/><br /><sub><b>sa hi</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=satoru-hirai" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ippo012"><img src="https://avatars3.githubusercontent.com/u/9071515?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ippo</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Aippo012" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://freelance-jak.com/"><img src="https://avatars3.githubusercontent.com/u/44320334?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Takumi Okada</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=reachscript-jak" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mike3104"><img src="https://avatars2.githubusercontent.com/u/64879464?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mike</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=mike3104" title="Code">💻</a></td>
   </tr>
 </table>
 
