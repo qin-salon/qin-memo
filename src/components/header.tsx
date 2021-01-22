@@ -3,6 +3,7 @@ import Link from "next/link";
 const items = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/mock-test", label: "MockTest" },
 ];
 
 export const Header = () => {
