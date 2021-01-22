@@ -6,7 +6,7 @@ import { ThemeProvider } from "next-themes";
 const App = (props: AppProps) => {
   return (
     <ThemeProvider attribute="class" disableTransitionOnChange>
-      <props.Component {...props.pageProps} />;
+      <props.Component {...props.pageProps} />
     </ThemeProvider>
   );
 };
