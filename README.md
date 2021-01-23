@@ -1,7 +1,7 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -138,6 +138,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/Takanaka123"><img src="https://avatars.githubusercontent.com/u/76854640?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Takanaka123</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=Takanaka123" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/abc123931"><img src="https://avatars.githubusercontent.com/u/15182311?v=4?s=100" width="100px;" alt=""/><br /><sub><b>abc123931</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Aabc123931" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
