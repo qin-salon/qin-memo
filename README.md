@@ -1,9 +1,7 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -137,6 +135,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mike3104"><img src="https://avatars2.githubusercontent.com/u/64879464?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mike</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=mike3104" title="Code">💻</a></td>
     <td align="center"><a href="https://fe-notes.work/"><img src="https://avatars.githubusercontent.com/u/38152917?v=4?s=100" width="100px;" alt=""/><br /><sub><b>reeve0930</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=reeve0930" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/magatakohei"><img src="https://avatars.githubusercontent.com/u/65271262?v=4?s=100" width="100px;" alt=""/><br /><sub><b>magako</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=magatakohei" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Takanaka123"><img src="https://avatars.githubusercontent.com/u/76854640?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Takanaka123</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=Takanaka123" title="Documentation">📖</a></td>
   </tr>
 </table>
 
