@@ -51,6 +51,8 @@ npm が入っていなかった方は Node.js も入っていないと思うの�
 
 npm は Node.js とともに配布されるため、Node.js をインストールしたら npm も自動的にインストールされます。その後、yarn をインストールしてください。
 
+Next.js のインストールは、④ 依存関係のインストールの yarn で実行されるので、npx 等でインストールする必要はありません。
+
 ### ② VS Code 拡張機能のインストール
 
 - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
