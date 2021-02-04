@@ -7,7 +7,7 @@
 /* eslint-disable */
 /* tslint:disable */
 
-const INTEGRITY_CHECKSUM = '7a54d6f8bbbda3fb393dcd9176d1fd19'
+const INTEGRITY_CHECKSUM = 'dc3d39c97ba52ee7fff0d667f7bc098c'
 const bypassHeaderName = 'x-msw-bypass'
 
 let clients = {}
@@ -22,7 +22,17 @@ self.addEventListener('activate', async function (event) {
 
 self.addEventListener('message', async function (event) {
   const clientId = event.source.id
-  const client = await event.currentTarget.clients.get(clientId)
+
+  if (!clientId || !self.clients) {
+    return
+  }
+
+  const client = await self.clients.get(clientId)
+
+  if (!client) {
+    return
+  }
+
   const allClients = await self.clients.matchAll()
   const allClientIds = allClients.map((client) => client.id)
 
@@ -99,7 +109,7 @@ self.addEventListener('fetch', function (event) {
 
   event.respondWith(
     new Promise(async (resolve, reject) => {
-      const client = await event.target.clients.get(clientId)
+      const client = await self.clients.get(clientId)
 
       // Bypass mocking when the request client is not active.
       if (!client) {
@@ -190,17 +200,19 @@ If you wish to mock an error response, please refer to this guide: https://mswjs
       }
     })
       .then(async (response) => {
-        const client = await event.target.clients.get(clientId)
+        const client = await self.clients.get(clientId)
         const clonedResponse = response.clone()
 
         sendToClient(client, {
           type: 'RESPONSE',
           payload: {
             requestId,
+            type: clonedResponse.type,
             ok: clonedResponse.ok,
             status: clonedResponse.status,
             statusText: clonedResponse.statusText,
-            body: await clonedResponse.text(),
+            body:
+              clonedResponse.body === null ? null : await clonedResponse.text(),
             headers: serializeHeaders(clonedResponse.headers),
             redirected: clonedResponse.redirected,
           },
