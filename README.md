@@ -1,9 +1,7 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -50,6 +48,8 @@ npm install -g yarn
 npm が入っていなかった方は Node.js も入っていないと思うので、まずは Node.js をインストールしてください。インストール方法はたくさんありますが、[VOLTA](https://volta.sh/)をオススメしております。VOLTA のサイトを参考に Node.js をインストールしてください。
 
 npm は Node.js とともに配布されるため、Node.js をインストールしたら npm も自動的にインストールされます。その後、yarn をインストールしてください。
+
+Next.js のインストールは、④ 依存関係のインストールの yarn で実行されるので、npx 等でインストールする必要はありません。
 
 ### ② VS Code 拡張機能のインストール
 
@@ -135,6 +135,10 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/mike3104"><img src="https://avatars2.githubusercontent.com/u/64879464?v=4?s=100" width="100px;" alt=""/><br /><sub><b>mike</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=mike3104" title="Code">💻</a></td>
     <td align="center"><a href="https://fe-notes.work/"><img src="https://avatars.githubusercontent.com/u/38152917?v=4?s=100" width="100px;" alt=""/><br /><sub><b>reeve0930</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=reeve0930" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/magatakohei"><img src="https://avatars.githubusercontent.com/u/65271262?v=4?s=100" width="100px;" alt=""/><br /><sub><b>magako</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=magatakohei" title="Code">💻</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/Takanaka123"><img src="https://avatars.githubusercontent.com/u/76854640?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Takanaka123</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=Takanaka123" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/abc123931"><img src="https://avatars.githubusercontent.com/u/15182311?v=4?s=100" width="100px;" alt=""/><br /><sub><b>abc123931</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Aabc123931" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 

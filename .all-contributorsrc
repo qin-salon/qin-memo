@@ -69,6 +69,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Takanaka123",
+      "name": "Takanaka123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76854640?v=4",
+      "profile": "https://github.com/Takanaka123",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "abc123931",
+      "name": "abc123931",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15182311?v=4",
+      "profile": "https://github.com/abc123931",
+      "contributions": [
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
