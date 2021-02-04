@@ -10,7 +10,8 @@
     "lint": "eslint . --ext ts --ext tsx --ext js",
     "type-check": "tsc --pretty --noEmit",
     "test": "jest",
-    "test-all": "yarn lint && yarn type-check && yarn test"
+    "test-all": "yarn lint && yarn type-check && yarn test",
+    "msw": "msw init public"
   },
   "husky": {
     "hooks": {
