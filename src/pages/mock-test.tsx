@@ -1,34 +1,25 @@
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
 import type { VFC } from "react";
-import { useState } from "react";
 import { Layout } from "src/components/layout";
+import useSWR from "swr";
 
-type Book = {
-  title: string;
-  description: string;
+type Post = { id: string; body: string };
+type User = { id: string; name: string; img: string };
+
+export const getServerSideProps: GetServerSideProps<{ posts: Post[] }> = async () => {
+  const res = await fetch("https://demo.qin/posts");
+  const posts = await res.json();
+  return { props: { posts } };
 };
 
-type Review = {
-  id: string;
-  text: string;
-  author: string;
-};
-
-export const getServerSideProps: GetServerSideProps<{ book: Book }> = async () => {
-  const res = await fetch("https://my.backend/book");
-  const book = await res.json();
-  return { props: { book } };
-};
-
-const MockTest: VFC<{ book: Book }> = (props) => {
-  const [reviews, setReviews] = useState<Review[]>();
-
-  const handleGetReviews = async () => {
-    const res = await fetch("/reviews");
-    const reviews = await res.json();
-    setReviews(reviews);
-  };
+const MockTest: VFC<{ posts: Post[] }> = (props) => {
+  const { data: posts, error: postsError } = useSWR<Post[]>("https://demo.qin/posts", {
+    initialData: props.posts,
+  });
+  const { data: user, error: userError } = useSWR<User>("https://demo.qin/user");
+  if (postsError || userError) return <div>failed to load</div>;
+  if (!posts || !user) return <div>loading...</div>;
 
   return (
     <Layout>
@@ -37,22 +28,18 @@ const MockTest: VFC<{ book: Book }> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>{props.book.title}</h1>
-      <p>{props.book.description}</p>
-      <button onClick={handleGetReviews}>Load reviews</button>
+      <h1>{user.name}</h1>
+      <img src={user.img} alt={user.name} />
 
-      {reviews ? (
-        <ul>
-          {reviews.map((review) => {
-            return (
-              <li key={review.id}>
-                <p>{review.text}</p>
-                <p>{review.author}</p>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
+      <ul className="p-8 grid gap-8">
+        {posts.map((post) => {
+          return (
+            <li key={post.id}>
+              <p>{post.body}</p>
+            </li>
+          );
+        })}
+      </ul>
     </Layout>
   );
 };
