@@ -39,12 +39,5 @@ module.exports = {
       { components: ["Link"], specialLink: ["hrefLeft", "hrefRight"], aspects: ["invalidHref", "preferButton"] },
     ],
   },
-  overrides: [
-    {
-      files: ["src/pages/**/*.tsx"],
-      rules: {
-        "import/no-default-export": "off",
-      },
-    },
-  ],
+  overrides: [{ files: ["src/pages/**/*.tsx"], rules: { "import/no-default-export": "off" } }],
 };
