@@ -1,23 +1,21 @@
+import type { ListedPost, User } from "libs/mocks/handlers";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import type { VFC } from "react";
 import { Layout } from "src/components/layout";
 import useSWR from "swr";
 
-type Post = { id: string; body: string };
-type User = { id: string; name: string; img: string };
-
-export const getStaticProps: GetStaticProps<{ posts: Post[] }> = async () => {
-  const res = await fetch("https://demo.qin/posts");
+export const getStaticProps: GetStaticProps<{ posts: ListedPost[] }> = async () => {
+  const res = await fetch("https://demo.qin/notes");
   const posts = await res.json();
   return { props: { posts } };
 };
 
-const MockTest: VFC<{ posts: Post[] }> = (props) => {
-  const { data: posts, error: postsError } = useSWR<Post[]>("https://demo.qin/posts", {
+const MockTest: VFC<{ posts: ListedPost[] }> = (props) => {
+  const { data: posts, error: postsError } = useSWR<ListedPost[]>("https://demo.qin/notes", {
     initialData: props.posts,
   });
-  const { data: user, error: userError } = useSWR<User>("https://demo.qin/user");
+  const { data: user, error: userError } = useSWR<User>(`https://demo.qin/users/${"foo"}`);
   if (postsError || userError) return <div>failed to load</div>;
 
   return (
@@ -27,28 +25,26 @@ const MockTest: VFC<{ posts: Post[] }> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {user ? (
+      <div className="p-2">
         <div>
-          <h1>{user.name}</h1>
-          <img src={user.img} alt={user.name} />
+          <h1>{user?.name ?? "...Loading"}</h1>
+          <img src={user?.profileImage} alt={user?.name} width={200} height={200} />
         </div>
-      ) : (
-        <div>...loading</div>
-      )}
 
-      {posts ? (
-        <ul className="p-8 grid gap-8">
-          {posts.map((post) => {
-            return (
-              <li key={post.id}>
-                <p>{post.body}</p>
-              </li>
-            );
-          })}
+        <ul className="mt-4 grid gap-2">
+          {posts ? (
+            posts.map((post) => {
+              return (
+                <li key={post.id}>
+                  <p>{post.excerpt}</p>
+                </li>
+              );
+            })
+          ) : (
+            <div>...loading</div>
+          )}
         </ul>
-      ) : (
-        <div>...loading</div>
-      )}
+      </div>
     </Layout>
   );
 };
