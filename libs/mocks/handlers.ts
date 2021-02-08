@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-const ORIGIN = "https://demo.qin";
+export const ORIGIN = "https://my.backend";
 const random = (num?: number) => {
   return Math.floor(Math.random() * (num ?? 2000));
 };
