@@ -2,21 +2,30 @@ import { rest } from "msw";
 
 export const handlers = [
   rest.get("https://demo.qin/login", (req, res, ctx) => {
-    return res(ctx.status(200));
+    return res(ctx.status(200), ctx.delay(1000));
   }),
   rest.get("https://demo.qin/me", (req, res, ctx) => {
     const isAuthenticated = true;
     if (!isAuthenticated) {
       return res(ctx.status(403), ctx.json({ errorMessage: "Not authorized" }));
     }
-    return res(ctx.status(200), ctx.json({ id: "fjdajfiasj", name: "ゲームボーイ", img: "/img/dummy/user1.png" }));
+    return res(
+      ctx.status(200),
+      ctx.delay(1000),
+      ctx.json({ id: "fjdajfiasj", name: "ゲームボーイ", img: "/img/dummy/user1.png" })
+    );
   }),
   rest.get("https://demo.qin/user", (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ id: "fdsjafiooo", name: "イカちゃん", img: "/img/dummy/user2.png" }));
+    return res(
+      ctx.status(200),
+      ctx.delay(1000),
+      ctx.json({ id: "fdsjafiooo", name: "イカちゃん", img: "/img/dummy/user2.png" })
+    );
   }),
   rest.get("https://demo.qin/posts", (req, res, ctx) => {
     return res(
       ctx.status(200),
+      ctx.delay(500),
       ctx.json([
         {
           id: "fdjaifdaff",
