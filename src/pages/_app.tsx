@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { SWRConfig } from "swr";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-  require("libs/mocks");
+  require("src/mocks");
 }
 
 const fetcher = async (input: RequestInfo, init?: RequestInit) => {

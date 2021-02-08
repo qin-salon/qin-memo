@@ -1,9 +1,9 @@
-import type { ListedPost, User } from "libs/mocks/handlers";
-import { ORIGIN } from "libs/mocks/handlers";
 import type { GetStaticProps } from "next";
 import Head from "next/head";
 import type { VFC } from "react";
 import { Layout } from "src/components/layout";
+import type { ListedPost, User } from "src/mocks/handlers";
+import { ORIGIN } from "src/mocks/handlers";
 import useSWR from "swr";
 
 export const getStaticProps: GetStaticProps<{ posts: ListedPost[] }> = async () => {
