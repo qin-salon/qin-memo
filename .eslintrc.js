@@ -7,11 +7,11 @@ module.exports = {
   plugins: ["import", "simple-import-sort", "react-hooks"],
   extends: [
     "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "prettier",
-    "prettier/@typescript-eslint",
   ],
   rules: {
     "no-console": ["error", { allow: ["warn", "info", "error"] }],
@@ -23,6 +23,15 @@ module.exports = {
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/display-name": "error",
+    "react/jsx-handler-names": [
+      "error",
+      {
+        eventHandlerPrefix: "handle",
+        eventHandlerPropPrefix: "on",
+        checkLocalVariables: true,
+        checkInlineFunction: true,
+      },
+    ],
     "react/destructuring-assignment": ["error", "never"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
@@ -39,12 +48,5 @@ module.exports = {
       { components: ["Link"], specialLink: ["hrefLeft", "hrefRight"], aspects: ["invalidHref", "preferButton"] },
     ],
   },
-  overrides: [
-    {
-      files: ["src/pages/**/*.tsx"],
-      rules: {
-        "import/no-default-export": "off",
-      },
-    },
-  ],
+  overrides: [{ files: ["src/pages/**/*.tsx"], rules: { "import/no-default-export": "off" } }],
 };

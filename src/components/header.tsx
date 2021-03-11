@@ -8,16 +8,14 @@ const items = [
 
 export const Header = () => {
   const { theme, setTheme } = useTheme();
+  const handleClick = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
   return (
     <header>
       <div className="bg-white dark:bg-gray-800">
         <h1 className="text-gray-900 dark:text-white">Title</h1>
-        <button
-          className="text-white dark:text-gray-900 bg-gray-800 dark:bg-white"
-          onClick={() => {
-            setTheme(theme === "light" ? "dark" : "light");
-          }}
-        >
+        <button className="text-white dark:text-gray-900 bg-gray-800 dark:bg-white" onClick={handleClick}>
           Change Theme
         </button>
         <nav>
