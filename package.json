@@ -13,8 +13,7 @@
     "fix:eslint": "npm run lint:eslint -- --fix",
     "fix:prettier": "npm run lint:prettier -- --write",
     "test": "run-p -l -c --aggregate-output lint:* unit",
-    "unit": "jest",
-    "msw": "msw init public / --save"
+    "unit": "jest"
   },
   "babel": {
     "presets": [
