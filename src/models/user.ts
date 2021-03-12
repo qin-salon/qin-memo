@@ -10,7 +10,7 @@ export const hasName = (user: UserPutRequest): user is User | Pick<User, "id" | 
   return "name" in user;
 };
 
-export const hasAvatarUrl = (user: UserPutRequest): user is User | Pick<User, "id" | "name"> => {
+export const hasAvatarUrl = (user: UserPutRequest): user is User | Pick<User, "id" | "avatarUrl"> => {
   return "avatarUrl" in user;
 };
 
