@@ -6,7 +6,7 @@ import type { SearchHistory } from "src/models/searchHistory";
 export const notesHandlers = [
   // 新しいメモを作成する
   rest.post<string, { id: string }, never>("/notes", (_req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200), ctx.json({ id: "foo" }));
+    return res(ctx.delay(1000), ctx.status(201), ctx.json({ id: "foo" }));
   }),
 
   // 特定のメモの情報を取得する

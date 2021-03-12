@@ -13,7 +13,7 @@ export const searchHistoriesHandlers = [
     const body: Pick<SearchHistory, "keyword"> = JSON.parse(req.body);
     // eslint-disable-next-line no-console
     console.log(body.keyword);
-    return res(ctx.delay(1000), ctx.status(200), ctx.json({ id: "foo" }));
+    return res(ctx.delay(1000), ctx.status(201), ctx.json({ id: "foo" }));
   }),
 
   // 自分の特定の検索履歴を削除する

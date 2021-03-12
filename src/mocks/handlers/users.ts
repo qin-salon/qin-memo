@@ -5,7 +5,7 @@ import { EXAMPLE_USER_01, EXAMPLE_USER_02 } from "src/models/user";
 export const usersHandlers = [
   // ユーザーを作成する
   rest.post<string, User, never>("/users", (_req, res, ctx) => {
-    return res(ctx.delay(1000), ctx.status(200), ctx.json(EXAMPLE_USER_01));
+    return res(ctx.delay(1000), ctx.status(201), ctx.json(EXAMPLE_USER_01));
   }),
 
   // 特定のユーザーの情報を取得する
