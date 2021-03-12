@@ -1,17 +1,17 @@
 export type Note = {
-  id: number;
+  id: string;
   content: string;
   public: boolean;
 };
 
 export type ListNote = {
-  id: number;
+  id: string;
   excerpt: string;
   public: boolean;
 };
 
 export const EXAMPLE_NOTE: Note = {
-  id: 123,
+  id: "123",
   content: `書籍を使って学ぶのは本当に必要なのか考察
 
 メリット
@@ -28,29 +28,29 @@ export const EXAMPLE_NOTE: Note = {
   public: false,
 };
 
-export const EXAMPLE_NOTE_LIST: ListNote[] = [
+export const EXAMPLE_MY_NOTE_LIST: ListNote[] = [
   {
-    id: 5,
+    id: "5",
     excerpt: `書籍を使って学ぶのは本当に必要なのか考察。最初にプログラミングはどうやって学ぶべきか考えてみた。公式ドキュメ`,
     public: false,
   },
   {
-    id: 4,
+    id: "4",
     excerpt: `HTML・CSS・JavaScriptの実践。構文を学んだけど使えるか分からないので、実際にレイアウトを組んでみた。今回は`,
     public: true,
   },
   {
-    id: 3,
+    id: "3",
     excerpt: `3年後にどうなっていたいかを考えてみた。プログラミングの勉強はいったん休みにして、将来どうなりたいかを真剣に考`,
     public: false,
   },
   {
-    id: 2,
+    id: "2",
     excerpt: `TypeScriptが何か調べてみた。開発するときに型があると便利らしい。JavaScriptは型が無いので、それを補うために`,
     public: false,
   },
   {
-    id: 1,
+    id: "1",
     excerpt: `Reactのチュートリアルを学んでみた感想。正直難しかったので、明日ももう一回同じところをやってみようと思う`,
     public: true,
   },
@@ -58,27 +58,27 @@ export const EXAMPLE_NOTE_LIST: ListNote[] = [
 
 export const EXAMPLE_OTHER_USER_NOTE_LIST: ListNote[] = [
   {
-    id: 5,
+    id: "5",
     excerpt: `昔々あるところに、おじいさんとおばあさんがいました。おじいさんは山へ芝刈りに、おばあさんは川へ洗濯へ。すると`,
     public: false,
   },
   {
-    id: 4,
+    id: "4",
     excerpt: `むかしむかし、ある村に、心のやさしい浦島太郎(うらしまたろう)という若者がいました。浦島(うらしま)さんが海辺を`,
     public: true,
   },
   {
-    id: 3,
+    id: "3",
     excerpt: `むかしむかし、足柄山に金太郎という元気な男の子が乳母と一緒に暮らしていました。金太郎は小さい時からクマやサル`,
     public: true,
   },
   {
-    id: 2,
+    id: "2",
     excerpt: `蟹がおにぎりを持って歩いていると、ずる賢い猿が、拾った柿の種と交換しようと言ってきた。蟹は最初は嫌がったが、「`,
     public: false,
   },
   {
-    id: 1,
+    id: "1",
     excerpt: `ある村に一人の男の子が産まれたが、その子は大人の小指ほどの大きさしかなかった。それでも両親は一寸法師と名付け`,
     public: true,
   },
