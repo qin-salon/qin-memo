@@ -2,7 +2,6 @@ import Head from "next/head";
 import AppleIcon from "src/components/icon/AppleIcon";
 import GoogleIcon from "src/components/icon/GoogleIcon";
 import LogoIcon from "src/components/icon/LogoIcon";
-import SigninOut from "src/components/icon/SigninOut";
 import Button from "src/components/share/Button";
 
 const Signin: React.VFC = () => {
