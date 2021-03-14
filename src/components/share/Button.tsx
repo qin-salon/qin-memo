@@ -61,7 +61,13 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   return (
     <div className="mx-auto">
       {isButton(props) ? (
-        <span data-testid={props.id} className={classes} onClick={props.onClick} onKeyDown={props.onKeyDown}>
+        <span
+          data-testid={props.id}
+          role="button"
+          className={classes}
+          onClick={props.onClick}
+          onKeyDown={props.onKeyDown}
+        >
           {props.StartIcon && (
             <div className={iconClasses}>
               <props.StartIcon />
@@ -76,7 +82,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
         </span>
       ) : (
         <Link href={props.linkProps}>
-          <span data-testid={props.id} className={classes}>
+          <span data-testid={props.id} role="link" className={classes}>
             {props.StartIcon && (
               <div className={iconClasses}>
                 <props.StartIcon />
