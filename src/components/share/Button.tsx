@@ -9,8 +9,8 @@ type CommonType = {
   disabled?: boolean;
   children?: ReactNode;
   className?: string;
-  StartIcon?: VFC;
-  EndIcon?: VFC;
+  StartIcon?: VFC<any | undefined>;
+  EndIcon?: VFC<any | undefined>;
   size?: "large" | "small";
 };
 type ButtonType = CommonType & {
@@ -62,7 +62,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   // 発生するため、0 固定としておく（-1だとタブ入力で移動しない）
   return (
     <div className="mx-auto">
-      {isButton(props) ? (
+      {isButton(props) && props.disabled === false && (
         <span
           data-testid={props.id}
           role="button"
@@ -83,7 +83,9 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
             </div>
           )}
         </span>
-      ) : (
+      )}
+
+      {!isButton(props) && props.disabled === false && (
         <Link href={props.linkProps}>
           <span data-testid={props.id} role="link" className={classes}>
             {props.StartIcon && (
@@ -99,6 +101,22 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
             )}
           </span>
         </Link>
+      )}
+
+      {props.disabled && (
+        <span data-testid={props.id} className={classes}>
+          {props.StartIcon && (
+            <div className={iconClasses}>
+              <props.StartIcon disabled={props.disabled} />
+            </div>
+          )}
+          <strong>{props.children}</strong>
+          {props.EndIcon && (
+            <div className={iconClasses}>
+              <props.EndIcon disabled={props.disabled} />
+            </div>
+          )}
+        </span>
       )}
     </div>
   );
