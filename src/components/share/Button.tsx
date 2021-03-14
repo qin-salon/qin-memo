@@ -1,6 +1,6 @@
-import { ReactNode } from "react";
 import clsx from "clsx";
 import Link from "next/link";
+import type { ReactNode, VFC } from "react";
 
 interface Props {
   id: string;
@@ -11,13 +11,13 @@ interface Props {
   type?: "button" | "link";
   linkProps?: string;
   className?: string;
-  StartIcon?: React.VFC;
-  EndIcon?: React.VFC;
+  StartIcon?: VFC;
+  EndIcon?: VFC;
   size?: "large" | "small";
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button: VFC<Props> = (props) => {
   // props受け取り、デフォルト値設定
   const {
     id,

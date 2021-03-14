@@ -1,10 +1,11 @@
 import Head from "next/head";
+import type { VFC } from "react";
 import AppleIcon from "src/components/icon/AppleIcon";
 import GoogleIcon from "src/components/icon/GoogleIcon";
 import LogoIcon from "src/components/icon/LogoIcon";
 import Button from "src/components/share/Button";
 
-const Signin: React.VFC = () => {
+const Signin: VFC = () => {
   return (
     <div>
       <Head>

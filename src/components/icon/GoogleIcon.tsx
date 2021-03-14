@@ -1,10 +1,11 @@
 import clsx from "clsx";
+import { VFC } from "react";
 
 interface Props {
   className?: string;
   size?: "large" | "small";
 }
-const GoogleIcon: React.VFC<Props> = (props) => {
+const GoogleIcon: VFC<Props> = (props) => {
   const { className = "", size = "small" } = props;
   const classes = clsx([
     {
