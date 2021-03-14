@@ -15,8 +15,8 @@ type CommonType = {
 };
 type ButtonType = CommonType & {
   type: "button";
-  onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
-  onKeyDown?: DOMAttributes<HTMLButtonElement>["onKeyDown"];
+  onClick: DOMAttributes<HTMLButtonElement>["onClick"];
+  onKeyDown: DOMAttributes<HTMLButtonElement>["onKeyDown"];
 };
 
 type LinkType = CommonType & {

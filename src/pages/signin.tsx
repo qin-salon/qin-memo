@@ -6,6 +6,14 @@ import { LogoIcon } from "src/components/icon/LogoIcon";
 import { Button } from "src/components/share/Button";
 
 const Signin: VFC = () => {
+  // onClickイベントを渡さないとButtonコンポーネント側でlinkと
+  // 判断されるため処理は何もしないけど、渡す
+  const handleGoogleRegister = () => {
+    return null;
+  };
+  const handleAppleRegister = () => {
+    return null;
+  };
   return (
     <div>
       <Head>
@@ -17,10 +25,28 @@ const Signin: VFC = () => {
           <div className="flex justify-center mb-16">
             <LogoIcon />
           </div>
-          <Button type="button" id="googleButton" color="white" StartIcon={GoogleIcon} size="large" className="w-72">
+          <Button
+            type="button"
+            id="googleButton"
+            color="white"
+            StartIcon={GoogleIcon}
+            size="large"
+            className="w-72"
+            onClick={handleGoogleRegister}
+            onKeyDown={handleGoogleRegister}
+          >
             Googleでアカウント作成
           </Button>
-          <Button type="button" id="appleButton" color="black" StartIcon={AppleIcon} size="large" className="w-72">
+          <Button
+            type="button"
+            id="appleButton"
+            color="black"
+            StartIcon={AppleIcon}
+            size="large"
+            className="w-72"
+            onClick={handleAppleRegister}
+            onKeyDown={handleAppleRegister}
+          >
             Appleでアカウント作成
           </Button>
         </div>
