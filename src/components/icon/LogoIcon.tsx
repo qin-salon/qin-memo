@@ -1,19 +1,17 @@
 import clsx from "clsx";
-import { VFC } from "react";
+import type { VFC } from "react";
 
 interface Props {
   className?: string;
   size?: "large" | "small";
 }
 const LogoIcon: VFC<Props> = (props) => {
-  const { className = "", size = "small" } = props;
-
   const classes = clsx([
     {
-      "w-52 h-12": size === "large",
-      "w-32 h-6": size === "small",
+      "w-52 h-12": props.size === "large",
+      "w-32 h-6": props.size === "small",
     },
-    className,
+    props.className,
   ]);
   return (
     <svg className={classes} viewBox="0 0 189 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,4 +55,9 @@ const LogoIcon: VFC<Props> = (props) => {
   );
 };
 
+// Propsのデフォルト値
+LogoIcon.defaultProps = {
+  className: "",
+  size: "small",
+};
 export default LogoIcon;

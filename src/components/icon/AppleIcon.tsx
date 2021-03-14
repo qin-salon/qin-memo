@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { VFC } from "react";
+import type { VFC } from "react";
 
 interface Props {
   className?: string;
@@ -7,13 +7,12 @@ interface Props {
 }
 
 const AppleIcon: VFC<Props> = (props) => {
-  const { className = "", size = "small" } = props;
   const classes = clsx([
     {
-      "w-6 h-6": size === "large",
-      "w-5 h-5": size === "small",
+      "w-6 h-6": props.size === "large",
+      "w-5 h-5": props.size === "small",
     },
-    className,
+    props.className,
   ]);
   return (
     <svg className={classes} viewBox="0 0 20 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,4 +24,9 @@ const AppleIcon: VFC<Props> = (props) => {
   );
 };
 
+// Propsのデフォルト値
+AppleIcon.defaultProps = {
+  className: "",
+  size: "small",
+};
 export default AppleIcon;

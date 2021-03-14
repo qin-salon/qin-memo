@@ -1,18 +1,17 @@
 import clsx from "clsx";
-import { VFC } from "react";
+import type { VFC } from "react";
 
 interface Props {
   className?: string;
   size?: "large" | "small";
 }
 const GoogleIcon: VFC<Props> = (props) => {
-  const { className = "", size = "small" } = props;
   const classes = clsx([
     {
-      "w-8 h-8": size === "large",
-      "w-6 h-6": size === "small",
+      "w-8 h-8": props.size === "large",
+      "w-6 h-6": props.size === "small",
     },
-    className,
+    props.className,
   ]);
   return (
     <svg className={classes} viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,4 +35,9 @@ const GoogleIcon: VFC<Props> = (props) => {
   );
 };
 
+// Propsのデフォルト値
+GoogleIcon.defaultProps = {
+  className: "",
+  size: "small",
+};
 export default GoogleIcon;
