@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import type { VFC } from "react";
 
-interface Props {
+type Props = {
   className?: string;
   size?: "large" | "small";
-}
+};
 
-const AppleIcon: VFC<Props> = (props) => {
+export const AppleIcon: VFC<Props> = (props) => {
   const classes = clsx([
     {
       "w-6 h-6": props.size === "large",
@@ -29,4 +29,3 @@ AppleIcon.defaultProps = {
   className: "",
   size: "small",
 };
-export default AppleIcon;

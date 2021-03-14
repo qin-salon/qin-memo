@@ -5,7 +5,7 @@ interface Props {
   className?: string;
   size?: "large" | "small";
 }
-const GoogleIcon: VFC<Props> = (props) => {
+export const GoogleIcon: VFC<Props> = (props) => {
   const classes = clsx([
     {
       "w-8 h-8": props.size === "large",
@@ -40,4 +40,3 @@ GoogleIcon.defaultProps = {
   className: "",
   size: "small",
 };
-export default GoogleIcon;

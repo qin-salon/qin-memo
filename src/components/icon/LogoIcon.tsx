@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import type { VFC } from "react";
 
-interface Props {
+type Props = {
   className?: string;
   size?: "large" | "small";
-}
-const LogoIcon: VFC<Props> = (props) => {
+};
+export const LogoIcon: VFC<Props> = (props) => {
   const classes = clsx([
     {
       "w-52 h-12": props.size === "large",
@@ -60,4 +60,3 @@ LogoIcon.defaultProps = {
   className: "",
   size: "small",
 };
-export default LogoIcon;
