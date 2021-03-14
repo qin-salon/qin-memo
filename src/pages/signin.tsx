@@ -1,6 +1,7 @@
 import Head from "next/head";
 import type { VFC } from "react";
 import { AppleIcon } from "src/components/icon/AppleIcon";
+import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
 import { LogoIcon } from "src/components/icon/LogoIcon";
 import { Button } from "src/components/share/Button";
@@ -14,6 +15,9 @@ const Signin: VFC = () => {
   const handleAppleRegister = () => {
     return null;
   };
+  const handleBackClick = () => {
+    return null;
+  };
   return (
     <div>
       <Head>
@@ -21,6 +25,16 @@ const Signin: VFC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-gray-200 w-screen h-screen">
+        <Button
+          type="button"
+          id="backButton"
+          color="transparent"
+          className="absolute left-2"
+          onClick={handleBackClick}
+          onKeyDown={handleBackClick}
+        >
+          <ChevronLeft />
+        </Button>
         <div className="h-screen flex flex-col justify-center">
           <div className="flex justify-center mb-16">
             <LogoIcon />

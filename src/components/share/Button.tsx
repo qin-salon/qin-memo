@@ -4,7 +4,7 @@ import type { DOMAttributes, ReactNode, VFC } from "react";
 
 type CommonType = {
   id: string;
-  color?: "blue" | "red" | "black" | "white" | "gray" | "orange";
+  color?: "blue" | "red" | "black" | "white" | "gray" | "orange" | "transparent";
   textColor?: "black" | "red" | "blue";
   disabled?: boolean;
   children?: ReactNode;
@@ -41,6 +41,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
       "text-black bg-gray-300 hover:bg-gray-400": props.color === "gray" && props.disabled === false,
       "text-white bg-black hover:bg-gray-500": props.color === "black" && props.disabled === false,
       "bg-white hover:bg-gray-300": props.color === "white" && props.disabled === false,
+      "bg-transparent": props.color === "transparent" && props.disabled === false,
       "text-black": props.color === "white" && props.disabled === false && props.textColor === "black",
       "text-red-500": props.color === "white" && props.disabled === false && props.textColor === "red",
       "text-blue-500": props.color === "white" && props.disabled === false && props.textColor === "blue",
