@@ -57,7 +57,8 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
       "mx-2": props.size === "small",
     },
   ]);
-
+  // tabindex に正の値を指定するとESLintでtabindex-no-positiveのエラーが
+  // 発生するため、0 固定としておく（-1だとタブ入力で移動しない）
   return (
     <div className="mx-auto">
       {isButton(props) ? (
@@ -65,6 +66,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
           data-testid={props.id}
           role="button"
           className={classes}
+          tabIndex={0}
           onClick={props.onClick}
           onKeyDown={props.onKeyDown}
         >
