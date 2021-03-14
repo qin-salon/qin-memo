@@ -15,7 +15,8 @@ type CommonType = {
 };
 type ButtonType = CommonType & {
   type: "button";
-  onClick: DOMAttributes<HTMLButtonElement>["onClick"];
+  onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
+  onKeyDown?: DOMAttributes<HTMLButtonElement>["onKeyDown"];
 };
 
 type LinkType = CommonType & {
@@ -23,7 +24,7 @@ type LinkType = CommonType & {
   linkProps: string;
 };
 
-const Button: VFC<ButtonType | LinkType> = (props) => {
+export const Button: VFC<ButtonType | LinkType> = (props) => {
   // props の型がbutton型かlink型かを判断する関数を定義する。
   // props にonClickを持っている場合は true
   const isButton = (props: ButtonType | LinkType): props is ButtonType => {
@@ -60,7 +61,7 @@ const Button: VFC<ButtonType | LinkType> = (props) => {
   return (
     <div className="mx-auto">
       {isButton(props) ? (
-        <span data-testid={props.id} className={classes} onClick={props.onClick}>
+        <span data-testid={props.id} className={classes} onClick={props.onClick} onKeyDown={props.onKeyDown}>
           {props.StartIcon && (
             <div className={iconClasses}>
               <props.StartIcon />
@@ -102,4 +103,3 @@ Button.defaultProps = {
   type: "button",
   size: "small",
 };
-export default Button;
