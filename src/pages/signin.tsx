@@ -13,7 +13,7 @@ const Signin: VFC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-gray-200 w-screen h-screen">
-        <div className="h-screen flex flex-col justify-center  ">
+        <div className="h-screen flex flex-col justify-center">
           <div className="flex justify-center mb-16">
             <LogoIcon />
           </div>
