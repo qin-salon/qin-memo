@@ -5,6 +5,7 @@ type Props = {
   className?: string;
   size?: "large" | "small";
 };
+
 export const LogoIcon: VFC<Props> = (props) => {
   const classes = clsx([
     {
