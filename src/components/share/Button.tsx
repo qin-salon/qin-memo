@@ -29,40 +29,37 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 };
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
-  // ボタンのCSS
-  const classes = clsx([
-    "my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center",
-    {
-      "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue" && !props.disabled,
-      "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red" && !props.disabled,
-      "text-white bg-yellow-500 hover:bg-yellow-600": props.bgColor === "orange" && !props.disabled,
-      "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray" && !props.disabled,
-      "text-white bg-black hover:bg-gray-500": props.bgColor === "black" && !props.disabled,
-      "bg-white hover:bg-gray-300": props.bgColor === "white" && !props.disabled,
-      "bg-transparent": props.bgColor === "transparent" && !props.disabled,
-      "text-black": props.bgColor === "white" && !props.disabled && props.textColor === "black",
-      "text-red-500": props.bgColor === "white" && !props.disabled && props.textColor === "red",
-      "text-blue-500": props.bgColor === "white" && !props.disabled && props.textColor === "blue",
-      "text-gray-400 bg-gray-300 cursor-not-allowed": props.disabled,
-      "py-4 px-8": props.size === "large",
-      "py-2 px-4": props.size === "small",
-    },
-    props.className,
-  ]);
+  const classes = clsx("my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center", {
+    "py-4 px-8": props.size === "large",
+    "py-2 px-4": props.size === "small",
+  });
 
-  const iconClasses = clsx([
-    "my-auto",
-    {
-      "mr-3": props.startIcon && props.size === "large",
-      "mr-2": props.startIcon && props.size === "small",
-      "ml-3": props.endIcon && props.size === "large",
-      "ml-2": props.endIcon && props.size === "small",
-    },
-  ]);
+  const colorClasses = clsx({
+    "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue",
+    "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red",
+    "text-white bg-yellow-500 hover:bg-yellow-600": props.bgColor === "orange",
+    "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray",
+    "text-white bg-black hover:bg-gray-500": props.bgColor === "black",
+    "bg-white hover:bg-gray-300": props.bgColor === "white",
+    "bg-transparent": props.bgColor === "transparent",
+    "text-black": props.bgColor === "white" && props.textColor === "black",
+    "text-red-500": props.bgColor === "white" && props.textColor === "red",
+    "text-blue-500": props.bgColor === "white" && props.textColor === "blue",
+  });
+
+  const iconClasses = clsx("my-auto", {
+    "mr-3": props.startIcon && props.size === "large",
+    "mr-2": props.startIcon && props.size === "small",
+    "ml-3": props.endIcon && props.size === "large",
+    "ml-2": props.endIcon && props.size === "small",
+  });
 
   if (props.disabled) {
     return (
-      <button className={classes} disabled={props.disabled}>
+      <button
+        className={clsx("text-gray-400 bg-gray-300 cursor-not-allowed", classes, props.className)}
+        disabled={props.disabled}
+      >
         {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
         <span>{props.children}</span>
         {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
@@ -71,14 +68,14 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   }
 
   return isButton(props) ? (
-    <button className={classes} onClick={props.onClick}>
+    <button className={clsx(classes, colorClasses, props.className)} onClick={props.onClick}>
       {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
       <span>{props.children}</span>
       {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
     </button>
   ) : (
     <Link {...props.linkProps}>
-      <a className={classes}>
+      <a className={clsx(classes, colorClasses, props.className)}>
         {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
         <span>{props.children}</span>
         {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
