@@ -17,7 +17,6 @@ type CommonType = {
 type ButtonType = CommonType & {
   button: boolean;
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
-  onKeyDown?: DOMAttributes<HTMLButtonElement>["onKeyDown"];
 };
 type LinkType = CommonType & {
   linkProps: LinkProps;
@@ -32,7 +31,7 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 export const Button: VFC<ButtonType | LinkType> = (props) => {
   // ボタンのCSS
   const classes = clsx([
-    " my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center",
+    "my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center",
     {
       "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue" && props.disabled === false,
       "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red" && props.disabled === false,
@@ -44,7 +43,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
       "text-black": props.bgColor === "white" && props.disabled === false && props.textColor === "black",
       "text-red-500": props.bgColor === "white" && props.disabled === false && props.textColor === "red",
       "text-blue-500": props.bgColor === "white" && props.disabled === false && props.textColor === "blue",
-      "text-gray-400 bg-gray-300": props.disabled,
+      "text-gray-400 bg-gray-300 cursor-not-allowed": props.disabled,
       "py-4 px-8": props.size === "large",
       "py-2 px-4": props.size === "small",
     },
@@ -53,39 +52,37 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   const iconClasses = clsx([
     "my-auto",
     {
-      "mx-3": props.size === "large",
-      "mx-2": props.size === "small",
+      "mr-3": props.startIcon && props.size === "large",
+      "mr-2": props.startIcon && props.size === "small",
+      "ml-3": props.endIcon && props.size === "large",
+      "ml-2": props.endIcon && props.size === "small",
     },
   ]);
 
   if (props.disabled) {
     return (
-      <button className={classes}>
-        {props.startIcon && <div className={iconClasses}>{props.startIcon}</div>}
-        <strong>{props.children}</strong>
-        {props.endIcon && <div className={iconClasses}>{props.endIcon}</div>}
+      <button className={classes} disabled={props.disabled}>
+        {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
+        <span>{props.children}</span>
+        {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
       </button>
     );
   }
 
-  return (
-    <div className="mx-auto">
-      {isButton(props) ? (
-        <button className={classes} onClick={props.onClick} onKeyDown={props.onKeyDown}>
-          {props.startIcon ? <div className={iconClasses}>{props.startIcon}</div> : null}
-          <strong>{props.children}</strong>
-          {props.endIcon ? <div className={iconClasses}>{props.endIcon}</div> : null}
-        </button>
-      ) : (
-        <Link {...props.linkProps}>
-          <a className={classes}>
-            {props.startIcon ? <div className={iconClasses}>{props.startIcon}</div> : null}
-            <strong>{props.children}</strong>
-            {props.endIcon ? <div className={iconClasses}>{props.endIcon}</div> : null}
-          </a>
-        </Link>
-      )}
-    </div>
+  return isButton(props) ? (
+    <button className={classes} onClick={props.onClick}>
+      {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
+      <span>{props.children}</span>
+      {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
+    </button>
+  ) : (
+    <Link {...props.linkProps}>
+      <a className={classes}>
+        {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
+        <span>{props.children}</span>
+        {props.endIcon ? <span className={iconClasses}>{props.endIcon}</span> : null}
+      </a>
+    </Link>
   );
 };
 

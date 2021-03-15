@@ -30,92 +30,54 @@ const About = () => {
         </div>
         <div className="flex flex-row justify-start flex-none">
           <div className="mx-auto">
-            <Button button id="blue" bgColor="blue" onClick={handleAddCount} onKeyDown={handleAddCount}>
+            <Button button id="blue" bgColor="blue" onClick={handleAddCount}>
               メモを書く
             </Button>
           </div>
           <div className="mx-auto">
-            <Button button id="blue" bgColor="blue" onClick={handleAddCount} onKeyDown={handleAddCount} disabled>
+            <Button button id="blue" bgColor="blue" onClick={handleAddCount} disabled>
               メモを書く
             </Button>
           </div>
           <div className="mx-auto">
-            <Button
-              button
-              id="orange"
-              bgColor="orange"
-              className="w-auto"
-              onClick={handleAddCount}
-              onKeyDown={handleAddCount}
-            >
+            <Button button id="orange" bgColor="orange" className="w-auto" onClick={handleAddCount}>
               公開中
             </Button>
           </div>
           <div className="mx-auto">
-            <Button
-              button
-              id="orange"
-              bgColor="orange"
-              className="w-auto"
-              onClick={handleAddCount}
-              onKeyDown={handleAddCount}
-              disabled
-            >
+            <Button button id="orange" bgColor="orange" className="w-auto" onClick={handleAddCount} disabled>
               公開中
             </Button>
           </div>
           <div className="mx-auto">
-            <Button button id="gray" bgColor="gray" onClick={handleAddCount} onKeyDown={handleAddCount}>
+            <Button button id="gray" bgColor="gray" onClick={handleAddCount}>
               キャンセル
             </Button>
           </div>
           <div className="mx-auto">
-            <Button button id="disabled" bgColor="blue" onClick={handleAddCount} onKeyDown={handleAddCount} disabled>
+            <Button button id="disabled" bgColor="blue" onClick={handleAddCount} disabled>
               キャンセル
             </Button>
           </div>
         </div>
         <div className="flex flex-row justify-start">
           <div className="mx-auto">
-            <Button button id="red" bgColor="red" className="w-32" onClick={handleAddCount} onKeyDown={handleAddCount}>
+            <Button button id="red" bgColor="red" className="w-32" onClick={handleAddCount}>
               削除する
             </Button>
           </div>
           <div className="mx-auto">
-            <Button
-              button
-              id="red"
-              bgColor="red"
-              className="w-32"
-              onClick={handleAddCount}
-              onKeyDown={handleAddCount}
-              disabled
-            >
+            <Button button id="red" bgColor="red" className="w-32" onClick={handleAddCount} disabled>
               削除する
             </Button>
           </div>
           <div className="mx-auto">
-            <Button
-              button
-              id="appleButton"
-              bgColor="white"
-              textColor="blue"
-              onClick={handleAddCount}
-              onKeyDown={handleAddCount}
-            >
+            <Button button id="appleButton" bgColor="white" textColor="blue" onClick={handleAddCount}>
               プロフィール設定
             </Button>
           </div>
           <div className="mx-auto">
-            <Button
-              button
-              id="appleButton"
-              bgColor="white"
-              textColor="blue"
-              onClick={handleAddCount}
-              onKeyDown={handleAddCount}
-              disabled
-            >
+            <Button button id="appleButton" bgColor="white" textColor="blue" onClick={handleAddCount} disabled>
               プロフィール設定
             </Button>
           </div>
@@ -127,7 +89,6 @@ const About = () => {
               textColor="red"
               startIcon={<SignOut />}
               onClick={handleAddCount}
-              onKeyDown={handleAddCount}
             >
               ログアウト
             </Button>
@@ -140,7 +101,6 @@ const About = () => {
               textColor="red"
               startIcon={<SignOut disabled />}
               onClick={handleAddCount}
-              onKeyDown={handleAddCount}
               disabled
             >
               ログアウト
