@@ -7,7 +7,7 @@ type Props = {
   textColor?: "red" | "gray";
 };
 
-export const SigninOut: VFC<Props> = (props) => {
+export const SignOut: VFC<Props> = (props) => {
   return (
     <svg
       className={clsx([
@@ -32,7 +32,7 @@ export const SigninOut: VFC<Props> = (props) => {
   );
 };
 // Propsのデフォルト値
-SigninOut.defaultProps = {
+SignOut.defaultProps = {
   className: "w-5 h-5",
   disabled: false,
   textColor: "red",
