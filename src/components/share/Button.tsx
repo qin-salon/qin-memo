@@ -33,22 +33,23 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   const classes = clsx([
     "my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center",
     {
-      "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue" && props.disabled === false,
-      "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red" && props.disabled === false,
-      "text-white bg-yellow-500 hover:bg-yellow-600": props.bgColor === "orange" && props.disabled === false,
-      "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray" && props.disabled === false,
-      "text-white bg-black hover:bg-gray-500": props.bgColor === "black" && props.disabled === false,
-      "bg-white hover:bg-gray-300": props.bgColor === "white" && props.disabled === false,
-      "bg-transparent": props.bgColor === "transparent" && props.disabled === false,
-      "text-black": props.bgColor === "white" && props.disabled === false && props.textColor === "black",
-      "text-red-500": props.bgColor === "white" && props.disabled === false && props.textColor === "red",
-      "text-blue-500": props.bgColor === "white" && props.disabled === false && props.textColor === "blue",
+      "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue" && !props.disabled,
+      "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red" && !props.disabled,
+      "text-white bg-yellow-500 hover:bg-yellow-600": props.bgColor === "orange" && !props.disabled,
+      "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray" && !props.disabled,
+      "text-white bg-black hover:bg-gray-500": props.bgColor === "black" && !props.disabled,
+      "bg-white hover:bg-gray-300": props.bgColor === "white" && !props.disabled,
+      "bg-transparent": props.bgColor === "transparent" && !props.disabled,
+      "text-black": props.bgColor === "white" && !props.disabled && props.textColor === "black",
+      "text-red-500": props.bgColor === "white" && !props.disabled && props.textColor === "red",
+      "text-blue-500": props.bgColor === "white" && !props.disabled && props.textColor === "blue",
       "text-gray-400 bg-gray-300 cursor-not-allowed": props.disabled,
       "py-4 px-8": props.size === "large",
       "py-2 px-4": props.size === "small",
     },
     props.className,
   ]);
+
   const iconClasses = clsx([
     "my-auto",
     {
@@ -90,7 +91,5 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
 Button.defaultProps = {
   bgColor: "blue",
   textColor: "black",
-  disabled: false,
-  className: "",
   size: "small",
 };
