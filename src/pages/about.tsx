@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState } from "react";
 import { SignOut } from "src/components/icon/SignOut";
 import { Layout } from "src/components/layout";
-import { ClsxSample } from "src/components/sample/clsxSample";
 import { Button } from "src/components/share/Button";
 
 const About = () => {
@@ -22,8 +21,6 @@ const About = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h2 className="text-gray-800 dark:text-white">About</h2>
-      <ClsxSample>clsxサンプル</ClsxSample>
-      <ClsxSample bold>clsxサンプル(propsに応じてスタイル変更)</ClsxSample>
       <div className="flex flex-col">
         <div className="my-4 ml-4">
           <span className="m-auto">ボタンクリック テスト用のカウント：{count}</span>
