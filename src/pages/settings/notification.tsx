@@ -1,4 +1,6 @@
-const SettingsNotification = () => {
+import type { NextPage } from "next";
+
+const SettingsNotification: NextPage = () => {
   return <div>SettingsNotification</div>;
 };
 

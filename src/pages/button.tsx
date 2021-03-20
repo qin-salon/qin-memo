@@ -1,9 +1,10 @@
+import type { NextPage } from "next";
 import { useState } from "react";
 import { SignOut } from "src/components/icon/SignOut";
 import { Layout } from "src/components/layout";
 import { Button } from "src/components/shared/Button";
 
-const ButtonPage = () => {
+const ButtonPage: NextPage = () => {
   const [count, setCount] = useState(0);
 
   const handleAddCount = () => {
@@ -99,7 +100,7 @@ const ButtonPage = () => {
           </div>
         </div>
         <div>
-          <Button id="link" linkProps={{ href: "/" }}>
+          <Button id="link" linkProps={{ href: "/signin" }}>
             サインイン
           </Button>
         </div>

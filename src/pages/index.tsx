@@ -1,3 +1,4 @@
+import type { NextPage } from "next";
 import Link from "next/link";
 import { Layout } from "src/components/layout";
 
@@ -16,7 +17,7 @@ const PAGES = [
   { href: "/privacy", label: "プライバシーポリシー" },
 ] as const;
 
-const Index = () => {
+const Index: NextPage = () => {
   return (
     <Layout>
       <div className="p-4">
@@ -24,9 +25,9 @@ const Index = () => {
         <ul className="mt-2 grid gap-4 grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {PAGES.map((page) => {
             return (
-              <li key={page.href} className="contents">
+              <li key={page.href}>
                 <Link href={page.href}>
-                  <a className="p-3 border border-black">{page.label}</a>
+                  <a className="block p-3 border border-black">{page.label}</a>
                 </Link>
               </li>
             );
