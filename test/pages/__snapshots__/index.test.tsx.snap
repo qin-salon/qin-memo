@@ -1,72 +1,170 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home page matches snapshot 1`] = `
+exports[`Index page matches snapshot 1`] = `
 <DocumentFragment>
-  <header>
-    <div
+  <div
+    class="min-h-screen flex flex-col"
+  >
+    <header>
+      <div
+        class="bg-white dark:bg-gray-800"
+      >
+        <h1
+          class="text-gray-900 dark:text-white"
+        >
+          Title
+        </h1>
+        <button
+          class="text-white dark:text-gray-900 bg-gray-800 dark:bg-white"
+        >
+          Change Theme
+        </button>
+        <nav>
+          <a
+            class="text-gray-800 dark:text-gray-100"
+            href="/"
+            style="display: inline-block; padding: 12px;"
+          >
+            Home
+          </a>
+          <a
+            class="text-gray-800 dark:text-gray-100"
+            href="/async"
+            style="display: inline-block; padding: 12px;"
+          >
+            非同期
+          </a>
+          <a
+            class="text-gray-800 dark:text-gray-100"
+            href="/button"
+            style="display: inline-block; padding: 12px;"
+          >
+            ボタン
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main
+      class="flex-1 bg-gray-200 dark:bg-gray-700"
+    >
+      <div
+        class="p-4"
+      >
+        <h2>
+          ページ一覧
+        </h2>
+        <ul
+          class="mt-2 grid gap-4 grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/signin"
+            >
+              ログイン
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/signup"
+            >
+              新規登録
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/registration"
+            >
+              初回プロフィール登録
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/user/foo"
+            >
+              ユーザーページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/search"
+            >
+              メモ検索ページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/note/foo"
+            >
+              メモページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/settings"
+            >
+              各種設定への画面
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/settings/profile"
+            >
+              プロフィール変更ページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/settings/account"
+            >
+              SNS連携ページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/settings/notification"
+            >
+              通知設定ページ
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/terms"
+            >
+              利用規約
+            </a>
+          </li>
+          <li>
+            <a
+              class="block p-3 border border-black"
+              href="/privacy"
+            >
+              プライバシーポリシー
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+    <footer
       class="bg-white dark:bg-gray-800"
     >
-      <h1
-        class="text-gray-900 dark:text-white"
+      <small
+        class="text-gray-800 dark:text-white"
+        lang="en"
       >
-        Title
-      </h1>
-      <button
-        class="text-white dark:text-gray-900 bg-gray-800 dark:bg-white"
-      >
-        Change Theme
-      </button>
-      <nav>
-        <a
-          class="text-gray-800 dark:text-gray-100"
-          href="/"
-          style="display: inline-block; padding: 12px;"
-        >
-          Home
-        </a>
-        <a
-          class="text-gray-800 dark:text-gray-100"
-          href="/about"
-          style="display: inline-block; padding: 12px;"
-        >
-          About
-        </a>
-      </nav>
-    </div>
-  </header>
-  <main
-    class="bg-red-100 dark:bg-gray-700"
-  >
-    <h2
-      class="text-gray-800 dark:text-white"
-    >
-      Home
-    </h2>
-    <button
-      class="text-gray-800 dark:text-white"
-    >
-      Button
-    </button>
-    <div
-      class="mt-4 text-gray-800 dark:text-white"
-    >
-      <div>
-        failed to load
-      </div>
-      <div>
-        loading...
-      </div>
-    </div>
-  </main>
-  <footer
-    class="bg-white dark:bg-gray-800"
-  >
-    <small
-      class="text-gray-800 dark:text-white"
-      lang="en"
-    >
-      @ 2021 memo.qin.sh
-    </small>
-  </footer>
+        @ 2021 memo.qin.sh
+      </small>
+    </footer>
+  </div>
 </DocumentFragment>
 `;
