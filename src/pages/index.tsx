@@ -1,48 +1,40 @@
-import Head from "next/head";
+import Link from "next/link";
 import { Layout } from "src/components/layout";
-import type { User, UserPutRequest } from "src/models/user";
-import useSWR from "swr";
 
-const Home = () => {
-  const { data, error } = useSWR<User>("/users/foo");
+const PAGES = [
+  { href: "/signin", label: "ログイン" },
+  { href: "/signup", label: "新規登録" },
+  { href: "/registration", label: "初回プロフィール登録" },
+  { href: "/user/foo", label: "ユーザーページ" },
+  { href: "/search", label: "メモ検索ページ" },
+  { href: "/note/foo", label: "メモページ" },
+  { href: "/settings", label: "各種設定への画面" },
+  { href: "/settings/profile", label: "プロフィール変更ページ" },
+  { href: "/settings/account", label: "SNS連携ページ" },
+  { href: "/settings/notification", label: "通知設定ページ" },
+  { href: "/terms", label: "利用規約" },
+  { href: "/privacy", label: "プライバシーポリシー" },
+] as const;
 
-  const handleClick = async () => {
-    const req: UserPutRequest = { id: "foo", name: "秦子" };
-    // eslint-disable-next-line no-console
-    console.log({ ブラウザから送るリクエスト: req });
-    const res = await fetch("/users/foo", {
-      method: "put",
-      body: JSON.stringify(req),
-    });
-    const json = await res.json();
-    // eslint-disable-next-line no-console
-    console.log({ サーバーから受け取ったレスポンス: json });
-  };
-
+const Index = () => {
   return (
     <Layout>
-      <Head>
-        <title>Home</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <h2 className="text-gray-800 dark:text-white">Home</h2>
-      <button className="text-gray-800 dark:text-white" onClick={handleClick}>
-        Button
-      </button>
-
-      <div className="mt-4 text-gray-800 dark:text-white">
-        {error ? <div>failed to load</div> : null}
-        {data ? (
-          <div>
-            <img src={data.avatarUrl} alt={data.name} width={80} height={80} />
-            <h2>{data.name}</h2>
-          </div>
-        ) : (
-          <div>loading...</div>
-        )}
+      <div className="p-4">
+        <h2>ページ一覧</h2>
+        <ul className="mt-2 grid gap-4 grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {PAGES.map((page) => {
+            return (
+              <li key={page.href} className="contents">
+                <Link href={page.href}>
+                  <a className="p-3 border border-black">{page.label}</a>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </Layout>
   );
 };
 
-export default Home;
+export default Index;

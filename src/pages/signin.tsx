@@ -1,4 +1,3 @@
-import Head from "next/head";
 import type { VFC } from "react";
 import { AppleIcon } from "src/components/icon/AppleIcon";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
@@ -9,10 +8,6 @@ import { Button } from "src/components/shared/Button";
 const Signin: VFC = () => {
   return (
     <div>
-      <Head>
-        <title>Signin</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="bg-gray-200 w-screen h-screen">
         <Button button id="backButton" bgColor="transparent" className="absolute left-2">
           <ChevronLeft />
