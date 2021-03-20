@@ -3,18 +3,18 @@ import Link from "next/link";
 import { Layout } from "src/components/layout";
 
 const PAGES = [
-  { href: "/signin", label: "ログイン" },
-  { href: "/signup", label: "新規登録" },
-  { href: "/registration", label: "初回プロフィール登録" },
-  { href: "/user/foo", label: "ユーザーページ" },
-  { href: "/search", label: "メモ検索ページ" },
-  { href: "/note/foo", label: "メモページ" },
-  { href: "/settings", label: "各種設定への画面" },
-  { href: "/settings/profile", label: "プロフィール変更ページ" },
-  { href: "/settings/account", label: "SNS連携ページ" },
-  { href: "/settings/notification", label: "通知設定ページ" },
-  { href: "/terms", label: "利用規約" },
-  { href: "/privacy", label: "プライバシーポリシー" },
+  { href: "/signin", label: "ログインページ", isDone: true },
+  { href: "/signup", label: "新規登録ページ", isDone: false },
+  { href: "/registration", label: "初回プロフィール登録ページ", isDone: false },
+  { href: "/user/foo", label: "ユーザーページ", isDone: false },
+  { href: "/search", label: "メモ検索ページ", isDone: false },
+  { href: "/note/foo", label: "メモページ", isDone: false },
+  { href: "/settings", label: "設定一覧ページ", isDone: false },
+  { href: "/settings/profile", label: "プロフィール変更ページ", isDone: false },
+  { href: "/settings/account", label: "SNS連携ページ", isDone: false },
+  { href: "/settings/notification", label: "通知設定ページ", isDone: false },
+  { href: "/terms", label: "利用規約ページ", isDone: false },
+  { href: "/privacy", label: "プライバシーポリシーページ", isDone: false },
 ] as const;
 
 const Index: NextPage = () => {
@@ -27,7 +27,7 @@ const Index: NextPage = () => {
             return (
               <li key={page.href}>
                 <Link href={page.href}>
-                  <a className="block p-3 border border-black">{page.label}</a>
+                  <a className="block p-3 border border-black">{`${page.isDone ? "✅ " : ""}${page.label}`}</a>
                 </Link>
               </li>
             );
