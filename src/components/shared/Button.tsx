@@ -14,10 +14,12 @@ type CommonType = {
   endIcon?: JSX.Element;
   size?: "large" | "small";
 };
+
 type ButtonType = CommonType & {
   button: boolean;
   onClick?: DOMAttributes<HTMLButtonElement>["onClick"];
 };
+
 type LinkType = CommonType & {
   linkProps: LinkProps;
 };

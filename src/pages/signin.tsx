@@ -4,7 +4,7 @@ import { AppleIcon } from "src/components/icon/AppleIcon";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
 import { LogoIcon } from "src/components/icon/LogoIcon";
-import { Button } from "src/components/share/Button";
+import { Button } from "src/components/shared/Button";
 
 const Signin: VFC = () => {
   return (

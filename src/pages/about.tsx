@@ -2,13 +2,12 @@ import Head from "next/head";
 import { useState } from "react";
 import { SignOut } from "src/components/icon/SignOut";
 import { Layout } from "src/components/layout";
-import { Button } from "src/components/share/Button";
+import { Button } from "src/components/shared/Button";
 
 const About = () => {
   const [count, setCount] = useState(0);
 
   const handleAddCount = () => {
-    // console.log(`Button ${count}`);
     setCount((preCount) => {
       return preCount + 1;
     });
