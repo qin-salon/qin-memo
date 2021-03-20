@@ -32,6 +32,7 @@
     "swr": "^0.5.4"
   },
   "devDependencies": {
+    "@tailwindcss/jit": "^0.1.4",
     "@testing-library/react": "11.2.5",
     "@types/jest": "26.0.21",
     "@types/node": "14.14.35",
