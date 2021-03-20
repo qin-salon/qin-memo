@@ -42,16 +42,211 @@ exports[`About page matches snapshot 1`] = `
     >
       About
     </h2>
-    <button
-      class="sample"
+    <div
+      class="flex flex-col"
     >
-      clsxサンプル
-    </button>
-    <button
-      class="sample bold"
-    >
-      clsxサンプル(propsに応じてスタイル変更)
-    </button>
+      <div
+        class="my-4 ml-4"
+      >
+        <span
+          class="m-auto"
+        >
+          ボタンクリック テスト用のカウント：0
+        </span>
+      </div>
+      <div
+        class="flex flex-row justify-start flex-none"
+      >
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 text-white bg-blue-500 hover:bg-blue-600"
+          >
+            <span>
+              メモを書く
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4"
+            disabled=""
+          >
+            <span>
+              メモを書く
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 text-white bg-yellow-500 hover:bg-yellow-600 w-auto"
+          >
+            <span>
+              公開中
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 w-auto"
+            disabled=""
+          >
+            <span>
+              公開中
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 text-black bg-gray-300 hover:bg-gray-400"
+          >
+            <span>
+              キャンセル
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4"
+            disabled=""
+          >
+            <span>
+              キャンセル
+            </span>
+          </button>
+        </div>
+      </div>
+      <div
+        class="flex flex-row justify-start"
+      >
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 text-white bg-red-500 hover:bg-red-600 w-32"
+          >
+            <span>
+              削除する
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 w-32"
+            disabled=""
+          >
+            <span>
+              削除する
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 bg-white hover:bg-gray-300 text-blue-500"
+          >
+            <span>
+              プロフィール設定
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4"
+            disabled=""
+          >
+            <span>
+              プロフィール設定
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 bg-white hover:bg-gray-300 text-red-500"
+          >
+            <span
+              class="my-auto mr-2"
+            >
+              <svg
+                class="text-red-500 w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span>
+              ログアウト
+            </span>
+          </button>
+        </div>
+        <div
+          class="mx-auto"
+        >
+          <button
+            class="text-gray-400 bg-gray-300 cursor-not-allowed my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4"
+            disabled=""
+          >
+            <span
+              class="my-auto mr-2"
+            >
+              <svg
+                class="text-gray-500 w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                />
+              </svg>
+            </span>
+            <span>
+              ログアウト
+            </span>
+          </button>
+        </div>
+      </div>
+      <div>
+        <a
+          class="my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center py-2 px-4 text-white bg-blue-500 hover:bg-blue-600"
+          href="/"
+        >
+          <span>
+            サインイン
+          </span>
+        </a>
+      </div>
+    </div>
   </main>
   <footer
     class="bg-white dark:bg-gray-800"
