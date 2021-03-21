@@ -1,10 +1,10 @@
-import Head from "next/head";
+import type { NextPage } from "next";
 import { useState } from "react";
 import { SignOut } from "src/components/icon/SignOut";
 import { Layout } from "src/components/layout";
 import { Button } from "src/components/shared/Button";
 
-const About = () => {
+const ButtonPage: NextPage = () => {
   const [count, setCount] = useState(0);
 
   const handleAddCount = () => {
@@ -15,11 +15,7 @@ const About = () => {
 
   return (
     <Layout>
-      <Head>
-        <title>About</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <h2 className="text-gray-800 dark:text-white">About</h2>
+      <h2 className="text-gray-800 dark:text-white">使い回せるボタンのコンポーネント</h2>
       <div className="flex flex-col">
         <div className="my-4 ml-4">
           <span className="m-auto">ボタンクリック テスト用のカウント：{count}</span>
@@ -104,7 +100,7 @@ const About = () => {
           </div>
         </div>
         <div>
-          <Button id="link" linkProps={{ href: "/" }}>
+          <Button id="link" linkProps={{ href: "/signin" }}>
             サインイン
           </Button>
         </div>
@@ -113,4 +109,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default ButtonPage;

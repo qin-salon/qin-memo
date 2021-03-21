@@ -1,18 +1,13 @@
-import Head from "next/head";
-import type { VFC } from "react";
+import type { NextPage } from "next";
 import { AppleIcon } from "src/components/icon/AppleIcon";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
 import { LogoIcon } from "src/components/icon/LogoIcon";
 import { Button } from "src/components/shared/Button";
 
-const Signin: VFC = () => {
+const Signin: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>Signin</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="bg-gray-200 w-screen h-screen">
         <Button button id="backButton" bgColor="transparent" className="absolute left-2">
           <ChevronLeft />
