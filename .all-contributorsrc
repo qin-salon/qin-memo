@@ -96,6 +96,15 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "takasaki376",
+      "name": "takasaki376",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75880059?v=4",
+      "profile": "https://github.com/takasaki376",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
