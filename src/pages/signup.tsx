@@ -4,8 +4,8 @@ import { LogoIcon } from "src/components/icon/LogoIcon";
 
 const SignUp: NextPage = () => {
   return (
-    <div className="w-96 min-h-screen bg-white">
-      <div className="flex flex-col justify-center text-center">
+    <div className="w-96 min-h-screen bg-gray-50">
+      <div className="flex flex-col justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
           <path
             fillRule="evenodd"
@@ -13,11 +13,15 @@ const SignUp: NextPage = () => {
             clipRule="evenodd"
           />
         </svg>
-        <LogoIcon size="large" />
-        <div className="w-80 h-14 bg-white rounded-full relative">
-          <div className="flex justify-around">
-            <GoogleIcon size="large" />
-            <p>Googleでアカウントを作成</p>
+        <div>
+          <div className="flex justify-center">
+            <LogoIcon className="block" size="large" />
+          </div>
+          <div className="w-80 h-14 bg-white rounded-full relative">
+            <div className="flex justify-around">
+              <GoogleIcon size="large" />
+              <p>Googleでアカウントを作成</p>
+            </div>
           </div>
         </div>
       </div>
