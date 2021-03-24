@@ -1,7 +1,9 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -9,9 +11,13 @@
 - [React](https://ja.reactjs.org/)
   - 言わずとしれた Facebook 製 UI ライブラリ。
 - [Next.js](https://nextjs.org/)
-  - React のフレームワーク。純粋な React だけで構築するとしんどい部分を簡単にしてくれます。最も将来性が高いと思っている技術です。
+  - React のフレームワーク。純粋な React だけで構築すると面倒な部分を簡単にしてくれます。今後、頻繁に使われるようになる技術と考えています。
 - [TypeScript](https://www.typescriptlang.org/)
-  - 型を使うことでバグを防いだり、ドキュメント代わりになったり、チーム開発がスムースになります。
+  - 型があることでバグを防いだり、ドキュメント代わりになったり、チーム開発がスムースになります。
+- [Tailwind CSS](https://tailwindcss.com/)
+  - ユーティリティファーストな CSS フレームワークでスタイリングに非常に便利です。
+- [SWR](https://swr.now.sh/)
+  - React Hooks ベースのデータフェッチライブラリ。
 - [ESLint](https://eslint.org/)
   - コードを分析し問題点を指摘してくれるツールです。これがあることでメンバー同士のコード差異が少なくなったり、独自ルールを追加して書き方を統一できます。
 - [Prettier](https://prettier.io/)
@@ -20,6 +26,8 @@
   - Facebook 製の JavaScript のテスティングフレームワークです。テストに関する様々な機能を提供しており、ドキュメントも豊富かつ実績もあるため、採用しています。
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
   - React "Components"をテストするためのものです。[Jest 公式](https://jestjs.io/docs/ja/tutorial-react#dom-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88)でもコンポーネントをテストしたい場合に使えるものだと言及されています。
+- [Mock Service Worker](https://mswjs.io/)
+  - サービスワーカーを利用して API モックを作れるライブラリ。フロントエンド駆動開発やテストに便利です。
 - [GitMoji](https://gitmoji.dev/) 😜
   - Commit メッセージに絵文字を使うことでパッと見で分かりやすくするものです。
 
