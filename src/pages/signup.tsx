@@ -13,7 +13,7 @@ const SignUp: NextPage = () => {
             clipRule="evenodd"
           />
         </svg>
-        <LogoIcon size="larges" />
+        <LogoIcon size="large" />
         <div className="w-80 h-14 bg-white rounded-full relative">
           <div className="flex justify-around">
             <GoogleIcon size="large" />
