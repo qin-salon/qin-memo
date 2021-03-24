@@ -17,10 +17,10 @@ const Signin: NextPage = () => {
             <LogoIcon />
           </div>
           <Button button id="googleButton" bgColor="white" startIcon={<GoogleIcon />} size="large" className="w-72">
-            Googleでアカウント作成
+            Googleでログイン
           </Button>
           <Button button id="appleButton" bgColor="black" startIcon={<AppleIcon />} size="large" className="w-72">
-            Appleでアカウント作成
+            Appleでログイン
           </Button>
         </div>
       </div>
