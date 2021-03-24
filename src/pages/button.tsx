@@ -15,7 +15,10 @@ const ButtonPage: NextPage = () => {
 
   return (
     <Layout>
-      <h2 className="text-gray-800 dark:text-white">使い回せるボタンのコンポーネント</h2>
+      <h2 className="text-gray-800 dark:text-white">
+        使い回せるボタンのコンポーネントを @takasaki376
+        さんが作ってくれました。もし必要であればこちらのコンポーネントを使いまわしてください！
+      </h2>
       <div className="flex flex-col">
         <div className="my-4 ml-4">
           <span className="m-auto">ボタンクリック テスト用のカウント：{count}</span>
