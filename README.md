@@ -1,9 +1,7 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-11-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -149,6 +147,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/abc123931"><img src="https://avatars.githubusercontent.com/u/15182311?v=4?s=100" width="100px;" alt=""/><br /><sub><b>abc123931</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Aabc123931" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/yamatsum"><img src="https://avatars.githubusercontent.com/u/42740055?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yamatsum</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/pulls?q=is%3Apr+reviewed-by%3Ayamatsum" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/takasaki376"><img src="https://avatars.githubusercontent.com/u/75880059?v=4?s=100" width="100px;" alt=""/><br /><sub><b>takasaki376</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=takasaki376" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/yuji-bvb"><img src="https://avatars.githubusercontent.com/u/69225541?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yuji-bvb</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=yuji-bvb" title="Code">💻</a></td>
   </tr>
 </table>
 
