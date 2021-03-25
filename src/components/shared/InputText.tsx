@@ -2,20 +2,12 @@ import clsx from "clsx";
 import type { DOMAttributes } from "react";
 
 type CommonType = {
-<<<<<<< HEAD
   label?: string;
-=======
-  id: string;
-  title?: string;
->>>>>>> 3fd1799 (💄 テキストボックスコンポーネント追加)
   placeholder?: string;
   className?: string;
   value?: string;
   bgColor?: "white" | "gray";
-<<<<<<< HEAD
   textColor?: "black" | "glay";
-=======
->>>>>>> 3fd1799 (💄 テキストボックスコンポーネント追加)
   startIcon?: JSX.Element;
 };
 
