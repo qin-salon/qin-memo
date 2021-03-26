@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { DOMAttributes, ReactNode, VFC } from "react";
 
 type CommonType = {
-  id: string;
   bgColor?: "blue" | "red" | "black" | "white" | "gray" | "orange" | "transparent";
   textColor?: "black" | "red" | "blue";
   disabled?: boolean;
@@ -31,7 +30,7 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 };
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
-  const classes = clsx("mx-auto rounded-full focus:outline-none flex flex-row justify-center", {
+  const classes = clsx("mx-auto rounded-full focus:outline-none flex flex-row justify-center whitespace-nowrap", {
     "py-4 px-8 my-4": props.size === "large",
     "py-2 px-4 my-4": props.size === "small",
     "py-1 px-1 my-0": props.size === "extrasmall",

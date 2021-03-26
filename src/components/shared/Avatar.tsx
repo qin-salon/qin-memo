@@ -4,7 +4,6 @@ import type { VFC } from "react";
 import { Button } from "./Button";
 
 type CommonType = {
-  id: string;
   alt: string;
   className?: string;
   size?: "small" | "medium" | "large" | "extralarge";
@@ -51,7 +50,7 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
       {isImg(props) ? (
         <img src={props.src} alt={props.alt} className="rounded-full w-full h-full" />
       ) : (
-        <Button id={`Avator-${props.id}`} button className={fontStyle}>
+        <Button button className={fontStyle}>
           <span className="m-auto">{props.alt ? props.alt.substr(0, 1) : null}</span>
         </Button>
       )}
