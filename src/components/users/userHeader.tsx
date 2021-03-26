@@ -15,21 +15,15 @@ export const UserHeader = () => {
         </div>
       </div>
       <div className="flex-1 my-auto mx-16">
-        <InputText
-          id="serach"
-          startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6" />}
-          placeholder="メモを検索する"
-        />
+        <InputText startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6" />} placeholder="メモを検索する" />
       </div>
       <div className="flex-1">
         <div className="flex flex-row">
           <div className="ml-4">
-            <Button id="memo" button>
-              メモを書く
-            </Button>
+            <Button button>メモを書く</Button>
           </div>
           <div className="my-auto">
-            <Avatar id="user" alt={user.name} src={user.avatarUrl} />
+            <Avatar alt={user.name} src={user.avatarUrl} />
           </div>
         </div>
       </div>
