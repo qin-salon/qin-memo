@@ -2,7 +2,6 @@ import clsx from "clsx";
 import type { DOMAttributes } from "react";
 
 type CommonType = {
-  id: string;
   title?: string;
   placeholder?: string;
   className?: string;
