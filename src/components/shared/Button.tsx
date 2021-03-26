@@ -4,7 +4,6 @@ import Link from "next/link";
 import type { DOMAttributes, ReactNode, VFC } from "react";
 
 type CommonType = {
-  id: string;
   bgColor?: "blue" | "red" | "black" | "white" | "gray" | "orange" | "transparent";
   textColor?: "black" | "red" | "blue";
   disabled?: boolean;
