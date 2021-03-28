@@ -19,7 +19,7 @@ const Signin: NextPage = () => {
           <Button button bgColor="white" startIcon={<GoogleIcon />} size="large" className="w-72">
             Googleでログイン
           </Button>
-          <Button button bgColor="black" startIcon={<AppleIcon />} size="large" className="w-72">
+          <Button button bgColor="black" startIcon={<AppleIcon iconColor="white" />} size="large" className="w-72">
             Appleでログイン
           </Button>
         </div>
