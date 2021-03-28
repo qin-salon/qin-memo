@@ -27,7 +27,7 @@ const SettingsAccount: NextPage = () => {
         </div>
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center">
-            <AppleIcon className="fill-current" iconColor="black" />
+            <AppleIcon iconColor="black" />
             <p className="ml-3 font-bold">Apple</p>
           </div>
           <Button button bgColor="blue" className="my-0 mx-0 text-xs">
