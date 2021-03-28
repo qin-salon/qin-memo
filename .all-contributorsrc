@@ -105,6 +105,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "yuji-bvb",
+      "name": "yuji-bvb",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69225541?v=4",
+      "profile": "https://github.com/yuji-bvb",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "aluco-hirata",
+      "name": "aluco-hirata",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57079195?v=4",
+      "profile": "https://hirata-tech-blog.vercel.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
