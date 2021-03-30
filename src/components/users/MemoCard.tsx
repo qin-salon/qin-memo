@@ -1,15 +1,19 @@
 import type { VFC } from "react";
-import { Button } from "src/components/shared/Button";
 import type { ListNote } from "src/types/types";
 
 type Props = {
   note: ListNote;
 };
 
+// タイトルの取得（改行コードまでをタイトルとする）
+const pattarn = "(^.*)(\n)";
+const getTitle = (excTitle: RegExpMatchArray | null) => {
+  return String(excTitle ? excTitle[0] : "");
+};
+
 export const MemoCard: VFC<Props> = (props) => {
-  const pattarn = "(^.*)(\n)";
   const excTitle = props.note.excerpt.match(pattarn);
-  const title = String(excTitle ? excTitle[0] : "");
+  const title = getTitle(excTitle);
   return (
     <div className="bg-gray-200 my-4 rounded-3xl w-full h-32 mx-auto p-2">
       <strong>
@@ -26,9 +30,7 @@ export const MemoCard: VFC<Props> = (props) => {
         </div>
         <div>
           {props.note.public ? (
-            <Button button bgColor="orange" className="w-auto" size="extrasmall">
-              公開中
-            </Button>
+            <span className="py-1 px-1 my-0 mx-auto rounded-full w-auto text-white bg-yellow-500">公開中</span>
           ) : null}
         </div>
       </div>
