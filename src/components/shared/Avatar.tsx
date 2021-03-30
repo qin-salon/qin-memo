@@ -1,8 +1,6 @@
 import clsx from "clsx";
 import type { VFC } from "react";
 
-import { Button } from "./Button";
-
 type CommonType = {
   alt: string;
   className?: string;
@@ -22,11 +20,6 @@ const isImg = (props: ImgType | ButtonType): props is ImgType => {
   return "src" in props && props.src !== "";
 };
 
-const ramdomMin = 1;
-const ramdomMax = 3;
-
-const ramdom = Math.floor(Math.random() * (ramdomMax + 1 - ramdomMin)) + ramdomMin;
-
 export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   // サイズ small:36px medium:48px large:72px extralarge:100px
   const circleStyle = clsx([
@@ -41,15 +34,12 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   ]);
 
   const fontStyle = clsx([
-    "rounded-full w-full h-full flex items-center justify-center",
+    "rounded-full w-full h-full flex items-center justify-center bg-blue-300",
     {
       "text-2xl": props.size === "small",
       "text-3xl": props.size === "medium",
       "text-4xl ": props.size === "large",
       "text-5xl ": props.size === "extralarge",
-      "bg-red-100": ramdom === 1,
-      "bg-blue-300": ramdom === 2,
-      "bg-purple-300": ramdom === 3,
     },
   ]);
 
@@ -58,9 +48,9 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
       {isImg(props) ? (
         <img src={props.src} alt={props.alt} className="rounded-full w-full h-full" />
       ) : (
-        <Button button className={fontStyle}>
-          <span className="m-auto">{props.alt ? props.alt.substr(0, 1) : null}</span>
-        </Button>
+        <div className={fontStyle}>
+          <span className="m-auto">{props.alt.substr(0, 1)}</span>
+        </div>
       )}
     </div>
   );
