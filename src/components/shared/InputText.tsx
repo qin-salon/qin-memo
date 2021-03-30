@@ -11,23 +11,23 @@ type CommonType = {
   startIcon?: JSX.Element;
 };
 
-type textareaType = CommonType & {
+type TextareaType = CommonType & {
   multiline?: boolean;
   maxLength?: number;
   rows?: number;
   onChange?: DOMAttributes<HTMLTextAreaElement>["onChange"];
 };
-type inputType = CommonType & {
+type InputType = CommonType & {
   onChange?: DOMAttributes<HTMLInputElement>["onChange"];
 };
 
 // props の型がinput型かtextarea型かを判断する関数を定義する。
 // props に multiline を持っている場合は true
-const isTextarea = (props: textareaType | inputType): props is textareaType => {
+const isTextarea = (props: TextareaType | InputType): props is TextareaType => {
   return "multiline" in props;
 };
 
-export const InputText: React.FC<textareaType | inputType> = (props) => {
+export const InputText: React.FC<TextareaType | InputType> = (props) => {
   // テキストボックスにフォーカスがある場合にボーダーラインの表示を切り替える
   const divStyle = clsx([
     "flex text-center my-auto pl-3 pr-10  rounded-xl border-2 transition-colors",
