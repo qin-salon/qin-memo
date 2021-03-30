@@ -7,7 +7,7 @@ const Registration: NextPage = () => {
     <div className="max-w-screen-sm mx-auto p-4">
       <p className="my-4 text-center text-xl font-bold">プロフィール設定</p>
       <ProfileSetting />
-      <Button button className="w-full">
+      <Button button className="w-full mt-8">
         登録してはじめる
       </Button>
       <Button button bgColor="gray" textColor="black" className="w-full">

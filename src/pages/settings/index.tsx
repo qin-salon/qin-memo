@@ -1,8 +1,8 @@
-import Link from "next/link";
 import type { NextPage } from "next";
+import Link from "next/link";
+import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { Button } from "src/components/shared/Button";
 import { ProfileSetting } from "src/components/shared/ProfileSetting";
-import { ChevronLeft } from "src/components/icon/ChevronLeft";
 
 const Settings: NextPage = () => {
   return (
@@ -16,7 +16,7 @@ const Settings: NextPage = () => {
         <span className="block text-center w-full text-xl font-bold">プロフィール設定</span>
       </p>
       <ProfileSetting />
-      <Button button className="w-full">
+      <Button button className="w-full mt-8">
         保存する
       </Button>
     </div>

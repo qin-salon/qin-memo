@@ -3,8 +3,8 @@ import { InputText } from "src/components/shared/InputText";
 
 export const ProfileSetting = () => {
   return (
-    <>
-      <div className="mb-8">
+    <div>
+      <div>
         <p className="py-2 text-gray-500">アイコン</p>
         <div className="flex justify-start items-center">
           <img src="https://placehold.jp/100x100.png" alt="" />
@@ -13,15 +13,15 @@ export const ProfileSetting = () => {
           </Button>
         </div>
       </div>
-      <div className="mb-4">
+      <div className="mt-8">
         <p className="py-2 text-gray-500">名前</p>
         <InputText />
       </div>
-      <div className="mb-8">
+      <div className="mt-4">
         <p className="py-2 text-gray-500">ユーザー名</p>
         <InputText />
         <p className="py-1 text-gray-500">https://qin.page/shimabu</p>
       </div>
-    </>
+    </div>
   );
 };
