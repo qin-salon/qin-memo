@@ -20,11 +20,6 @@ const isImg = (props: ImgType | ButtonType): props is ImgType => {
   return "src" in props && props.src !== "";
 };
 
-const ramdomMin = 1;
-const ramdomMax = 3;
-
-const ramdom = Math.floor(Math.random() * (ramdomMax + 1 - ramdomMin)) + ramdomMin;
-
 export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   // サイズ small:36px medium:48px large:72px extralarge:100px
   const circleStyle = clsx([
@@ -45,9 +40,6 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
       "text-3xl": props.size === "medium",
       "text-4xl ": props.size === "large",
       "text-5xl ": props.size === "extralarge",
-      "bg-red-100": ramdom === 1,
-      "bg-blue-300": ramdom === 2,
-      "bg-purple-300": ramdom === 3,
     },
   ]);
 
