@@ -1,7 +1,7 @@
 # Qin Memo
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## 使用技術
@@ -149,6 +149,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/takasaki376"><img src="https://avatars.githubusercontent.com/u/75880059?v=4?s=100" width="100px;" alt=""/><br /><sub><b>takasaki376</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=takasaki376" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/yuji-bvb"><img src="https://avatars.githubusercontent.com/u/69225541?v=4?s=100" width="100px;" alt=""/><br /><sub><b>yuji-bvb</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=yuji-bvb" title="Code">💻</a></td>
     <td align="center"><a href="https://hirata-tech-blog.vercel.app/"><img src="https://avatars.githubusercontent.com/u/57079195?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aluco-hirata</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=aluco-hirata" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kondo-tomonori1001"><img src="https://avatars.githubusercontent.com/u/59102541?v=4?s=100" width="100px;" alt=""/><br /><sub><b>KON</b></sub></a><br /><a href="https://github.com/qin-salon/qin-memo/commits?author=kondo-tomonori1001" title="Code">💻</a></td>
   </tr>
 </table>
 
