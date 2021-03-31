@@ -30,11 +30,12 @@ const isTextarea = (props: TextareaType | InputType): props is TextareaType => {
 export const InputText: React.FC<TextareaType | InputType> = (props) => {
   // テキストボックスにフォーカスがある場合にボーダーラインの表示を切り替える
   const divStyle = clsx([
-    "flex text-center my-auto pl-3 pr-10 outline-none rounded-full transition-colors",
+    "flex text-center my-auto outline-none transition-colors",
     {
       "bg-gray-100": props.bgColor === "gray",
       "bg-white": props.bgColor === "white",
-      "h-10": !isTextarea(props),
+      "h-10 pl-3 pr-10 rounded-full": !isTextarea(props),
+      "p-4": isTextarea(props),
     },
     props.className,
   ]);
