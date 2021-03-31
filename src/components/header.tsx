@@ -5,6 +5,7 @@ const items = [
   { href: "/", label: "Home" },
   { href: "/async", label: "非同期" },
   { href: "/button", label: "ボタン" },
+  { href: "/textbox", label: "テキストボックス" },
 ];
 
 export const Header = () => {
