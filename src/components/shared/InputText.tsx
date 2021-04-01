@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import type { DOMAttributes } from "react";
+import type { DOMAttributes, VFC } from "react";
 
 type CommonType = {
   label?: string;
@@ -27,7 +27,7 @@ const isTextarea = (props: TextareaType | InputType): props is TextareaType => {
   return "multiline" in props;
 };
 
-export const InputText: React.FC<TextareaType | InputType> = (props) => {
+export const InputText: VFC<TextareaType | InputType> = (props) => {
   // テキストボックスにフォーカスがある場合にボーダーラインの表示を切り替える
   const divStyle = clsx([
     "flex text-center my-auto outline-none transition-colors",

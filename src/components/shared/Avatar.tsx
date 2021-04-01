@@ -1,11 +1,11 @@
 import clsx from "clsx";
-import type { VFC } from "react";
+import type { MouseEvent, VFC } from "react";
 
 type CommonType = {
   alt: string;
   className?: string;
   size?: "small" | "medium" | "large" | "extralarge";
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (e: MouseEvent<HTMLElement>) => void;
 };
 
 type ImgType = CommonType & {
