@@ -12,8 +12,7 @@ const getTitle = (excTitle: RegExpMatchArray | null) => {
 };
 
 export const MemoCard: VFC<Props> = (props) => {
-  const excTitle = props.note.excerpt.match(pattarn);
-  const title = getTitle(excTitle);
+  const title = getTitle(props.note.excerpt.match(pattarn));
   return (
     <div className="bg-gray-200 my-4 rounded-3xl w-full h-32 mx-auto p-2">
       <strong>
