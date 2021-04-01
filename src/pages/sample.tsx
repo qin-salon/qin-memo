@@ -37,16 +37,7 @@ const ButtonPage: NextPage = () => {
               メモを書く
             </Button>
           </div>
-          <div className="mx-auto">
-            <Button button bgColor="orange" className="w-auto" onClick={handleAddCount}>
-              公開中
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button button bgColor="orange" className="w-auto" onClick={handleAddCount} disabled>
-              公開中
-            </Button>
-          </div>
+
           <div className="mx-auto">
             <Button button bgColor="gray" onClick={handleAddCount}>
               キャンセル
@@ -55,28 +46,6 @@ const ButtonPage: NextPage = () => {
           <div className="mx-auto">
             <Button button bgColor="blue" onClick={handleAddCount} disabled>
               キャンセル
-            </Button>
-          </div>
-        </div>
-        <div className="flex flex-row justify-start">
-          <div className="mx-auto">
-            <Button button bgColor="red" className="w-32" onClick={handleAddCount}>
-              削除する
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button button bgColor="red" className="w-32" onClick={handleAddCount} disabled>
-              削除する
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button button bgColor="white" textColor="blue" onClick={handleAddCount}>
-              プロフィール設定
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button button bgColor="white" textColor="blue" onClick={handleAddCount} disabled>
-              プロフィール設定
             </Button>
           </div>
           <div className="mx-auto">
@@ -99,14 +68,35 @@ const ButtonPage: NextPage = () => {
         </div>
         <div className="flex flex-row justify-start">
           <div className="mx-auto">
-            <Button linkProps={{ href: "/signin" }}>サインイン</Button>
+            <Button button bgColor="red" className="w-32" onClick={handleAddCount}>
+              削除する
+            </Button>
           </div>
           <div className="mx-auto">
-            <Button linkProps={{ href: "/settings/profile" }} size="extrasmall" bgColor="transparent">
+            <Button button bgColor="red" className="w-32" onClick={handleAddCount} disabled>
+              削除する
+            </Button>
+          </div>
+          <div className="mx-auto">
+            <Button button bgColor="transparent" textColor="blue" onClick={handleAddCount}>
               プロフィール設定
             </Button>
           </div>
+          <div className="mx-auto">
+            <Button button bgColor="transparent" textColor="blue" onClick={handleAddCount} disabled>
+              プロフィール設定
+            </Button>
+          </div>
+          <div className="mx-auto">
+            <Button linkProps={{ href: "/signin" }}>サインイン</Button>
+          </div>
+          <div className="mx-auto">
+            <Button linkProps={{ href: "/signin" }} disabled>
+              サインイン
+            </Button>
+          </div>
         </div>
+
         <div className="my-4 ml-4">
           <span className="m-auto">アバターの表示</span>
         </div>
