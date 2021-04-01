@@ -9,7 +9,7 @@ type CommonType = {
 };
 
 type ImgType = CommonType & {
-  src: string;
+  src: string | null;
 };
 
 type ButtonType = CommonType;
@@ -17,7 +17,7 @@ type ButtonType = CommonType;
 // props の型がimage型かbutton型かを判断する関数を定義する。
 // 画像ファイルがある場合にimgタブで表示する
 const isImg = (props: ImgType | ButtonType): props is ImgType => {
-  return "src" in props && props.src !== "";
+  return "src" in props && !!props.src;
 };
 
 export const Avatar: VFC<ImgType | ButtonType> = (props) => {
@@ -45,7 +45,7 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
 
   return (
     <div className={circleStyle}>
-      {isImg(props) ? (
+      {isImg(props) && props.src ? (
         <img src={props.src} alt={props.alt} className="rounded-full w-full h-full" />
       ) : (
         <div className={fontStyle}>

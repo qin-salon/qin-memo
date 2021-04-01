@@ -129,13 +129,13 @@ const ButtonPage: NextPage = () => {
             <Avatar alt="特大" src="" size="extralarge" />
           </div>
           <div className="mx-auto">
-            <Avatar alt="大" src="" size="large" />
+            <Avatar alt="大" size="large" />
           </div>
           <div className="mx-auto">
-            <Avatar alt="中" src="" size="medium" />
+            <Avatar alt="中" src={null} size="medium" />
           </div>
           <div className="mx-auto">
-            <Avatar alt="小" src="" size="small" />
+            <Avatar alt="小" src={undefined} size="small" />
           </div>
         </div>
         <div className="my-4 ml-4">
