@@ -6,7 +6,7 @@ const PAGES = [
   { href: "/signin", file: "/signin.tsx", label: "ログインページ", isDone: true },
   { href: "/signup", file: "/signup.tsx", label: "新規登録ページ", isDone: true },
   { href: "/registration", file: "/registration.tsx", label: "初回プロフィール登録ページ", isDone: true },
-  { href: "/users/foo", file: "/users/[userId].tsx", label: "ユーザーページ", isDone: false },
+  { href: "/users/foo", file: "/users/[userId].tsx", label: "ユーザーページ", isDone: true },
   { href: "/search", file: "/search.tsx", label: "メモ検索ページ", isDone: false },
   { href: "/notes/foo", file: "/notes/[noteId].tsx", label: "メモページ", isDone: false },
   { href: "/settings", file: "/settings.tsx", label: "設定一覧ページ", isDone: false },
