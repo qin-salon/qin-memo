@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 const items = [
   { href: "/", label: "Home" },
   { href: "/async", label: "非同期" },
-  { href: "/button", label: "ボタン" },
+  { href: "/sample", label: "サンプル" },
 ];
 
 export const Header = () => {

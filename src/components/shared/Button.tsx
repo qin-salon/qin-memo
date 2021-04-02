@@ -4,14 +4,14 @@ import Link from "next/link";
 import type { DOMAttributes, ReactNode, VFC } from "react";
 
 type CommonType = {
-  bgColor?: "blue" | "red" | "black" | "white" | "gray" | "orange" | "transparent";
+  bgColor?: "blue" | "red" | "black" | "white" | "gray" | "transparent";
   textColor?: "black" | "red" | "blue";
   disabled?: boolean;
   children?: ReactNode;
   className?: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  size?: "large" | "small";
+  size?: "large" | "small" | "extrasmall";
 };
 
 type ButtonType = CommonType & {
@@ -30,19 +30,19 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 };
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
-  const classes = clsx("my-4 mx-auto rounded-full focus:outline-none flex flex-row justify-center", {
-    "py-4 px-8": props.size === "large",
-    "py-2 px-4": props.size === "small",
+  const classes = clsx("mx-auto rounded-full focus:outline-none flex flex-row justify-center whitespace-nowrap", {
+    "py-4 px-8 my-4": props.size === "large",
+    "py-2 px-4 my-4": props.size === "small",
+    "py-1 px-1 my-0": props.size === "extrasmall",
   });
 
   const colorClasses = clsx({
     "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue",
     "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red",
-    "text-white bg-yellow-500 hover:bg-yellow-600": props.bgColor === "orange",
     "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray",
     "text-white bg-black hover:bg-gray-500": props.bgColor === "black",
     "bg-white hover:bg-gray-300": props.bgColor === "white",
-    "bg-transparent": props.bgColor === "transparent",
+    "bg-transparent text-blue-500": props.bgColor === "transparent",
     "text-black": props.bgColor === "white" && props.textColor === "black",
     "text-red-500": props.bgColor === "white" && props.textColor === "red",
     "text-blue-500": props.bgColor === "white" && props.textColor === "blue",
