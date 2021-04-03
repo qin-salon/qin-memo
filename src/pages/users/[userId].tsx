@@ -50,7 +50,7 @@ const User: NextPage = () => {
           </div>
           <div className="flex flex-col">
             <span className="ml-2 my-0">{user.name}</span>
-            <Button linkProps={{ href: "/settings/profile" }} size="extrasmall" bgColor="transparent">
+            <Button linkProps={{ href: "/settings/profile" }} size="extrasmall" bgColor="transparent" textColor="blue">
               プロフィール設定
             </Button>
           </div>
