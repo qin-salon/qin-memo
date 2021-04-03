@@ -22,7 +22,7 @@ const isImg = (props: ImgType | ButtonType): props is ImgType => {
 
 export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   // サイズ small:36px medium:48px large:72px extralarge:100px
-  const circleStyle = clsx([
+  const circleClasses = clsx([
     "relative m-2",
     {
       "w-9 h-9": props.size === "small",
@@ -33,7 +33,7 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
     props.className,
   ]);
 
-  const fontStyle = clsx([
+  const fontClasses = clsx([
     "rounded-full w-full h-full flex items-center justify-center bg-blue-300",
     {
       "text-2xl": props.size === "small",
@@ -44,11 +44,11 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   ]);
 
   return (
-    <div className={circleStyle}>
+    <div className={circleClasses}>
       {isImg(props) && props.src ? (
         <img src={props.src} alt={props.alt} className="rounded-full w-full h-full" />
       ) : (
-        <div className={fontStyle}>
+        <div className={fontClasses}>
           <span className="m-auto">{props.alt.substr(0, 1)}</span>
         </div>
       )}
