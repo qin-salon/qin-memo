@@ -109,7 +109,15 @@ const Search: NextPage = () => {
   // ===================================
   const NoteRender = () => {
     if (!listNote) {
-      return null;
+      return (
+        <div>
+          {keyward ? (
+            <div>
+              <strong>{keyward}</strong>に一致するメモは見つかりませんでした。
+            </div>
+          ) : null}
+        </div>
+      );
     }
     return (
       <div className="w-full flex flex-col h-full">
@@ -124,11 +132,7 @@ const Search: NextPage = () => {
   // ===================================
   const HistoryRender = () => {
     if (!searchHistory) {
-      return (
-        <div>
-          <strong>{keyward}</strong>に一致するメモは見つかりませんでした。
-        </div>
-      );
+      return null;
     }
     return (
       <div className="w-full flex flex-col h-full">
