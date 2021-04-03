@@ -42,10 +42,10 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
     "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray",
     "text-white bg-black hover:bg-gray-500": props.bgColor === "black",
     "bg-white hover:bg-gray-300": props.bgColor === "white",
-    "bg-transparent text-blue-500": props.bgColor === "transparent",
-    "text-black": props.bgColor === "white" && props.textColor === "black",
+    "bg-transparent": props.bgColor === "transparent",
+    "text-black": (props.bgColor === "white" || props.bgColor === "transparent") && props.textColor === "black",
     "text-red-500": props.bgColor === "white" && props.textColor === "red",
-    "text-blue-500": props.bgColor === "white" && props.textColor === "blue",
+    "text-blue-500": (props.bgColor === "white" || props.bgColor === "transparent") && props.textColor === "blue",
   });
 
   const iconClasses = clsx("my-auto", {
