@@ -70,9 +70,16 @@ export const InputText: VFC<TextareaType | InputType> = (props) => {
             maxLength={props.maxLength}
             rows={props.rows}
             value={props.value}
+            onChange={props.onChange}
           />
         ) : (
-          <input type="text" className={inputStyle} placeholder={props.placeholder} value={props.value} />
+          <input
+            type="text"
+            className={inputStyle}
+            placeholder={props.placeholder}
+            value={props.value}
+            onChange={props.onChange}
+          />
         )}
       </div>
     </div>
