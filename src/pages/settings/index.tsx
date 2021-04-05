@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { XIcon } from "src/components/icon/XIcon";
 import { ChevronRight } from "src/components/icon/ChevronRight";
+import { XIcon } from "src/components/icon/XIcon";
 
 type Menu = {
   category: string;
@@ -61,39 +61,41 @@ const Settings: NextPage = () => {
       </p>
 
       <ul>
-        {MENUS.map((menu) => (
-          <li key={menu.category}>
-            <p className="mt-6 py-2 text-gray-400 font-bold">{menu.category}</p>
-            <ul>
-              {menu.details.map((detail) => (
-                <li key={detail.link}>
-                  <Link href={detail.link}>
-                    <a className="flex justify-between items-center mb-3">
-                      <div className="mt-2 font-bold text-lg">{detail.name}</div>
-                      <ChevronRight />
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
+        {MENUS.map((menu) => {
+          return (
+            <li key={menu.category}>
+              <p className="mt-6 py-2 text-gray-400 font-bold">{menu.category}</p>
+              <ul>
+                {menu.details.map((detail) => {
+                  return (
+                    <li key={detail.link}>
+                      <Link href={detail.link}>
+                        <a className="flex justify-between items-center mb-3">
+                          <div className="mt-2 font-bold text-lg">{detail.name}</div>
+                          <ChevronRight />
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </li>
+          );
+        })}
       </ul>
 
       <p className="mt-6 py-2 text-gray-400 font-bold">アクション</p>
       <div className="flex justify-between items-center mb-3">
         <div className="mt-3 font-bold text-lg">ダークモード</div>
         <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-          <input
-            type="checkbox"
-            name="toggle"
-            id="darkmode"
-            className="outline-none right-4 checked:right-0 duration-200 ease-in checked:bg-blue-600 absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"
-          />
-          <label
-            htmlFor="darkmode"
-            className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
-          ></label>
+          <label htmlFor="darkmode" className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              name="toggle"
+              id="darkmode"
+              className="outline-none right-4 checked:right-0 duration-200 ease-in checked:bg-blue-600 absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"
+            />
+          </label>
         </div>
       </div>
       <div className="mt-3 font-bold text-lg text-red-500">ログアウト</div>
