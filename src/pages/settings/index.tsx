@@ -82,23 +82,34 @@ const Settings: NextPage = () => {
             </li>
           );
         })}
-      </ul>
 
-      <p className="mt-6 py-2 text-gray-400 font-bold">アクション</p>
-      <div className="flex justify-between items-center mb-3">
-        <div className="mt-3 font-bold text-lg">ダークモード</div>
-        <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
-          <label htmlFor="darkmode" className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer">
-            <input
-              type="checkbox"
-              name="toggle"
-              id="darkmode"
-              className="outline-none right-4 checked:right-0 duration-200 ease-in checked:bg-blue-600 absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"
-            />
-          </label>
-        </div>
-      </div>
-      <div className="mt-3 font-bold text-lg text-red-500">ログアウト</div>
+        <li>
+          <p className="mt-6 py-2 text-gray-400 font-bold">アクション</p>
+          <ul>
+            <li>
+              <div className="flex justify-between items-center mb-3">
+                <div className="mt-3 font-bold text-lg">ダークモード</div>
+                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                  <label
+                    htmlFor="darkmode"
+                    className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                  >
+                    <input
+                      type="checkbox"
+                      name="toggle"
+                      id="darkmode"
+                      className="outline-none right-4 checked:right-0 duration-200 ease-in checked:bg-blue-600 absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                    />
+                  </label>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div className="mt-3 font-bold text-lg text-red-500">ログアウト</div>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </div>
   );
 };
