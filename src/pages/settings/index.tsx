@@ -60,18 +60,18 @@ const Settings: NextPage = () => {
         <span className="block text-center w-full text-xl font-bold">マイページ</span>
       </p>
 
-      <ul>
+      <ul className="space-y-10">
         {MENUS.map((menu) => {
           return (
             <li key={menu.category}>
-              <p className="mt-6 py-2 text-gray-400 font-bold">{menu.category}</p>
-              <ul>
+              <p className="py-2 text-gray-400 font-bold">{menu.category}</p>
+              <ul className="space-y-6">
                 {menu.details.map((detail) => {
                   return (
                     <li key={detail.link}>
                       <Link href={detail.link}>
-                        <a className="flex justify-between items-center mb-3">
-                          <div className="mt-2 font-bold text-lg">{detail.name}</div>
+                        <a className="flex justify-between items-center">
+                          <div className="font-bold text-lg">{detail.name}</div>
                           <ChevronRight />
                         </a>
                       </Link>
@@ -84,11 +84,11 @@ const Settings: NextPage = () => {
         })}
 
         <li>
-          <p className="mt-6 py-2 text-gray-400 font-bold">アクション</p>
-          <ul>
+          <p className="py-2 text-gray-400 font-bold">アクション</p>
+          <ul className="space-y-6">
             <li>
-              <div className="flex justify-between items-center mb-3">
-                <div className="mt-3 font-bold text-lg">ダークモード</div>
+              <div className="flex justify-between items-center">
+                <div className="font-bold text-lg">ダークモード</div>
                 <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                   <label
                     htmlFor="darkmode"
@@ -105,7 +105,7 @@ const Settings: NextPage = () => {
               </div>
             </li>
             <li>
-              <div className="mt-3 font-bold text-lg text-red-500">ログアウト</div>
+              <div className="font-bold text-lg text-red-500">ログアウト</div>
             </li>
           </ul>
         </li>
