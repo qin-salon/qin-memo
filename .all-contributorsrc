@@ -132,6 +132,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "wi-tech",
+      "name": "wi-tech",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75743359?v=4",
+      "profile": "https://github.com/wi-tech",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
