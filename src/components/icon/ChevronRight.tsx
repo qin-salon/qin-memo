@@ -2,7 +2,6 @@ import type { VFC } from "react";
 
 type Props = {
   className?: string;
-  disabled?: boolean;
 };
 
 export const ChevronRight: VFC<Props> = (props) => {
@@ -20,5 +19,4 @@ export const ChevronRight: VFC<Props> = (props) => {
 // Propsのデフォルト値
 ChevronRight.defaultProps = {
   className: "w-5 h-5",
-  disabled: false,
 };

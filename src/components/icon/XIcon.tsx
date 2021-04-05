@@ -2,7 +2,6 @@ import type { VFC } from "react";
 
 type Props = {
   className?: string;
-  disabled?: boolean;
 };
 
 export const XIcon: VFC<Props> = (props) => {
@@ -22,5 +21,4 @@ export const XIcon: VFC<Props> = (props) => {
 // Propsのデフォルト値
 XIcon.defaultProps = {
   className: "w-5 h-5",
-  disabled: false,
 };
