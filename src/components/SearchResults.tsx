@@ -9,29 +9,33 @@ type Props = { keyword: string };
 const user = EXAMPLE_USER_01;
 
 export const SearchResults: VFC<Props> = (props) => {
-  const { data } = useSWR<ListNote[]>(`/users/${user.id}/notes`);
+  const { data, error } = useSWR(`/users/${user.id}/notes/search/${props.keyword}`);
+
+  if (error) {
+    // TODO: 検索結果が取得できなかった場合のエラー処理
+    return null;
+  }
 
   if (!data) {
-    return (
-      <div>
-        {props.keyword ? (
-          <div>
-            <strong>{props.keyword}</strong>に一致するメモは見つかりませんでした。
-          </div>
-        ) : null}
-      </div>
-    );
+    // TODO: 検索結果取得時のローディング処理
+    return <div>loading</div>;
   }
 
   return (
     <ul className="space-y-1">
-      {data.map((note: ListNote) => {
-        return (
-          <li key={note.id}>
-            <MemoCard note={note} />
-          </li>
-        );
-      })}
+      {data.length > 0 ? (
+        data.map((note: ListNote) => {
+          return (
+            <li key={note.id}>
+              <MemoCard note={note} />
+            </li>
+          );
+        })
+      ) : (
+        <div>
+          <strong>{props.keyword}</strong>に一致するメモは見つかりませんでした。
+        </div>
+      )}
     </ul>
   );
 };
