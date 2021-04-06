@@ -21,7 +21,7 @@ export const SearchHistories: VFC = () => {
   }
 
   return (
-    <div className="w-full flex flex-col h-full">
+    <ul className="space-y-1">
       {data.map((serchHistory) => {
         const handleHistoryClick = async () => {
           // TODO: 検索結果のアイテムをクリックしたときの処理
@@ -41,23 +41,23 @@ export const SearchHistories: VFC = () => {
         };
 
         return (
-          <div key={serchHistory.id} className="flex flex-row justify-between w-full my-1">
-            <div className="my-auto hover:bg-gray-100 w-full p-2 pl-6 rounded-full">
-              <Button
-                button
-                className="w-full"
-                bgColor="transparent"
-                textColor="black"
-                size="extrasmall"
-                justifyCenter="justify-start"
-                onClick={handleHistoryClick}
-              >
-                <strong>
-                  <span className="my-auto">{serchHistory.keyword}</span>
-                </strong>
-              </Button>
-            </div>
-            <div>
+          <li key={serchHistory.id}>
+            <div className="flex">
+              <div className="flex-1 my-auto p-2 pl-6 rounded-full hover:bg-gray-100 ">
+                <Button
+                  button
+                  className="w-full"
+                  bgColor="transparent"
+                  textColor="black"
+                  size="extrasmall"
+                  justifyCenter="justify-start"
+                  onClick={handleHistoryClick}
+                >
+                  <strong>
+                    <span className="my-auto">{serchHistory.keyword}</span>
+                  </strong>
+                </Button>
+              </div>
               <Button
                 button
                 className="hover:bg-gray-100 rounded-full"
@@ -69,9 +69,9 @@ export const SearchHistories: VFC = () => {
                 <XIcon className="text-gray-300 my-2 w-6 h-6" />
               </Button>
             </div>
-          </div>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };

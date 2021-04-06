@@ -24,10 +24,14 @@ export const SearchResults: VFC<Props> = (props) => {
   }
 
   return (
-    <div className="w-full flex flex-col h-full">
+    <ul className="space-y-1">
       {data.map((note: ListNote) => {
-        return <MemoCard key={note.id} note={note} />;
+        return (
+          <li key={note.id}>
+            <MemoCard note={note} />
+          </li>
+        );
       })}
-    </div>
+    </ul>
   );
 };

@@ -40,50 +40,38 @@ const Search: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col overscroll-none h-screen">
+    <div className="flex flex-col overscroll-none h-screen w-full md:max-w-3xl mx-auto p-4">
       <header>
-        <div className="w-3/5 mx-auto flex flex-col mt-4">
-          <div className="flex flex-row items-center">
-            <div className="flex-1">
-              <div className="flex  mr-4">
-                <Button
-                  linkProps={{ href: `/users/${user.id}` }}
-                  className="hover:bg-gray-100 rounded-full"
-                  bgColor="transparent"
-                  size="extrasmall"
-                >
-                  <ChevronLeft />
-                </Button>
-              </div>
-            </div>
-            <div className="flex-auto items-center m-0">
-              <form onSubmit={handleSubmit}>
-                <InputText
-                  className="w-full"
-                  startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
-                  placeholder="検索"
-                  value={value}
-                  onChange={handleChange}
-                />
-              </form>
-            </div>
-            <div className="flex-1 w-6">
-              <div className="flex flex-row justify-end ">
-                <Button
-                  button
-                  className="hover:bg-gray-100 rounded-full"
-                  bgColor="transparent"
-                  size="extrasmall"
-                  onClick={handleClose}
-                >
-                  <XIcon className="my-auto w-6 h-6" />
-                </Button>
-              </div>
-            </div>
-          </div>
+        <div className="flex items-center space-x-4">
+          <Button
+            linkProps={{ href: `/users/${user.id}` }}
+            className="hover:bg-gray-100 rounded-full"
+            bgColor="transparent"
+            size="extrasmall"
+          >
+            <ChevronLeft />
+          </Button>
+          <form className="flex-1" onSubmit={handleSubmit}>
+            <InputText
+              className="w-full"
+              startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
+              placeholder="検索"
+              value={value}
+              onChange={handleChange}
+            />
+          </form>
+          <Button
+            button
+            className="hover:bg-gray-100 rounded-full"
+            bgColor="transparent"
+            size="extrasmall"
+            onClick={handleClose}
+          >
+            <XIcon className="my-auto w-6 h-6" />
+          </Button>
         </div>
       </header>
-      <div className="w-3/5 mx-auto">{keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}</div>
+      <div className="mt-4">{keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}</div>
     </div>
   );
 };
