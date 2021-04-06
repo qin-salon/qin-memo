@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import type { KeyboardEvent } from "react";
+import type { DOMAttributes } from "react";
 import { useState } from "react";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { SearchIcon } from "src/components/icon/SearchIcon";
@@ -16,7 +16,7 @@ import useSWR from "swr";
 // Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
 const user = EXAMPLE_USER_01;
 
-function getMaxid(searchHistory: SearchHistory[] | undefined) {
+const getMaxid = (searchHistory: SearchHistory[] | undefined) => {
   if (searchHistory) {
     const maxId = Math.max.apply(
       null,
@@ -32,7 +32,7 @@ function getMaxid(searchHistory: SearchHistory[] | undefined) {
   } else {
     return 1;
   }
-}
+};
 
 const Search: NextPage = () => {
   // 検索履歴の取得
@@ -50,14 +50,15 @@ const Search: NextPage = () => {
   // ===================================
   // 検索キーワード入力
   // ===================================
-  const handleKeywardChange = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeywardChange: DOMAttributes<HTMLInputElement>["onChange"] = (e) => {
     setKeyward(e.currentTarget.value);
   };
 
   // ===================================
   // 検索履歴の登録
   // ===================================
-  const handleSubmit = async () => {
+  const handleSubmit: DOMAttributes<HTMLFormElement>["onSubmit"] = async (e) => {
+    e.preventDefault();
     // id の採番
     const id = getMaxid(searchHistory);
     // 登録用のデータ定義
@@ -72,18 +73,6 @@ const Search: NextPage = () => {
     await serachMutate();
     await setMode(true);
     await setKeyward("");
-  };
-
-  // ===================================
-  // 検索履歴の削除
-  // ===================================
-  const handleHistoryDeleteClick = async (id: number) => {
-    // deleteメソッド
-    await fetch(`/users/${user.id}/searchHistories/${id}`, {
-      method: "delete",
-    });
-    // 検索履歴を取得し直す
-    await historyMutate();
   };
 
   // ===================================
@@ -137,6 +126,18 @@ const Search: NextPage = () => {
     return (
       <div className="w-full flex flex-col h-full">
         {searchHistory.map((serchHistory: SearchHistory) => {
+          // ===================================
+          // 検索履歴の削除
+          // ===================================
+          const handleHistoryDeleteClick = async () => {
+            // deleteメソッド
+            await fetch(`/users/${user.id}/searchHistories/${serchHistory.id}`, {
+              method: "delete",
+            });
+            // 検索履歴を取得し直す
+            await historyMutate();
+          };
+
           return (
             <div key={serchHistory.id} className="flex flex-row justify-between w-full my-1">
               <div className="my-auto hover:bg-gray-100 w-full p-2 pl-6 rounded-full">
@@ -147,9 +148,7 @@ const Search: NextPage = () => {
                   textColor="black"
                   size="extrasmall"
                   justifyCenter="justify-start"
-                  onClick={() => {
-                    handleHistoryClick();
-                  }}
+                  onClick={handleHistoryClick}
                 >
                   <strong>
                     <span className="my-auto">{serchHistory.keyword}</span>
@@ -163,9 +162,7 @@ const Search: NextPage = () => {
                   bgColor="transparent"
                   textColor="black"
                   size="extrasmall"
-                  onClick={() => {
-                    handleHistoryDeleteClick(serchHistory.id);
-                  }}
+                  onClick={handleHistoryDeleteClick}
                 >
                   <XIcon className="text-gray-300 my-2 w-6 h-6" />
                 </Button>
@@ -198,20 +195,13 @@ const Search: NextPage = () => {
               </div>
             </div>
             <div className="flex-auto items-center m-0">
-              <form
-                onSubmit={(e) => {
-                  handleSubmit();
-                  return e.preventDefault();
-                }}
-              >
+              <form onSubmit={handleSubmit}>
                 <InputText
                   className="w-full"
                   startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
                   placeholder="検索"
                   value={keyward}
-                  onChange={(e: KeyboardEvent<HTMLInputElement>) => {
-                    handleKeywardChange(e);
-                  }}
+                  onChange={handleKeywardChange}
                 />
               </form>
             </div>
@@ -222,9 +212,7 @@ const Search: NextPage = () => {
                   className="hover:bg-gray-100 rounded-full"
                   bgColor="transparent"
                   size="extrasmall"
-                  onClick={() => {
-                    handleCloseClick();
-                  }}
+                  onClick={handleCloseClick}
                 >
                   <XIcon className="my-auto w-6 h-6" />
                 </Button>
