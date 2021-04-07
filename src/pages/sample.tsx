@@ -132,18 +132,6 @@ const ButtonPage: NextPage = () => {
           <span className="m-auto">テキストボックスの表示</span>
         </div>
         <div className="flex flex-row justify-start flex-none mt-4">
-          <div className="mx-auto w-10/12">
-            <InputText
-              label="メモ入力用のtextarea"
-              multiline
-              rows={10}
-              placeholder="本文を入力する"
-              bgColor="white"
-              className="w-full"
-            />
-          </div>
-        </div>
-        <div className="flex flex-row justify-start flex-none mt-4">
           <div className="mx-auto">
             <InputText startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6" />} placeholder="メモを検索する" />
           </div>

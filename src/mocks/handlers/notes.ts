@@ -1,7 +1,6 @@
 import { rest } from "msw";
 import type { ListNote, Note } from "src/models/note";
 import { EXAMPLE_MY_NOTE_LIST, EXAMPLE_NOTE, EXAMPLE_OTHER_USER_NOTE_LIST } from "src/models/note";
-import type { SearchHistory } from "src/models/searchHistory";
 
 export const notesHandlers = [
   // 新しいメモを作成する
@@ -47,15 +46,15 @@ export const notesHandlers = [
     return res(ctx.delay(1000), ctx.status(200), ctx.json(notes));
   }),
 
-  // 自分または特定のユーザーのメモ一覧を取得する
-  rest.get<string, ListNote[], { userId: string }>("/users/:userId/notes/search", (req, res, ctx) => {
-    const body: Pick<SearchHistory, "keyword"> = JSON.parse(req.body);
-    // eslint-disable-next-line no-console
-    console.log(body);
-    return res(
-      ctx.delay(1000),
-      ctx.status(200),
-      ctx.json([EXAMPLE_OTHER_USER_NOTE_LIST[1], EXAMPLE_OTHER_USER_NOTE_LIST[2]])
-    );
-  }),
+  // 自分または特定のユーザーのメモ一覧を検索して取得する
+  rest.get<string, ListNote[], { userId: string; keyword: string }>(
+    "/users/:userId/notes/search/:keyword",
+    (req, res, ctx) => {
+      const data =
+        req.params.keyword.length > 2
+          ? [EXAMPLE_OTHER_USER_NOTE_LIST[1]]
+          : [EXAMPLE_OTHER_USER_NOTE_LIST[1], EXAMPLE_OTHER_USER_NOTE_LIST[2]];
+      return res(ctx.delay(1000), ctx.status(200), ctx.json(data));
+    }
+  ),
 ];
