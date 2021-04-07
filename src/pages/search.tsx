@@ -9,7 +9,7 @@ import { SearchResults } from "src/components/SearchResults";
 import { Button } from "src/components/shared/Button";
 import { InputText } from "src/components/shared/InputText";
 import { EXAMPLE_USER_01 } from "src/models/user";
-import type { SearchHistory } from "src/types/types";
+import type { SearchHistoryType } from "src/types/types";
 
 // **********************************
 // ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
@@ -27,7 +27,7 @@ const Search: NextPage = () => {
   const handleSubmit: DOMAttributes<HTMLFormElement>["onSubmit"] = async (e) => {
     e.preventDefault();
     setKeyword(value);
-    const req: Pick<SearchHistory, "keyword"> = { keyword };
+    const req: Pick<SearchHistoryType, "keyword"> = { keyword };
     await fetch(`/users/${user.id}/searchHistories`, {
       method: "post",
       body: JSON.stringify(req),

@@ -6,7 +6,7 @@ import { Button } from "src/components/shared/Button";
 import { InputText } from "src/components/shared/InputText";
 import { MemoCard } from "src/components/users/MemoCard";
 import { EXAMPLE_USER_01 } from "src/models/user";
-import type { ListNote } from "src/types/types";
+import type { ListNoteType } from "src/types/types";
 import useSWR from "swr";
 
 // **********************************
@@ -15,7 +15,7 @@ import useSWR from "swr";
 const user = EXAMPLE_USER_01;
 
 const User: NextPage = () => {
-  const { data: listNote, error } = useSWR<ListNote[]>(`/users/${user.id}/notes`);
+  const { data: listNote, error } = useSWR<ListNoteType[]>(`/users/${user.id}/notes`);
 
   return (
     <div className="flex flex-col overscroll-none h-screen">
@@ -61,7 +61,7 @@ const User: NextPage = () => {
         {error ? <div>メモが登録されていません</div> : null}
         {listNote ? (
           <div className="w-full flex flex-col h-full">
-            {listNote.map((note: ListNote) => {
+            {listNote.map((note: ListNoteType) => {
               return <MemoCard key={note.id} note={note} />;
             })}
           </div>

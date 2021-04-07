@@ -1,8 +1,8 @@
 import type { VFC } from "react";
-import type { ListNote } from "src/types/types";
+import type { ListNoteType } from "src/types/types";
 
 type Props = {
-  note: ListNote;
+  note: ListNoteType;
 };
 
 // タイトルの取得（改行コードまでをタイトルとする）
@@ -25,7 +25,7 @@ export const MemoCard: VFC<Props> = (props) => {
       </div>
       <div className="flex flex-row justify-between items-end ">
         <div className="pb-2">
-          <span>{props.note.date}</span>
+          <span>{props.note.updatedOn}</span>
         </div>
         <div>
           {props.note.public ? (

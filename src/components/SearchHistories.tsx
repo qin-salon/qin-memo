@@ -2,13 +2,13 @@ import type { VFC } from "react";
 import { XIcon } from "src/components/icon/XIcon";
 import { Button } from "src/components/shared/Button";
 import { EXAMPLE_USER_01 } from "src/models/user";
-import type { SearchHistory } from "src/types/types";
+import type { SearchHistoryType } from "src/types/types";
 import useSWR from "swr";
 
 const user = EXAMPLE_USER_01;
 
 export const SearchHistories: VFC = () => {
-  const { data, error, mutate } = useSWR<SearchHistory[]>(`/users/${user.id}/searchHistories`);
+  const { data, error, mutate } = useSWR<SearchHistoryType[]>(`/users/${user.id}/searchHistories`);
 
   if (error) {
     // TODO: 検索結果が取得できなかった場合のエラー処理
