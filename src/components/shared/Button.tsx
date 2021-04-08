@@ -11,7 +11,7 @@ type CommonType = {
   className?: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  justifyCenter?: "justify-center" | "justify-start";
+  justifyCenter?: "justify-center" | "justify-start" | "justify-between";
   size?: "large" | "small" | "extrasmall";
 };
 
@@ -40,7 +40,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   const colorClasses = clsx({
     "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue",
     "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red",
-    "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray",
+    "text-black bg-gray-200 hover:bg-gray-300": props.bgColor === "gray",
     "text-white bg-black hover:bg-gray-500": props.bgColor === "black",
     "bg-white hover:bg-gray-300": props.bgColor === "white",
     "bg-transparent": props.bgColor === "transparent",
