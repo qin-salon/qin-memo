@@ -1,7 +1,7 @@
 import type { VFC } from "react";
 import { MemoCard } from "src/components/users/MemoCard";
 import { EXAMPLE_USER_01 } from "src/models/user";
-import type { ListNote } from "src/types/types";
+import type { ListNoteType } from "src/types/types";
 import useSWR from "swr";
 
 type Props = { keyword: string };
@@ -24,7 +24,7 @@ export const SearchResults: VFC<Props> = (props) => {
   return (
     <ul className="space-y-1">
       {data.length > 0 ? (
-        data.map((note: ListNote) => {
+        data.map((note: ListNoteType) => {
           return (
             <li key={note.id}>
               <MemoCard note={note} />

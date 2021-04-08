@@ -1,23 +1,25 @@
-export type User = {
+export type UserType = {
   id: string;
   name: string;
   avatarUrl: string;
 };
-export type Note = {
+
+export type UserPutRequest = UserType | Pick<UserType, "id" | "name"> | Pick<UserType, "id" | "avatarUrl">;
+
+export type NoteType = {
   id: string;
   content: string;
   public: boolean;
-  date: string;
 };
 
-export type ListNote = {
+export type ListNoteType = {
   id: string;
   excerpt: string;
   public: boolean;
-  date: string;
+  updatedOn: string;
 };
 
-export type SearchHistory = {
+export type SearchHistoryType = {
   id: number;
   keyword: string;
 };
