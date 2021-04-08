@@ -76,6 +76,13 @@ const Note: NextPage = () => {
     setMemoDelete(!memoDelete);
   };
   // ===================================
+  // 削除確認画面起動・閉じる
+  // ===================================
+  const handleDeleteModalOpen = () => {
+    setMemoDelete(true);
+    setMenuOpen(false);
+  };
+  // ===================================
   // 公開する・しないの切替
   // ===================================
   const handlePublicClick = () => {
@@ -214,7 +221,7 @@ const Note: NextPage = () => {
               size="small"
               justifyCenter="justify-between"
               endIcon={<TrashIcon />}
-              onClick={handleDeleteModalClick}
+              onClick={handleDeleteModalOpen}
             >
               <strong>
                 <span className="my-auto text-red-500">削除する</span>
