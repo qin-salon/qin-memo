@@ -11,7 +11,7 @@ type CommonType = {
   className?: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  justifyCenter?: "justify-center" | "justify-start" | "justify-between";
+  justifyContent?: "justify-center" | "justify-start" | "justify-between";
   size?: "large" | "small" | "extrasmall";
 };
 
@@ -31,11 +31,15 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 };
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
-  const classes = clsx("mx-auto rounded-full focus:outline-none flex flex-row whitespace-nowrap", props.justifyCenter, {
-    "py-4 px-8 my-4": props.size === "large",
-    "py-2 px-4 my-4": props.size === "small",
-    "py-1 px-1 my-0": props.size === "extrasmall",
-  });
+  const classes = clsx(
+    "mx-auto rounded-full focus:outline-none flex flex-row whitespace-nowrap",
+    props.justifyContent,
+    {
+      "py-4 px-8 my-4": props.size === "large",
+      "py-2 px-4 my-4": props.size === "small",
+      "py-1 px-1 my-0": props.size === "extrasmall",
+    }
+  );
 
   const colorClasses = clsx({
     "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue",
@@ -91,5 +95,5 @@ Button.defaultProps = {
   bgColor: "blue",
   textColor: "black",
   size: "small",
-  justifyCenter: "justify-center",
+  justifyContent: "justify-center",
 };
