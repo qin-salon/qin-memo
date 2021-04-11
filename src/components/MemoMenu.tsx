@@ -13,9 +13,10 @@ type Props = {
   memoDelete: boolean;
   onDeleteModalClose: () => void;
   onDeleteModalOpen: () => void;
+  onMemoDeleteClick: () => void;
   menuOpen: boolean;
   onMenuClose: () => void;
-  publicDisp: boolean;
+  publicFlg: boolean;
   onPublicClick: () => void;
 };
 
@@ -33,7 +34,7 @@ export const MemoMenu: VFC<Props> = (props) => {
           <Button button bgColor="gray" className="w-28" onClick={props.onDeleteModalClose}>
             <strong>キャンセル</strong>
           </Button>
-          <Button linkProps={{ href: "/" }} className="w-28" bgColor="red">
+          <Button button className="w-28" bgColor="red" onClick={props.onMemoDeleteClick}>
             <strong>削除する</strong>
           </Button>
         </div>
@@ -46,7 +47,7 @@ export const MemoMenu: VFC<Props> = (props) => {
             </Button>
           </header>
           <main>
-            {props.publicDisp ? (
+            {props.publicFlg ? (
               <Button
                 button
                 className="w-full"
@@ -88,7 +89,7 @@ export const MemoMenu: VFC<Props> = (props) => {
                 <span className="my-auto text-red-500">削除する</span>
               </strong>
             </Button>
-            {props.publicDisp ? null : (
+            {props.publicFlg ? null : (
               <p className="text-center m-2">
                 <strong>以下は公開後に操作ができます</strong>
               </p>
@@ -99,8 +100,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               bgColor="gray"
               justifyContent="justify-between"
               group="top"
-              disabled={!props.publicDisp}
-              endIcon={<TwitterIcon disabled={!props.publicDisp} />}
+              disabled={!props.publicFlg}
+              endIcon={<TwitterIcon disabled={!props.publicFlg} />}
             >
               <strong>
                 <span className="my-auto">Twitterでシェアする</span>
@@ -113,8 +114,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               bgColor="gray"
               justifyContent="justify-between"
               group="bottom"
-              disabled={!props.publicDisp}
-              endIcon={<TwitterIcon disabled={!props.publicDisp} />}
+              disabled={!props.publicFlg}
+              endIcon={<TwitterIcon disabled={!props.publicFlg} />}
             >
               <strong>
                 <span className="my-auto">画像化してシェアする</span>
@@ -125,8 +126,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               className="w-full"
               bgColor="gray"
               justifyContent="justify-between"
-              disabled={!props.publicDisp}
-              endIcon={<ClipboardCopy disabled={!props.publicDisp} />}
+              disabled={!props.publicFlg}
+              endIcon={<ClipboardCopy disabled={!props.publicFlg} />}
             >
               <strong>
                 <span className="my-auto">リンクをコピーする</span>
@@ -137,8 +138,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               className="w-full"
               bgColor="gray"
               justifyContent="justify-between"
-              disabled={!props.publicDisp}
-              endIcon={<DotsCircleHorizontalIcon disabled={!props.publicDisp} />}
+              disabled={!props.publicFlg}
+              endIcon={<DotsCircleHorizontalIcon disabled={!props.publicFlg} />}
             >
               <strong>
                 <span className="my-auto">その他オプション</span>

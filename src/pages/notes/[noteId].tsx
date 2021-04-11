@@ -9,8 +9,14 @@ import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { DotsCircleHorizontalIcon } from "src/components/icon/DotsCircleHorizontalIcon";
 import { MemoMenu } from "src/components/MemoMenu";
 import { Button } from "src/components/shared/Button";
+import { EXAMPLE_USER_01 } from "src/models/user";
 import type { NotePostRequest, NotePutRequest, NoteType } from "src/types/types";
 import useSWR from "swr";
+
+// **********************************
+// ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
+// Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
+const user = EXAMPLE_USER_01;
 
 const InitialData: NoteType = {
   id: "0",
@@ -22,7 +28,7 @@ const Note: NextPage = () => {
   const router = useRouter();
 
   const [content, setContent] = useState("");
-  const [publicDisp, setPublicDisp] = useState(false);
+  const [publicFlg, setPublicFlg] = useState(false);
   const [publicOpen, setPublicOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [memoDelete, setMemoDelete] = useState(false);
@@ -32,11 +38,11 @@ const Note: NextPage = () => {
   });
 
   useEffect(() => {
-    // textareaのvalueに渡す
-    setContent(data?.content || "");
-  }, [data?.content]);
+    setContent(data?.content ?? "");
+    setPublicFlg(data?.public ?? false);
+  }, [data?.content, data?.public]);
 
-  if (error) {
+  if (error && router.query.noteId !== "new") {
     // TODO: 検索結果が取得できなかった場合のエラー処理
     return null;
   }
@@ -81,20 +87,19 @@ const Note: NextPage = () => {
   // 公開する・しないの切替
   const handlePublicClick = () => {
     const feachUpdate = async () => {
-      const req: NotePutRequest = { id: data.id, public: !publicDisp };
+      const req: NotePutRequest = { id: data.id, public: !publicFlg };
       // 更新
-      const res = await fetch(`/notes/${router.query.noteId}/public`, {
-        method: "put",
+      await fetch(`/notes/${data.id}/public`, {
+        method: "patch",
         body: JSON.stringify(req),
       });
-      await res.json();
       await mutate;
     };
-    feachUpdate;
-    if (!publicDisp) {
+    feachUpdate();
+    if (!publicFlg) {
       setPublicOpen(true);
     }
-    setPublicDisp(!publicDisp);
+    setPublicFlg(!publicFlg);
     setMenuOpen(false);
   };
   // ===================================
@@ -112,7 +117,7 @@ const Note: NextPage = () => {
         // 更新処理
         if (data) {
           const req: NotePutRequest = { id: data.id, content: content };
-          await fetch(`/notes/${router.query.noteId}`, {
+          await fetch(`/notes/${data.id}`, {
             method: "put",
             body: JSON.stringify(req),
           });
@@ -120,10 +125,21 @@ const Note: NextPage = () => {
       }
       await mutate;
     };
-    Router.push("/");
-    feachUpdate;
+    Router.push(`/users/${user.id}`);
+    feachUpdate();
   };
-
+  // ===================================
+  // メモ削除
+  const handleMemoDeleteClick = () => {
+    const feachDelete = async () => {
+      await fetch(`/notes/${data.id}`, {
+        method: "delete",
+      });
+      await mutate;
+    };
+    Router.push(`/users/${user.id}`);
+    feachDelete();
+  };
   return (
     <div className="max-w-screen-sm mx-auto h-screen flex flex-col">
       <div className="relative flex justify-around">
@@ -160,9 +176,10 @@ const Note: NextPage = () => {
         memoDelete={memoDelete}
         onDeleteModalClose={handleDeleteModalClose}
         onDeleteModalOpen={handleDeleteModalOpen}
+        onMemoDeleteClick={handleMemoDeleteClick}
         menuOpen={menuOpen}
         onMenuClose={handleMenuClose}
-        publicDisp={publicDisp}
+        publicFlg={publicFlg}
         onPublicClick={handlePublicClick}
       />
     </div>
