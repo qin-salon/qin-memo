@@ -20,9 +20,6 @@ const InitialData: NoteType = {
 
 const Note: NextPage = () => {
   const router = useRouter();
-  const { data: note, mutate: noteMutate } = useSWR<NoteType>(`/notes/${router.query.noteId}`, {
-    initialData: InitialData,
-  });
 
   const [content, setContent] = useState("");
   const [publicDisp, setPublicDisp] = useState(false);
@@ -30,11 +27,24 @@ const Note: NextPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [memoDelete, setMemoDelete] = useState(false);
 
-  useEffect(() => {
-    setContent(note?.content || "");
-  }, [note?.content]);
+  const { data, error, mutate } = useSWR<NoteType>(`/notes/${router.query.noteId}`, {
+    initialData: InitialData,
+  });
 
-  // if (!note) return <div>loading</div>;
+  useEffect(() => {
+    // textareaのvalueに渡す
+    setContent(data?.content || "");
+  }, [data?.content]);
+
+  if (error) {
+    // TODO: 検索結果が取得できなかった場合のエラー処理
+    return null;
+  }
+
+  if (!data) {
+    // TODO: 検索結果取得時のローディング処理
+    return null;
+  }
 
   // ===================================
   // 入力値の保存
@@ -70,6 +80,17 @@ const Note: NextPage = () => {
   // ===================================
   // 公開する・しないの切替
   const handlePublicClick = () => {
+    const feachUpdate = async () => {
+      const req: NotePutRequest = { id: data.id, public: !publicDisp };
+      // 更新
+      const res = await fetch(`/notes/${router.query.noteId}/public`, {
+        method: "put",
+        body: JSON.stringify(req),
+      });
+      await res.json();
+      await mutate;
+    };
+    feachUpdate;
     if (!publicDisp) {
       setPublicOpen(true);
     }
@@ -80,26 +101,24 @@ const Note: NextPage = () => {
   // メモ更新
   const handleContentSave = () => {
     const feachUpdate = async () => {
-      if (note?.id === "0") {
+      if (data?.id === "0") {
         // 登録処理
         const req: NotePostRequest = { content: content, public: false };
-        // postメソッド
         await fetch("/notes", {
           method: "post",
           body: JSON.stringify(req),
         });
       } else {
         // 更新処理
-        if (note) {
-          const req: NotePutRequest = { id: note.id, content: content };
-          // putメソッド
+        if (data) {
+          const req: NotePutRequest = { id: data.id, content: content };
           await fetch(`/notes/${router.query.noteId}`, {
             method: "put",
             body: JSON.stringify(req),
           });
         }
       }
-      await noteMutate;
+      await mutate;
     };
     Router.push("/");
     feachUpdate;
@@ -114,7 +133,7 @@ const Note: NextPage = () => {
         <div className="flex-auto" />
 
         <div className="mt-5">
-          {note?.public ? (
+          {data?.public ? (
             <span className="py-1 px-1 my-0 mx-auto rounded-full w-auto text-xs text-white bg-yellow-500">公開中</span>
           ) : null}
         </div>
