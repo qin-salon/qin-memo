@@ -6,15 +6,9 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { CheckCircle } from "src/components/icon/CheckCircle";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
-import { ClipboardCopy } from "src/components/icon/ClipboardCopy";
 import { DotsCircleHorizontalIcon } from "src/components/icon/DotsCircleHorizontalIcon";
-import { EyeIcon } from "src/components/icon/EyeIcon";
-import { EyeOffIcon } from "src/components/icon/EyeOffIcon";
-import { TrashIcon } from "src/components/icon/TrashIcon";
-import { TwitterIcon } from "src/components/icon/TwitterIcon";
-import { XIcon } from "src/components/icon/XIcon";
+import { MemoMenu } from "src/components/MemoMenu";
 import { Button } from "src/components/shared/Button";
-import { Modal } from "src/components/shared/Modal";
 import type { NotePostRequest, NotePutRequest, NoteType } from "src/types/types";
 import useSWR from "swr";
 
@@ -44,47 +38,37 @@ const Note: NextPage = () => {
 
   // ===================================
   // 入力値の保存
-  // ===================================
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.currentTarget.value);
   };
-
   // ===================================
   // メモ公開後のボタンクローズ
-  // ===================================
   const handlePublicClose = () => {
     setPublicOpen(!publicOpen);
   };
-
   // ===================================
   // メニューオープン
-  // ===================================
   const handleMenuOpen = () => {
     setMenuOpen(true);
   };
-
   // ===================================
   // メニュークローズ
-  // ===================================
   const handleMenuClose = () => {
     setMenuOpen(false);
   };
   // ===================================
-  // 削除確認画面起動・閉じる
-  // ===================================
-  const handleDeleteModalClick = () => {
-    setMemoDelete(!memoDelete);
+  // 削除確認画面閉じる
+  const handleDeleteModalClose = () => {
+    setMemoDelete(false);
   };
   // ===================================
-  // 削除確認画面起動・閉じる
-  // ===================================
+  // 削除確認画面起動
   const handleDeleteModalOpen = () => {
     setMemoDelete(true);
     setMenuOpen(false);
   };
   // ===================================
   // 公開する・しないの切替
-  // ===================================
   const handlePublicClick = () => {
     if (!publicDisp) {
       setPublicOpen(true);
@@ -94,7 +78,6 @@ const Note: NextPage = () => {
   };
   // ===================================
   // メモ更新
-  // ===================================
   const handleContentSave = () => {
     const feachUpdate = async () => {
       if (note?.id === "0") {
@@ -116,7 +99,6 @@ const Note: NextPage = () => {
           });
         }
       }
-
       await noteMutate;
     };
     Router.push("/");
@@ -155,138 +137,15 @@ const Note: NextPage = () => {
           </Button>
         </div>
       ) : null}
-      <Modal className="w-80 h-44" open={memoDelete} onClick={handleDeleteModalClick}>
-        <div className="h-8 text-center mt-6">
-          <strong>メモを削除</strong>
-        </div>
-        <div className="ml-8 mt-2">
-          <span>復元できませんがよろしいですか？</span>
-        </div>
-        <div className="flex flex-row mt-2">
-          <Button button bgColor="gray" className="w-28" size="small" onClick={handleDeleteModalClick}>
-            <strong>キャンセル</strong>
-          </Button>
-          <Button linkProps={{ href: "/" }} className="w-28" size="small" bgColor="red">
-            <strong>削除する</strong>
-          </Button>
-        </div>
-      </Modal>
-      <Modal className="max-w-md" open={menuOpen} onClick={handleMenuClose} drawer>
-        <div className="p-4">
-          <header className="justify-items-end">
-            <Button
-              button
-              className="hover:bg-gray-100 rounded-full"
-              bgColor="gray"
-              size="small"
-              onClick={handleMenuClose}
-            >
-              <XIcon />
-            </Button>
-          </header>
-          <main>
-            {publicDisp ? (
-              <Button
-                button
-                className="w-full"
-                bgColor="gray"
-                size="small"
-                justifyCenter="justify-between"
-                endIcon={<EyeOffIcon />}
-                onClick={handlePublicClick}
-              >
-                <strong>
-                  <span className="my-auto text-blue-500">非公開にする</span>
-                </strong>
-              </Button>
-            ) : (
-              <Button
-                button
-                className="w-full"
-                bgColor="gray"
-                size="small"
-                justifyCenter="justify-between"
-                endIcon={<EyeIcon />}
-                onClick={handlePublicClick}
-              >
-                <strong>
-                  <span className="my-auto text-blue-500">公開する</span>
-                </strong>
-              </Button>
-            )}
-            <Button
-              button
-              className="w-full"
-              bgColor="gray"
-              size="small"
-              justifyCenter="justify-between"
-              endIcon={<TrashIcon />}
-              onClick={handleDeleteModalOpen}
-            >
-              <strong>
-                <span className="my-auto text-red-500">削除する</span>
-              </strong>
-            </Button>
-            <Button
-              button
-              className="w-full"
-              bgColor="gray"
-              size="small"
-              justifyCenter="justify-between"
-              disabled={!publicDisp}
-              endIcon={<TwitterIcon disabled={!publicDisp} />}
-            >
-              <strong>
-                <span className="my-auto">Twitterでシェアする</span>
-              </strong>
-            </Button>
-            {publicDisp ? null : (
-              <p className="text-center">
-                <strong>以下は公開後に操作ができます</strong>
-              </p>
-            )}
-            <Button
-              button
-              className="w-full"
-              bgColor="gray"
-              size="small"
-              justifyCenter="justify-between"
-              disabled={!publicDisp}
-              endIcon={<TwitterIcon disabled={!publicDisp} />}
-            >
-              <strong>
-                <span className="my-auto">画像化してシェアする</span>
-              </strong>
-            </Button>
-            <Button
-              button
-              className="w-full"
-              bgColor="gray"
-              size="small"
-              justifyCenter="justify-between"
-              disabled={!publicDisp}
-              endIcon={<ClipboardCopy disabled={!publicDisp} />}
-            >
-              <strong>
-                <span className="my-auto">リンクをコピーする</span>
-              </strong>
-            </Button>
-            <Button
-              button
-              className="w-full"
-              bgColor="gray"
-              size="small"
-              justifyCenter="justify-between"
-              disabled={!publicDisp}
-              endIcon={<DotsCircleHorizontalIcon disabled={!publicDisp} />}
-            >
-              <strong>
-                <span className="my-auto">その他オプション</span>
-              </strong>
-            </Button>
-          </main>
-        </div>
-      </Modal>
+      <MemoMenu
+        memoDelete={memoDelete}
+        onDeleteModalClose={handleDeleteModalClose}
+        onDeleteModalOpen={handleDeleteModalOpen}
+        menuOpen={menuOpen}
+        onMenuClose={handleMenuClose}
+        publicDisp={publicDisp}
+        onPublicClick={handlePublicClick}
+      />
     </div>
   );
 };
