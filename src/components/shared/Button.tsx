@@ -63,7 +63,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   if (props.disabled) {
     return (
       <button
-        className={clsx("text-gray-400 bg-gray-300 cursor-not-allowed", classes, props.className)}
+        className={clsx("text-gray-400 bg-gray-200 cursor-not-allowed", classes, props.className)}
         disabled={props.disabled}
       >
         {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
