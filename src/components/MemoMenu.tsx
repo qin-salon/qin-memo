@@ -22,7 +22,7 @@ type Props = {
 export const MemoMenu: VFC<Props> = (props) => {
   return (
     <>
-      <Modal className="w-80 h-44" open={props.memoDelete} onClick={props.onDeleteModalClose}>
+      <Modal className="max-w-md h-44" open={props.memoDelete} onClick={props.onDeleteModalClose}>
         <div className="h-8 text-center mt-6">
           <strong>メモを削除</strong>
         </div>
