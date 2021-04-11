@@ -30,10 +30,10 @@ export const MemoMenu: VFC<Props> = (props) => {
           <span>復元できませんがよろしいですか？</span>
         </div>
         <div className="flex flex-row mt-2">
-          <Button button bgColor="gray" className="w-28" size="small" onClick={props.onDeleteModalClose}>
+          <Button button bgColor="gray" className="w-28" onClick={props.onDeleteModalClose}>
             <strong>キャンセル</strong>
           </Button>
-          <Button linkProps={{ href: "/" }} className="w-28" size="small" bgColor="red">
+          <Button linkProps={{ href: "/" }} className="w-28" bgColor="red">
             <strong>削除する</strong>
           </Button>
         </div>
@@ -41,13 +41,7 @@ export const MemoMenu: VFC<Props> = (props) => {
       <Modal className="max-w-md" open={props.menuOpen} onClick={props.onMenuClose} drawer>
         <div className="p-4">
           <header className="justify-items-end">
-            <Button
-              button
-              className="hover:bg-gray-100 rounded-full"
-              bgColor="gray"
-              size="small"
-              onClick={props.onMenuClose}
-            >
+            <Button button className="hover:bg-gray-100 rounded-full" bgColor="gray" onClick={props.onMenuClose}>
               <XIcon />
             </Button>
           </header>
@@ -57,8 +51,8 @@ export const MemoMenu: VFC<Props> = (props) => {
                 button
                 className="w-full"
                 bgColor="gray"
-                size="small"
                 justifyContent="justify-between"
+                group="top"
                 endIcon={<EyeOffIcon />}
                 onClick={props.onPublicClick}
               >
@@ -71,8 +65,8 @@ export const MemoMenu: VFC<Props> = (props) => {
                 button
                 className="w-full"
                 bgColor="gray"
-                size="small"
                 justifyContent="justify-between"
+                group="top"
                 endIcon={<EyeIcon />}
                 onClick={props.onPublicClick}
               >
@@ -85,8 +79,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               button
               className="w-full"
               bgColor="gray"
-              size="small"
               justifyContent="justify-between"
+              group="bottom"
               endIcon={<TrashIcon />}
               onClick={props.onDeleteModalOpen}
             >
@@ -95,7 +89,7 @@ export const MemoMenu: VFC<Props> = (props) => {
               </strong>
             </Button>
             {props.publicDisp ? null : (
-              <p className="text-center">
+              <p className="text-center m-2">
                 <strong>以下は公開後に操作ができます</strong>
               </p>
             )}
@@ -103,8 +97,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               button
               className="w-full"
               bgColor="gray"
-              size="small"
               justifyContent="justify-between"
+              group="top"
               disabled={!props.publicDisp}
               endIcon={<TwitterIcon disabled={!props.publicDisp} />}
             >
@@ -117,8 +111,8 @@ export const MemoMenu: VFC<Props> = (props) => {
               button
               className="w-full"
               bgColor="gray"
-              size="small"
               justifyContent="justify-between"
+              group="bottom"
               disabled={!props.publicDisp}
               endIcon={<TwitterIcon disabled={!props.publicDisp} />}
             >
@@ -130,7 +124,6 @@ export const MemoMenu: VFC<Props> = (props) => {
               button
               className="w-full"
               bgColor="gray"
-              size="small"
               justifyContent="justify-between"
               disabled={!props.publicDisp}
               endIcon={<ClipboardCopy disabled={!props.publicDisp} />}
@@ -143,7 +136,6 @@ export const MemoMenu: VFC<Props> = (props) => {
               button
               className="w-full"
               bgColor="gray"
-              size="small"
               justifyContent="justify-between"
               disabled={!props.publicDisp}
               endIcon={<DotsCircleHorizontalIcon disabled={!props.publicDisp} />}
