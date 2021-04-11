@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import type { VFC } from "react";
 
 type Props = {
@@ -7,7 +8,7 @@ type Props = {
 export const EyeIcon: VFC<Props> = (props) => {
   return (
     <svg
-      className={props.className}
+      className={clsx(["text-blue-500", props.className])}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

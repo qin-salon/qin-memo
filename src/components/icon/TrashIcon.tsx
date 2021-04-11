@@ -12,6 +12,7 @@ export const TrashIcon: VFC<Props> = (props) => {
       className={clsx([
         {
           "text-gray-500": props.disabled,
+          "text-red-500": !props.disabled,
         },
         props.className,
       ])}
