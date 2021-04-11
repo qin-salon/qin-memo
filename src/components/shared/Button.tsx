@@ -12,7 +12,7 @@ type CommonType = {
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
   justifyContent?: "justify-center" | "justify-start" | "justify-between";
-  size?: "large" | "small" | "extrasmall";
+  size?: "large" | "small" | "extrasmall" | "none";
   group?: "none" | "top" | "bottom";
 };
 
@@ -33,8 +33,10 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
   const classes = clsx(
-    "mx-auto focus:outline-none flex whitespace-nowrap",
     props.justifyContent,
+    {
+      "mx-auto focus:outline-none flex whitespace-nowrap": props.size !== "none",
+    },
     {
       "py-4 px-8": props.size === "large",
       "py-2 px-4": props.size === "small",

@@ -33,7 +33,7 @@ const User: NextPage = () => {
             <div className="flex-1">
               <div className="flex flex-row justify-end lg:justify-start">
                 <div className="ml-4">
-                  <Button button>メモを書く</Button>
+                  <Button linkProps={{ href: "/notes/new" }}>メモを書く</Button>
                 </div>
                 <div className="my-auto">
                   <Avatar alt={user.name} src={user.avatarUrl} />
