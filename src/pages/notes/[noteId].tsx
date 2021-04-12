@@ -1,9 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import Router from "next/router";
-import type { ChangeEvent } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import type { TextareaHTMLAttributes } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle } from "src/components/icon/CheckCircle";
 import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { DotsCircleHorizontalIcon } from "src/components/icon/DotsCircleHorizontalIcon";
@@ -54,7 +52,7 @@ const Note: NextPage = () => {
 
   // ===================================
   // 入力値の保存
-  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleContentChange: TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"] = (event) => {
     setContent(event.currentTarget.value);
   };
   // ===================================
@@ -85,17 +83,14 @@ const Note: NextPage = () => {
   };
   // ===================================
   // 公開する・しないの切替
-  const handlePublicClick = () => {
-    const feachUpdate = async () => {
-      const req: NotePutRequest = { id: data.id, public: !publicFlg };
-      // 更新
-      await fetch(`/notes/${data.id}/public`, {
-        method: "patch",
-        body: JSON.stringify(req),
-      });
-      await mutate;
-    };
-    feachUpdate();
+  const handlePublicClick = async () => {
+    const req: NotePutRequest = { id: data.id, public: !publicFlg };
+    // 更新
+    await fetch(`/notes/${data.id}/public`, {
+      method: "patch",
+      body: JSON.stringify(req),
+    });
+    await mutate();
     if (!publicFlg) {
       setPublicOpen(true);
     }
@@ -104,41 +99,35 @@ const Note: NextPage = () => {
   };
   // ===================================
   // メモ更新
-  const handleContentSave = () => {
-    const feachUpdate = async () => {
-      if (data?.id === "0") {
-        // 登録処理
-        const req: NotePostRequest = { content: content, public: false };
-        await fetch("/notes", {
-          method: "post",
+  const handleContentSave = async () => {
+    if (data?.id === "0") {
+      // 登録処理
+      const req: NotePostRequest = { content: content, public: false };
+      await fetch("/notes", {
+        method: "post",
+        body: JSON.stringify(req),
+      });
+    } else {
+      // 更新処理
+      if (data) {
+        const req: NotePutRequest = { id: data.id, content: content };
+        await fetch(`/notes/${data.id}`, {
+          method: "put",
           body: JSON.stringify(req),
         });
-      } else {
-        // 更新処理
-        if (data) {
-          const req: NotePutRequest = { id: data.id, content: content };
-          await fetch(`/notes/${data.id}`, {
-            method: "put",
-            body: JSON.stringify(req),
-          });
-        }
       }
-      await mutate;
-    };
-    Router.push(`/users/${user.id}`);
-    feachUpdate();
+    }
+    await mutate();
+    await router.push(`/users/${user.id}`);
   };
   // ===================================
   // メモ削除
-  const handleMemoDeleteClick = () => {
-    const feachDelete = async () => {
-      await fetch(`/notes/${data.id}`, {
-        method: "delete",
-      });
-      await mutate;
-    };
-    Router.push(`/users/${user.id}`);
-    feachDelete();
+  const handleMemoDeleteClick = async () => {
+    await fetch(`/notes/${data.id}`, {
+      method: "delete",
+    });
+    await mutate();
+    await router.push(`/users/${user.id}`);
   };
   return (
     <div className="max-w-screen-sm mx-auto h-screen flex flex-col">
