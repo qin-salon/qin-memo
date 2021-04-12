@@ -142,21 +142,23 @@ const Note: NextPage = () => {
   };
   return (
     <div className="max-w-screen-sm mx-auto h-screen flex flex-col">
-      <div className="relative flex justify-around">
-        <Button button bgColor="transparent" textColor="black" onClick={handleContentSave}>
-          <ChevronLeft />
-        </Button>
-        <div className="flex-auto" />
-
-        <div className="mt-5">
-          {data?.public ? (
-            <span className="py-1 px-1 my-0 mx-auto rounded-full w-auto text-xs text-white bg-yellow-500">公開中</span>
-          ) : null}
+      <div className="relative flex items-center justify-between">
+        <div>
+          <Button button bgColor="transparent" textColor="black" onClick={handleContentSave}>
+            <ChevronLeft />
+          </Button>
         </div>
-        <Button button bgColor="transparent" textColor="black" onClick={handleMenuOpen}>
-          <DotsCircleHorizontalIcon />
-        </Button>
+
+        <div className="ml-auto flex items-center">
+          {data?.public ? (
+            <span className="py-1 px-2 rounded-full text-xs text-white bg-yellow-500">公開中</span>
+          ) : null}
+          <Button button bgColor="transparent" textColor="black" onClick={handleMenuOpen}>
+            <DotsCircleHorizontalIcon />
+          </Button>
+        </div>
       </div>
+
       <div className="h-full w-full p-4 outline-none transition-colors">
         <textarea
           className="min-h-full w-full px-2 outline-none transition-colors"
@@ -165,6 +167,7 @@ const Note: NextPage = () => {
           placeholder="本文を入力する"
         />
       </div>
+
       {publicOpen ? (
         <div className="z-50 absolute left-1/2 transform -translate-x-1/2">
           <Button button startIcon={<CheckCircle />} onClick={handlePublicClose}>
@@ -172,6 +175,7 @@ const Note: NextPage = () => {
           </Button>
         </div>
       ) : null}
+
       <MemoMenu
         memoDelete={memoDelete}
         onDeleteModalClose={handleDeleteModalClose}
