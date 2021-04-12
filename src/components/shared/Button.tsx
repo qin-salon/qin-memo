@@ -11,8 +11,9 @@ type CommonType = {
   className?: string;
   startIcon?: JSX.Element;
   endIcon?: JSX.Element;
-  justifyCenter?: "justify-center" | "justify-start";
-  size?: "large" | "small" | "extrasmall";
+  justifyContent?: "justify-center" | "justify-start" | "justify-between";
+  size?: "large" | "small" | "extrasmall" | "none";
+  group?: "none" | "top" | "bottom";
 };
 
 type ButtonType = CommonType & {
@@ -31,16 +32,27 @@ const isButton = (props: ButtonType | LinkType): props is ButtonType => {
 };
 
 export const Button: VFC<ButtonType | LinkType> = (props) => {
-  const classes = clsx("mx-auto rounded-full focus:outline-none flex flex-row whitespace-nowrap", props.justifyCenter, {
-    "py-4 px-8 my-4": props.size === "large",
-    "py-2 px-4 my-4": props.size === "small",
-    "py-1 px-1 my-0": props.size === "extrasmall",
-  });
+  const classes = clsx(
+    props.justifyContent,
+    {
+      "mx-auto focus:outline-none flex whitespace-nowrap": props.size !== "none",
+    },
+    {
+      "py-4 px-8": props.size === "large",
+      "py-2 px-4": props.size === "small",
+      "py-1 px-1 my-0": props.size === "extrasmall",
+    },
+    {
+      "rounded-full my-4": props.group === "none",
+      "rounded-t-2xl mt-4": props.group === "top",
+      "rounded-b-2xl mb-4": props.group === "bottom",
+    }
+  );
 
   const colorClasses = clsx({
     "text-white bg-blue-500 hover:bg-blue-600": props.bgColor === "blue",
     "text-white bg-red-500 hover:bg-red-600": props.bgColor === "red",
-    "text-black bg-gray-300 hover:bg-gray-400": props.bgColor === "gray",
+    "text-black bg-gray-200 hover:bg-gray-300": props.bgColor === "gray",
     "text-white bg-black hover:bg-gray-500": props.bgColor === "black",
     "bg-white hover:bg-gray-300": props.bgColor === "white",
     "bg-transparent": props.bgColor === "transparent",
@@ -59,7 +71,7 @@ export const Button: VFC<ButtonType | LinkType> = (props) => {
   if (props.disabled) {
     return (
       <button
-        className={clsx("text-gray-400 bg-gray-300 cursor-not-allowed", classes, props.className)}
+        className={clsx("text-gray-400 bg-gray-200 cursor-not-allowed", classes, props.className)}
         disabled={props.disabled}
       >
         {props.startIcon ? <span className={iconClasses}>{props.startIcon}</span> : null}
@@ -91,5 +103,6 @@ Button.defaultProps = {
   bgColor: "blue",
   textColor: "black",
   size: "small",
-  justifyCenter: "justify-center",
+  justifyContent: "justify-center",
+  group: "none",
 };

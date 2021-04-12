@@ -12,6 +12,14 @@ export type NoteType = {
   public: boolean;
 };
 
+export type NotePostRequest = Pick<NoteType, "content" | "public">;
+
+export type NotePutRequest =
+  | NoteType
+  | Pick<NoteType, "id" | "content">
+  | Pick<NoteType, "id" | "public">
+  | Pick<NoteType, "id" | "content" | "public">;
+
 export type ListNoteType = {
   id: string;
   excerpt: string;
