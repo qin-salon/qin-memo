@@ -21,7 +21,18 @@ export const MemoMenu: VFC<Props> = (props) => {
   return (
     <Transition.Root show={props.menuOpen} as={Fragment}>
       <Dialog static open={props.menuOpen} onClose={props.onMenuClose}>
-        <Dialog.Overlay className="absolute inset-0 bg-black opacity-40" />
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-200"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+        </Transition.Child>
+
         <div className="fixed bottom-0">
           <Transition.Child
             as={Fragment}
