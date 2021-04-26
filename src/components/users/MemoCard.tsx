@@ -15,7 +15,7 @@ const getTitle = (excTitle: RegExpMatchArray | null) => {
 export const MemoCard: VFC<Props> = (props) => {
   const title = getTitle(props.note.excerpt.match(pattarn));
   return (
-    <div className="bg-gray-200 my-4 rounded-3xl w-full h-32 mx-auto p-2">
+    <div className="p-2 my-4 mx-auto w-full h-32 bg-gray-200 rounded-3xl">
       <Button
         linkProps={{ href: `/notes/${props.note.id}` }}
         bgColor="transparent"
@@ -25,7 +25,7 @@ export const MemoCard: VFC<Props> = (props) => {
       >
         <div>
           <strong>
-            <div className="h-6 mt-2 truncate">
+            <div className="mt-2 h-6 truncate">
               <span>{title}</span>
             </div>
           </strong>
@@ -38,7 +38,7 @@ export const MemoCard: VFC<Props> = (props) => {
             </div>
             <div>
               {props.note.public ? (
-                <span className="py-1 px-1 my-0 mx-auto rounded-full w-auto text-white bg-yellow-500">公開中</span>
+                <span className="py-1 px-1 my-0 mx-auto w-auto text-white bg-yellow-500 rounded-full">公開中</span>
               ) : null}
             </div>
           </div>

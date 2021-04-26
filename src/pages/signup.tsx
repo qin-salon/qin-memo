@@ -8,11 +8,11 @@ import { Button } from "src/components/shared/Button";
 const SignUp: NextPage = () => {
   return (
     <div>
-      <div className="bg-gray-200 w-screen h-screen">
+      <div className="w-screen h-screen bg-gray-200">
         <Button button bgColor="transparent" className="absolute left-2">
           <ChevronLeftIcon className="w-5 h-5" />
         </Button>
-        <div className="h-screen flex flex-col justify-center">
+        <div className="flex flex-col justify-center h-screen">
           <div className="flex justify-center mb-16">
             <LogoIcon />
           </div>

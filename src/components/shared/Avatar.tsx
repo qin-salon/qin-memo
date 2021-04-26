@@ -46,7 +46,7 @@ export const Avatar: VFC<ImgType | ButtonType> = (props) => {
   return (
     <div className={circleClasses}>
       {isImg(props) && props.src ? (
-        <img src={props.src} alt={props.alt} className="rounded-full w-full h-full" />
+        <img src={props.src} alt={props.alt} className="w-full h-full rounded-full" />
       ) : (
         <div className={fontClasses}>
           <span className="m-auto">{props.alt.substr(0, 1)}</span>

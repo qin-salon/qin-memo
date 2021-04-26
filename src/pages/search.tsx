@@ -38,12 +38,12 @@ const Search: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col overscroll-none h-screen w-full md:max-w-3xl mx-auto p-4">
+    <div className="flex overscroll-none flex-col p-4 mx-auto w-full h-screen md:max-w-3xl">
       <header>
         <div className="flex items-center space-x-4">
           <Button
             linkProps={{ href: `/users/${user.id}` }}
-            className="hover:bg-gray-100 rounded-full"
+            className="rounded-full hover:bg-gray-100"
             bgColor="transparent"
             size="extrasmall"
           >
@@ -60,7 +60,7 @@ const Search: NextPage = () => {
           </form>
           <Button
             button
-            className="hover:bg-gray-100 rounded-full"
+            className="rounded-full hover:bg-gray-100"
             bgColor="transparent"
             size="extrasmall"
             onClick={handleClose}

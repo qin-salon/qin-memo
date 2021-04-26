@@ -39,7 +39,7 @@ export const MemoMenu: VFC<Props> = (props) => {
             leaveFrom="translate-y-0"
             leaveTo="translate-y-full"
           >
-            <div className="w-screen bg-white py-4 px-6 rounded-t-2xl">
+            <div className="py-4 px-6 w-screen bg-white rounded-t-2xl">
               <ModalContent {...props} />
             </div>
           </Transition.Child>
@@ -54,11 +54,11 @@ const ModalContent: VFC<Omit<Props, "menuOpen">> = (props) => {
     <div>
       <div className="text-right">
         <button
-          className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={props.onMenuClose}
         >
           <span className="sr-only">Close panel</span>
-          <XIcon className="h-6 w-6" aria-hidden="true" />
+          <XIcon className="w-6 h-6" aria-hidden="true" />
         </button>
       </div>
 
@@ -106,7 +106,7 @@ const ModalContent: VFC<Omit<Props, "menuOpen">> = (props) => {
           </strong>
         </Button>
         {props.publicFlg ? null : (
-          <p className="text-center m-2">
+          <p className="m-2 text-center">
             <strong>以下は公開後に操作ができます</strong>
           </p>
         )}

@@ -49,28 +49,28 @@ const MENUS: Menu[] = [
 
 const Settings: NextPage = () => {
   return (
-    <div className="max-w-screen-sm mx-auto p-4">
-      <p className="relative my-4 flex items-center">
+    <div className="p-4 mx-auto max-w-screen-sm">
+      <p className="flex relative items-center my-4">
         <Link href="/">
           <a className="absolute left-1">
             <XIcon className="w-5 h-5" />
           </a>
         </Link>
-        <span className="block text-center w-full text-xl font-bold">マイページ</span>
+        <span className="block w-full text-xl font-bold text-center">マイページ</span>
       </p>
 
       <ul className="space-y-10">
         {MENUS.map((menu) => {
           return (
             <li key={menu.category}>
-              <p className="py-2 text-gray-400 font-bold">{menu.category}</p>
+              <p className="py-2 font-bold text-gray-400">{menu.category}</p>
               <ul className="space-y-6">
                 {menu.details.map((detail) => {
                   return (
                     <li key={detail.link}>
                       <Link href={detail.link}>
                         <a className="flex justify-between items-center">
-                          <div className="font-bold text-lg">{detail.name}</div>
+                          <div className="text-lg font-bold">{detail.name}</div>
                           <ChevronRightIcon className="w-5 h-5" />
                         </a>
                       </Link>
@@ -83,28 +83,28 @@ const Settings: NextPage = () => {
         })}
 
         <li>
-          <p className="py-2 text-gray-400 font-bold">アクション</p>
+          <p className="py-2 font-bold text-gray-400">アクション</p>
           <ul className="space-y-6">
             <li>
               <div className="flex justify-between items-center">
-                <div className="font-bold text-lg">ダークモード</div>
-                <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                <div className="text-lg font-bold">ダークモード</div>
+                <div className="inline-block relative mr-2 w-10 align-middle transition duration-200 ease-in select-none">
                   <label
                     htmlFor="darkmode"
-                    className="block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"
+                    className="block overflow-hidden h-6 bg-gray-300 rounded-full cursor-pointer"
                   >
                     <input
                       type="checkbox"
                       name="toggle"
                       id="darkmode"
-                      className="outline-none right-4 checked:right-0 duration-200 ease-in checked:bg-blue-600 absolute block w-6 h-6 rounded-full bg-white border-2 appearance-none cursor-pointer"
+                      className="block absolute right-4 w-6 h-6 bg-white rounded-full border-2 duration-200 ease-in appearance-none cursor-pointer outline-none checked:right-0 checked:bg-blue-600"
                     />
                   </label>
                 </div>
               </div>
             </li>
             <li>
-              <div className="font-bold text-lg text-red-500">ログアウト</div>
+              <div className="text-lg font-bold text-red-500">ログアウト</div>
             </li>
           </ul>
         </li>

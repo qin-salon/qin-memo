@@ -7,15 +7,15 @@ import { Button } from "src/components/shared/Button";
 
 const SettingsAccount: NextPage = () => {
   return (
-    <div className="bg-white h-screen flex justify-center px-5 text-black">
+    <div className="flex justify-center px-5 h-screen text-black bg-white">
       <div className="w-80">
-        <div className="relative flex justify-center mb-6 py-3">
+        <div className="flex relative justify-center py-3 mb-6">
           <Button button bgColor="transparent" className="absolute left-0 top-0 mx-0 my-0 px-0 py-3.5">
             <ChevronLeftIcon className="w-5 h-5" />
           </Button>
           <QinAccount />
         </div>
-        <h2 className="font-bold mb-10 text-2xl">アカウントの連携</h2>
+        <h2 className="mb-10 text-2xl font-bold">アカウントの連携</h2>
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center">
             <GoogleIcon />

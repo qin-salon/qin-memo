@@ -6,17 +6,17 @@ import { ProfileSetting } from "src/components/shared/ProfileSetting";
 
 const Settings: NextPage = () => {
   return (
-    <div className="max-w-screen-sm mx-auto p-4">
-      <p className="relative my-4 flex items-center">
+    <div className="p-4 mx-auto max-w-screen-sm">
+      <p className="flex relative items-center my-4">
         <Link href="/">
           <a className="absolute left-1">
             <ChevronLeftIcon className="w-5 h-5" />
           </a>
         </Link>
-        <span className="block text-center w-full text-xl font-bold">プロフィール設定</span>
+        <span className="block w-full text-xl font-bold text-center">プロフィール設定</span>
       </p>
       <ProfileSetting />
-      <Button button className="w-full mt-8">
+      <Button button className="mt-8 w-full">
         保存する
       </Button>
     </div>

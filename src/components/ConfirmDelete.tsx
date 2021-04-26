@@ -9,7 +9,7 @@ export const ConfirmDelete: VFC<Props> = (props) => {
     <Transition.Root show={props.memoDelete} as={Fragment}>
       <Dialog
         static
-        className="fixed z-10 inset-0 overflow-y-auto"
+        className="overflow-y-auto fixed inset-0 z-10"
         open={props.memoDelete}
         onClose={props.onDeleteModalClose}
       >
@@ -26,7 +26,7 @@ export const ConfirmDelete: VFC<Props> = (props) => {
             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
           </Transition.Child>
 
-          <span className="inline-block align-middle h-screen" aria-hidden="true">
+          <span className="inline-block h-screen align-middle" aria-hidden="true">
             &#8203;
           </span>
 
@@ -41,24 +41,24 @@ export const ConfirmDelete: VFC<Props> = (props) => {
           >
             <div className="inline-block bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-sm w-10/12 p-4 sm:p-6">
               <div className="text-center">
-                <Dialog.Title as="h3" className="leading-6 font-bold text-gray-900">
+                <Dialog.Title as="h3" className="font-bold leading-6 text-gray-900">
                   メモを削除
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">復元できませんがよろしいですか？</p>
                 </div>
               </div>
-              <div className="mt-6 flex space-x-3 sm:space-x-4">
+              <div className="flex mt-6 space-x-3 sm:space-x-4">
                 <button
                   type="button"
-                  className="inline-flex justify-center rounded-full border border-gray-300 shadow-sm flex-1 py-2 bg-white font-bold text-gray-700 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-auto text-sm"
+                  className="inline-flex flex-1 justify-center py-2 w-auto text-sm font-bold text-gray-700 bg-white rounded-full border border-gray-300 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   onClick={props.onDeleteModalClose}
                 >
                   キャンセル
                 </button>
                 <button
                   type="button"
-                  className="inline-flex justify-center rounded-full border border-transparent shadow-sm flex-1 py-2 bg-red-600 font-bold text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 w-auto text-sm"
+                  className="inline-flex flex-1 justify-center py-2 w-auto text-sm font-bold text-white bg-red-600 rounded-full border border-transparent shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                   onClick={props.onMemoDeleteClick}
                 >
                   削除する

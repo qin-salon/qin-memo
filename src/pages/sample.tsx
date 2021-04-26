@@ -25,7 +25,7 @@ const ButtonPage: NextPage = () => {
         <div className="my-4 ml-4">
           <span className="m-auto">ボタンクリック テスト用のカウント：{count}</span>
         </div>
-        <div className="flex flex-row justify-start flex-none">
+        <div className="flex flex-row flex-none justify-start">
           <div className="mx-auto">
             <Button button bgColor="blue" onClick={handleAddCount}>
               メモを書く
@@ -82,7 +82,7 @@ const ButtonPage: NextPage = () => {
         <div className="my-4 ml-4">
           <span className="m-auto">アバターの表示</span>
         </div>
-        <div className="flex flex-row justify-start flex-none">
+        <div className="flex flex-row flex-none justify-start">
           <div className="mx-auto">
             <Avatar alt="特大" src="/mocks/avatar01.jpg" size="extralarge" />
           </div>
@@ -96,7 +96,7 @@ const ButtonPage: NextPage = () => {
             <Avatar alt="小" src="/mocks/avatar01.jpg" size="small" />
           </div>
         </div>
-        <div className="flex flex-row justify-start flex-none">
+        <div className="flex flex-row flex-none justify-start">
           <div className="mx-auto">
             <Avatar alt="特大" src="" size="extralarge" />
           </div>
@@ -113,7 +113,7 @@ const ButtonPage: NextPage = () => {
         <div className="my-4 ml-4">
           <span className="m-auto">テキストボックスの表示</span>
         </div>
-        <div className="flex flex-row justify-start flex-none mt-4">
+        <div className="flex flex-row flex-none justify-start mt-4">
           <div className="mx-auto">
             <InputText startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6" />} placeholder="メモを検索する" />
           </div>

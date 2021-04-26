@@ -22,7 +22,7 @@ const Index: NextPage = () => {
     <Layout>
       <div className="p-4">
         <h2>ページ一覧</h2>
-        <ul className="mt-2 grid gap-4 grid-flow-row sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <ul className="grid grid-flow-row gap-4 mt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {PAGES.map((page) => {
             return (
               <li key={page.href}>

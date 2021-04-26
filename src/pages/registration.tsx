@@ -4,10 +4,10 @@ import { ProfileSetting } from "src/components/shared/ProfileSetting";
 
 const Registration: NextPage = () => {
   return (
-    <div className="max-w-screen-sm mx-auto p-4">
-      <p className="my-4 text-center text-xl font-bold">プロフィール設定</p>
+    <div className="p-4 mx-auto max-w-screen-sm">
+      <p className="my-4 text-xl font-bold text-center">プロフィール設定</p>
       <ProfileSetting />
-      <Button button className="w-full mt-8">
+      <Button button className="mt-8 w-full">
         登録してはじめる
       </Button>
       <Button button bgColor="gray" textColor="black" className="w-full">
