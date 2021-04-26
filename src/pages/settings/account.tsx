@@ -1,6 +1,6 @@
+import { ChevronLeftIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { AppleIcon } from "src/components/icon/AppleIcon";
-import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
 import { QinAccount } from "src/components/icon/QinAccount";
 import { Button } from "src/components/shared/Button";
@@ -11,7 +11,7 @@ const SettingsAccount: NextPage = () => {
       <div className="w-80">
         <div className="relative flex justify-center mb-6 py-3">
           <Button button bgColor="transparent" className="absolute left-0 top-0 mx-0 my-0 px-0 py-3.5">
-            <ChevronLeft />
+            <ChevronLeftIcon className="w-5 h-5" />
           </Button>
           <QinAccount />
         </div>

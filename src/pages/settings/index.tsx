@@ -1,7 +1,6 @@
+import { ChevronRightIcon, XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { ChevronRight } from "src/components/icon/ChevronRight";
-import { XIcon } from "src/components/icon/XIcon";
 
 type Menu = {
   category: string;
@@ -54,7 +53,7 @@ const Settings: NextPage = () => {
       <p className="relative my-4 flex items-center">
         <Link href="/">
           <a className="absolute left-1">
-            <XIcon />
+            <XIcon className="w-5 h-5" />
           </a>
         </Link>
         <span className="block text-center w-full text-xl font-bold">マイページ</span>
@@ -72,7 +71,7 @@ const Settings: NextPage = () => {
                       <Link href={detail.link}>
                         <a className="flex justify-between items-center">
                           <div className="font-bold text-lg">{detail.name}</div>
-                          <ChevronRight />
+                          <ChevronRightIcon className="w-5 h-5" />
                         </a>
                       </Link>
                     </li>

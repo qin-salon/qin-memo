@@ -1,6 +1,6 @@
+import { ChevronLeftIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { ChevronLeft } from "src/components/icon/ChevronLeft";
 import { Button } from "src/components/shared/Button";
 import { ProfileSetting } from "src/components/shared/ProfileSetting";
 
@@ -10,7 +10,7 @@ const Settings: NextPage = () => {
       <p className="relative my-4 flex items-center">
         <Link href="/">
           <a className="absolute left-1">
-            <ChevronLeft />
+            <ChevronLeftIcon className="w-5 h-5" />
           </a>
         </Link>
         <span className="block text-center w-full text-xl font-bold">プロフィール設定</span>

@@ -1,6 +1,6 @@
+import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { LogoIcon } from "src/components/icon/LogoIcon";
-import { SearchIcon } from "src/components/icon/SearchIcon";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { InputText } from "src/components/shared/InputText";

@@ -1,9 +1,7 @@
+import { ChevronLeftIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import type { DOMAttributes } from "react";
 import { useState } from "react";
-import { ChevronLeft } from "src/components/icon/ChevronLeft";
-import { SearchIcon } from "src/components/icon/SearchIcon";
-import { XIcon } from "src/components/icon/XIcon";
 import { SearchHistories } from "src/components/SearchHistories";
 import { SearchResults } from "src/components/SearchResults";
 import { Button } from "src/components/shared/Button";
@@ -49,7 +47,7 @@ const Search: NextPage = () => {
             bgColor="transparent"
             size="extrasmall"
           >
-            <ChevronLeft />
+            <ChevronLeftIcon className="w-5 h-5" />
           </Button>
           <form className="flex-1" onSubmit={handleSubmit}>
             <InputText

@@ -1,5 +1,5 @@
+import { XIcon } from "@heroicons/react/outline";
 import type { VFC } from "react";
-import { XIcon } from "src/components/icon/XIcon";
 import { Button } from "src/components/shared/Button";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";

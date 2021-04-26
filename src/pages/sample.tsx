@@ -1,7 +1,6 @@
+import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { useState } from "react";
-import { SearchIcon } from "src/components/icon/SearchIcon";
-import { SignOut } from "src/components/icon/SignOut";
 import { Layout } from "src/components/layout";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
@@ -46,23 +45,6 @@ const ButtonPage: NextPage = () => {
           <div className="mx-auto">
             <Button button bgColor="blue" onClick={handleAddCount} disabled>
               キャンセル
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button button bgColor="white" textColor="red" startIcon={<SignOut />} onClick={handleAddCount}>
-              ログアウト
-            </Button>
-          </div>
-          <div className="mx-auto">
-            <Button
-              button
-              bgColor="white"
-              textColor="red"
-              startIcon={<SignOut disabled />}
-              onClick={handleAddCount}
-              disabled
-            >
-              ログアウト
             </Button>
           </div>
         </div>
