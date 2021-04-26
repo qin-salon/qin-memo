@@ -19,7 +19,7 @@ const User: NextPage = () => {
   const { data: listNote, error } = useSWR<ListNoteType[]>(`/users/${user.id}/notes`);
 
   return (
-    <div>
+    <div className="pb-40">
       <Header />
       <WidthContainer>
         <div className="space-y-7">
@@ -43,11 +43,15 @@ const User: NextPage = () => {
           {error ? <div>メモが登録されていません</div> : null}
 
           {listNote ? (
-            <div>
+            <ul className="space-y-5">
               {listNote.map((note: ListNoteType) => {
-                return <MemoCard key={note.id} note={note} />;
+                return (
+                  <li key={note.id}>
+                    <MemoCard note={note} />
+                  </li>
+                );
               })}
-            </div>
+            </ul>
           ) : null}
         </div>
       </WidthContainer>

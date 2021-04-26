@@ -1,10 +1,8 @@
+import Link from "next/link";
 import type { VFC } from "react";
-import { Button } from "src/components/shared/Button";
 import type { ListNoteType } from "src/types/types";
 
-type Props = {
-  note: ListNoteType;
-};
+type MemoCardProps = { note: ListNoteType };
 
 // タイトルの取得（改行コードまでをタイトルとする）
 const pattarn = "(^.*)(\n)";
@@ -12,38 +10,22 @@ const getTitle = (excTitle: RegExpMatchArray | null) => {
   return String(excTitle ? excTitle[0] : "");
 };
 
-export const MemoCard: VFC<Props> = (props) => {
+export const MemoCard: VFC<MemoCardProps> = (props) => {
   const title = getTitle(props.note.excerpt.match(pattarn));
+
   return (
-    <div className="p-2 my-4 mx-auto w-full h-32 bg-gray-200 rounded-3xl">
-      <Button
-        linkProps={{ href: `/notes/${props.note.id}` }}
-        bgColor="transparent"
-        size="none"
-        justifyContent="justify-start"
-        className="w-full"
-      >
-        <div>
-          <strong>
-            <div className="mt-2 h-6 truncate">
-              <span>{title}</span>
-            </div>
-          </strong>
-          <div className="my-2 truncate">
-            <span>{props.note.excerpt.replace(title, "")}</span>
-          </div>
-          <div className="flex flex-row justify-between items-end ">
-            <div className="pb-2">
-              <span>{props.note.updatedOn}</span>
-            </div>
-            <div>
-              {props.note.public ? (
-                <span className="py-1 px-1 my-0 mx-auto w-auto text-white bg-yellow-500 rounded-full">公開中</span>
-              ) : null}
-            </div>
-          </div>
+    <Link href={`/notes/${props.note.id}`}>
+      <a className="block py-3 px-6 w-full bg-gray-100 rounded-xl shadow">
+        <div className="font-bold truncate">{title}</div>
+        <div className="text-sm mt-0.5 truncate">{props.note.excerpt.replace(title, "")}</div>
+
+        <div className="flex justify-between items-center mt-4">
+          <time className="text-sm font-bold text-gray-400">{props.note.updatedOn}</time>
+          {props.note.public ? (
+            <div className="text-xs font-bold py-1 px-2.5 text-white bg-orange-400 rounded-full">公開中</div>
+          ) : null}
         </div>
-      </Button>
-    </div>
+      </a>
+    </Link>
   );
 };
