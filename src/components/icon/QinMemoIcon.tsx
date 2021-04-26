@@ -1,21 +1,10 @@
-import clsx from "clsx";
 import type { VFC } from "react";
 
-type Props = {
-  className?: string;
-  size?: "large" | "small";
-};
+type QinMemoIconProps = { className?: string };
 
-export const LogoIcon: VFC<Props> = (props) => {
-  const classes = clsx([
-    {
-      "w-52 h-12": props.size === "large",
-      "w-32 h-6": props.size === "small",
-    },
-    props.className,
-  ]);
+export const QinMemoIcon: VFC<QinMemoIconProps> = (props) => {
   return (
-    <svg className={classes} viewBox="0 0 189 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={props.className} viewBox="0 0 189 36" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M33.5657 28.9323C28.5744 33.4843 22.3254 28.9323 22.2555 28.9323C14.0199 22.9428 7.68105 28.3832 7.62116 28.4332C7.58115 28.4787 7.55908 28.5372 7.55908 28.5979C7.55908 28.6585 7.58115 28.717 7.62116 28.7626C7.65073 28.8152 7.69838 28.8554 7.75528 28.8755C7.81218 28.8957 7.87448 28.8946 7.93061 28.8724C13.3411 26.7461 20.0693 33.3445 20.1492 33.4244C21.633 34.9404 23.6229 35.8572 25.7394 35.9999C26.1657 35.9986 26.5907 35.9517 27.0072 35.8601C31.3795 34.9318 33.8651 29.5113 33.9949 29.2817C34.0196 29.2263 34.0241 29.1641 34.0077 29.1057C33.9913 29.0474 33.955 28.9966 33.9051 28.9622C33.8616 28.9171 33.8033 28.8893 33.741 28.8838C33.6786 28.8783 33.6163 28.8955 33.5657 28.9323Z"
         fill="#070417"
@@ -54,10 +43,4 @@ export const LogoIcon: VFC<Props> = (props) => {
       />
     </svg>
   );
-};
-
-// Propsのデフォルト値
-LogoIcon.defaultProps = {
-  className: "",
-  size: "small",
 };

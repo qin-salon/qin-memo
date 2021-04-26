@@ -2,7 +2,7 @@ import { ChevronLeftIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { AppleIcon } from "src/components/icon/AppleIcon";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
-import { LogoIcon } from "src/components/icon/LogoIcon";
+import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
 import { Button } from "src/components/shared/Button";
 
 const Signin: NextPage = () => {
@@ -14,7 +14,7 @@ const Signin: NextPage = () => {
         </Button>
         <div className="flex flex-col justify-center h-screen">
           <div className="flex justify-center mb-16">
-            <LogoIcon />
+            <QinMemoIcon className="w-48" />
           </div>
           <Button button bgColor="white" startIcon={<GoogleIcon />} size="large" className="w-72">
             Googleでログイン
