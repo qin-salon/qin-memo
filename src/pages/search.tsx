@@ -1,10 +1,10 @@
 import { ChevronLeftIcon, SearchIcon, XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
+import Link from "next/link";
 import type { DOMAttributes } from "react";
 import { useState } from "react";
 import { SearchHistories } from "src/components/SearchHistories";
 import { SearchResults } from "src/components/SearchResults";
-import { Button } from "src/components/shared/Button";
 import { InputText } from "src/components/shared/InputText";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
@@ -38,38 +38,30 @@ const Search: NextPage = () => {
   };
 
   return (
-    <div className="flex overscroll-none flex-col p-4 mx-auto w-full h-screen md:max-w-3xl">
-      <header>
-        <div className="flex items-center space-x-4">
-          <Button
-            linkProps={{ href: `/users/${user.id}` }}
-            className="rounded-full hover:bg-gray-100"
-            bgColor="transparent"
-            size="extrasmall"
-          >
-            <ChevronLeftIcon className="w-5 h-5" />
-          </Button>
-          <form className="flex-1" onSubmit={handleSubmit}>
-            <InputText
-              className="w-full"
-              startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
-              placeholder="検索"
-              value={value}
-              onChange={handleChange}
-            />
-          </form>
-          <Button
-            button
-            className="rounded-full hover:bg-gray-100"
-            bgColor="transparent"
-            size="extrasmall"
-            onClick={handleClose}
-          >
-            <XIcon className="my-auto w-6 h-6" />
-          </Button>
-        </div>
+    <div className="py-4 px-2 mx-auto space-y-7 max-w-screen-sm sm:px-4">
+      <header className="flex items-center space-x-1">
+        <Link href="/users/foo">
+          <a className="grid place-items-center w-10 h-10">
+            <ChevronLeftIcon className="w-6 h-6" />
+          </a>
+        </Link>
+
+        <form className="flex-1" onSubmit={handleSubmit}>
+          <InputText
+            className="w-full"
+            startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
+            placeholder="検索"
+            value={value}
+            onChange={handleChange}
+          />
+        </form>
+
+        <button className="grid place-items-center w-10 h-10" onClick={handleClose}>
+          <XIcon className="w-6 h-6" />
+        </button>
       </header>
-      <div className="mt-4">{keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}</div>
+
+      <div>{keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}</div>
     </div>
   );
 };
