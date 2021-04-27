@@ -15,8 +15,8 @@ export const MemoCard: VFC<MemoCardProps> = (props) => {
 
   return (
     <Link href={`/notes/${props.note.id}`}>
-      <a className="block py-3 px-6 w-full bg-gray-100 rounded-xl shadow">
-        <div className="font-bold truncate">{title}</div>
+      <a className="block py-3 px-4 w-full bg-gray-100 rounded-xl shadow sm:px-6">
+        <div className="text-sm font-bold sm:text-base truncate">{title}</div>
         <div className="text-sm mt-0.5 truncate">{props.note.excerpt.replace(title, "")}</div>
 
         <div className="flex justify-between items-center mt-4">
