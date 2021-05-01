@@ -1,5 +1,5 @@
 module.exports = {
-  future: { webpack5: true, strictPostcssConfiguration: true },
+  future: { strictPostcssConfiguration: true },
   reactStrictMode: true,
   typescript: { ignoreDevErrors: true },
   poweredByHeader: false,
