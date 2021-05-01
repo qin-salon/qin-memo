@@ -16,33 +16,44 @@ type Props = {
 export const MemoMenu: VFC<Props> = (props) => {
   return (
     <Transition.Root show={props.menuOpen} as={Fragment}>
-      <Dialog static open={props.menuOpen} onClose={props.onMenuClose}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-200"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
-        </Transition.Child>
-
-        <div className="fixed bottom-0">
+      <Dialog
+        static
+        open={props.menuOpen}
+        onClose={props.onMenuClose}
+        className="sm:fixed sm:inset-0 sm:z-10 sm:overflow-y-auto"
+      >
+        <div className="min-h-screen text-center">
           <Transition.Child
             as={Fragment}
-            enter="transform transition ease-in-out duration-200"
-            enterFrom="translate-y-full"
-            enterTo="translate-y-0"
-            leave="transform transition ease-in-out duration-200"
-            leaveFrom="translate-y-0"
-            leaveTo="translate-y-full"
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
           >
-            <div className="py-4 px-6 w-screen bg-white rounded-t-2xl">
-              <ModalContent {...props} />
-            </div>
+            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
           </Transition.Child>
+
+          <span className="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">
+            &#8203;
+          </span>
+
+          <div className="fixed bottom-0 w-full sm:max-w-md sm:static sm:inline-block sm:align-middle sm:transform">
+            <Transition.Child
+              as={Fragment}
+              enter="transform ease-in-out duration-300 sm:ease-out"
+              enterFrom="translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95"
+              enterTo="translate-y-0 sm:opacity-100 sm:scale-100"
+              leave="transform ease-in-out duration-200 sm:ease-in"
+              leaveFrom="translate-y-0 sm:opacity-100 sm:scale-100"
+              leaveTo="translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95"
+            >
+              <div className="py-4 px-6 bg-white rounded-t-2xl sm:rounded-b-2xl">
+                <ModalContent {...props} />
+              </div>
+            </Transition.Child>
+          </div>
         </div>
       </Dialog>
     </Transition.Root>
