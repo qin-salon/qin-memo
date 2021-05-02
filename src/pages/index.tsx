@@ -1,43 +1,63 @@
+import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { Layout } from "src/components/layout";
+import { Avatar } from "src/components/shared/Avatar";
+import { Header } from "src/components/shared/Header";
+import { InputText } from "src/components/shared/InputText";
+import { WidthContainer } from "src/components/shared/WidthContainer";
+import { MemoCard } from "src/components/users/MemoCard";
+import { EXAMPLE_USER_01 } from "src/models/user";
+import type { ListNoteType } from "src/types/types";
+import useSWR from "swr";
 
-const PAGES = [
-  { href: "/signin", file: "/signin.tsx", label: "ログインページ", isDone: true },
-  { href: "/signup", file: "/signup.tsx", label: "新規登録ページ", isDone: true },
-  { href: "/registration", file: "/registration.tsx", label: "初回プロフィール登録ページ", isDone: true },
-  { href: "/users/foo", file: "/users/[userId].tsx", label: "ユーザーページ", isDone: true },
-  { href: "/search", file: "/search.tsx", label: "メモ検索ページ", isDone: true },
-  { href: "/notes/foo", file: "/notes/[noteId].tsx", label: "メモページ", isDone: false },
-  { href: "/settings/memo", file: "/settings/memo.tsx", label: "設定一覧ページ", isDone: true },
-  { href: "/settings/profile", file: "/settings/profile.tsx", label: "プロフィール変更ページ", isDone: true },
-  { href: "/settings/account", file: "/settings/account.tsx", label: "SNS連携ページ", isDone: true },
-  // { href: "/settings/notification", file: "/settings/notification.tsx", label: "通知設定ページ", isDone: false },
-  // { href: "/terms", file: "/terms", label: "利用規約ページ", isDone: false },
-  // { href: "/privacy", file: "/privacy", label: "プライバシーポリシーページ", isDone: false },
-] as const;
+// **********************************
+// ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
+// Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
+const user = EXAMPLE_USER_01;
 
 const Index: NextPage = () => {
+  const { data: listNote, error } = useSWR<ListNoteType[]>(`/users/${user.id}/notes`);
+
   return (
-    <Layout>
-      <div className="p-4">
-        <h2>ページ一覧</h2>
-        <ul className="grid grid-flow-row gap-4 mt-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {PAGES.map((page) => {
-            return (
-              <li key={page.href}>
-                <Link href={page.href}>
-                  <a className="block p-3 border border-black">
-                    <div>{`${page.isDone ? "✅ " : ""}${page.label}`}</div>
-                    <div>pages{page.file} のページです</div>
-                  </a>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </Layout>
+    <div className="pb-40">
+      <Header />
+      <WidthContainer>
+        <div className="space-y-7">
+          <div className="flex items-center space-x-4">
+            <Avatar alt={user.name} src={user.avatarUrl} className="w-16 h-16" />
+            <div className="flex flex-col">
+              <span className="font-bold">{user.name}</span>
+              <Link href="/settings/profile">
+                <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
+              </Link>
+            </div>
+          </div>
+
+          <Link href="/search">
+            <a className="block">
+              <InputText
+                startIcon={<SearchIcon className="my-auto mr-2 w-5 h-5 text-blue-500" />}
+                placeholder="メモを検索する"
+              />
+            </a>
+          </Link>
+
+          {error ? <div>メモが登録されていません</div> : null}
+
+          {listNote ? (
+            <ul className="space-y-5">
+              {listNote.map((note: ListNoteType) => {
+                return (
+                  <li key={note.id}>
+                    <MemoCard note={note} />
+                  </li>
+                );
+              })}
+            </ul>
+          ) : null}
+        </div>
+      </WidthContainer>
+    </div>
   );
 };
 
