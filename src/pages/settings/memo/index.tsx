@@ -19,7 +19,7 @@ const SettingsMemo: NextPage = () => {
               items: [
                 { label: "利用規約", href: "/terms" },
                 { label: "プライバシーポリシー", href: "/privacy" },
-                { label: "お問い合わせ", href: "/contact" },
+                { label: "お問い合わせ", href: "https://forms.gle/pNNUdFnf3YmYpqhJ6" },
               ],
             },
           ]}

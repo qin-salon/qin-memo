@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import type { VFC } from "react";
 
@@ -15,12 +15,17 @@ export const List: VFC<ListProps> = (props) => {
       <div className="px-2 font-bold text-gray-400">{props.title}</div>
       <ul className="mt-2">
         {props.items.map((item) => {
+          const isExternal = item.href.slice(0, 1) !== "/";
           return (
             <li key={item.href}>
               <Link href={item.href}>
-                <a className="flex items-center justify-between text-lg py-3 px-2 font-bold hover:bg-gray-50">
+                <a
+                  className="flex items-center justify-between text-lg py-3 px-2 font-bold hover:bg-gray-50"
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                >
                   <span>{item.label}</span>
-                  <ChevronRightIcon className="w-5 h-5" />
+                  {isExternal ? <ExternalLinkIcon className="w-5 h-5" /> : <ChevronRightIcon className="w-5 h-5" />}
                 </a>
               </Link>
             </li>
