@@ -1,11 +1,11 @@
 import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
+import { MemoCard } from "src/components/MemoCard";
 import { Avatar } from "src/components/shared/Avatar";
 import { Header } from "src/components/shared/Header";
 import { InputText } from "src/components/shared/InputText";
 import { WidthContainer } from "src/components/shared/WidthContainer";
-import { MemoCard } from "src/components/users/MemoCard";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { ListNoteType } from "src/types/types";
 import useSWR from "swr";

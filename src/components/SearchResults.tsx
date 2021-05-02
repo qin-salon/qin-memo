@@ -1,5 +1,5 @@
 import type { VFC } from "react";
-import { MemoCard } from "src/components/users/MemoCard";
+import { MemoCard } from "src/components/MemoCard";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { ListNoteType } from "src/types/types";
 import useSWR from "swr";
