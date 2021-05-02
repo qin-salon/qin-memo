@@ -5,7 +5,7 @@ const Privacy: NextPage = () => {
   return (
     <div>
       <Header page="setting" center="プライバシーポリシー" left="back" />
-      <div className="mx-auto p-4 prose prose-sm prose-blue">
+      <div className="p-4 mx-auto prose prose-sm prose-blue">
         <h3>この文章は仮です</h3>
         <p>
           Qin（以下「弊サービス」とします）は、個人情報が人格尊重の理念の下に慎重に取扱われるべきものであることに鑑み、個人情報を保護することが弊サービスの事業活動の基本であり、社会的責務であると認識し、以下の方針に基づき個人情報の保護に努めます。

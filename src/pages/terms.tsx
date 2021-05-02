@@ -5,7 +5,7 @@ const Terms: NextPage = () => {
   return (
     <div>
       <Header page="setting" center="利用規約" left="back" />
-      <div className="mx-auto p-4 prose prose-sm prose-blue">
+      <div className="p-4 mx-auto prose prose-sm prose-blue">
         <h3>この文章は仮です</h3>
         <p>
           この規約は、Qin
