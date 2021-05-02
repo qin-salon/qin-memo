@@ -2,9 +2,12 @@ import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import type { DOMAttributes, VFC } from "react";
 
-type Link = { label: string; href: string };
+type Link = {
+  label: string | JSX.Element;
+  href: string;
+};
 type Button = {
-  label: string;
+  label: string | JSX.Element;
   button: {
     label: JSX.Element;
     onClick: DOMAttributes<HTMLButtonElement>["onClick"];
@@ -12,7 +15,10 @@ type Button = {
   };
 };
 type ListItem = Link | Button;
-type ListProps = { title: string; items: [ListItem, ...ListItem[]] };
+type ListProps = {
+  title?: string | JSX.Element;
+  items: [ListItem, ...ListItem[]];
+};
 
 const isButton = (item: ListItem): item is Button => {
   return "button" in item;
@@ -20,26 +26,26 @@ const isButton = (item: ListItem): item is Button => {
 
 export const List: VFC<ListProps> = (props) => {
   return (
-    <div>
-      <div className="px-4 text-sm font-bold text-gray-400">{props.title}</div>
-      <ul className="mt-2">
-        {props.items.map((item) => {
+    <div className="space-y-1">
+      {props.title ? <div className="px-4 text-sm font-bold text-gray-400">{props.title}</div> : null}
+      <ul>
+        {props.items.map((item, i) => {
           if (isButton(item)) {
             const handleClick = item.button.onClick;
             return (
-              <li key={item.label}>
+              <li key={i}>
                 {item.button.clickableAll ? (
                   <button
                     type="button"
                     onClick={handleClick}
                     className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold hover:bg-gray-100"
                   >
-                    <span>{item.label}</span>
+                    {item.label}
                     {item.button.label}
                   </button>
                 ) : (
                   <div className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold">
-                    <span>{item.label}</span>
+                    {item.label}
                     <button type="button" onClick={handleClick}>
                       {item.button.label}
                     </button>
@@ -51,14 +57,14 @@ export const List: VFC<ListProps> = (props) => {
 
           const isExternal = item.href.slice(0, 1) !== "/";
           return (
-            <li key={item.label}>
+            <li key={i}>
               <Link href={item.href}>
                 <a
                   className="flex justify-between items-center py-3 px-4 text-lg font-bold hover:bg-gray-100"
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                 >
-                  <span>{item.label}</span>
+                  {item.label}
                   {isExternal ? <ExternalLinkIcon className="w-5 h-5" /> : <ChevronRightIcon className="w-5 h-5" />}
                 </a>
               </Link>
@@ -77,9 +83,9 @@ type RecursiveListProps = {
 export const RecursiveList: VFC<RecursiveListProps> = (props) => {
   return (
     <ul className="space-y-8">
-      {props.list.map((listItems) => {
+      {props.list.map((listItems, i) => {
         return (
-          <li key={listItems.title}>
+          <li key={i}>
             <List {...listItems} />
           </li>
         );
