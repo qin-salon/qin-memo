@@ -17,8 +17,8 @@ const SettingsMemo: NextPage = () => {
             {
               title: "サポート",
               items: [
-                { label: "プライバシーポリシー", href: "/privacy" },
                 { label: "利用規約", href: "/terms" },
+                { label: "プライバシーポリシー", href: "/privacy" },
                 { label: "お問い合わせ", href: "/contact" },
               ],
             },
