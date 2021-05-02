@@ -20,10 +20,7 @@ const SettingsMemo: NextPage = () => {
           list={[
             {
               title: "設定",
-              items: [
-                { label: "通知", href: "/settings/memo/notification" },
-                { label: "テーマ", href: "/settings/memo/theme" },
-              ],
+              items: [{ label: "テーマ", href: "/settings/memo/theme" }],
             },
             {
               title: "サポート",
