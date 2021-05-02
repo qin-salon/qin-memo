@@ -12,7 +12,7 @@ type ListProps = {
 export const List: VFC<ListProps> = (props) => {
   return (
     <div>
-      <div className="px-2 font-bold text-gray-400">{props.title}</div>
+      <div className="px-4 text-sm font-bold text-gray-400">{props.title}</div>
       <ul className="mt-2">
         {props.items.map((item) => {
           const isExternal = item.href.slice(0, 1) !== "/";
@@ -20,7 +20,7 @@ export const List: VFC<ListProps> = (props) => {
             <li key={item.href}>
               <Link href={item.href}>
                 <a
-                  className="flex items-center justify-between text-lg py-3 px-2 font-bold hover:bg-gray-50"
+                  className="flex justify-between items-center py-3 px-4 text-lg font-bold hover:bg-gray-50"
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                 >

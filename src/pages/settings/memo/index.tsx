@@ -7,7 +7,7 @@ const SettingsMemo: NextPage = () => {
     <div>
       <Header page="setting" center="マイページ" left="close" />
 
-      <div className="mt-12 mx-auto max-w-screen-sm">
+      <div className="mx-auto max-w-screen-sm sm:mt-4">
         <RecursiveList
           list={[
             {
