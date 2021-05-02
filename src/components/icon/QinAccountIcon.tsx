@@ -1,21 +1,10 @@
-import clsx from "clsx";
 import type { VFC } from "react";
 
-type Props = {
-  className?: string;
-  size?: "large" | "small";
-};
+type Props = { className?: string };
 
-export const QinAccount: VFC<Props> = (props) => {
-  const classes = clsx([
-    {
-      "w-52 h-12": props.size === "large",
-      "w-32 h-6": props.size === "small",
-    },
-    props.className,
-  ]);
+export const QinAccountIcon: VFC<Props> = (props) => {
   return (
-    <svg className={classes} viewBox="0 0 130 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className={props.className} viewBox="0 0 130 18" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M16.7828 14.4662C14.2872 16.7422 11.1626 14.4662 11.1277 14.4662C7.00991 11.4714 3.84047 14.1917 3.81052 14.2166C3.79052 14.2394 3.77949 14.2687 3.77949 14.299C3.77949 14.3293 3.79052 14.3586 3.81052 14.3813C3.82531 14.4077 3.84914 14.4277 3.87759 14.4378C3.90604 14.4479 3.93718 14.4474 3.96525 14.4363C6.67051 13.3731 10.0346 16.6723 10.0745 16.7123C10.8164 17.4703 11.8114 17.9287 12.8696 18C13.0828 17.9993 13.2953 17.9759 13.5035 17.9301C15.6897 17.4659 16.9325 14.7557 16.9974 14.6409C17.0097 14.6132 17.012 14.5821 17.0038 14.5529C16.9956 14.5237 16.9774 14.4984 16.9525 14.4812C16.9308 14.4586 16.9016 14.4447 16.8704 14.4419C16.8392 14.4392 16.8081 14.4478 16.7828 14.4662Z"
         fill="#070417"
@@ -58,10 +47,4 @@ export const QinAccount: VFC<Props> = (props) => {
       />
     </svg>
   );
-};
-
-// Propsのデフォルト値
-QinAccount.defaultProps = {
-  className: "",
-  size: "small",
 };
