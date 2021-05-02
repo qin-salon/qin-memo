@@ -27,7 +27,7 @@ const Index: NextPage = () => {
             <Avatar alt={user.name} src={user.avatarUrl} className="w-16 h-16" />
             <div className="flex flex-col">
               <span className="font-bold">{user.name}</span>
-              <Link href="/settings/profile">
+              <Link href="/settings/qin/profile">
                 <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
               </Link>
             </div>
