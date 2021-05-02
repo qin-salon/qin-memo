@@ -14,13 +14,13 @@ const SettingsAccount: NextPage = () => {
         <ul className="mt-8 space-y-4">
           <li className="flex justify-between items-center">
             <GoogleIcon />
-            <div className="ml-3 flex-1 font-bold">Google</div>
+            <div className="flex-1 ml-3 font-bold">Google</div>
             <button className="py-2 px-4 text-sm font-bold bg-gray-100 rounded-full">解除する</button>
           </li>
           <li className="flex justify-between items-center">
             <AppleIcon />
-            <div className="ml-3 flex-1 font-bold">Apple</div>
-            <button className="py-2 px-4 text-sm font-bold bg-blue-500 text-white rounded-full">連携する</button>
+            <div className="flex-1 ml-3 font-bold">Apple</div>
+            <button className="py-2 px-4 text-sm font-bold text-white bg-blue-500 rounded-full">連携する</button>
           </li>
         </ul>
       </div>

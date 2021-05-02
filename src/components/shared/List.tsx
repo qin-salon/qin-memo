@@ -1,12 +1,21 @@
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 import Link from "next/link";
-import type { VFC } from "react";
+import type { DOMAttributes, VFC } from "react";
 
-type ListItem = { label: string; href: string };
+type Link = { label: string; href: string };
+type Button = {
+  label: string;
+  button: {
+    label: JSX.Element;
+    onClick: DOMAttributes<HTMLButtonElement>["onClick"];
+    clickableAll?: boolean;
+  };
+};
+type ListItem = Link | Button;
+type ListProps = { title: string; items: [ListItem, ...ListItem[]] };
 
-type ListProps = {
-  title: string;
-  items: [ListItem, ...ListItem[]];
+const isButton = (item: ListItem): item is Button => {
+  return "button" in item;
 };
 
 export const List: VFC<ListProps> = (props) => {
@@ -15,9 +24,34 @@ export const List: VFC<ListProps> = (props) => {
       <div className="px-4 text-sm font-bold text-gray-400">{props.title}</div>
       <ul className="mt-2">
         {props.items.map((item) => {
+          if (isButton(item)) {
+            const handleClick = item.button.onClick;
+            return (
+              <li key={item.label}>
+                {item.button.clickableAll ? (
+                  <button
+                    type="button"
+                    onClick={handleClick}
+                    className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold hover:bg-gray-50"
+                  >
+                    <span>{item.label}</span>
+                    {item.button.label}
+                  </button>
+                ) : (
+                  <div className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold">
+                    <span>{item.label}</span>
+                    <button type="button" onClick={handleClick}>
+                      {item.button.label}
+                    </button>
+                  </div>
+                )}
+              </li>
+            );
+          }
+
           const isExternal = item.href.slice(0, 1) !== "/";
           return (
-            <li key={item.href}>
+            <li key={item.label}>
               <Link href={item.href}>
                 <a
                   className="flex justify-between items-center py-3 px-4 text-lg font-bold hover:bg-gray-50"
