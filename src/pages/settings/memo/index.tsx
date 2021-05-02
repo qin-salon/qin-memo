@@ -47,7 +47,7 @@ const MENUS: Menu[] = [
   },
 ];
 
-const Settings: NextPage = () => {
+const SettingsMemo: NextPage = () => {
   return (
     <div className="p-4 mx-auto max-w-screen-sm">
       <p className="flex relative items-center my-4">
@@ -113,4 +113,4 @@ const Settings: NextPage = () => {
   );
 };
 
-export default Settings;
+export default SettingsMemo;

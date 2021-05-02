@@ -9,7 +9,7 @@ const PAGES = [
   { href: "/users/foo", file: "/users/[userId].tsx", label: "ユーザーページ", isDone: true },
   { href: "/search", file: "/search.tsx", label: "メモ検索ページ", isDone: true },
   { href: "/notes/foo", file: "/notes/[noteId].tsx", label: "メモページ", isDone: false },
-  { href: "/settings", file: "/settings.tsx", label: "設定一覧ページ", isDone: true },
+  { href: "/settings/memo", file: "/settings/memo.tsx", label: "設定一覧ページ", isDone: true },
   { href: "/settings/profile", file: "/settings/profile.tsx", label: "プロフィール変更ページ", isDone: true },
   { href: "/settings/account", file: "/settings/account.tsx", label: "SNS連携ページ", isDone: true },
   // { href: "/settings/notification", file: "/settings/notification.tsx", label: "通知設定ページ", isDone: false },

@@ -1,5 +1,5 @@
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronLeftIcon, DotsCircleHorizontalIcon, LogoutIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, CogIcon, DotsCircleHorizontalIcon, LogoutIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import type { DOMAttributes, VFC } from "react";
@@ -104,7 +104,7 @@ const UserMenu = () => {
                 >
                   <div className="overflow-hidden p-4 space-y-2 bg-white rounded-2xl ring-1 ring-gray-400 ring-opacity-5 shadow-lg">
                     <div>
-                      <Link href="/users/foo">
+                      <Link href="/settings/qin">
                         <a className="flex items-center py-2 px-2 rounded-2xl transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                           <Avatar alt={user.name} src={user.avatarUrl} className="w-14 h-14" />
                           <div className="ml-4">
@@ -115,9 +115,17 @@ const UserMenu = () => {
                       </Link>
                     </div>
                     <div className="grid relative gap-1 bg-white">
+                      <Link href="/settings/memo">
+                        <a className="flex items-center p-2 rounded-2xl transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                          <div className="flex flex-shrink-0 justify-center items-center">
+                            <CogIcon className="w-7 h-7" />
+                          </div>
+                          <p className="ml-4 font-bold">設定</p>
+                        </a>
+                      </Link>
                       <button className="flex items-center p-2 rounded-2xl transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
                         <div className="flex flex-shrink-0 justify-center items-center">
-                          <LogoutIcon className="w-7 h-7 text-red-500" />
+                          <LogoutIcon className="ml-0.5 w-7 h-7 text-red-500" />
                         </div>
                         <p className="ml-4 font-bold text-red-500">ログアウト</p>
                       </button>
