@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
-import { ProfileSetting } from "src/components/shared/ProfileSetting";
+import { ProfileForm } from "src/components/shared/ProfileForm";
 
 const Registration: NextPage = () => {
-  return <ProfileSetting />;
+  return <ProfileForm />;
 };
 
 export default Registration;

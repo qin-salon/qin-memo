@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import { ProfileSetting } from "src/components/shared/ProfileSetting";
+import { ProfileForm } from "src/components/shared/ProfileForm";
 import { EXAMPLE_USER_01 } from "src/models/user";
 
 const user = EXAMPLE_USER_01;
 
 const Settings: NextPage = () => {
-  return <ProfileSetting user={user} />;
+  return <ProfileForm user={user} />;
 };
 
 export default Settings;

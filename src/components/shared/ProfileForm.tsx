@@ -4,9 +4,9 @@ import { Header } from "src/components/shared/Header";
 import { InputText } from "src/components/shared/InputText";
 import type { UserType } from "src/types/types";
 
-type ProfileSettingProps = { user?: UserType };
+type ProfileFormProps = { user?: UserType };
 
-export const ProfileSetting: VFC<ProfileSettingProps> = (props) => {
+export const ProfileForm: VFC<ProfileFormProps> = (props) => {
   return (
     <div className="pb-20">
       <Header page="setting" left={props.user !== undefined ? "back" : undefined} />
