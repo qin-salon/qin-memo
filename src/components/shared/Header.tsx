@@ -1,5 +1,5 @@
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronLeftIcon, CogIcon, DotsCircleHorizontalIcon, LogoutIcon } from "@heroicons/react/outline";
+import { ChevronLeftIcon, CogIcon, DotsCircleHorizontalIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
 import type { DOMAttributes, VFC } from "react";
@@ -13,7 +13,7 @@ const user = EXAMPLE_USER_01;
 
 type AllOrNone<T> = T | { [Key in keyof T]?: never };
 type Note = { page: "note"; isPublic: boolean; onMenuClick: DOMAttributes<HTMLButtonElement>["onClick"] };
-type Setting = { page: "setting"; hasBack?: boolean };
+type Setting = { page: "setting"; center?: string; left?: "back" | "close" };
 type HeaderProps = AllOrNone<Note> | AllOrNone<Setting>;
 
 const isNotePage = (props: HeaderProps): props is Note => {
@@ -27,10 +27,10 @@ export const Header: VFC<HeaderProps> = (props) => {
   return (
     <header>
       <div className="flex items-center p-4 pb-8 mx-auto max-w-screen-lg">
-        {isSettingPage(props) && props.hasBack ? (
+        {isSettingPage(props) && props.left ? (
           <Link href="/">
             <a className="grid place-items-center w-9 h-9">
-              <ChevronLeftIcon className="w-5 h-5" />
+              {props.left === "back" ? <ChevronLeftIcon className="w-5 h-5" /> : <XIcon className="w-5 h-5" />}
             </a>
           </Link>
         ) : null}
@@ -47,9 +47,13 @@ export const Header: VFC<HeaderProps> = (props) => {
         {isSettingPage(props) ? (
           <>
             <div className="flex flex-1 justify-center">
-              <QinAccountIcon className="h-5 sm:h-6" />
+              {props.center ? (
+                <div className="text-xl font-bold">{props.center}</div>
+              ) : (
+                <QinAccountIcon className="h-5 sm:h-6" />
+              )}
             </div>
-            {props.hasBack ? <div className="w-9" /> : null}
+            {props.left ? <div className="w-9" /> : null}
           </>
         ) : (
           <div className="flex items-center ml-auto space-x-2 sm:space-x-3">

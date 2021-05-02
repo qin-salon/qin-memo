@@ -9,7 +9,7 @@ type ProfileSettingProps = { user?: UserType };
 export const ProfileSetting: VFC<ProfileSettingProps> = (props) => {
   return (
     <div className="pb-20">
-      <Header page="setting" hasBack={props.user !== undefined} />
+      <Header page="setting" left={props.user !== undefined ? "back" : undefined} />
 
       <div className="px-4 mx-auto max-w-screen-sm">
         <h1 className="text-xl font-bold">プロフィール設定</h1>
