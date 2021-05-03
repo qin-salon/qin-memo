@@ -9,7 +9,7 @@ type ProfileFormProps = { user?: UserType };
 export const ProfileForm: VFC<ProfileFormProps> = (props) => {
   return (
     <div className="pb-20">
-      <Header page="setting" left={props.user !== undefined ? "back" : undefined} />
+      <Header left="back" center="account" />
 
       <div className="px-4 mx-auto max-w-screen-sm">
         <h1 className="text-xl font-bold">プロフィール設定</h1>

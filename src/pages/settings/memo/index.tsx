@@ -5,7 +5,7 @@ import { RecursiveList } from "src/components/shared/List";
 const SettingsMemo: NextPage = () => {
   return (
     <div>
-      <Header page="setting" center="マイページ" left="close" />
+      <Header left="close" center="マイページ" />
 
       <div className="mx-auto max-w-screen-sm sm:mt-4">
         <RecursiveList

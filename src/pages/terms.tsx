@@ -4,7 +4,7 @@ import { Header } from "src/components/shared/Header";
 const Terms: NextPage = () => {
   return (
     <div>
-      <Header page="setting" center="利用規約" left="back" />
+      <Header left="back" center="利用規約" />
       <div className="p-4 mx-auto prose prose-sm prose-blue">
         <h3>この文章は仮です</h3>
         <p>

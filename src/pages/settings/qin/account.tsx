@@ -7,7 +7,7 @@ import { List } from "src/components/shared/List";
 const SettingsAccount: NextPage = () => {
   return (
     <div className="pb-20">
-      <Header page="setting" left="back" />
+      <Header left="back" center="account" />
 
       <div className="mx-auto max-w-screen-sm">
         <h1 className="px-4 text-xl font-bold">アカウントの連携</h1>

@@ -30,7 +30,8 @@ const SettingsMemoTheme: NextPage = () => {
 
   return (
     <div>
-      <Header page="setting" center="テーマ" left="back" />
+      <Header left="back" center="テーマ" />
+
       <div className="mx-auto max-w-screen-sm sm:mt-4">
         <RadioGroup value={currentTheme} onChange={handleTheme}>
           <RadioGroup.Label className="sr-only">Color theme</RadioGroup.Label>

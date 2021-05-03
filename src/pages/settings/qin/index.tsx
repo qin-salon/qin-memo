@@ -8,7 +8,8 @@ const user = EXAMPLE_USER_01;
 const SettingsQin: NextPage = () => {
   return (
     <div className="pb-20">
-      <Header page="setting" left="close" />
+      <Header left="close" center="account" />
+
       <div className="p-4 mx-auto max-w-screen-sm">
         <div className="flex flex-col items-center">
           <img src={user.avatarUrl} alt={user.name} className="overflow-hidden w-24 h-24 rounded-full" />
