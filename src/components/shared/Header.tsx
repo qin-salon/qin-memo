@@ -12,7 +12,7 @@ const user = EXAMPLE_USER_01;
 
 type Right = "profile" | JSX.Element;
 
-type HeaderProps = {
+export type HeaderProps = {
   left?: "back" | "close" | "memo" | JSX.Element;
   center?: "account" | string | JSX.Element;
   right?: [Right, ...Right[]];
@@ -20,29 +20,21 @@ type HeaderProps = {
 
 export const Header: VFC<HeaderProps> = (props) => {
   return (
-    <header>
-      <div className="flex items-center p-4 pb-8 mx-auto max-w-screen-lg">
-        <Left left={props.left} />
+    <header className="flex items-center">
+      <Left left={props.left} />
 
-        <div className={props.center ? "flex-1 flex justify-center" : ""}>
-          <Center center={props.center} />
-        </div>
-
-        {props.right ? (
-          <div className="ml-auto">
-            <Right right={props.right} />
-          </div>
-        ) : props.center ? (
-          <div className="w-9" />
-        ) : null}
+      <div className="flex flex-1 justify-center px-2">
+        <Center center={props.center} />
       </div>
+
+      <Right right={props.right} />
     </header>
   );
 };
 
 const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
   if (!props.left) {
-    return null;
+    return <div className="w-9 h-9" />;
   }
   if (props.left === "back") {
     return (
@@ -63,7 +55,13 @@ const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
     );
   }
   if (props.left === "memo") {
-    return <QinMemoIcon className="w-28 sm:w-32" />;
+    return (
+      <Link href="/">
+        <a>
+          <QinMemoIcon className="w-28 sm:w-32" />
+        </a>
+      </Link>
+    );
   }
   return props.left;
 };
@@ -73,7 +71,13 @@ const Center: VFC<Pick<HeaderProps, "center">> = (props) => {
     return null;
   }
   if (props.center === "account") {
-    return <QinAccountIcon className="h-5 sm:h-6" />;
+    return (
+      <Link href="/settings/qin">
+        <a>
+          <QinAccountIcon className="h-5 sm:h-6" />
+        </a>
+      </Link>
+    );
   }
   if (typeof props.center === "string") {
     return <div className="text-xl font-bold">{props.center}</div>;
@@ -83,15 +87,12 @@ const Center: VFC<Pick<HeaderProps, "center">> = (props) => {
 
 const Right: VFC<Pick<HeaderProps, "right">> = (props) => {
   if (!props.right) {
-    return null;
+    return <div className="w-9 h-9" />;
   }
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
       {props.right.map((item) => {
-        if (item === "profile") {
-          return <UserMenu />;
-        }
-        return item;
+        return <Fragment key={item.toString()}>{item === "profile" ? <UserMenu /> : item}</Fragment>;
       })}
     </div>
   );

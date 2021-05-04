@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
-import { Header } from "src/components/shared/Header";
+import { Layout } from "src/components/shared/Layout";
 
 const Terms: NextPage = () => {
   return (
-    <div>
-      <Header left="back" center="利用規約" />
-      <div className="p-4 mx-auto prose prose-sm prose-blue">
+    <Layout left="back" center="利用規約">
+      <div className="mx-auto prose-sm prose-blue">
         <h3>この文章は仮です</h3>
         <p>
           この規約は、Qin
@@ -397,7 +396,7 @@ const Terms: NextPage = () => {
 
         <time>2020 年 xx 月 xx 日 改定</time>
       </div>
-    </div>
+    </Layout>
   );
 };
 

@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
-import { Header } from "src/components/shared/Header";
+import { Layout } from "src/components/shared/Layout";
 
 const Privacy: NextPage = () => {
   return (
-    <div>
-      <Header left="back" center="プライバシーポリシー" />
-      <div className="p-4 mx-auto prose prose-sm prose-blue">
+    <Layout left="back" center="プライバシーポリシー">
+      <div className="mx-auto prose-sm prose-blue">
         <h3>この文章は仮です</h3>
         <p>
           Qin（以下「弊サービス」とします）は、個人情報が人格尊重の理念の下に慎重に取扱われるべきものであることに鑑み、個人情報を保護することが弊サービスの事業活動の基本であり、社会的責務であると認識し、以下の方針に基づき個人情報の保護に努めます。
@@ -59,7 +58,7 @@ const Privacy: NextPage = () => {
 
         <time>2021 年 xx 月 xx 日 改定</time>
       </div>
-    </div>
+    </Layout>
   );
 };
 

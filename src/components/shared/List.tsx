@@ -27,7 +27,7 @@ const isButton = (item: ListItem): item is Button => {
 export const List: VFC<ListProps> = (props) => {
   return (
     <div className="space-y-1">
-      {props.title ? <div className="px-4 text-sm font-bold text-gray-400">{props.title}</div> : null}
+      {props.title ? <div className="text-sm font-bold text-gray-400">{props.title}</div> : null}
       <ul>
         {props.items.map((item, i) => {
           if (isButton(item)) {
@@ -38,13 +38,13 @@ export const List: VFC<ListProps> = (props) => {
                   <button
                     type="button"
                     onClick={handleClick}
-                    className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold hover:bg-gray-100"
+                    className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100"
                   >
                     {item.label}
                     {item.button.label}
                   </button>
                 ) : (
-                  <div className="flex justify-between items-center py-3 px-4 w-full text-lg font-bold">
+                  <div className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold">
                     {item.label}
                     <button type="button" onClick={handleClick}>
                       {item.button.label}
@@ -60,7 +60,7 @@ export const List: VFC<ListProps> = (props) => {
             <li key={i}>
               <Link href={item.href}>
                 <a
-                  className="flex justify-between items-center py-3 px-4 text-lg font-bold hover:bg-gray-100"
+                  className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100"
                   target={isExternal ? "_blank" : undefined}
                   rel={isExternal ? "noopener noreferrer" : undefined}
                 >

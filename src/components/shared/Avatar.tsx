@@ -1,9 +1,7 @@
 import clsx from "clsx";
 import type { ImgHTMLAttributes, VFC } from "react";
 
-type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & {
-  alt: string;
-};
+type AvatarProps = ImgHTMLAttributes<HTMLImageElement> & { alt: string };
 
 export const Avatar: VFC<AvatarProps> = (props) => {
   // eslint-disable-next-line react/destructuring-assignment

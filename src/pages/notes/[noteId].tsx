@@ -7,8 +7,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import { ConfirmDelete } from "src/components/ConfirmDelete";
 import { MemoMenu } from "src/components/MemoMenu";
 import { Button } from "src/components/shared/Button";
-import { Header } from "src/components/shared/Header";
-import { WidthContainer } from "src/components/shared/WidthContainer";
+import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { NotePutRequest, NoteType } from "src/types/types";
 import useSWR from "swr";
@@ -128,8 +127,8 @@ const Note: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Header
+    <>
+      <Layout
         left="memo"
         right={[
           <span key="public" className="text-xs font-bold py-1 px-2.5 text-white bg-orange-400 rounded-full">
@@ -140,28 +139,29 @@ const Note: NextPage = () => {
           </button>,
           "profile",
         ]}
-      />
+      >
+        <div className="flex flex-col min-h-screen">
+          <label htmlFor="memo" className="flex-1 pb-20 cursor-text">
+            <TextareaAutosize
+              id="memo"
+              style={{ caretColor: "#3B82F6" }}
+              className="w-full text-lg outline-none resize-none sm:text-2xl"
+              value={content}
+              onChange={handleContentChange}
+              placeholder="メモを入力する"
+            />
+          </label>
 
-      <WidthContainer className="flex flex-col flex-1 mt-7">
-        <label htmlFor="memo" className="flex-1 pb-20 cursor-text">
-          <TextareaAutosize
-            id="memo"
-            style={{ caretColor: "#3B82F6" }}
-            className="px-2 w-full text-lg outline-none resize-none sm:text-2xl"
-            value={content}
-            onChange={handleContentChange}
-            placeholder="メモを入力する"
-          />
-        </label>
-      </WidthContainer>
-
-      {publicOpen ? (
-        <div className="z-50 absolute left-1/2 transform -translate-x-1/2">
-          <Button button startIcon={<CheckCircleIcon className="w-5 h-5" />} onClick={handlePublicClose}>
-            メモを公開しました
-          </Button>
+          {publicOpen ? (
+            <div className="z-50 absolute left-1/2 transform -translate-x-1/2">
+              <Button button startIcon={<CheckCircleIcon className="w-5 h-5" />} onClick={handlePublicClose}>
+                メモを公開しました
+              </Button>
+            </div>
+          ) : null}
         </div>
-      ) : null}
+      </Layout>
+
       <ConfirmDelete
         memoDelete={memoDelete}
         onDeleteModalClose={handleDeleteModalClose}
@@ -174,7 +174,7 @@ const Note: NextPage = () => {
         publicFlg={publicFlg}
         onPublicClick={handlePublicClick}
       />
-    </div>
+    </>
   );
 };
 

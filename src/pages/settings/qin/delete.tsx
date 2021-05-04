@@ -1,14 +1,12 @@
 import type { NextPage } from "next";
-import { Header } from "src/components/shared/Header";
+import { Layout } from "src/components/shared/Layout";
 import { RecursiveList } from "src/components/shared/List";
 
 const SettingsAccount: NextPage = () => {
   return (
-    <div className="pb-20">
-      <Header left="back" center="account" />
-
+    <Layout left="back" center="account">
       <div className="mx-auto max-w-screen-sm">
-        <h1 className="px-4 text-xl font-bold">データの削除</h1>
+        <h1 className="text-xl font-bold">データの削除</h1>
 
         <div className="mt-8">
           <RecursiveList
@@ -53,7 +51,7 @@ const SettingsAccount: NextPage = () => {
           />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

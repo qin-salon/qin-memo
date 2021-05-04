@@ -4,8 +4,8 @@ import type { DOMAttributes } from "react";
 import { useState } from "react";
 import { SearchHistories } from "src/components/SearchHistories";
 import { SearchResults } from "src/components/SearchResults";
-import { Header } from "src/components/shared/Header";
 import { InputText } from "src/components/shared/InputText";
+import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
 
@@ -38,29 +38,27 @@ const Search: NextPage = () => {
   };
 
   return (
-    <div className="py-4 px-2 mx-auto space-y-7 max-w-screen-sm sm:px-4">
-      <Header
-        left="back"
-        center={
-          <form className="flex-1" onSubmit={handleSubmit}>
-            <InputText
-              className="w-full"
-              startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
-              placeholder="検索"
-              value={value}
-              onChange={handleChange}
-            />
-          </form>
-        }
-        right={[
-          <button key="delete" type="button" className="grid place-items-center w-9 h-9" onClick={handleClose}>
-            <XIcon className="w-5 h-5" />
-          </button>,
-        ]}
-      />
-
-      <div>{keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}</div>
-    </div>
+    <Layout
+      left="back"
+      center={
+        <form className="flex-1" onSubmit={handleSubmit}>
+          <InputText
+            className="w-full"
+            startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
+            placeholder="検索"
+            value={value}
+            onChange={handleChange}
+          />
+        </form>
+      }
+      right={[
+        <button key="delete" type="button" className="grid place-items-center w-9 h-9" onClick={handleClose}>
+          <XIcon className="w-5 h-5" />
+        </button>,
+      ]}
+    >
+      {keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}
+    </Layout>
   );
 };
 
