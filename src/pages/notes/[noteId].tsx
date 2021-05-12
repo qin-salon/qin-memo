@@ -137,7 +137,6 @@ const Note: NextPage = () => {
           <button key="menu" className="grid place-items-center w-9 h-9" onClick={handleMenuOpen}>
             <DotsCircleHorizontalIcon className="w-5 h-5" />
           </button>,
-          "profile",
         ]}
       >
         <div className="flex flex-col min-h-screen">
