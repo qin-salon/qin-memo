@@ -70,7 +70,7 @@
     "workerDirectory": "public"
   },
   "lint-staged": {
-    "*.js": "eslint --cache --fix",
-    "*.{js,css,md}": "prettier --write"
+    "*.{ts,tsx}": "yarn fix:eslint",
+    "*": "yarn fix:prettier"
   }
 }
