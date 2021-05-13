@@ -20,13 +20,13 @@ const THEME_LANG = {
 };
 
 const SettingsMemoTheme: NextPage = () => {
-  const [mounted, setMounted] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const { themes, theme: currentTheme, setTheme: handleTheme } = useTheme() as ExtendUseThemeProps;
   useEffect(() => {
-    return setMounted(true);
+    return setIsMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!isMounted) return null;
 
   return (
     <Layout left="back" center="テーマ">

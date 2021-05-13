@@ -1,15 +1,16 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
-  parserOptions: { ecmaVersion: 2021, sourceType: "module", ecmaFeatures: { jsx: true } },
+  parserOptions: { project: "./tsconfig.json", ecmaFeatures: { jsx: true } },
   settings: { react: { version: "detect" } },
   env: { es2021: true, browser: true, jest: true, node: true },
-  plugins: ["import", "simple-import-sort", "react-hooks"],
+  plugins: ["@typescript-eslint", "import", "simple-import-sort"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "prettier",
   ],
@@ -44,6 +45,12 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/consistent-type-imports": ["warn", { prefer: "type-imports" }],
     "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
+      { selector: ["property", "parameterProperty", "method"], format: ["camelCase"] },
+      { selector: "variable", types: ["boolean"], format: ["PascalCase"], prefix: ["is", "has", "should"] },
+    ],
     "jsx-a11y/anchor-is-valid": [
       "error",
       { components: ["Link"], specialLink: ["hrefLeft", "hrefRight"], aspects: ["invalidHref", "preferButton"] },
