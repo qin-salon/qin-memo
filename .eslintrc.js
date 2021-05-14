@@ -18,6 +18,7 @@ module.exports = {
     "no-console": ["error", { allow: ["warn", "info", "error"] }],
     "no-restricted-syntax": ["error", { selector: "TSEnumDeclaration", message: "Don't declare enums" }],
     "prefer-arrow-callback": "error",
+    "prefer-const": "error",
     "func-style": ["error", "expression"],
     "arrow-body-style": ["error", "always"],
     "no-restricted-imports": ["error", { paths: [{ name: "react", importNames: ["default"] }] }],
