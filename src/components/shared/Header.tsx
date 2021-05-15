@@ -1,8 +1,9 @@
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import type { VFC } from "react";
-import { Fragment } from "react";
+import { Fragment, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
 import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
 import { Avatar } from "src/components/shared/Avatar";
@@ -33,25 +34,27 @@ export const Header: VFC<HeaderProps> = (props) => {
 };
 
 const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
+  const router = useRouter();
+  const handleClick = useCallback(() => {
+    const prevPath = sessionStorage.getItem("prevPath");
+    return prevPath ? router.back() : router.push("/");
+  }, [router]);
+
   if (!props.left) {
     return <div className="w-9 h-9" />;
   }
   if (props.left === "back") {
     return (
-      <Link href="/">
-        <a className="grid place-items-center w-9 h-9">
-          <ChevronLeftIcon className="w-5 h-5" />
-        </a>
-      </Link>
+      <button onClick={handleClick} className="grid place-items-center w-9 h-9">
+        <ChevronLeftIcon className="w-5 h-5" />
+      </button>
     );
   }
   if (props.left === "close") {
     return (
-      <Link href="/">
-        <a className="grid place-items-center w-9 h-9">
-          <XIcon className="w-5 h-5" />
-        </a>
-      </Link>
+      <button onClick={handleClick} className="grid place-items-center w-9 h-9">
+        <XIcon className="w-5 h-5" />
+      </button>
     );
   }
   if (props.left === "memo") {
