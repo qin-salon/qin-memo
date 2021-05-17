@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { Layout } from "src/components/shared/Layout";
 import { ProfileForm } from "src/components/shared/ProfileForm";
 
-const Registration: NextPage = () => {
+const SettingsQinUserNew: NextPage = () => {
   return (
     <Layout center="account">
       <ProfileForm />
@@ -10,4 +10,4 @@ const Registration: NextPage = () => {
   );
 };
 
-export default Registration;
+export default SettingsQinUserNew;

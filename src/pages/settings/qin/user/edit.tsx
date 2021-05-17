@@ -5,7 +5,7 @@ import { EXAMPLE_USER_01 } from "src/models/user";
 
 const user = EXAMPLE_USER_01;
 
-const Settings: NextPage = () => {
+const SettingsQinUserEdit: NextPage = () => {
   return (
     <Layout left="back" center="account">
       <ProfileForm user={user} />
@@ -13,4 +13,4 @@ const Settings: NextPage = () => {
   );
 };
 
-export default Settings;
+export default SettingsQinUserEdit;

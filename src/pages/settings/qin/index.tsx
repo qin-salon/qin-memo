@@ -18,7 +18,7 @@ const SettingsQin: NextPage = () => {
         <List
           title="全般"
           items={[
-            { label: "プロフィール", href: "/settings/qin/profile" },
+            { label: "プロフィール", href: "/settings/qin/user/edit" },
             { label: "アカウントの連携", href: "/settings/qin/account" },
             { label: "データの削除", href: "/settings/qin/delete" },
           ]}
