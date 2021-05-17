@@ -134,7 +134,7 @@ const MemosNoteId: NextPage = () => {
           <span key="public" className="text-xs font-bold py-1 px-2.5 text-white bg-orange-400 rounded-full">
             公開中
           </span>,
-          <button key="menu" className="grid place-items-center w-9 h-9" onClick={handleMenuOpen}>
+          <button type="button" key="menu" className="grid place-items-center w-9 h-9" onClick={handleMenuOpen}>
             <DotsCircleHorizontalIcon className="w-5 h-5" />
           </button>,
         ]}

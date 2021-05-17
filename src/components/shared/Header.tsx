@@ -45,14 +45,14 @@ const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
   }
   if (props.left === "back") {
     return (
-      <button onClick={handleClick} className="grid place-items-center w-9 h-9">
+      <button type="button" onClick={handleClick} className="grid place-items-center w-9 h-9">
         <ChevronLeftIcon className="w-5 h-5" />
       </button>
     );
   }
   if (props.left === "close") {
     return (
-      <button onClick={handleClick} className="grid place-items-center w-9 h-9">
+      <button type="button" onClick={handleClick} className="grid place-items-center w-9 h-9">
         <XIcon className="w-5 h-5" />
       </button>
     );
@@ -154,6 +154,7 @@ const UserMenu: VFC = () => {
                         </a>
                       </Link>
                       <button
+                        type="button"
                         className="flex items-center py-2.5 px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                         onClick={handleSignOut}
                       >

@@ -52,10 +52,14 @@ const HistoryItem: VFC<HistoryItemProps> = (props) => {
 
   return (
     <div className="flex">
-      <button className="flex-1 px-2.5 h-10 text-left" onClick={handleHistoryClick}>
+      <button type="button" className="flex-1 px-2.5 h-10 text-left" onClick={handleHistoryClick}>
         {props.keyword}
       </button>
-      <button className="grid flex-shrink-0 place-items-center w-10 h-10" onClick={handleHistoryDeleteClick}>
+      <button
+        type="button"
+        className="grid flex-shrink-0 place-items-center w-10 h-10"
+        onClick={handleHistoryDeleteClick}
+      >
         <XIcon className="w-5 h-5 text-gray-300" />
       </button>
     </div>

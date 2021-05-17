@@ -65,6 +65,7 @@ const ModalContent: VFC<Omit<Props, "menuOpen">> = (props) => {
     <div>
       <div className="text-right">
         <button
+          type="button"
           className="text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={props.onMenuClose}
         >
