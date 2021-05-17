@@ -1,22 +1,15 @@
 import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
-import { MemoCard } from "src/components/MemoCard";
+import { UserNoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
 import { InputText } from "src/components/shared/InputText";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
-import type { ListNoteType } from "src/types/types";
-import useSWR from "swr";
 
-// **********************************
-// ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
-// Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
 const user = EXAMPLE_USER_01;
 
 const Index: NextPage = () => {
-  const { data: listNote, error } = useSWR<ListNoteType[]>(`/users/${user.id}/notes`);
-
   return (
     <Layout
       left="memo"
@@ -49,19 +42,7 @@ const Index: NextPage = () => {
           </a>
         </Link>
 
-        {error ? <div>メモが登録されていません</div> : null}
-
-        {listNote ? (
-          <ul className="space-y-5">
-            {listNote.map((note: ListNoteType) => {
-              return (
-                <li key={note.id}>
-                  <MemoCard note={note} />
-                </li>
-              );
-            })}
-          </ul>
-        ) : null}
+        <UserNoteList userId={user.id} />
       </div>
     </Layout>
   );

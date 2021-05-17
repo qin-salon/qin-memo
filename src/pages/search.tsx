@@ -2,16 +2,13 @@ import { SearchIcon, XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import type { DOMAttributes } from "react";
 import { useState } from "react";
+import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
-import { SearchResults } from "src/components/SearchResults";
 import { InputText } from "src/components/shared/InputText";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
 
-// **********************************
-// ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
-// Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
 const user = EXAMPLE_USER_01;
 
 const Search: NextPage = () => {
@@ -57,7 +54,7 @@ const Search: NextPage = () => {
         </button>,
       ]}
     >
-      {keyword === "" ? <SearchHistories /> : <SearchResults keyword={keyword} />}
+      {keyword === "" ? <SearchHistories /> : <SearchNoteList userId={user.id} keyword={keyword} />}
     </Layout>
   );
 };
