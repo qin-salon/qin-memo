@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Layout } from "src/components/shared/Layout";
 
-const Terms: NextPage = () => {
+const SettingsMemoTerms: NextPage = () => {
   return (
     <Layout left="back" center="利用規約">
       <div className="mx-auto prose-sm prose-blue">
@@ -400,4 +400,4 @@ const Terms: NextPage = () => {
   );
 };
 
-export default Terms;
+export default SettingsMemoTerms;

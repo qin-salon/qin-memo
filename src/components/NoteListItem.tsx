@@ -14,7 +14,7 @@ export const NoteListItem: VFC<NoteListItemProps> = (props) => {
   const title = getTitle(props.note.excerpt.match(pattarn));
 
   return (
-    <Link href={`/notes/${props.note.id}`}>
+    <Link href={`/memos/${props.note.id}`}>
       <a className="block py-3 px-4 w-full bg-gray-100 rounded-xl shadow sm:px-6">
         <div className="text-sm font-bold sm:text-base truncate">{title}</div>
         <div className="text-sm mt-0.5 truncate">{props.note.excerpt.replace(title, "")}</div>

@@ -4,7 +4,7 @@ import { GoogleIcon } from "src/components/icon/GoogleIcon";
 import { Layout } from "src/components/shared/Layout";
 import { List } from "src/components/shared/List";
 
-const SettingsAccount: NextPage = () => {
+const SettingsQinAccount: NextPage = () => {
   return (
     <Layout left="back" center="account">
       <h1 className="text-xl font-bold">アカウントの連携</h1>
@@ -47,4 +47,4 @@ const SettingsAccount: NextPage = () => {
   );
 };
 
-export default SettingsAccount;
+export default SettingsQinAccount;

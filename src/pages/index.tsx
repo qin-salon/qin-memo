@@ -14,7 +14,7 @@ const Index: NextPage = () => {
     <Layout
       left="memo"
       right={[
-        <Link href="/notes/new" key="write memo">
+        <Link href="/memos/new" key="write memo">
           <a className="grid place-items-center px-4 h-9 text-sm font-bold text-white bg-blue-500 rounded-full">
             メモを書く
           </a>

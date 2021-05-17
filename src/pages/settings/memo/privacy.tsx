@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Layout } from "src/components/shared/Layout";
 
-const Privacy: NextPage = () => {
+const SettingsMemoPrivacy: NextPage = () => {
   return (
     <Layout left="back" center="プライバシーポリシー">
       <div className="mx-auto prose-sm prose-blue">
@@ -62,4 +62,4 @@ const Privacy: NextPage = () => {
   );
 };
 
-export default Privacy;
+export default SettingsMemoPrivacy;
