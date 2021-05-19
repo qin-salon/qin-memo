@@ -1,144 +1,43 @@
-import { CheckCircleIcon, DotsCircleHorizontalIcon } from "@heroicons/react/outline";
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import type { TextareaHTMLAttributes } from "react";
-import { useEffect, useState } from "react";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { ChangeEvent } from "react";
+import { useCallback, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { ConfirmDelete } from "src/components/ConfirmDelete";
-import { MemoMenu } from "src/components/MemoMenu";
-import { Button } from "src/components/shared/Button";
+import { ConfirmDialog } from "src/components/ConfirmDialog";
+import { MenuDialog } from "src/components/MenuDialog";
+import { NoteMenu } from "src/components/NoteMenu";
 import { Layout } from "src/components/shared/Layout";
-import { EXAMPLE_USER_01 } from "src/models/user";
-import type { NotePutRequest, NoteType } from "src/types/types";
-import useSWR from "swr";
+import { useNote } from "src/hooks/useNote";
+import { EXAMPLE_NOTE } from "src/models/note";
+import type { NoteType } from "src/types/types";
 
-// **********************************
-// ユーザ情報はログイン時に取得している想定のため、一旦固定値にする
-// Google認証でもApple認証でもOAuth2.0ならトークンでユーザ情報取得しているはず
-const user = EXAMPLE_USER_01;
+export const getStaticPaths: GetStaticPaths = async () => {
+  return { paths: [], fallback: "blocking" };
+};
 
-const MemosNoteId: NextPage = () => {
-  const router = useRouter();
+export const getStaticProps: GetStaticProps<NoteType, { noteId: string }> = async ({ params: _ }) => {
+  // const res = await fetch(`/notes/${params?.noteId}`);
+  // const data: NoteType = await res.json();
+  return { props: EXAMPLE_NOTE, revalidate: 60 };
+};
 
-  const [content, setContent] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
-  const [hasPublicAlert, setHasPublicAlert] = useState(false);
-  const [hasMenuDialog, setHasMenuDialog] = useState(false);
-  const [hasDeleteMemoDialog, setHasDeleteMemoDialog] = useState(false);
-
-  const { data, error, mutate } = useSWR<NoteType>(`/notes/${router.query.noteId}`, {
-    initialData: { id: "0", content: "", public: false },
-  });
-
-  useEffect(() => {
-    setContent(data?.content ?? "");
-    setIsPublic(data?.public ?? false);
-  }, [data?.content, data?.public]);
-
-  if (error && router.query.noteId !== "new") {
-    // TODO: 検索結果が取得できなかった場合のエラー処理
-    return null;
-  }
-
-  if (!data) {
-    // TODO: 検索結果取得時のローディング処理
-    return null;
-  }
-
-  // ===================================
-  // 入力値の保存
-  const handleContentChange: TextareaHTMLAttributes<HTMLTextAreaElement>["onChange"] = (event) => {
+const MemosNoteId: NextPage<NoteType> = (props) => {
+  const {
+    headerRight,
+    menu,
+    isShowMenu,
+    handleCloseMenu,
+    handleDeleteMemo,
+    isShowDeleteNoteDialog,
+    handleCloseDeleteNoteDialog,
+  } = useNote(props);
+  const [content, setContent] = useState(props.content);
+  const handleChangeContent = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.currentTarget.value);
-  };
-  // ===================================
-  // メモ公開後のボタンクローズ
-  const handlePublicClose = () => {
-    setHasPublicAlert(!hasPublicAlert);
-  };
-  // ===================================
-  // メニューオープン
-  const handleMenuOpen = () => {
-    setHasMenuDialog(true);
-  };
-  // ===================================
-  // メニュークローズ
-  const handleMenuClose = () => {
-    setHasMenuDialog(false);
-  };
-  // ===================================
-  // 削除確認画面閉じる
-  const handleDeleteModalClose = () => {
-    setHasDeleteMemoDialog(false);
-  };
-  // ===================================
-  // 削除確認画面起動
-  const handleDeleteModalOpen = () => {
-    setHasDeleteMemoDialog(true);
-    setHasMenuDialog(false);
-  };
-  // ===================================
-  // 公開する・しないの切替
-  const handlePublicClick = async () => {
-    const req: NotePutRequest = { id: data.id, public: !isPublic };
-    // 更新
-    await fetch(`/notes/${data.id}/public`, {
-      method: "patch",
-      body: JSON.stringify(req),
-    });
-    await mutate();
-    if (!isPublic) {
-      setHasPublicAlert(true);
-    }
-    setIsPublic(!isPublic);
-    setHasMenuDialog(false);
-  };
-  // ===================================
-  // メモ更新
-  // const handleContentSave = async () => {
-  //   if (data?.id === "0") {
-  //     // 登録処理
-  //     const req: NotePostRequest = { content: content, public: false };
-  //     await fetch("/notes", {
-  //       method: "post",
-  //       body: JSON.stringify(req),
-  //     });
-  //   } else {
-  //     // 更新処理
-  //     if (data) {
-  //       const req: NotePutRequest = { id: data.id, content: content };
-  //       await fetch(`/notes/${data.id}`, {
-  //         method: "put",
-  //         body: JSON.stringify(req),
-  //       });
-  //     }
-  //   }
-  //   await mutate();
-  //   await router.push(`/users/${user.id}`);
-  // };
-
-  // ===================================
-  // メモ削除
-  const handleMemoDeleteClick = async () => {
-    await fetch(`/notes/${data.id}`, {
-      method: "delete",
-    });
-    await mutate();
-    await router.push(`/users/${user.id}`);
-  };
+  }, []);
 
   return (
     <>
-      <Layout
-        left="memo"
-        right={[
-          <span key="public" className="text-xs font-bold py-1 px-2.5 text-white bg-orange-400 rounded-full">
-            公開中
-          </span>,
-          <button type="button" key="menu" className="grid place-items-center w-9 h-9" onClick={handleMenuOpen}>
-            <DotsCircleHorizontalIcon className="w-5 h-5" />
-          </button>,
-        ]}
-      >
+      <Layout left="memo" right={headerRight}>
         <div className="flex flex-col min-h-screen">
           <label htmlFor="memo" className="flex-1 pb-20 cursor-text">
             <TextareaAutosize
@@ -146,32 +45,35 @@ const MemosNoteId: NextPage = () => {
               style={{ caretColor: "#3B82F6" }}
               className="w-full text-lg outline-none resize-none sm:text-2xl"
               value={content}
-              onChange={handleContentChange}
+              onChange={handleChangeContent}
               placeholder="メモを入力する"
+              autoComplete="off"
             />
           </label>
-
-          {hasPublicAlert ? (
-            <div className="z-50 absolute left-1/2 transform -translate-x-1/2">
-              <Button button startIcon={<CheckCircleIcon className="w-5 h-5" />} onClick={handlePublicClose}>
-                メモを公開しました
-              </Button>
-            </div>
-          ) : null}
         </div>
       </Layout>
 
-      <ConfirmDelete
-        memoDelete={hasDeleteMemoDialog}
-        onDeleteModalClose={handleDeleteModalClose}
-        onMemoDeleteClick={handleMemoDeleteClick}
-      />
-      <MemoMenu
-        onDeleteModalOpen={handleDeleteModalOpen}
-        menuOpen={hasMenuDialog}
-        onMenuClose={handleMenuClose}
-        publicFlg={isPublic}
-        onPublicClick={handlePublicClick}
+      {/* {hasPublicToast ? (
+        <div className="z-50 fixed top-5 left-1/2 transform -translate-x-1/2">
+          <NewButton className="py-1 px-2.5 text-sm font-normal text-white bg-blue-500" onClick={handleCloseToast}>
+            <CheckCircleIcon className="mr-1 w-5 h-5" />
+            メモを公開しました
+          </NewButton>
+        </div>
+      ) : null} */}
+
+      <MenuDialog show={isShowMenu} onClose={handleCloseMenu}>
+        <NoteMenu menu={menu} />
+      </MenuDialog>
+
+      <ConfirmDialog
+        show={isShowDeleteNoteDialog}
+        onClose={handleCloseDeleteNoteDialog}
+        onClickOk={handleDeleteMemo}
+        title="メモを削除"
+        description="復元できませんがよろしいですか？"
+        buttonText="削除する"
+        buttonColor="red"
       />
     </>
   );

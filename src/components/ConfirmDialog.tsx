@@ -1,17 +1,30 @@
 import { Dialog, Transition } from "@headlessui/react";
-import type { VFC } from "react";
+import clsx from "clsx";
+import type { DOMAttributes, VFC } from "react";
+import { useRef } from "react";
 import { Fragment } from "react";
 
-type Props = { memoDelete: boolean; onDeleteModalClose: () => void; onMemoDeleteClick: () => void };
+type Props = {
+  show: boolean;
+  onClose: () => void;
+  onClickOk: DOMAttributes<HTMLButtonElement>["onClick"];
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonColor: "blue" | "red";
+};
 
-export const ConfirmDelete: VFC<Props> = (props) => {
+export const ConfirmDialog: VFC<Props> = (props) => {
+  const buttonRef = useRef(null);
+
   return (
-    <Transition.Root show={props.memoDelete} as={Fragment}>
+    <Transition.Root show={props.show} as={Fragment}>
       <Dialog
         static
         className="overflow-y-auto fixed inset-0 z-10"
-        open={props.memoDelete}
-        onClose={props.onDeleteModalClose}
+        open={props.show}
+        onClose={props.onClose}
+        initialFocus={buttonRef}
       >
         <div className="text-center">
           <Transition.Child
@@ -42,26 +55,33 @@ export const ConfirmDelete: VFC<Props> = (props) => {
             <div className="inline-block bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all align-middle max-w-sm w-10/12 p-4 sm:p-6">
               <div className="text-center">
                 <Dialog.Title as="h3" className="font-bold leading-6 text-gray-900">
-                  メモを削除
+                  {props.title}
                 </Dialog.Title>
                 <div className="mt-2">
-                  <p className="text-sm text-gray-500">復元できませんがよろしいですか？</p>
+                  <p className="text-sm text-gray-500">{props.description}</p>
                 </div>
               </div>
               <div className="flex mt-6 space-x-3 sm:space-x-4">
                 <button
                   type="button"
                   className="inline-flex flex-1 justify-center py-2 w-auto text-sm font-bold text-gray-700 bg-white rounded-full border border-gray-300 shadow-sm hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  onClick={props.onDeleteModalClose}
+                  onClick={props.onClose}
+                  ref={buttonRef}
                 >
                   キャンセル
                 </button>
                 <button
                   type="button"
-                  className="inline-flex flex-1 justify-center py-2 w-auto text-sm font-bold text-white bg-red-600 rounded-full border border-transparent shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                  onClick={props.onMemoDeleteClick}
+                  className={clsx(
+                    "inline-flex flex-1 justify-center py-2 w-auto text-sm font-bold text-white rounded-full border border-transparent shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2",
+                    {
+                      "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500": props.buttonColor === "blue",
+                      "bg-red-600 hover:bg-red-700 focus:ring-red-500": props.buttonColor === "red",
+                    }
+                  )}
+                  onClick={props.onClickOk}
                 >
-                  削除する
+                  {props.buttonText}
                 </button>
               </div>
             </div>

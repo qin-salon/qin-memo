@@ -2,8 +2,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { VFC } from "react";
-import { Fragment, useCallback } from "react";
+import { Fragment, memo, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
 import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
 import { Avatar } from "src/components/shared/Avatar";
@@ -16,10 +15,10 @@ type Right = "profile" | JSX.Element;
 export type HeaderProps = {
   left?: "back" | "close" | "memo" | JSX.Element;
   center?: "account" | string | JSX.Element;
-  right?: [Right, ...Right[]];
+  right?: ("profile" | JSX.Element)[];
 };
 
-export const Header: VFC<HeaderProps> = (props) => {
+export const Header = memo<HeaderProps>((props) => {
   return (
     <header className="flex items-center">
       <Left left={props.left} />
@@ -31,9 +30,10 @@ export const Header: VFC<HeaderProps> = (props) => {
       <Right right={props.right} />
     </header>
   );
-};
+});
+Header.displayName = "Header";
 
-const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
+const Left = memo<Pick<HeaderProps, "left">>((props) => {
   const router = useRouter();
   const handleClick = useCallback(() => {
     const prevPath = sessionStorage.getItem("prevPath");
@@ -67,9 +67,10 @@ const Left: VFC<Pick<HeaderProps, "left">> = (props) => {
     );
   }
   return props.left;
-};
+});
+Left.displayName = "Left";
 
-const Center: VFC<Pick<HeaderProps, "center">> = (props) => {
+const Center = memo<Pick<HeaderProps, "center">>((props) => {
   if (!props.center) {
     return null;
   }
@@ -86,22 +87,24 @@ const Center: VFC<Pick<HeaderProps, "center">> = (props) => {
     return <div className="text-xl font-bold">{props.center}</div>;
   }
   return props.center;
-};
+});
+Center.displayName = "Center";
 
-const Right: VFC<Pick<HeaderProps, "right">> = (props) => {
+const Right = memo<Pick<HeaderProps, "right">>((props) => {
   if (!props.right) {
     return <div className="w-9 h-9" />;
   }
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
-      {props.right.map((item) => {
-        return <Fragment key={item.toString()}>{item === "profile" ? <UserMenu /> : item}</Fragment>;
+      {props.right.map((item, i) => {
+        return <Fragment key={i}>{item === "profile" ? <UserMenu /> : item}</Fragment>;
       })}
     </div>
   );
-};
+});
+Right.displayName = "Right";
 
-const UserMenu: VFC = () => {
+const UserMenu = memo(() => {
   const router = useRouter();
   const handleSignOut = useCallback(async () => {
     await router.push("/signin");
@@ -173,4 +176,5 @@ const UserMenu: VFC = () => {
       }}
     </Popover>
   );
-};
+});
+UserMenu.displayName = "UserMenu";
