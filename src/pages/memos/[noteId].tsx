@@ -43,7 +43,7 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
             <TextareaAutosize
               id="memo"
               style={{ caretColor: "#3B82F6" }}
-              className="w-full text-lg outline-none resize-none sm:text-2xl"
+              className="w-full text-lg outline-none resize-none sm:text-xl"
               value={content}
               onChange={handleChangeContent}
               placeholder="メモを入力する"
@@ -52,15 +52,6 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
           </label>
         </div>
       </Layout>
-
-      {/* {hasPublicToast ? (
-        <div className="z-50 fixed top-5 left-1/2 transform -translate-x-1/2">
-          <NewButton className="py-1 px-2.5 text-sm font-normal text-white bg-blue-500" onClick={handleCloseToast}>
-            <CheckCircleIcon className="mr-1 w-5 h-5" />
-            メモを公開しました
-          </NewButton>
-        </div>
-      ) : null} */}
 
       <MenuDialog show={isShowMenu} onClose={handleCloseMenu}>
         <NoteMenu menu={menu} />
