@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { useCallback } from "react";
 import { AppleIcon } from "src/components/icon/AppleIcon";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
+import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { List } from "src/components/shared/List";
-import { NewButton } from "src/components/shared/NewButton";
 
 const SettingsQinAccount: NextPage = () => {
   const handleGoogle = useCallback(() => {
@@ -29,9 +29,9 @@ const SettingsQinAccount: NextPage = () => {
                 </div>
               ),
               button: (
-                <NewButton className="py-2 px-4 text-sm bg-gray-100" onClick={handleGoogle}>
+                <Button className="py-2 px-4 text-sm bg-gray-100" onClick={handleGoogle}>
                   解除する
-                </NewButton>
+                </Button>
               ),
             },
             {
@@ -42,9 +42,9 @@ const SettingsQinAccount: NextPage = () => {
                 </div>
               ),
               button: (
-                <NewButton className="py-2 px-4 text-sm text-white bg-blue-500" onClick={handleApple}>
+                <Button className="py-2 px-4 text-sm text-white bg-blue-500" onClick={handleApple}>
                   解除する
-                </NewButton>
+                </Button>
               ),
             },
           ]}

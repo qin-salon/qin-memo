@@ -1,7 +1,7 @@
 import { UserIcon } from "@heroicons/react/solid";
 import type { VFC } from "react";
+import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
-import { NewButton } from "src/components/shared/NewButton";
 import type { UserType } from "src/types/types";
 
 type ProfileFormProps = { user?: UserType };
@@ -19,9 +19,9 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
                 <UserIcon className="text-white" />
               </div>
             )}
-            <NewButton className="py-2.5 px-5 mt-4 w-max text-gray-800 bg-gray-100">
+            <Button className="py-2.5 px-5 mt-4 w-max text-gray-800 bg-gray-100">
               アイコンを{props.user ? "変更する" : "設定する"}
-            </NewButton>
+            </Button>
           </div>
         </div>
         <Input name="name" label="名前" />
@@ -30,11 +30,11 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
 
       <div className="mt-12 space-y-4">
         {props.user ? (
-          <NewButton className="p-3 text-white bg-blue-500">保存する</NewButton>
+          <Button className="p-3 text-white bg-blue-500">保存する</Button>
         ) : (
           <>
-            <NewButton className="p-3 text-white bg-blue-500">登録してはじめる</NewButton>
-            <NewButton className="p-3 text-gray-800 bg-gray-100">登録せずに終了する</NewButton>
+            <Button className="p-3 text-white bg-blue-500">登録してはじめる</Button>
+            <Button className="p-3 text-gray-800 bg-gray-100">登録せずに終了する</Button>
           </>
         )}
       </div>

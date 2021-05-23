@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { useCallback } from "react";
+import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { RecursiveList } from "src/components/shared/List";
-import { NewButton } from "src/components/shared/NewButton";
 
 const SettingsQinDelete: NextPage = () => {
   const handleDeleteQinMemo = useCallback(() => {
@@ -25,9 +25,9 @@ const SettingsQinDelete: NextPage = () => {
                 {
                   label: "Qin Memoを削除",
                   button: (
-                    <NewButton className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinMemo}>
+                    <Button className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinMemo}>
                       削除する
-                    </NewButton>
+                    </Button>
                   ),
                 },
               ],
@@ -38,9 +38,9 @@ const SettingsQinDelete: NextPage = () => {
                 {
                   label: "アカウントを削除",
                   button: (
-                    <NewButton className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinAccount}>
+                    <Button className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinAccount}>
                       削除する
-                    </NewButton>
+                    </Button>
                   ),
                 },
               ],
