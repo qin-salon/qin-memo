@@ -1,10 +1,10 @@
-import { SearchIcon, XIcon } from "@heroicons/react/outline";
+import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import type { DOMAttributes } from "react";
 import { useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
-import { InputText } from "src/components/shared/InputText";
+import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
@@ -36,16 +36,11 @@ const Search: NextPage = () => {
 
   return (
     <Layout
+      isHeaderNarrow
       left="back"
       center={
         <form className="flex-1" onSubmit={handleSubmit}>
-          <InputText
-            className="w-full"
-            startIcon={<SearchIcon className="my-auto mr-2 w-6 h-6 text-gray-200" />}
-            placeholder="検索"
-            value={value}
-            onChange={handleChange}
-          />
+          <InputSearch placeholder="検索" value={value} onChange={handleChange} autoFocus />
         </form>
       }
       right={[

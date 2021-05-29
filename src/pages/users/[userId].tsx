@@ -1,9 +1,8 @@
-import { SearchIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import Link from "next/link";
 import { UserNoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
-import { InputText } from "src/components/shared/InputText";
+import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_02 } from "src/models/user";
 
@@ -32,10 +31,7 @@ const UsersUserId: NextPage = () => {
 
         <Link href="/search">
           <a className="block">
-            <InputText
-              startIcon={<SearchIcon className="my-auto mr-2 w-5 h-5 text-blue-500" />}
-              placeholder="メモを検索する"
-            />
+            <InputSearch placeholder="メモを検索する" />
           </a>
         </Link>
 
