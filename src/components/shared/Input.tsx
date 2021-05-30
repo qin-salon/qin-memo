@@ -13,7 +13,7 @@ export const Input: VFC<InputProps> = (props) => {
       <label htmlFor={props.name} className="block ml-4 text-sm font-bold text-gray-500">
         {props.label}
       </label>
-      <div className="mt-0.5 px-5 py-3 bg-gray-100 rounded-full text-gray-800 flex">
+      <div className="flex py-3 px-5 mt-0.5 text-gray-800 bg-gray-100 rounded-full">
         {props.prefix ? <span className="pr-1 font-bold">{props.prefix}</span> : null}
         <input
           type="text"

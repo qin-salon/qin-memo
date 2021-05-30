@@ -4,7 +4,7 @@ import { Layout } from "src/components/shared/Layout";
 const SettingsMemoPrivacy: NextPage = () => {
   return (
     <Layout left="back" center="プライバシーポリシー">
-      <div className="mx-auto prose-sm prose-blue">
+      <div className="mx-auto prose prose-blue">
         <h3>この文章は仮です</h3>
         <p>
           Qin（以下「弊サービス」とします）は、個人情報が人格尊重の理念の下に慎重に取扱われるべきものであることに鑑み、個人情報を保護することが弊サービスの事業活動の基本であり、社会的責務であると認識し、以下の方針に基づき個人情報の保護に努めます。

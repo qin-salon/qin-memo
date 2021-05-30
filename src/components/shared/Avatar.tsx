@@ -10,6 +10,6 @@ export const Avatar: VFC<AvatarProps> = (props) => {
   return otherProps.src ? (
     <img {...otherProps} alt={otherProps.alt} className={clsx("rounded-full", className)} />
   ) : (
-    <div className={clsx("rounded-full bg-gray-200 grid place-items-center", className)}>{props.alt.substr(0, 1)}</div>
+    <div className={clsx("grid place-items-center bg-gray-200 rounded-full", className)}>{props.alt.substr(0, 1)}</div>
   );
 };

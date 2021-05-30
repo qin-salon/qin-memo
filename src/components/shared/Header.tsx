@@ -133,12 +133,12 @@ const UserMenu = memo(() => {
               >
                 <Popover.Panel
                   static
-                  className="absolute left-full z-10 pl-8 sm:pl-0 mt-2 w-screen max-w-xs transform -translate-x-full sm:px-0 sm:max-w-sm xl:-translate-x-1/2 xl:-left-full 2xl:left-1/2"
+                  className="absolute left-full xl:-left-full 2xl:left-1/2 z-10 sm:px-0 pl-8 sm:pl-0 mt-2 w-screen max-w-xs sm:max-w-sm transform -translate-x-full xl:-translate-x-1/2"
                 >
                   <div className="overflow-hidden py-4 bg-white rounded-2xl ring-1 ring-gray-400 ring-opacity-20 shadow-lg">
                     <div>
                       <Link href="/settings/qin">
-                        <a className="flex items-center p-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                        <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 transition duration-150 ease-in-out focus:outline-none">
                           <Avatar alt={user.name} src={user.avatarUrl} className="w-14 h-14" />
                           <div className="ml-4">
                             <p className="text-base font-bold text-gray-900">しまぶー</p>
@@ -149,7 +149,7 @@ const UserMenu = memo(() => {
                     </div>
                     <div className="grid relative bg-white">
                       <Link href="/settings/memo">
-                        <a className="flex items-center py-2.5 px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50">
+                        <a className="flex items-center py-2.5 px-4 hover:bg-gray-100 focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 transition duration-150 ease-in-out focus:outline-none">
                           <div className="flex flex-shrink-0 justify-center items-center">
                             <CogIcon className="w-7 h-7" />
                           </div>
@@ -158,7 +158,7 @@ const UserMenu = memo(() => {
                       </Link>
                       <button
                         type="button"
-                        className="flex items-center py-2.5 px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                        className="flex items-center py-2.5 px-4 hover:bg-gray-100 focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 transition duration-150 ease-in-out focus:outline-none"
                         onClick={handleSignOut}
                       >
                         <div className="flex flex-shrink-0 justify-center items-center">

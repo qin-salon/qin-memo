@@ -14,11 +14,11 @@ export const Sign: VFC<SignProps> = (props) => {
           <QinMemoIcon className="w-48" />
         </div>
         <div className="mt-20 space-y-5">
-          <Button className="py-4 w-72 bg-white sm:w-80">
+          <Button className="py-4 w-72 sm:w-80 bg-white">
             <GoogleIcon className="mr-3" />
             <span>{props.page === "signin" ? "Googleでログイン" : "Googleでアカウント作成"}</span>
           </Button>
-          <Button className="py-4 w-72 text-white bg-black sm:w-80">
+          <Button className="py-4 w-72 sm:w-80 text-white bg-black">
             <AppleIcon className="mr-3" />
             <span>{props.page === "signin" ? "Appleでログイン" : "Appleでアカウント作成"}</span>
           </Button>
