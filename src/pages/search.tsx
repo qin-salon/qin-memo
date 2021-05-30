@@ -1,7 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
-import type { DOMAttributes } from "react";
-import { useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
 import { InputSearch } from "src/components/shared/InputSearch";
@@ -15,24 +15,27 @@ const Search: NextPage = () => {
   const [value, setValue] = useState("");
   const [keyword, setKeyword] = useState("");
 
-  const handleChange: DOMAttributes<HTMLInputElement>["onChange"] = (e) => {
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
-  };
+  }, []);
 
-  const handleSubmit: DOMAttributes<HTMLFormElement>["onSubmit"] = async (e) => {
-    e.preventDefault();
-    setKeyword(value);
-    const req: Pick<SearchHistoryType, "keyword"> = { keyword };
-    await fetch(`/users/${user.id}/searchHistories`, {
-      method: "post",
-      body: JSON.stringify(req),
-    });
-  };
+  const handleSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setKeyword(value);
+      const req: Pick<SearchHistoryType, "keyword"> = { keyword };
+      await fetch(`/users/${user.id}/searchHistories`, {
+        method: "post",
+        body: JSON.stringify(req),
+      });
+    },
+    [keyword, value]
+  );
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setValue("");
     setKeyword("");
-  };
+  }, []);
 
   return (
     <Layout
