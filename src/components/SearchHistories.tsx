@@ -11,13 +11,11 @@ export const SearchHistories: VFC = () => {
   const { data, error, mutate } = useSWR<SearchHistoryType[]>(`/users/${user.id}/searchHistories`);
 
   if (error) {
-    // TODO: 検索結果が取得できなかった場合のエラー処理
     return <div>error</div>;
   }
 
   if (!data) {
-    // TODO: 検索結果取得時のローディング処理
-    return <div>loading</div>;
+    return null;
   }
 
   return (

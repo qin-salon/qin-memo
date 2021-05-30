@@ -12,7 +12,19 @@ const NoteList: VFC<NoteListProps> = (props) => {
   }
 
   if (!props.data) {
-    return <div>loading</div>;
+    return (
+      <ul className="space-y-5">
+        {[1, 2, 3, 4, 5].map((v) => {
+          return (
+            <li key={v} className="py-3 px-4 sm:px-6 w-full bg-gray-100 rounded-xl shadow animate-pulse">
+              <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
+              <div className="mt-2 h-3.5 bg-gray-200 rounded"></div>
+              <div className="mt-4 w-1/5 h-3.5 bg-gray-200 rounded"></div>
+            </li>
+          );
+        })}
+      </ul>
+    );
   }
 
   if (props.data.length === 0) {
