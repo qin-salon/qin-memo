@@ -1,5 +1,6 @@
 import type { VFC } from "react";
 import { NoteListItem } from "src/components/NoteListItem";
+import { Error } from "src/components/shared/Error";
 import type { ListNoteType } from "src/types/types";
 import type { SWRResponse } from "swr";
 import useSWR from "swr";
@@ -8,7 +9,7 @@ type NoteListProps = SWRResponse<ListNoteType[], any>;
 
 const NoteList: VFC<NoteListProps> = (props) => {
   if (props.error) {
-    return <div>error</div>;
+    return <Error />;
   }
 
   if (!props.data) {

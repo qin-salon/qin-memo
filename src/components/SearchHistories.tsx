@@ -1,5 +1,6 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { VFC } from "react";
+import { Error } from "src/components/shared/Error";
 import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
 import type { SWRResponse } from "swr";
@@ -11,7 +12,7 @@ export const SearchHistories: VFC = () => {
   const { data, error, mutate } = useSWR<SearchHistoryType[]>(`/users/${user.id}/searchHistories`);
 
   if (error) {
-    return <div>error</div>;
+    return <Error />;
   }
 
   if (!data) {
