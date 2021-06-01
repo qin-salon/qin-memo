@@ -14,7 +14,7 @@ const Index: NextPage = () => {
       left="memo"
       right={[
         <Link href="/memos/new" key="write memo">
-          <a className="grid place-items-center px-4 h-9 text-sm font-bold text-white bg-blue-500 rounded-full">
+          <a className="grid place-items-center px-4 h-9 text-sm font-bold text-white bg-blue-500 focus:bg-blue-600 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none">
             メモを書く
           </a>
         </Link>,
@@ -33,8 +33,8 @@ const Index: NextPage = () => {
         </div>
 
         <Link href="/search">
-          <a className="block">
-            <InputSearch placeholder="メモを検索する" />
+          <a className="block rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none">
+            <InputSearch placeholder="メモを検索する" disabled />
           </a>
         </Link>
 

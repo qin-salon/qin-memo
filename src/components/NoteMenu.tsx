@@ -34,10 +34,13 @@ export const NoteMenu: VFC<NoteMenuProps> = (props) => {
               return (
                 <li key={props.label} className="overflow-hidden first:rounded-t-2xl last:rounded-b-2xl">
                   <button
-                    className={clsx("flex items-center py-3 px-6 w-full text-left bg-blueGray-100", {
-                      "hover:bg-blueGray-200": !props.disabled,
-                      "text-gray-400 text-opacity-50 cursor-not-allowed": props.disabled,
-                    })}
+                    className={clsx(
+                      "flex items-center py-3 px-6 w-full text-left bg-gray-100 focus:bg-gray-200 dark:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none",
+                      {
+                        "hover:bg-gray-200 dark:hover:bg-gray-600": !props.disabled,
+                        "text-gray-400 text-opacity-50 cursor-not-allowed": props.disabled,
+                      }
+                    )}
                     onClick={props.onClick}
                     disabled={props.disabled}
                   >

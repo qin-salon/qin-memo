@@ -8,13 +8,13 @@ type SignProps = { page: "signin" | "signup" };
 
 export const Sign: VFC<SignProps> = (props) => {
   return (
-    <div className="grid place-items-center w-screen h-screen bg-gray-200">
+    <div className="grid place-items-center w-screen h-screen bg-gray-200 dark:bg-gray-700">
       <div className="p-4">
         <div className="flex justify-center">
           <QinMemoIcon className="w-48" />
         </div>
         <div className="mt-20 space-y-5">
-          <Button className="py-4 w-72 sm:w-80 bg-white">
+          <Button className="py-4 w-72 sm:w-80 dark:text-black bg-white">
             <GoogleIcon className="mr-3" />
             <span>{props.page === "signin" ? "Googleでログイン" : "Googleでアカウント作成"}</span>
           </Button>

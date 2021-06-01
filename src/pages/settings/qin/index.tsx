@@ -11,7 +11,7 @@ const SettingsQin: NextPage = () => {
       <div className="flex flex-col items-center">
         <img src={user.avatarUrl} alt={user.name} className="overflow-hidden w-24 h-24 rounded-full" />
         <h1 className="mt-8 text-2xl font-bold">ようこそ、{user.name}さん</h1>
-        <p className="mt-2 text-sm text-gray-500">Qinアカウントに関する各種設定ができます</p>
+        <p className="mt-2 text-sm opacity-70">Qinアカウントに関する各種設定ができます</p>
       </div>
 
       <div className="mt-12">

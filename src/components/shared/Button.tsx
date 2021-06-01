@@ -22,7 +22,7 @@ export const Button: VFC<Button | Link> = (props) => {
     <Link {...props.linkProps}>
       <a
         className={clsx(
-          "flex justify-center items-center w-full font-bold hover:bg-opacity-80 rounded-full",
+          "flex justify-center items-center w-full font-bold hover:bg-opacity-80 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none",
           props.className
         )}
       >

@@ -19,7 +19,7 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
                 <UserIcon className="text-white" />
               </div>
             )}
-            <Button className="py-2.5 px-5 mt-4 w-max text-gray-800 bg-gray-100">
+            <Button className="py-2.5 px-5 mt-4 w-max bg-gray-100 focus:bg-gray-200 dark:bg-gray-700 dark:focus:bg-gray-600 focus:ring-2 focus:ring-blue-400 focus:outline-none">
               アイコンを{props.user ? "変更する" : "設定する"}
             </Button>
           </div>

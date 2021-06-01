@@ -4,7 +4,7 @@ import { Layout } from "src/components/shared/Layout";
 const SettingsMemoTerms: NextPage = () => {
   return (
     <Layout left="back" center="利用規約">
-      <div className="mx-auto prose prose-blue">
+      <div className="mx-auto prose prose-blue dark:prose-light">
         <h3>この文章は仮です</h3>
         <p>
           この規約は、Qin

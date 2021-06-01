@@ -15,7 +15,7 @@ export const NoteListItem: VFC<NoteListItemProps> = (props) => {
 
   return (
     <Link href={`/memos/${props.note.id}`}>
-      <a className="block py-3 px-4 sm:px-6 w-full bg-gray-100 rounded-xl shadow">
+      <a className="block py-3 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow">
         <div className="text-sm sm:text-base font-bold truncate">{title}</div>
         <div className="mt-0.5 text-sm truncate">{props.note.excerpt.replace(title, "")}</div>
 

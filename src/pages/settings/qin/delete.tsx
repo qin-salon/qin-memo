@@ -25,7 +25,10 @@ const SettingsQinDelete: NextPage = () => {
                 {
                   label: "Qin Memoを削除",
                   button: (
-                    <Button className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinMemo}>
+                    <Button
+                      className="py-2 px-5 text-sm text-red-500 bg-gray-100 dark:bg-gray-700"
+                      onClick={handleDeleteQinMemo}
+                    >
                       削除する
                     </Button>
                   ),
@@ -38,7 +41,10 @@ const SettingsQinDelete: NextPage = () => {
                 {
                   label: "アカウントを削除",
                   button: (
-                    <Button className="py-2 px-5 text-sm text-red-500 bg-gray-200" onClick={handleDeleteQinAccount}>
+                    <Button
+                      className="py-2 px-5 text-sm text-red-500 bg-gray-100 dark:bg-gray-700"
+                      onClick={handleDeleteQinAccount}
+                    >
                       削除する
                     </Button>
                   ),

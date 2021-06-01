@@ -29,7 +29,7 @@ const SettingsQinAccount: NextPage = () => {
                 </div>
               ),
               button: (
-                <Button className="py-2 px-4 text-sm bg-gray-100" onClick={handleGoogle}>
+                <Button className="py-2 px-4 text-sm bg-gray-100 dark:bg-gray-700" onClick={handleGoogle}>
                   解除する
                 </Button>
               ),
@@ -43,7 +43,7 @@ const SettingsQinAccount: NextPage = () => {
               ),
               button: (
                 <Button className="py-2 px-4 text-sm text-white bg-blue-500" onClick={handleApple}>
-                  解除する
+                  連携する
                 </Button>
               ),
             },

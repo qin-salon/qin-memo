@@ -39,7 +39,7 @@ export const List: VFC<ListProps> = (props) => {
               <li key={i}>
                 <Link href={item.href}>
                   <a
-                    className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100"
+                    className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:bg-gray-700 focus:outline-none"
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                   >
@@ -68,7 +68,7 @@ export const List: VFC<ListProps> = (props) => {
               <button
                 type="button"
                 onClick={handleClick}
-                className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100"
+                className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 {item.label}
               </button>

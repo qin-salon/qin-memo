@@ -49,11 +49,11 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
               leaveFrom="translate-y-0 sm:opacity-100 sm:scale-100"
               leaveTo="translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95"
             >
-              <div className="relative px-6 pt-20 pb-12 bg-white rounded-t-2xl sm:rounded-b-2xl">
+              <div className="relative px-6 pt-20 pb-12 bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-b-2xl">
                 <button
                   type="button"
                   ref={buttonRef}
-                  className="absolute top-4 right-6 text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                  className="absolute top-4 right-6 text-gray-400 hover:text-gray-500 focus:text-blue-400 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
                   onClick={props.onClose}
                 >
                   <span className="sr-only">Close panel</span>

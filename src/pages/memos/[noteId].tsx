@@ -43,7 +43,7 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
             <TextareaAutosize
               id="memo"
               style={{ caretColor: "#3B82F6" }}
-              className="w-full text-lg sm:text-xl outline-none resize-none"
+              className="w-full text-lg sm:text-xl bg-transparent border-none focus:ring-0 resize-none"
               value={content}
               onChange={handleChangeContent}
               placeholder="メモを入力する"

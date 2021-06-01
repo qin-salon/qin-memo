@@ -1,6 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import type { ChangeEvent, FormEvent } from "react";
+import { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
@@ -37,6 +38,20 @@ const Search: NextPage = () => {
     setKeyword("");
   }, []);
 
+  const right = useMemo(() => {
+    if (!value) return;
+    return [
+      <button
+        key="delete"
+        type="button"
+        className="grid place-items-center w-9 h-9 focus:bg-blue-50 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
+        onClick={handleClose}
+      >
+        <XIcon className="w-5 h-5" />
+      </button>,
+    ];
+  }, [handleClose, value]);
+
   return (
     <Layout
       isHeaderNarrow
@@ -46,11 +61,7 @@ const Search: NextPage = () => {
           <InputSearch placeholder="検索" value={value} onChange={handleChange} autoFocus />
         </form>
       }
-      right={[
-        <button key="delete" type="button" className="grid place-items-center w-9 h-9" onClick={handleClose}>
-          <XIcon className="w-5 h-5" />
-        </button>,
-      ]}
+      right={right}
     >
       {keyword === "" ? <SearchHistories /> : <SearchNoteList userId={user.id} keyword={keyword} />}
     </Layout>
