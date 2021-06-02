@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { UserNoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
+import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_02 } from "src/models/user";
@@ -13,11 +14,9 @@ const UsersUserId: NextPage = () => {
     <Layout
       left="memo"
       right={[
-        <Link href="/memos/new" key="write memo">
-          <a className="grid place-items-center px-4 h-9 text-sm font-bold text-white bg-blue-500 rounded-full">
-            メモを書く
-          </a>
-        </Link>,
+        <Button key="write memo" variant="solid-blue" linkProps={{ href: "/memos/new" }} className="px-4 h-9">
+          メモを書く
+        </Button>,
         "profile",
       ]}
     >

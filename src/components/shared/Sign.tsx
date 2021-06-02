@@ -14,13 +14,17 @@ export const Sign: VFC<SignProps> = (props) => {
           <QinMemoIcon className="w-48" />
         </div>
         <div className="mt-20 space-y-5">
-          <Button className="py-4 w-72 sm:w-80 dark:text-black bg-white">
-            <GoogleIcon className="mr-3" />
-            <span>{props.page === "signin" ? "Googleでログイン" : "Googleでアカウント作成"}</span>
+          <Button variant="solid-white" className="py-4 w-72 sm:w-80">
+            <div className="flex">
+              <GoogleIcon className="mr-3" />
+              <span>{props.page === "signin" ? "Googleでログイン" : "Googleでアカウント作成"}</span>
+            </div>
           </Button>
-          <Button className="py-4 w-72 sm:w-80 text-white bg-black">
-            <AppleIcon className="mr-3" />
-            <span>{props.page === "signin" ? "Appleでログイン" : "Appleでアカウント作成"}</span>
+          <Button variant="solid-black" className="py-4 w-72 sm:w-80">
+            <div className="flex">
+              <AppleIcon className="mr-3" />
+              <span>{props.page === "signin" ? "Appleでログイン" : "Appleでアカウント作成"}</span>
+            </div>
           </Button>
         </div>
       </div>

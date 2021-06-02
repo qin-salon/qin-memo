@@ -1,8 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
-import clsx from "clsx";
 import type { DOMAttributes, VFC } from "react";
-import { useRef } from "react";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
+import { Button } from "src/components/shared/Button";
 
 type Props = {
   show: boolean;
@@ -62,27 +61,16 @@ export const ConfirmDialog: VFC<Props> = (props) => {
                 </div>
               </div>
               <div className="flex mt-6 space-x-3 sm:space-x-4">
-                <button
-                  type="button"
-                  className="inline-flex flex-1 justify-center py-2 text-sm font-bold rounded-full border border-gray-300 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  onClick={props.onClose}
-                  ref={buttonRef}
-                >
+                <Button variant="outline" className="flex-1 py-2 text-sm" onClick={props.onClose} ref={buttonRef}>
                   キャンセル
-                </button>
-                <button
-                  type="button"
-                  className={clsx(
-                    "inline-flex flex-1 justify-center py-2 text-sm font-bold text-white rounded-full border border-transparent focus:ring-2 focus:ring-red-400 focus:outline-none",
-                    {
-                      "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500": props.buttonColor === "blue",
-                      "bg-red-600 hover:bg-red-700 focus:ring-red-500": props.buttonColor === "red",
-                    }
-                  )}
+                </Button>
+                <Button
+                  variant={props.buttonColor === "blue" ? "solid-blue" : "solid-red"}
+                  className="flex-1 py-2 text-sm"
                   onClick={props.onClickOk}
                 >
                   {props.buttonText}
-                </button>
+                </Button>
               </div>
             </div>
           </Transition.Child>
