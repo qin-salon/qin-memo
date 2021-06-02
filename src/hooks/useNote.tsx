@@ -30,6 +30,7 @@ const useDeleteNoteDialog = (note: NoteType) => {
   const handleDeleteMemo = useCallback(async () => {
     await fetch(`/notes/${note.id}`, { method: "delete" });
     await router.push("/");
+    toast.success("削除しました");
   }, [note.id, router]);
   return { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo };
 };
@@ -85,9 +86,9 @@ export const useNote = (note: NoteType) => {
           onClick: () => {
             handleTogglePublicState();
             if (isPublic) {
-              toast("メモを非公開にしました", { duration: 3000 });
+              toast("非公開にしました");
             } else {
-              toast.success("メモを公開しました", { duration: 3000 });
+              toast.success("公開しました");
             }
           },
         },
@@ -122,6 +123,7 @@ export const useNote = (note: NoteType) => {
           icon: <ClipboardCopyIcon />,
           onClick: async () => {
             await navigator.clipboard.writeText(location.href);
+            toast("コピーしました");
             handleCloseMenu();
           },
           disabled: !isPublic,

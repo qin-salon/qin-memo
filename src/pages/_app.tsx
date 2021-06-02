@@ -17,7 +17,7 @@ const App = (props: AppProps) => {
   return (
     <ThemeProvider attribute="class">
       <props.Component {...props.pageProps} />
-      <Toaster toastOptions={{ className: "!rounded-full !py-1 !px-2.5 !text-sm font-bold" }} />
+      <Toaster toastOptions={{ duration: 2500, className: "!rounded-full !py-1 !px-2.5 !text-sm font-bold" }} />
     </ThemeProvider>
   );
 };
