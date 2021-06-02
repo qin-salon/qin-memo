@@ -8,7 +8,7 @@ type Common = {
   children: ReactNode;
   className?: string;
   disabled?: boolean;
-  variant?: "outline" | "solid-blue" | "solid-red" | "solid-gray" | "solid-white" | "solid-black";
+  variant?: "outline" | "ghost" | "solid-blue" | "solid-red" | "solid-gray" | "solid-white" | "solid-black";
 };
 
 type Button = Common & { onClick?: DOMAttributes<HTMLButtonElement>["onClick"] };
@@ -25,6 +25,8 @@ export const Button = forwardRef<HTMLButtonElement & HTMLAnchorElement, Button |
       "grid place-items-center font-bold rounded-full focus-visible:ring-2 transition duration-200 ease-in-out focus:outline-none",
       {
         "border dark:border-gray-500 focus:ring-2 focus:ring-blue-400": props.variant === "outline",
+        "hover:text-blue-400 focus-visible:text-blue-400 hover:bg-blue-50 focus-visible:bg-blue-50 dark:hover:bg-opacity-10 dark:focus-visible:bg-opacity-10 focus-visible:ring-blue-400":
+          props.variant === "ghost",
         "text-white bg-blue-500 hover:bg-blue-600 focus-visible:bg-blue-600 focus-visible:ring-blue-400":
           props.variant === "solid-blue",
         "text-white bg-red-500 hover:bg-red-600 focus-visible:bg-red-600 focus-visible:ring-red-400":

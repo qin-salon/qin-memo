@@ -4,6 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TwitterIcon } from "src/components/icon/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
+import { Button } from "src/components/shared/Button";
 import type { NotePutRequest, NoteType } from "src/types/types";
 
 const useNoteMenu = () => {
@@ -60,15 +61,15 @@ export const useNote = (note: NoteType) => {
         <span key="public" className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">
           公開中
         </span>,
-        <button type="button" key="menu" className="grid place-items-center w-9 h-9" onClick={handleOpenMenu}>
+        <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
           <DotsCircleHorizontalIcon className="w-5 h-5" />
-        </button>,
+        </Button>,
       ];
     }
     return [
-      <button type="button" key="menu" className="grid place-items-center w-9 h-9" onClick={handleOpenMenu}>
+      <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
         <DotsCircleHorizontalIcon className="w-5 h-5" />
-      </button>,
+      </Button>,
     ];
   }, [handleOpenMenu, isPublic]);
 

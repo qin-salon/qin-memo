@@ -2,15 +2,19 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import type { VFC } from "react";
 import { Fragment, memo, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
 import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
 import { Avatar } from "src/components/shared/Avatar";
+import { Button } from "src/components/shared/Button";
 import { EXAMPLE_USER_01 } from "src/models/user";
 
 const user = EXAMPLE_USER_01;
 
 type Right = "profile" | JSX.Element;
+
+const ICON_SIZE = "w-10 h-10";
 
 export type HeaderProps = {
   left?: "back" | "close" | "memo" | JSX.Element;
@@ -41,18 +45,14 @@ const Left = memo<Pick<HeaderProps, "left">>((props) => {
   }, [router]);
 
   if (!props.left) {
-    return <div className="w-9 h-9" />;
+    return <div className={ICON_SIZE} />;
   }
   if (props.left === "back" || props.left === "close") {
     return (
-      <button
-        type="button"
-        onClick={handleClick}
-        className="grid place-items-center w-9 h-9 focus:bg-blue-50 dark:focus:bg-opacity-10 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-      >
+      <Button variant="ghost" className={ICON_SIZE} onClick={handleClick}>
         {props.left === "back" ? <ChevronLeftIcon className="w-5 h-5" /> : null}
         {props.left === "close" ? <XIcon className="w-5 h-5" /> : null}
-      </button>
+      </Button>
     );
   }
   if (props.left === "memo") {
@@ -90,7 +90,7 @@ Center.displayName = "Center";
 
 const Right = memo<Pick<HeaderProps, "right">>((props) => {
   if (!props.right) {
-    return <div className="w-9 h-9" />;
+    return <div className={ICON_SIZE} />;
   }
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
@@ -102,7 +102,7 @@ const Right = memo<Pick<HeaderProps, "right">>((props) => {
 });
 Right.displayName = "Right";
 
-const UserMenu = memo(() => {
+const UserMenu: VFC = () => {
   const router = useRouter();
   const handleSignOut = useCallback(async () => {
     await router.push("/signin");
@@ -114,8 +114,8 @@ const UserMenu = memo(() => {
       {({ open }) => {
         return (
           <>
-            <Popover.Button className="rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none">
-              <Avatar alt={user.name} src={user.avatarUrl} className="w-9 h-9" />
+            <Popover.Button className="rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
+              <Avatar alt={user.name} src={user.avatarUrl} className={ICON_SIZE} />
             </Popover.Button>
 
             <div className="relative">
@@ -174,5 +174,4 @@ const UserMenu = memo(() => {
       }}
     </Popover>
   );
-});
-UserMenu.displayName = "UserMenu";
+};

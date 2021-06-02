@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import type { ReactNode, VFC } from "react";
-import { useRef } from "react";
-import { Fragment } from "react";
+import { Fragment, useRef } from "react";
+import { Button } from "src/components/shared/Button";
 
 type MenuDialogProps = {
   children: ReactNode;
@@ -49,16 +49,11 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
               leaveFrom="translate-y-0 sm:opacity-100 sm:scale-100"
               leaveTo="translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95"
             >
-              <div className="relative px-6 pt-20 pb-12 bg-white dark:bg-gray-800 rounded-t-2xl sm:rounded-b-2xl">
-                <button
-                  type="button"
-                  ref={buttonRef}
-                  className="absolute top-4 right-6 text-gray-400 hover:text-gray-500 focus:text-blue-400 rounded-md focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                  onClick={props.onClose}
-                >
+              <div className="relative px-6 pt-20 pb-12 bg-white dark:bg-gray-800 sm:rounded-2xl rounded-t-3xl">
+                <Button ref={buttonRef} variant="ghost" className="absolute top-4 right-5 p-2" onClick={props.onClose}>
                   <span className="sr-only">Close panel</span>
                   <XIcon className="w-6 h-6" aria-hidden="true" />
-                </button>
+                </Button>
                 <div>{props.children}</div>
               </div>
             </Transition.Child>

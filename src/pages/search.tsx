@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
+import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
@@ -41,14 +42,9 @@ const Search: NextPage = () => {
   const right = useMemo(() => {
     if (!value) return;
     return [
-      <button
-        key="delete"
-        type="button"
-        className="grid place-items-center w-9 h-9 focus:bg-blue-50 rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none"
-        onClick={handleClose}
-      >
+      <Button key="delete" variant="ghost" className="w-10 h-10" onClick={handleClose}>
         <XIcon className="w-5 h-5" />
-      </button>,
+      </Button>,
     ];
   }, [handleClose, value]);
 
