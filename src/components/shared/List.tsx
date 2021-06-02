@@ -1,4 +1,5 @@
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/outline";
+import clsx from "clsx";
 import Link from "next/link";
 import type { DOMAttributes, VFC } from "react";
 
@@ -33,13 +34,18 @@ export const List: VFC<ListProps> = (props) => {
       {props.title ? <div className="text-sm font-bold text-gray-400">{props.title}</div> : null}
       <ul>
         {props.items.map((item, i) => {
+          const className = clsx("flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold", {
+            "hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none":
+              isLink(item),
+          });
+
           if (isLink(item)) {
             const isExternal = item.href.slice(0, 1) !== "/";
             return (
               <li key={i}>
                 <Link href={item.href}>
                   <a
-                    className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700 dark:focus:bg-gray-700 focus:outline-none"
+                    className={className}
                     target={isExternal ? "_blank" : undefined}
                     rel={isExternal ? "noopener noreferrer" : undefined}
                   >
@@ -54,7 +60,7 @@ export const List: VFC<ListProps> = (props) => {
           if (hasButton(item)) {
             return (
               <li key={i}>
-                <div className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold">
+                <div className={className}>
                   <div className="flex-1">{item.label}</div>
                   <div className="flex-shrink-0">{item.button}</div>
                 </div>
@@ -65,11 +71,7 @@ export const List: VFC<ListProps> = (props) => {
           const handleClick = item.onClick;
           return (
             <li key={i}>
-              <button
-                type="button"
-                onClick={handleClick}
-                className="flex justify-between items-center py-3 px-4 -mx-4 text-lg font-bold hover:bg-gray-100 dark:hover:bg-gray-700"
-              >
+              <button type="button" onClick={handleClick} className={className}>
                 {item.label}
               </button>
             </li>
