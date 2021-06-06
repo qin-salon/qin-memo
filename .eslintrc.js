@@ -55,7 +55,7 @@ module.exports = {
     "@typescript-eslint/naming-convention": [
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
-      { selector: ["property", "parameterProperty", "method"], format: ["camelCase"] },
+      { selector: ["property", "method"], format: ["camelCase"] },
       { selector: "variable", types: ["boolean"], format: ["PascalCase"], prefix: ["is", "has", "should"] },
     ],
     "jsx-a11y/no-autofocus": "off",
@@ -64,5 +64,5 @@ module.exports = {
       { components: ["Link"], specialLink: ["hrefLeft", "hrefRight"], aspects: ["invalidHref", "preferButton"] },
     ],
   },
-  overrides: [{ files: ["src/pages/**/*.tsx"], rules: { "import/no-default-export": "off" } }],
+  overrides: [{ files: ["src/pages/**/*.tsx", "src/pages/api/**/*.ts"], rules: { "import/no-default-export": "off" } }],
 };
