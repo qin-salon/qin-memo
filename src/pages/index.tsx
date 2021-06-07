@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import { UserNoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
@@ -7,9 +8,13 @@ import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { EXAMPLE_USER_01 } from "src/models/user";
 
-const user = EXAMPLE_USER_01;
-
 const Index: NextPage = () => {
+  const authUser = useAuthUser();
+
+  const user = authUser
+    ? { id: authUser.id ?? "", name: authUser.displayName ?? "", avatarUrl: authUser.photoURL ?? "" }
+    : EXAMPLE_USER_01;
+
   return (
     <Layout
       left="memo"
@@ -43,4 +48,7 @@ const Index: NextPage = () => {
   );
 };
 
-export default Index;
+export default withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(Index);

@@ -5,10 +5,13 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
 import { useAddClassToBodyElem } from "src/hooks/useAddClassToBodyElem";
 import { useSessionRouter } from "src/hooks/useSessionRouter";
+import { initAuth } from "src/utils/initAuth";
 
 if (process.env.NODE_ENV === "development") {
   require("src/mocks");
 }
+
+initAuth();
 
 const App = (props: AppProps) => {
   useSessionRouter(props.router.asPath);

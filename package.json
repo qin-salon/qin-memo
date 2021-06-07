@@ -14,6 +14,7 @@
     "fix:prettier": "yarn lint:prettier --write",
     "test": "run-p -l -c --aggregate-output lint:* unit",
     "unit": "jest",
+    "env": "vc env pull .env.local",
     "prepare": "husky install"
   },
   "babel": {
@@ -30,7 +31,10 @@
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "clsx": "^1.1.1",
+    "firebase": "^8.6.5",
+    "firebase-admin": "^9.9.0",
     "next": "10.2.3",
+    "next-firebase-auth": "^0.13.1",
     "next-themes": "^0.0.14",
     "react": "17.0.2",
     "react-dom": "17.0.2",

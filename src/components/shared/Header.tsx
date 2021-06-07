@@ -2,6 +2,7 @@ import { Popover, Transition } from "@headlessui/react";
 import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
 import { Fragment, memo, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
@@ -103,11 +104,10 @@ const Right = memo<Pick<HeaderProps, "right">>((props) => {
 Right.displayName = "Right";
 
 const UserMenu: VFC = () => {
-  const router = useRouter();
-  const handleSignOut = useCallback(async () => {
-    await router.push("/signin");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const AuthUser = useAuthUser();
+  const handleSignOut = useCallback(() => {
+    return AuthUser.signOut();
+  }, [AuthUser]);
 
   return (
     <Popover className="grid">
