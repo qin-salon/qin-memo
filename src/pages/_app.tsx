@@ -8,7 +8,7 @@ import { useSessionRouter } from "src/hooks/useSessionRouter";
 import { initAuth } from "src/utils/initAuth";
 
 if (process.env.NODE_ENV === "development") {
-  require("src/mocks");
+  // require("src/mocks");
 }
 
 initAuth();

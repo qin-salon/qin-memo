@@ -22,7 +22,7 @@ export const NoteListItem: VFC<NoteListItemProps> = (props) => {
         <div className="flex justify-between items-center mt-4">
           <time className="text-sm font-bold text-gray-400">{props.note.updatedOn}</time>
           {props.note.public ? (
-            <div className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">公開中</div>
+            <div className="py-1 px-2.5 text-xs font-bold text-white rounded-full bg-orange-400">公開中</div>
           ) : null}
         </div>
       </a>

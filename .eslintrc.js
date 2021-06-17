@@ -4,7 +4,7 @@ module.exports = {
   parserOptions: { project: "./tsconfig.json", ecmaFeatures: { jsx: true } },
   settings: {
     react: { version: "detect" },
-    tailwindcss: { whitelist: ["prose-light"] },
+    tailwindcss: { whitelist: ["prose-light", "prose-blue", "bg-orange-400"] },
   },
   env: { es2021: true, browser: true, jest: true, node: true },
   plugins: ["@typescript-eslint", "import", "simple-import-sort", "tailwindcss"],
