@@ -59,7 +59,7 @@ export const useNote = (note: NoteType) => {
   const headerRight = useMemo(() => {
     if (isPublic) {
       return [
-        <span key="public" className="py-1 px-2.5 text-xs font-bold text-white rounded-full bg-orange-400">
+        <span key="public" className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">
           公開中
         </span>,
         <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
