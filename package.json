@@ -26,7 +26,7 @@
     "printWidth": 120
   },
   "dependencies": {
-    "@headlessui/react": "^1.2.0",
+    "@headlessui/react": "^1.3.0",
     "@heroicons/react": "^1.0.1",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
@@ -47,8 +47,8 @@
     "@types/jest": "26.0.23",
     "@types/node": "15.12.4",
     "@types/react": "17.0.11",
-    "@typescript-eslint/eslint-plugin": "4.27.0",
-    "@typescript-eslint/parser": "4.27.0",
+    "@typescript-eslint/eslint-plugin": "4.28.0",
+    "@typescript-eslint/parser": "4.28.0",
     "autoprefixer": "^10.2.6",
     "babel-jest": "27.0.2",
     "eslint": "7.29.0",
