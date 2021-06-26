@@ -1,5 +1,6 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
+import { AuthAction, withAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, FormEvent } from "react";
 import { useMemo } from "react";
 import { useCallback, useState } from "react";
@@ -64,4 +65,7 @@ const Search: NextPage = () => {
   );
 };
 
-export default Search;
+export default withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(Search);

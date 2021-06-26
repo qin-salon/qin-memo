@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { AppleIcon } from "src/components/icon/AppleIcon";
 import { GoogleIcon } from "src/components/icon/GoogleIcon";
@@ -54,4 +55,7 @@ const SettingsQinAccount: NextPage = () => {
   );
 };
 
-export default SettingsQinAccount;
+export default withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(SettingsQinAccount);

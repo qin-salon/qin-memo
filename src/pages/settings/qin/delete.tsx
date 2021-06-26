@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
@@ -60,4 +61,7 @@ const SettingsQinDelete: NextPage = () => {
   );
 };
 
-export default SettingsQinDelete;
+export default withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(SettingsQinDelete);

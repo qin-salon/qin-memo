@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { Layout } from "src/components/shared/Layout";
 import { List } from "src/components/shared/List";
 import { EXAMPLE_USER_01 } from "src/models/user";
@@ -28,4 +29,7 @@ const SettingsQin: NextPage = () => {
   );
 };
 
-export default SettingsQin;
+export default withAuthUser({
+  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+})(SettingsQin);
