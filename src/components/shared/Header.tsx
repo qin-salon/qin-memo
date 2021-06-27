@@ -1,5 +1,6 @@
 import { Popover, Transition } from "@headlessui/react";
 import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
+import clsx from "clsx";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
@@ -115,7 +116,14 @@ const UserMenu: VFC = () => {
         return (
           <>
             <Popover.Button className="rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
-              <Avatar alt={user.name} src={user.avatarUrl} className={ICON_SIZE} />
+              <Avatar
+                alt={user.name}
+                src={user.avatarUrl}
+                width={40}
+                height={40}
+                className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
+                noDialog
+              />
             </Popover.Button>
 
             <div className="relative">
@@ -137,7 +145,14 @@ const UserMenu: VFC = () => {
                     <div>
                       <Link href="/settings/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
-                          <Avatar alt={user.name} src={user.avatarUrl} className="w-14 h-14" />
+                          <Avatar
+                            alt={user.name}
+                            src={user.avatarUrl}
+                            width={56}
+                            height={56}
+                            className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
+                            noDialog
+                          />
                           <div className="ml-4">
                             <p className="text-base font-bold">しまぶー</p>
                             <p className="text-sm text-gray-400">@shimabu</p>

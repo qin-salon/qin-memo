@@ -1,5 +1,5 @@
-import { UserIcon } from "@heroicons/react/solid";
 import type { VFC } from "react";
+import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
 import type { UserType } from "src/types/types";
@@ -12,13 +12,13 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
       <div className="space-y-6 sm:space-y-8">
         <div>
           <div className="flex justify-start items-center space-x-6">
-            {props.user ? (
-              <img src={props.user.avatarUrl} alt={props.user.name} width={96} height={96} className="w-24 h-24" />
-            ) : (
-              <div className="p-2 w-24 h-24 bg-gray-300">
-                <UserIcon className="text-white" />
-              </div>
-            )}
+            <Avatar
+              src={props.user?.avatarUrl}
+              alt={props.user?.name}
+              width={96}
+              height={96}
+              className="overflow-hidden w-24 h-24 rounded-full"
+            />
             <Button variant="solid-gray" className="py-2.5 px-5 mt-4">
               アイコンを{props.user ? "変更する" : "設定する"}
             </Button>

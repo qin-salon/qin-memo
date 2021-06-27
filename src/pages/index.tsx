@@ -27,7 +27,13 @@ const Index: NextPage = () => {
     >
       <div className="space-y-7">
         <div className="flex items-center space-x-4">
-          <Avatar alt={user.name} src={user.avatarUrl} className="w-16 h-16" />
+          <Avatar
+            src={user.avatarUrl}
+            alt={user.name}
+            width={64}
+            height={64}
+            className="overflow-hidden w-16 h-16 rounded-full"
+          />
           <div className="flex flex-col">
             <span className="font-bold">{user.name}</span>
             <Link href="/settings/qin/user/edit">
