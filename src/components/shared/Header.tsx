@@ -115,7 +115,7 @@ const UserMenu: VFC = () => {
       {({ open }) => {
         return (
           <>
-            <Popover.Button className="rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
+            <Popover.Button className="flex rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
               <Avatar
                 alt={user.name}
                 src={user.avatarUrl}
