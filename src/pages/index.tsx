@@ -43,7 +43,7 @@ const Index: NextPage = () => {
         </div>
 
         <Link href="/search">
-          <a className="block rounded-full focus:ring-2 focus:ring-blue-400 focus:outline-none">
+          <a className="block rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none">
             <InputSearch placeholder="メモを検索する" disabled />
           </a>
         </Link>
