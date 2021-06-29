@@ -11,7 +11,7 @@ type DialogImageProps = ImageProps & { noDialog?: boolean };
 type SrcUndefinedImageProps = Omit<DialogImageProps, "src"> & { src?: DialogImageProps["src"] };
 
 const hasSrc = (props: DialogImageProps | SrcUndefinedImageProps): props is DialogImageProps => {
-  return "src" in props;
+  return !!props.src;
 };
 
 export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {

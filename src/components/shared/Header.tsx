@@ -8,11 +8,9 @@ import type { VFC } from "react";
 import { Fragment, memo, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
 import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
+import { useUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
-import { EXAMPLE_USER_01 } from "src/models/user";
-
-const user = EXAMPLE_USER_01;
 
 type Right = "profile" | JSX.Element;
 
@@ -106,9 +104,12 @@ Right.displayName = "Right";
 
 const UserMenu: VFC = () => {
   const AuthUser = useAuthUser();
+  const { user } = useUser();
   const handleSignOut = useCallback(() => {
     return AuthUser.signOut();
   }, [AuthUser]);
+
+  if (!user) return null;
 
   return (
     <Popover className="grid">
