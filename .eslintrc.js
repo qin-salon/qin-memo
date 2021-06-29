@@ -51,7 +51,7 @@ module.exports = {
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
       { selector: ["property", "method"], format: ["camelCase"] },
-      { selector: "variable", types: ["boolean"], format: ["PascalCase"], prefix: ["is", "has", "should"] },
+      { selector: "variable", types: ["boolean"], format: ["PascalCase"], prefix: ["no", "is", "has", "should"] },
     ],
     "jsx-a11y/no-autofocus": "off",
     "jsx-a11y/alt-text": ["error", { img: [] }],

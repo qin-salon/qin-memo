@@ -15,19 +15,22 @@ const hasSrc = (props: DialogImageProps | SrcUndefinedImageProps): props is Dial
 };
 
 export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
-  if (!hasSrc(props)) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const { noDialog, ...imageProps } = props;
+
+  if (!hasSrc(imageProps)) {
     return (
-      <div className={props.className}>
+      <div className={imageProps.className}>
         <Image src={NoProfileImage} alt="No Profile Image" />
       </div>
     );
   }
 
-  if (props.noDialog) {
-    return <Image {...props} />;
+  if (noDialog) {
+    return <Image {...imageProps} />;
   }
 
-  return <DialogImage {...props} />;
+  return <DialogImage {...imageProps} />;
 };
 
 export const DialogImage: VFC<ImageProps> = (props) => {
