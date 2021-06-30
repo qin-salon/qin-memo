@@ -3,6 +3,7 @@ import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import type { Dispatch, ReactNode, SetStateAction, VFC } from "react";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { UserType } from "src/types/types";
+import { SWRConfig } from "swr";
 
 type ContextType = {
   user?: UserType;
@@ -57,8 +58,32 @@ export const withUser = (Component: NextPage) => {
   })(() => {
     return (
       <UserProvider>
-        <Component />
+        <SWRComponent>
+          <Component />
+        </SWRComponent>
       </UserProvider>
     );
   });
+};
+
+const SWRComponent: VFC<{ children: ReactNode }> = (props) => {
+  const authUser = useAuthUser();
+
+  return (
+    <SWRConfig
+      value={{
+        fetcher: async (url: string) => {
+          const idToken = await authUser.getIdToken();
+          return fetch(url, { headers: { authorization: `Bearer ${idToken}` } }).then((res) => {
+            if (res.status === 200 || res.status === 201) {
+              return res.json();
+            }
+            throw new Error();
+          });
+        },
+      }}
+    >
+      {props.children}
+    </SWRConfig>
+  );
 };

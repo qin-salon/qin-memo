@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { UserNoteList } from "src/components/NoteList";
 import { useUser, withUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
@@ -42,7 +43,7 @@ const Index: NextPage = () => {
           </a>
         </Link>
 
-        {/* <UserNoteList userId={user?.id} /> */}
+        {user ? <UserNoteList userId={user?.id} /> : null}
       </div>
     </Layout>
   );

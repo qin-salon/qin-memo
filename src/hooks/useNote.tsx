@@ -1,11 +1,12 @@
 import { ClipboardCopyIcon, DotsCircleHorizontalIcon, EyeIcon, EyeOffIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { TwitterIcon } from "src/components/icon/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
 import { Button } from "src/components/shared/Button";
-import type { NotePutRequest, NoteType } from "src/types/types";
+import type { NoteType } from "src/types/types";
 
 const useNoteMenu = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -46,14 +47,18 @@ export const useNote = (note: NoteType) => {
   const { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo } =
     useDeleteNoteDialog(note);
   const [isPublic, setIsPublic] = useState(note.public);
+  const authUser = useAuthUser();
 
   const handleTogglePublicState = useCallback(async () => {
-    const req: NotePutRequest = { id: note.id, public: !isPublic };
-    await fetch(`/notes/${note.id}/public`, { method: "patch", body: JSON.stringify(req) });
+    const idToken = await authUser.getIdToken();
+    await fetch(`/api/proxy/v1/notes/${note.id}/public`, {
+      method: "patch",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
     handleCloseMenu();
     await sleep(200);
     setIsPublic(!isPublic);
-  }, [handleCloseMenu, isPublic, note.id]);
+  }, [authUser, handleCloseMenu, isPublic, note.id]);
 
   // ヘッダーの右メニュー部分
   const headerRight = useMemo(() => {

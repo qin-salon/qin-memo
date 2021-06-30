@@ -49,11 +49,11 @@ const NoteList: VFC<NoteListProps> = (props) => {
 };
 
 export const UserNoteList: VFC<{ userId: string }> = (props) => {
-  const res = useSWR<ListNoteType[]>(`/users/${props.userId}/notes`);
+  const res = useSWR<ListNoteType[]>(`/api/proxy/v1/users/${props.userId}/notes`);
   return <NoteList {...res} />;
 };
 
 export const SearchNoteList: VFC<{ userId: string; keyword: string }> = (props) => {
-  const res = useSWR(`/users/${props.userId}/notes/search/${props.keyword}`);
+  const res = useSWR(`/api/proxy/v1/users/${props.userId}/notes/search?q=${props.keyword}`);
   return <NoteList {...res} />;
 };

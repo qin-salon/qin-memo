@@ -1,20 +1,20 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
-import { AuthAction, withAuthUser } from "next-firebase-auth";
+import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, FormEvent } from "react";
 import { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
+import { useUser, withUser } from "src/components/providers/UserProvider";
 import { SearchHistories } from "src/components/SearchHistories";
 import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
-import { EXAMPLE_USER_01 } from "src/models/user";
 import type { SearchHistoryType } from "src/types/types";
 
-const user = EXAMPLE_USER_01;
-
 const Search: NextPage = () => {
+  const authUser = useAuthUser();
+  const { user } = useUser();
   const [value, setValue] = useState("");
   const [keyword, setKeyword] = useState("");
 
@@ -26,13 +26,19 @@ const Search: NextPage = () => {
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setKeyword(value);
-      const req: Pick<SearchHistoryType, "keyword"> = { keyword };
-      await fetch(`/users/${user.id}/searchHistories`, {
-        method: "post",
-        body: JSON.stringify(req),
-      });
+      const req: Pick<SearchHistoryType, "keyword"> = { keyword: value };
+      try {
+        const idToken = await authUser.getIdToken();
+        await fetch(`/api/proxy/v1/users/${user?.id}/searchHistories`, {
+          method: "post",
+          headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
+          body: JSON.stringify(req),
+        });
+      } catch (error) {
+        console.error(error);
+      }
     },
-    [keyword, value]
+    [authUser, user?.id, value]
   );
 
   const handleClose = useCallback(() => {
@@ -60,12 +66,15 @@ const Search: NextPage = () => {
       }
       right={right}
     >
-      {keyword === "" ? <SearchHistories /> : <SearchNoteList userId={user.id} keyword={keyword} />}
+      {user ? (
+        keyword === "" ? (
+          <SearchHistories setKeyword={setKeyword} />
+        ) : (
+          <SearchNoteList userId={user.id} keyword={keyword} />
+        )
+      ) : null}
     </Layout>
   );
 };
 
-export default withAuthUser({
-  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-})(Search);
+export default withUser(Search);
