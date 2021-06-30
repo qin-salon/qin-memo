@@ -29,6 +29,24 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
       const res = await fetch("/api/proxy/v1/users", {
         headers: { authorization: `Bearer ${token}` },
       });
+
+      if (res.status === 404) {
+        const body = {
+          uid: authUser.id,
+          name: authUser.displayName,
+          avatarUrl: authUser.photoURL,
+        };
+        const res = await fetch("/api/proxy/v1/users", {
+          method: "POST",
+          headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        // TODO: ここはtypeguard
+        const json: UserType = await res.json();
+        return setUser(json);
+      }
+
+      // TODO: ここはtypeguard
       const json: UserType = await res.json();
       setUser(json);
     } catch (error) {
