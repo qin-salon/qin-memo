@@ -1,4 +1,7 @@
+import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
+import { useForm } from "react-hook-form";
+import { useUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
@@ -6,7 +9,34 @@ import type { UserType } from "src/types/types";
 
 type ProfileFormProps = { user?: UserType };
 
+type Form = {
+  name: string;
+  accountId: string;
+  avatarUrl: string;
+};
+
 export const ProfileForm: VFC<ProfileFormProps> = (props) => {
+  const authUser = useAuthUser();
+  const { user } = useUser();
+  const { register, handleSubmit } = useForm<Form>();
+
+  const handleSave = handleSubmit(async (data) => {
+    try {
+      const idToken = await authUser.getIdToken();
+      await fetch(`/api/proxy/v1/users/${user?.id}`, {
+        method: "PUT",
+        headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  });
+
+  // TODO: 修正必要
+  if (!user) return null;
+
+  // TOOD: アイコンの設定がまだ
   return (
     <div>
       <div className="space-y-6 sm:space-y-8">
@@ -24,13 +54,13 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
             </Button>
           </div>
         </div>
-        <Input name="name" label="名前" />
-        <Input name="id" label="ユーザー名" prefix="@" />
+        <Input label="名前" defaultValue={user?.name} {...register("name")} />
+        <Input label="ユーザー名" prefix="@" defaultValue={user?.accountId} {...register("accountId")} />
       </div>
 
       <div className="mt-12 space-y-4">
         {props.user ? (
-          <Button variant="solid-blue" className="p-3 w-full">
+          <Button variant="solid-blue" className="p-3 w-full" onClick={handleSave}>
             保存する
           </Button>
         ) : (
