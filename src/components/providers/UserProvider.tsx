@@ -47,8 +47,20 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
       }
 
       // TODO: ここはtypeguard
-      const json: UserType = await res.json();
-      setUser(json);
+      const userData: UserType = await res.json();
+
+      if (!userData.enabledQinMemo) {
+        const body = { enabledQinMemo: true };
+        const res = await fetch(`/api/proxy/v1/users/${userData?.id}`, {
+          method: "PUT",
+          headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+          body: JSON.stringify(body),
+        });
+        const json: UserType = await res.json();
+        return setUser(json);
+      }
+
+      setUser(userData);
     } catch (error) {
       console.error(error);
     }
