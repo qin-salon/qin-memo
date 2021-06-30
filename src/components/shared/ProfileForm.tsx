@@ -1,6 +1,7 @@
+import firebase from "firebase";
 import { useAuthUser } from "next-firebase-auth";
-import type { VFC } from "react";
-import { useForm } from "react-hook-form";
+import type { ChangeEvent, VFC } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
@@ -9,29 +10,57 @@ import type { UserType } from "src/types/types";
 
 type ProfileFormProps = { user?: UserType };
 
-type Form = {
-  name: string;
-  accountId: string;
-  avatarUrl: string;
+const createAvatarUrl = (userId?: string) => {
+  if (!userId) return;
+  const filePath = encodeURIComponent(`thumbnails/${userId}_200x200`);
+  return `${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_URL}/${filePath}?alt=media`;
 };
 
 export const ProfileForm: VFC<ProfileFormProps> = (props) => {
+  // TODO: ここhooksにまとめたい
   const authUser = useAuthUser();
   const { user } = useUser();
-  const { register, handleSubmit } = useForm<Form>();
+  const [selectedFile, setSelectedFile] = useState<File>();
+  const [imageUrl, setImageUrl] = useState<string>();
+  const nameRef = useRef<HTMLInputElement>(null);
+  const accountIdRef = useRef<HTMLInputElement>(null);
+  const imageRef = useRef<HTMLInputElement>(null);
+  const handleOpenFileDialog = useCallback(() => {
+    imageRef.current?.click();
+  }, []);
 
-  const handleSave = handleSubmit(async (data) => {
+  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target?.files?.item(0);
+    if (file) {
+      setSelectedFile(file);
+      const url = URL.createObjectURL(file);
+      setImageUrl(url);
+    }
+  }, []);
+
+  const handleSave = useCallback(async () => {
     try {
+      if (!nameRef.current?.value || !accountIdRef.current?.value) {
+        return;
+      }
+      if (selectedFile) {
+        await firebase.storage().ref(user?.id).put(selectedFile);
+      }
       const idToken = await authUser.getIdToken();
+      const body = {
+        name: nameRef.current.value,
+        accountId: accountIdRef.current?.value,
+        avatarUrl: createAvatarUrl(user?.id),
+      };
       await fetch(`/api/proxy/v1/users/${user?.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(body),
       });
     } catch (error) {
       console.error(error);
     }
-  });
+  }, [authUser, selectedFile, user?.id]);
 
   // TODO: 修正必要
   if (!user) return null;
@@ -43,19 +72,21 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
         <div>
           <div className="flex justify-start items-center space-x-6">
             <Avatar
-              src={props.user?.avatarUrl}
+              noDialog
+              src={imageUrl ?? props.user?.avatarUrl}
               alt={props.user?.name}
               width={96}
               height={96}
               className="overflow-hidden w-24 h-24 rounded-full"
             />
-            <Button variant="solid-gray" className="py-2.5 px-5 mt-4">
+            <input ref={imageRef} type="file" className="hidden" onChange={handleFileChange} />
+            <Button variant="solid-gray" className="py-2.5 px-5 mt-4" onClick={handleOpenFileDialog}>
               アイコンを{props.user ? "変更する" : "設定する"}
             </Button>
           </div>
         </div>
-        <Input label="名前" defaultValue={user?.name} {...register("name")} />
-        <Input label="ユーザー名" prefix="@" defaultValue={user?.accountId} {...register("accountId")} />
+        <Input name="name" label="名前" defaultValue={user?.name} ref={nameRef} />
+        <Input name="accountId" label="ユーザー名" prefix="@" defaultValue={user?.accountId} ref={accountIdRef} />
       </div>
 
       <div className="mt-12 space-y-4">

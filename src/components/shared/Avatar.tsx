@@ -27,6 +27,10 @@ export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
   }
 
   if (noDialog) {
+    if (imageProps.src.toString().includes("blob")) {
+      // eslint-disable-next-line @next/next/no-img-element
+      return <img src={imageProps.src.toString()} alt={imageProps.alt} />;
+    }
     return <Image {...imageProps} />;
   }
 
