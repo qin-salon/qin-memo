@@ -155,8 +155,8 @@ const UserMenu: VFC = () => {
                             noDialog
                           />
                           <div className="ml-4">
-                            <p className="text-base font-bold">しまぶー</p>
-                            <p className="text-sm text-gray-400">@shimabu</p>
+                            <p className="text-base font-bold">{user.name}</p>
+                            <p className="text-sm text-gray-400">@{user.accountId}</p>
                           </div>
                         </a>
                       </Link>
