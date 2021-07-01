@@ -1,26 +1,31 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
+import { AuthAction, useAuthUser, withAuthUserTokenSSR } from "next-firebase-auth";
 import type { ChangeEvent } from "react";
 import { useCallback, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
 import { ConfirmDialog } from "src/components/ConfirmDialog";
 import { MenuDialog } from "src/components/MenuDialog";
 import { NoteMenu } from "src/components/NoteMenu";
+import { withUser } from "src/components/providers/UserProvider";
 import { Layout } from "src/components/shared/Layout";
 import { useNote } from "src/hooks/useNote";
-import { EXAMPLE_NOTE } from "src/models/note";
 import type { NoteType } from "src/types/types";
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: "blocking" };
-};
-
-export const getStaticProps: GetStaticProps<NoteType, { noteId: string }> = async ({ params: _ }) => {
-  // const res = await fetch(`/notes/${params?.noteId}`);
-  // const data: NoteType = await res.json();
-  return { props: EXAMPLE_NOTE, revalidate: 60 };
-};
+export const getServerSideProps = withAuthUserTokenSSR({
+  whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
+})(async (props) => {
+  const idToken = await props.AuthUser.getIdToken();
+  const response = await fetch(`http://localhost:3000/api/proxy/v1/notes/${props.params?.noteId}`, {
+    headers: { authorization: `Bearer ${idToken}` },
+  });
+  const data = await response.json();
+  return {
+    props: { ...data },
+  };
+});
 
 const MemosNoteId: NextPage<NoteType> = (props) => {
+  const authUser = useAuthUser();
   const {
     headerRight,
     menu,
@@ -31,9 +36,22 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
     handleCloseDeleteNoteDialog,
   } = useNote(props);
   const [content, setContent] = useState(props.content);
-  const handleChangeContent = useCallback((event: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(event.currentTarget.value);
-  }, []);
+  const handleChangeContent = useCallback(
+    async (event: ChangeEvent<HTMLTextAreaElement>) => {
+      setContent(event.currentTarget.value);
+      try {
+        const idToken = await authUser.getIdToken();
+        await fetch(`/api/proxy/v1/notes/${props.id}`, {
+          method: "PUT",
+          headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
+          body: JSON.stringify({ content }),
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [authUser, content, props.id]
+  );
 
   return (
     <>
@@ -70,4 +88,5 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
   );
 };
 
-export default MemosNoteId;
+// TODO: 修正必要
+export default withUser(MemosNoteId as any);

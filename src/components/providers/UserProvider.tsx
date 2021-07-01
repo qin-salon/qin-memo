@@ -85,11 +85,11 @@ export const withUser = (Component: NextPage) => {
   return withAuthUser({
     whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
     whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-  })(() => {
+  })((props) => {
     return (
       <UserProvider>
         <SWRComponent>
-          <Component />
+          <Component {...props} />
         </SWRComponent>
       </UserProvider>
     );

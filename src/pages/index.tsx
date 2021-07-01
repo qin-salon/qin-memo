@@ -1,20 +1,41 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useAuthUser } from "next-firebase-auth";
+import { useCallback } from "react";
 import { UserNoteList } from "src/components/NoteList";
 import { useUser, withUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
+import type { NoteType } from "src/types/types";
 
 const Index: NextPage = () => {
+  const router = useRouter();
+  const authUser = useAuthUser();
   const { user } = useUser();
+  const handleCreateMemo = useCallback(async () => {
+    try {
+      if (!user?.id) return;
+      const idToken = await authUser.getIdToken();
+      const res = await fetch(`/api/proxy/v1/users/${user.id}/notes`, {
+        method: "POST",
+        headers: { authorization: `Bearer ${idToken}` },
+      });
+      // TODO: typeguard
+      const data: NoteType = await res.json();
+      await router.push(`/memos/${data.id}`);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [authUser, router, user?.id]);
 
   return (
     <Layout
       left="memo"
       right={[
-        <Button key="write memo" variant="solid-blue" linkProps={{ href: "/memos/new" }} className="px-4 h-10">
+        <Button key="write memo" variant="solid-blue" onClick={handleCreateMemo} className="px-4 h-10">
           メモを書く
         </Button>,
         "profile",
