@@ -3,6 +3,7 @@ import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import type { Dispatch, ReactNode, SetStateAction, VFC } from "react";
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { UserType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 import { SWRConfig } from "swr";
 
 type ContextType = {
@@ -26,7 +27,7 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
       }
 
       const token = await authUser.getIdToken();
-      const res = await fetch("/api/proxy/v1/users", {
+      const res = await fetch(`${API_URL}/v1/users`, {
         headers: { authorization: `Bearer ${token}` },
       });
 
@@ -36,7 +37,7 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
           name: authUser.displayName,
           avatarUrl: authUser.photoURL,
         };
-        const res = await fetch("/api/proxy/v1/users", {
+        const res = await fetch(`${API_URL}/v1/users`, {
           method: "POST",
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),
@@ -51,7 +52,7 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
 
       if (!userData.enabledQinMemo) {
         const body = { enabledQinMemo: true };
-        const res = await fetch(`/api/proxy/v1/users/${userData?.id}`, {
+        const res = await fetch(`${API_URL}/v1/users/${userData?.id}`, {
           method: "PUT",
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),

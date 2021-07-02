@@ -7,6 +7,7 @@ import { TwitterIcon } from "src/components/icon/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
 import { Button } from "src/components/shared/Button";
 import type { NoteType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 const useNoteMenu = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -32,7 +33,7 @@ const useDeleteNoteDialog = (note: NoteType) => {
   const handleDeleteMemo = useCallback(async () => {
     try {
       const idToken = await authUser.getIdToken();
-      await fetch(`/api/proxy/v1/notes/${note.id}`, {
+      await fetch(`${API_URL}/v1/notes/${note.id}`, {
         method: "delete",
         headers: { authorization: `Bearer ${idToken}` },
       });
@@ -60,7 +61,7 @@ export const useNote = (note: NoteType) => {
 
   const handleTogglePublicState = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`/api/proxy/v1/notes/${note.id}/public`, {
+    await fetch(`${API_URL}/v1/notes/${note.id}/public`, {
       method: "patch",
       headers: { authorization: `Bearer ${idToken}` },
     });

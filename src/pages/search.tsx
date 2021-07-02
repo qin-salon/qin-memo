@@ -11,6 +11,7 @@ import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import type { SearchHistoryType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 const Search: NextPage = () => {
   const authUser = useAuthUser();
@@ -29,7 +30,7 @@ const Search: NextPage = () => {
       const req: Pick<SearchHistoryType, "keyword"> = { keyword: value };
       try {
         const idToken = await authUser.getIdToken();
-        await fetch(`/api/proxy/v1/users/${user?.id}/searchHistories`, {
+        await fetch(`${API_URL}/v1/users/${user?.id}/searchHistories`, {
           method: "post",
           headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
           body: JSON.stringify(req),

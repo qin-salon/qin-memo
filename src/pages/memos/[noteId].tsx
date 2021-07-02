@@ -10,12 +10,13 @@ import { withUser } from "src/components/providers/UserProvider";
 import { Layout } from "src/components/shared/Layout";
 import { useNote } from "src/hooks/useNote";
 import type { NoteType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 })(async (props) => {
   const idToken = await props.AuthUser.getIdToken();
-  const response = await fetch(`http://localhost:3000/api/proxy/v1/notes/${props.params?.noteId}`, {
+  const response = await fetch(`${API_URL}/v1/notes/${props.params?.noteId}`, {
     headers: { authorization: `Bearer ${idToken}` },
   });
   const data = await response.json();
@@ -41,7 +42,7 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
       setContent(event.currentTarget.value);
       try {
         const idToken = await authUser.getIdToken();
-        await fetch(`/api/proxy/v1/notes/${props.id}`, {
+        await fetch(`${API_URL}/v1/notes/${props.id}`, {
           method: "PUT",
           headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
           body: JSON.stringify({ content }),

@@ -7,6 +7,7 @@ import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
 import type { UserType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 type ProfileFormProps = { user?: UserType };
 
@@ -52,7 +53,7 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
         accountId: accountIdRef.current?.value,
         avatarUrl: createAvatarUrl(user?.id),
       };
-      await fetch(`/api/proxy/v1/users/${user?.id}`, {
+      await fetch(`${API_URL}/v1/users/${user?.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify(body),

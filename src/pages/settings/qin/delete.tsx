@@ -5,6 +5,7 @@ import { useUser, withUser } from "src/components/providers/UserProvider";
 import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { RecursiveList } from "src/components/shared/List";
+import { API_URL } from "src/utils/constants";
 
 const SettingsQinDelete: NextPage = () => {
   const authUser = useAuthUser();
@@ -13,7 +14,7 @@ const SettingsQinDelete: NextPage = () => {
   const handleDeleteQinMemo = useCallback(async () => {
     try {
       const idToken = await authUser.getIdToken();
-      await fetch(`/api/proxy/v1/users/${user?.id}/service`, {
+      await fetch(`${API_URL}/v1/users/${user?.id}/service`, {
         method: "DELETE",
         headers: { authorization: `Bearer ${idToken}` },
       });
@@ -25,7 +26,7 @@ const SettingsQinDelete: NextPage = () => {
 
   const handleDeleteQinAccount = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`/api/proxy/v1/users/${user?.id}`, {
+    await fetch(`${API_URL}/v1/users/${user?.id}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });

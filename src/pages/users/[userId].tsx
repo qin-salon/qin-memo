@@ -10,6 +10,7 @@ import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import type { NoteType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 const UsersUserId: NextPage = () => {
   const authUser = useAuthUser();
@@ -19,7 +20,7 @@ const UsersUserId: NextPage = () => {
     try {
       if (!user?.id) return;
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`/api/proxy/v1/users/${user.id}/notes`, {
+      const res = await fetch(`${API_URL}/v1/users/${user.id}/notes`, {
         method: "POST",
         headers: { authorization: `Bearer ${idToken}` },
       });

@@ -4,6 +4,7 @@ import type { Dispatch, SetStateAction, VFC } from "react";
 import { useUser } from "src/components/providers/UserProvider";
 import { Error } from "src/components/shared/Error";
 import type { SearchHistoryType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 import type { SWRResponse } from "swr";
 import useSWR from "swr";
 
@@ -13,7 +14,7 @@ type SearchHistoriesProps = {
 
 export const SearchHistories: VFC<SearchHistoriesProps> = (props) => {
   const { user } = useUser();
-  const { data, error, mutate } = useSWR<SearchHistoryType[]>(`/api/proxy/v1/users/${user?.id}/searchHistories`);
+  const { data, error, mutate } = useSWR<SearchHistoryType[]>(`${API_URL}/v1/users/${user?.id}/searchHistories`);
 
   if (error) {
     return <Error />;
@@ -49,7 +50,7 @@ const HistoryItem: VFC<HistoryItemProps> = (props) => {
   const handleHistoryDeleteClick = async () => {
     // deleteメソッド
     const idToken = await authUser.getIdToken();
-    await fetch(`/api/proxy/v1/searchHistories/${props.id}`, {
+    await fetch(`${API_URL}/v1/searchHistories/${props.id}`, {
       method: "delete",
       headers: { authorization: `Bearer ${idToken}` },
     });
