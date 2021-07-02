@@ -21,6 +21,7 @@ const useNoteMenu = () => {
 
 const useDeleteNoteDialog = (note: NoteType) => {
   const router = useRouter();
+  const authUser = useAuthUser();
   const [isShowDeleteNoteDialog, setIsShowDeleteNoteDialog] = useState(false);
   const handleOpenDeleteNoteDialog = useCallback(() => {
     setIsShowDeleteNoteDialog(true);
@@ -29,10 +30,18 @@ const useDeleteNoteDialog = (note: NoteType) => {
     setIsShowDeleteNoteDialog(false);
   }, []);
   const handleDeleteMemo = useCallback(async () => {
-    await fetch(`/notes/${note.id}`, { method: "delete" });
-    await router.push("/");
-    toast.success("削除しました");
-  }, [note.id, router]);
+    try {
+      const idToken = await authUser.getIdToken();
+      await fetch(`/api/proxy/v1/notes/${note.id}`, {
+        method: "delete",
+        headers: { authorization: `Bearer ${idToken}` },
+      });
+      await router.push("/");
+      toast.success("削除しました");
+    } catch (error) {
+      console.error(error);
+    }
+  }, [authUser, note.id, router]);
   return { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo };
 };
 
