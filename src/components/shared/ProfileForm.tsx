@@ -1,4 +1,6 @@
-import firebase from "firebase";
+import "firebase/storage";
+
+import firebase from "firebase/app";
 import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, VFC } from "react";
 import { useCallback, useRef, useState } from "react";

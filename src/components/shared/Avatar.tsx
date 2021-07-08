@@ -3,15 +3,19 @@ import { XIcon } from "@heroicons/react/outline";
 import type { ImageProps } from "next/image";
 import Image from "next/image";
 import NoProfileImage from "public/no-profile-image.webp";
-import type { VFC } from "react";
+import type { ImgHTMLAttributes, VFC } from "react";
 import { Fragment, useCallback, useState } from "react";
 
-type DialogImageProps = ImageProps & { noDialog?: boolean };
+type DialogImageProps = (ImageProps | ImgHTMLAttributes<HTMLImageElement>) & { noDialog?: boolean };
 
 type SrcUndefinedImageProps = Omit<DialogImageProps, "src"> & { src?: DialogImageProps["src"] };
 
 const hasSrc = (props: DialogImageProps | SrcUndefinedImageProps): props is DialogImageProps => {
   return !!props.src;
+};
+
+const isBlob = (props: DialogImageProps): props is ImgHTMLAttributes<HTMLImageElement> => {
+  return typeof props.src === "string" && props.src.startsWith("blob");
 };
 
 export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
@@ -26,11 +30,12 @@ export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
     );
   }
 
+  if (isBlob(imageProps)) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return <img {...imageProps} alt={imageProps.alt} />;
+  }
+
   if (noDialog) {
-    if (imageProps.src.toString().includes("blob")) {
-      // eslint-disable-next-line @next/next/no-img-element
-      return <img src={imageProps.src.toString()} alt={imageProps.alt} />;
-    }
     return <Image {...imageProps} />;
   }
 
