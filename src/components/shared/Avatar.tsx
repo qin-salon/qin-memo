@@ -1,48 +1,47 @@
+/* eslint-disable @next/next/no-img-element */
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import type { ImageProps } from "next/image";
+import type { ImageProps as NextImageProps } from "next/image";
 import Image from "next/image";
 import NoProfileImage from "public/no-profile-image.webp";
 import type { ImgHTMLAttributes, VFC } from "react";
 import { Fragment, useCallback, useState } from "react";
 
-type DialogImageProps = (ImageProps | ImgHTMLAttributes<HTMLImageElement>) & { noDialog?: boolean };
+type BlobImage = ImgHTMLAttributes<HTMLImageElement>;
 
-type SrcUndefinedImageProps = Omit<DialogImageProps, "src"> & { src?: DialogImageProps["src"] };
+type ImageProps = BlobImage | (NextImageProps & { noDialog?: boolean });
 
-const hasSrc = (props: DialogImageProps | SrcUndefinedImageProps): props is DialogImageProps => {
+type AvatarProps = ImageProps | (Omit<ImageProps, "src"> & { src?: ImageProps["src"] });
+
+const hasSrc = (props: AvatarProps): props is ImageProps => {
   return !!props.src;
 };
 
-const isBlob = (props: DialogImageProps): props is ImgHTMLAttributes<HTMLImageElement> => {
+const isBlob = (props: ImageProps): props is BlobImage => {
   return typeof props.src === "string" && props.src.startsWith("blob");
 };
 
-export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
-  // eslint-disable-next-line react/destructuring-assignment
-  const { noDialog, ...imageProps } = props;
-
-  if (!hasSrc(imageProps)) {
+export const Avatar: VFC<AvatarProps> = (props) => {
+  if (!hasSrc(props)) {
     return (
-      <div className={imageProps.className}>
+      <div className={props.className}>
         <Image src={NoProfileImage} alt="No Profile Image" />
       </div>
     );
   }
 
-  if (isBlob(imageProps)) {
-    // eslint-disable-next-line @next/next/no-img-element
-    return <img {...imageProps} alt={imageProps.alt} />;
+  if (isBlob(props)) {
+    return <img {...props} alt={props.alt} />;
   }
 
-  if (noDialog) {
-    return <Image {...imageProps} />;
+  if (props.noDialog) {
+    return <Image {...props} />;
   }
 
-  return <DialogImage {...imageProps} />;
+  return <DialogImage {...props} />;
 };
 
-export const DialogImage: VFC<ImageProps> = (props) => {
+export const DialogImage: VFC<NextImageProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
   const handleOpen = useCallback(() => {
     setIsShow(true);
@@ -82,7 +81,6 @@ export const DialogImage: VFC<ImageProps> = (props) => {
               leaveTo="opacity-0"
             >
               <div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="absolute inset-0 m-auto max-w-full max-h-full"
                   src={typeof props.src === "string" ? props.src : "/no-profile-image.webp"}
