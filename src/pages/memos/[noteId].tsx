@@ -20,9 +20,7 @@ export const getServerSideProps = withAuthUserTokenSSR({
     headers: { authorization: `Bearer ${idToken}` },
   });
   const data = await response.json();
-  return {
-    props: { ...data },
-  };
+  return { props: data };
 });
 
 const MemosNoteId: NextPage<NoteType> = (props) => {

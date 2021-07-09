@@ -8,10 +8,7 @@ import { useUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
-import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
-
-type ProfileFormProps = { user?: UserType };
 
 const createAvatarUrl = (userId?: string) => {
   if (!userId) return;
@@ -19,7 +16,7 @@ const createAvatarUrl = (userId?: string) => {
   return `${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_URL}/${filePath}?alt=media`;
 };
 
-export const ProfileForm: VFC<ProfileFormProps> = (props) => {
+export const ProfileForm: VFC = () => {
   // TODO: ここhooksにまとめたい
   const authUser = useAuthUser();
   const { user } = useUser();
@@ -73,15 +70,15 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
           <div className="flex justify-start items-center space-x-6">
             <Avatar
               noDialog
-              src={imageUrl ?? props.user?.avatarUrl}
-              alt={props.user?.name}
+              src={imageUrl ?? user?.avatarUrl}
+              alt={user?.name}
               width={96}
               height={96}
               className="overflow-hidden w-24 h-24 rounded-full"
             />
             <input ref={imageRef} type="file" className="hidden" onChange={handleFileChange} />
             <Button variant="solid-gray" className="py-2.5 px-5 mt-4" onClick={handleOpenFileDialog}>
-              アイコンを{props.user ? "変更する" : "設定する"}
+              アイコンを{user ? "変更する" : "設定する"}
             </Button>
           </div>
         </div>
@@ -90,7 +87,7 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
       </div>
 
       <div className="mt-12 space-y-4">
-        {props.user ? (
+        {user ? (
           <Button variant="solid-blue" className="p-3 w-full" onClick={handleSave}>
             保存する
           </Button>
