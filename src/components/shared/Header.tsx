@@ -109,8 +109,6 @@ const UserMenu: VFC = () => {
     return AuthUser.signOut();
   }, [AuthUser]);
 
-  if (!user) return null;
-
   return (
     <Popover className="grid">
       {({ open }) => {
@@ -118,8 +116,8 @@ const UserMenu: VFC = () => {
           <>
             <Popover.Button className="flex rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
               <Avatar
-                alt={user.name}
-                src={user.avatarUrl}
+                alt={user?.name}
+                src={user?.avatarUrl}
                 width={40}
                 height={40}
                 className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
@@ -147,16 +145,16 @@ const UserMenu: VFC = () => {
                       <Link href="/settings/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
                           <Avatar
-                            alt={user.name}
-                            src={user.avatarUrl}
+                            alt={user?.name}
+                            src={user?.avatarUrl}
                             width={56}
                             height={56}
                             className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
                             noDialog
                           />
                           <div className="ml-4">
-                            <p className="text-base font-bold">{user.name}</p>
-                            <p className="text-sm text-gray-400">@{user.accountId}</p>
+                            <p className="text-base font-bold">{user?.name}</p>
+                            <p className="text-sm text-gray-400">@{user?.accountId}</p>
                           </div>
                         </a>
                       </Link>
