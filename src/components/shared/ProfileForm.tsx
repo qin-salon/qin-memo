@@ -65,9 +65,6 @@ export const ProfileForm: VFC<ProfileFormProps> = (props) => {
     }
   }, [authUser, selectedFile, user?.id]);
 
-  // TODO: 修正必要
-  if (!user) return null;
-
   // TOOD: アイコンの設定がまだ
   return (
     <div>

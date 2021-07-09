@@ -12,20 +12,26 @@ import { Layout } from "src/components/shared/Layout";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
+const isNoteType = (data: any): data is NoteType => {
+  return data.id !== undefined;
+};
+
 const Index: NextPage = () => {
   const router = useRouter();
   const authUser = useAuthUser();
   const { user } = useUser();
   const handleCreateMemo = useCallback(async () => {
+    if (!user?.id) return;
     try {
-      if (!user?.id) return;
       const idToken = await authUser.getIdToken();
       const res = await fetch(`${API_URL}/v1/users/${user.id}/notes`, {
         method: "POST",
         headers: { authorization: `Bearer ${idToken}` },
       });
-      // TODO: typeguard
-      const data: NoteType = await res.json();
+      const data = await res.json();
+      if (!isNoteType(data)) {
+        throw new Error("Failed to create memo");
+      }
       await router.push(`/memos/${data.id}`);
     } catch (error) {
       console.error(error);
@@ -65,7 +71,7 @@ const Index: NextPage = () => {
           </a>
         </Link>
 
-        {user ? <UserNoteList userId={user?.id} /> : null}
+        {user ? <UserNoteList userId={user.id} /> : null}
       </div>
     </Layout>
   );
