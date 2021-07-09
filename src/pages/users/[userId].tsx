@@ -62,7 +62,7 @@ const UsersUserId: NextPage = () => {
         </Link>
 
         {/* TODO:修正必要かも */}
-        {user ? <UserNoteList userId={user?.id} /> : null}
+        {user ? <UserNoteList userId={user.id} /> : null}
       </div>
     </Layout>
   );
