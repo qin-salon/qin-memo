@@ -9,11 +9,11 @@ import { Fragment, useCallback, useState } from "react";
 
 type BlobImage = ImgHTMLAttributes<HTMLImageElement>;
 
-type ImageProps = BlobImage | (NextImageProps & { noDialog?: boolean });
+type ImageProps = (BlobImage | NextImageProps) & { noDialog?: boolean };
 
-type AvatarProps = ImageProps | (Omit<ImageProps, "src"> & { src?: ImageProps["src"] });
+type ImagePropsSrcUndefinedable = Omit<ImageProps, "src"> & { src?: ImageProps["src"] };
 
-const hasSrc = (props: AvatarProps): props is ImageProps => {
+const hasSrc = (props: ImagePropsSrcUndefinedable): props is ImageProps => {
   return !!props.src;
 };
 
@@ -21,7 +21,7 @@ const isBlob = (props: ImageProps): props is BlobImage => {
   return typeof props.src === "string" && props.src.startsWith("blob");
 };
 
-export const Avatar: VFC<AvatarProps> = (props) => {
+export const Avatar: VFC<ImagePropsSrcUndefinedable> = (props) => {
   if (!hasSrc(props)) {
     return (
       <div className={props.className}>
@@ -31,11 +31,13 @@ export const Avatar: VFC<AvatarProps> = (props) => {
   }
 
   if (isBlob(props)) {
-    return <img {...props} alt={props.alt} />;
+    const { noDialog: _, alt, ...others } = props;
+    return <img {...others} alt={alt} />;
   }
 
   if (props.noDialog) {
-    return <Image {...props} />;
+    const { noDialog: _, alt, ...others } = props;
+    return <Image {...others} alt={alt} />;
   }
 
   return <DialogImage {...props} />;
@@ -53,7 +55,7 @@ export const DialogImage: VFC<NextImageProps> = (props) => {
   return (
     <>
       <button className="contents" onClick={handleOpen}>
-        <Image {...props} />
+        <Image {...props} alt={props.alt} />
       </button>
 
       <Transition as={Fragment} show={isShow}>
