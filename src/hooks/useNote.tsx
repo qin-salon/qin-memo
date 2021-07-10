@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { TwitterIcon } from "src/components/icon/TwitterIcon";
+import { TwitterIcon } from "src/components/icons/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
 import { Button } from "src/components/shared/Button";
 import type { NoteType } from "src/types/types";

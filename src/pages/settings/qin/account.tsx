@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
-import { AppleIcon } from "src/components/icon/AppleIcon";
-import { GoogleIcon } from "src/components/icon/GoogleIcon";
+import { AppleIcon } from "src/components/icons/AppleIcon";
+import { GoogleIcon } from "src/components/icons/GoogleIcon";
 import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { List } from "src/components/shared/List";
