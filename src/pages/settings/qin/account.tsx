@@ -25,7 +25,7 @@ const SettingsQinAccount: NextPage = () => {
             {
               label: (
                 <div className="flex items-center">
-                  <GoogleIcon />
+                  <GoogleIcon className="w-6 h-6" />
                   <div className="flex-1 ml-3 font-bold">Google</div>
                 </div>
               ),
@@ -38,7 +38,7 @@ const SettingsQinAccount: NextPage = () => {
             {
               label: (
                 <div className="flex items-center">
-                  <AppleIcon />
+                  <AppleIcon className="w-6 h-6" />
                   <div className="flex-1 ml-3 font-bold">Apple</div>
                 </div>
               ),

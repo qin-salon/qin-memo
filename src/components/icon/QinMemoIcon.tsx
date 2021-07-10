@@ -1,9 +1,7 @@
 import type { VFC } from "react";
 import { useGetIconFillColor } from "src/hooks/useTheme";
 
-type QinMemoIconProps = { className?: string };
-
-export const QinMemoIcon: VFC<QinMemoIconProps> = (props) => {
+export const QinMemoIcon: VFC<{ className?: string }> = (props) => {
   const { fillColor } = useGetIconFillColor();
 
   return (
