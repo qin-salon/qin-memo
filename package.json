@@ -34,7 +34,7 @@
     "firebase": "^8.7.1",
     "firebase-admin": "^9.11.0",
     "http-proxy": "^1.18.1",
-    "next": "11.0.1",
+    "next": "^11.0.2-canary.16",
     "next-firebase-auth": "^0.13.2",
     "next-themes": "^0.0.15",
     "react": "17.0.2",
