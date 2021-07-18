@@ -8,9 +8,9 @@ import type { VFC } from "react";
 import { Fragment, memo, useCallback } from "react";
 import { QinAccountIcon } from "src/components/icons/QinAccountIcon";
 import { QinMemoIcon } from "src/components/icons/QinMemoIcon";
-import { useUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
+import { useUser } from "src/domains/auth";
 
 type Right = "profile" | JSX.Element;
 

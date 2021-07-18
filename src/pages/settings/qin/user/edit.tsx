@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
-import { withUser } from "src/components/providers/UserProvider";
 import { Layout } from "src/components/shared/Layout";
 import { ProfileForm } from "src/components/shared/ProfileForm";
+import { withUser } from "src/domains/auth";
 
 const SettingsQinUserEdit: NextPage = () => {
   return (

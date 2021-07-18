@@ -5,11 +5,11 @@ import type { ChangeEvent, FormEvent } from "react";
 import { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
-import { useUser, withUser } from "src/components/providers/UserProvider";
 import { SearchHistories } from "src/components/SearchHistories";
 import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
+import { useUser, withUser } from "src/domains/auth";
 import type { SearchHistoryType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 

@@ -4,10 +4,11 @@ import firebase from "firebase/app";
 import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, VFC } from "react";
 import { useCallback, useRef, useState } from "react";
-import { useUser } from "src/components/providers/UserProvider";
+import toast from "react-hot-toast";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
+import { useUser } from "src/domains/auth";
 import { API_URL } from "src/utils/constants";
 
 const createAvatarUrl = (userId?: string) => {
@@ -57,8 +58,10 @@ export const ProfileForm: VFC = () => {
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify(body),
       });
+      toast.success("保存しました");
     } catch (error) {
       console.error(error);
+      toast.success("失敗しました");
     }
   }, [authUser, selectedFile, user?.id]);
 

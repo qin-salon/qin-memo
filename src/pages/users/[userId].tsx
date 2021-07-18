@@ -4,11 +4,11 @@ import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { UserNoteList } from "src/components/NoteList";
-import { useUser, withUser } from "src/components/providers/UserProvider";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
+import { useUser, withUser } from "src/domains/auth";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 

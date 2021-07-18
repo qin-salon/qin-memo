@@ -1,19 +1,15 @@
 import type { NextPage } from "next";
 import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
-import type { Dispatch, ReactNode, SetStateAction, VFC } from "react";
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
+import type { VFC } from "react";
+import { useCallback, useEffect } from "react";
 import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
-import { SWRConfig } from "swr";
 
-type ContextType = {
-  user?: UserType;
-  setUser?: Dispatch<SetStateAction<UserType | undefined>>;
-};
-const UserContext = createContext<ContextType>({});
+import { SWRProvider } from "./SWRProvider";
+import { useUser } from "./UserProvider";
 
-const UserProvider: VFC<{ children: ReactNode }> = (props) => {
-  const [user, setUser] = useState<UserType | undefined>();
+const UserFetcher: VFC<{ children: JSX.Element }> = (props) => {
+  const { user, setUser } = useUser();
   const authUser = useAuthUser();
 
   const fetchUser = useCallback(async () => {
@@ -65,21 +61,13 @@ const UserProvider: VFC<{ children: ReactNode }> = (props) => {
     } catch (error) {
       console.error(error);
     }
-  }, [authUser, user]);
+  }, [authUser, setUser, user]);
 
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
 
-  return <UserContext.Provider value={{ user, setUser }}>{props.children}</UserContext.Provider>;
-};
-
-export const useUser = () => {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useUser must be used within a UserProvider");
-  }
-  return context;
+  return props.children;
 };
 
 export const withUser = (Component: NextPage) => {
@@ -88,33 +76,11 @@ export const withUser = (Component: NextPage) => {
     whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
   })((props) => {
     return (
-      <UserProvider>
-        <SWRComponent>
+      <UserFetcher>
+        <SWRProvider>
           <Component {...props} />
-        </SWRComponent>
-      </UserProvider>
+        </SWRProvider>
+      </UserFetcher>
     );
   });
-};
-
-const SWRComponent: VFC<{ children: ReactNode }> = (props) => {
-  const authUser = useAuthUser();
-
-  return (
-    <SWRConfig
-      value={{
-        fetcher: async (url: string) => {
-          const idToken = await authUser.getIdToken();
-          return fetch(url, { headers: { authorization: `Bearer ${idToken}` } }).then((res) => {
-            if (res.status === 200 || res.status === 201) {
-              return res.json();
-            }
-            throw new Error();
-          });
-        },
-      }}
-    >
-      {props.children}
-    </SWRConfig>
-  );
 };
