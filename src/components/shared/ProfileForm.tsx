@@ -45,7 +45,7 @@ export const ProfileForm: VFC = () => {
         return;
       }
       if (selectedFile) {
-        await firebase.storage().ref(user?.id).put(selectedFile);
+        await firebase.storage().ref(user?.id).put(selectedFile, { cacheControl: "public, maxage=1, s-maxage=1" });
       }
       const idToken = await authUser.getIdToken();
       const body = {
