@@ -1,11 +1,13 @@
 import { ClipboardCopyIcon, DotsCircleHorizontalIcon, EyeIcon, EyeOffIcon, TrashIcon } from "@heroicons/react/outline";
 import { useRouter } from "next/router";
+import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { TwitterIcon } from "src/components/icon/TwitterIcon";
+import { TwitterIcon } from "src/components/icons/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
 import { Button } from "src/components/shared/Button";
-import type { NotePutRequest, NoteType } from "src/types/types";
+import type { NoteType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 
 const useNoteMenu = () => {
   const [isShowMenu, setIsShowMenu] = useState(false);
@@ -20,6 +22,7 @@ const useNoteMenu = () => {
 
 const useDeleteNoteDialog = (note: NoteType) => {
   const router = useRouter();
+  const authUser = useAuthUser();
   const [isShowDeleteNoteDialog, setIsShowDeleteNoteDialog] = useState(false);
   const handleOpenDeleteNoteDialog = useCallback(() => {
     setIsShowDeleteNoteDialog(true);
@@ -28,10 +31,18 @@ const useDeleteNoteDialog = (note: NoteType) => {
     setIsShowDeleteNoteDialog(false);
   }, []);
   const handleDeleteMemo = useCallback(async () => {
-    await fetch(`/notes/${note.id}`, { method: "delete" });
-    await router.push("/");
-    toast.success("削除しました");
-  }, [note.id, router]);
+    try {
+      const idToken = await authUser.getIdToken();
+      await fetch(`${API_URL}/v1/notes/${note.id}`, {
+        method: "delete",
+        headers: { authorization: `Bearer ${idToken}` },
+      });
+      await router.push("/");
+      toast.success("削除しました");
+    } catch (error) {
+      console.error(error);
+    }
+  }, [authUser, note.id, router]);
   return { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo };
 };
 
@@ -46,14 +57,18 @@ export const useNote = (note: NoteType) => {
   const { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo } =
     useDeleteNoteDialog(note);
   const [isPublic, setIsPublic] = useState(note.public);
+  const authUser = useAuthUser();
 
   const handleTogglePublicState = useCallback(async () => {
-    const req: NotePutRequest = { id: note.id, public: !isPublic };
-    await fetch(`/notes/${note.id}/public`, { method: "patch", body: JSON.stringify(req) });
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/notes/${note.id}/public`, {
+      method: "patch",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
     handleCloseMenu();
     await sleep(200);
     setIsPublic(!isPublic);
-  }, [handleCloseMenu, isPublic, note.id]);
+  }, [authUser, handleCloseMenu, isPublic, note.id]);
 
   // ヘッダーの右メニュー部分
   const headerRight = useMemo(() => {

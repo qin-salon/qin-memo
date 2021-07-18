@@ -1,4 +1,5 @@
-import type { InputHTMLAttributes, VFC } from "react";
+import type { InputHTMLAttributes } from "react";
+import { forwardRef } from "react";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   label: string;
@@ -7,7 +8,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
 };
 
-export const Input: VFC<InputProps> = (props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <div className="block">
       <label htmlFor={props.name}>
@@ -23,6 +24,7 @@ export const Input: VFC<InputProps> = (props) => {
               props.prefix ? "pl-10" : "pl-5"
             }`}
             autoComplete="off"
+            ref={ref}
             {...props}
           />
         </div>
@@ -30,4 +32,6 @@ export const Input: VFC<InputProps> = (props) => {
       {props.error ? <p className="mt-0.5 ml-4 text-sm text-red-500">{props.error}</p> : null}
     </div>
   );
-};
+});
+
+Input.displayName === "Input";

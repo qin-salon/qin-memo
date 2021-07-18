@@ -3,9 +3,9 @@ import "firebase/auth";
 import firebase from "firebase/app";
 import type { VFC } from "react";
 import { useCallback } from "react";
-import { AppleIcon } from "src/components/icon/AppleIcon";
-import { GoogleIcon } from "src/components/icon/GoogleIcon";
-import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
+import { AppleIcon } from "src/components/icons/AppleIcon";
+import { GoogleIcon } from "src/components/icons/GoogleIcon";
+import { QinMemoIcon } from "src/components/icons/QinMemoIcon";
 import { Button } from "src/components/shared/Button";
 
 type SignProps = { page: "signin" | "signup" };
@@ -29,13 +29,13 @@ export const Sign: VFC<SignProps> = (props) => {
         <div className="mt-20 space-y-5">
           <Button variant="solid-white" className="py-4 w-72 sm:w-80" onClick={handleGoogleAuth}>
             <div className="flex">
-              <GoogleIcon className="mr-3" />
+              <GoogleIcon className="mr-3 w-6 h-6" />
               <span>{props.page === "signin" ? "Googleでログイン" : "Googleでアカウント作成"}</span>
             </div>
           </Button>
           <Button variant="solid-black" className="py-4 w-72 sm:w-80" onClick={handleAppleAuth}>
             <div className="flex">
-              <AppleIcon className="mr-3" />
+              <AppleIcon className="mr-3 w-6 h-6" />
               <span>{props.page === "signin" ? "Appleでログイン" : "Appleでアカウント作成"}</span>
             </div>
           </Button>

@@ -1,39 +1,49 @@
+/* eslint-disable @next/next/no-img-element */
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import type { ImageProps } from "next/image";
+import type { ImageProps as NextImageProps } from "next/image";
 import Image from "next/image";
 import NoProfileImage from "public/no-profile-image.webp";
-import type { VFC } from "react";
+import type { ImgHTMLAttributes, VFC } from "react";
 import { Fragment, useCallback, useState } from "react";
 
-type DialogImageProps = ImageProps & { noDialog?: boolean };
+type BlobImage = ImgHTMLAttributes<HTMLImageElement>;
 
-type SrcUndefinedImageProps = Omit<DialogImageProps, "src"> & { src?: DialogImageProps["src"] };
+type ImageProps = (BlobImage | NextImageProps) & { noDialog?: boolean };
 
-const hasSrc = (props: DialogImageProps | SrcUndefinedImageProps): props is DialogImageProps => {
-  return "src" in props;
+type ImagePropsSrcUndefinedable = Omit<ImageProps, "src"> & { src?: ImageProps["src"] };
+
+const hasSrc = (props: ImagePropsSrcUndefinedable): props is ImageProps => {
+  return !!props.src;
 };
 
-export const Avatar: VFC<SrcUndefinedImageProps> = (props) => {
-  // eslint-disable-next-line react/destructuring-assignment
-  const { noDialog, ...imageProps } = props;
+const isBlob = (props: ImageProps): props is BlobImage => {
+  return typeof props.src === "string" && props.src.startsWith("blob");
+};
 
-  if (!hasSrc(imageProps)) {
+export const Avatar: VFC<ImagePropsSrcUndefinedable> = (props) => {
+  if (!hasSrc(props)) {
     return (
-      <div className={imageProps.className}>
+      <div className={props.className}>
         <Image src={NoProfileImage} alt="No Profile Image" />
       </div>
     );
   }
 
-  if (noDialog) {
-    return <Image {...imageProps} />;
+  if (isBlob(props)) {
+    const { noDialog: _, alt, ...others } = props;
+    return <img {...others} alt={alt} />;
   }
 
-  return <DialogImage {...imageProps} />;
+  if (props.noDialog) {
+    const { noDialog: _, alt, ...others } = props;
+    return <Image {...others} alt={alt} />;
+  }
+
+  return <DialogImage {...props} />;
 };
 
-export const DialogImage: VFC<ImageProps> = (props) => {
+export const DialogImage: VFC<NextImageProps> = (props) => {
   const [isShow, setIsShow] = useState(false);
   const handleOpen = useCallback(() => {
     setIsShow(true);
@@ -45,7 +55,7 @@ export const DialogImage: VFC<ImageProps> = (props) => {
   return (
     <>
       <button className="contents" onClick={handleOpen}>
-        <Image {...props} />
+        <Image {...props} alt={props.alt} />
       </button>
 
       <Transition as={Fragment} show={isShow}>
@@ -73,7 +83,6 @@ export const DialogImage: VFC<ImageProps> = (props) => {
               leaveTo="opacity-0"
             >
               <div>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   className="absolute inset-0 m-auto max-w-full max-h-full"
                   src={typeof props.src === "string" ? props.src : "/no-profile-image.webp"}

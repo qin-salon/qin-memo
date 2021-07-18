@@ -20,6 +20,7 @@ export const initAuth = () => {
       authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
       databaseURL: "", // 無くても問題が無い。むしろFirestore, RealtimeDBを使わないのでこれで良し。
       projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
     },
     cookies: {
       // domain: "localhost", // いずれサブドメイン間認証できるか試す。期待値は低い。

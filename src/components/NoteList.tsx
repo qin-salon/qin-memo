@@ -2,6 +2,7 @@ import type { VFC } from "react";
 import { NoteListItem } from "src/components/NoteListItem";
 import { Error } from "src/components/shared/Error";
 import type { ListNoteType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 import type { SWRResponse } from "swr";
 import useSWR from "swr";
 
@@ -49,11 +50,11 @@ const NoteList: VFC<NoteListProps> = (props) => {
 };
 
 export const UserNoteList: VFC<{ userId: string }> = (props) => {
-  const res = useSWR<ListNoteType[]>(`/users/${props.userId}/notes`);
+  const res = useSWR<ListNoteType[]>(`${API_URL}/v1/users/${props.userId}/notes`);
   return <NoteList {...res} />;
 };
 
 export const SearchNoteList: VFC<{ userId: string; keyword: string }> = (props) => {
-  const res = useSWR(`/users/${props.userId}/notes/search/${props.keyword}`);
+  const res = useSWR(`${API_URL}/v1/users/${props.userId}/notes/search?q=${props.keyword}`);
   return <NoteList {...res} />;
 };

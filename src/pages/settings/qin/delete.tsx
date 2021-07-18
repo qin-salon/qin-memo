@@ -1,17 +1,37 @@
 import type { NextPage } from "next";
-import { AuthAction, withAuthUser } from "next-firebase-auth";
+import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { RecursiveList } from "src/components/shared/List";
+import { useUser, withUser } from "src/domains/auth";
+import { API_URL } from "src/utils/constants";
 
 const SettingsQinDelete: NextPage = () => {
-  const handleDeleteQinMemo = useCallback(() => {
-    alert("Qin Memoの削除");
-  }, []);
-  const handleDeleteQinAccount = useCallback(() => {
-    alert("Qinアカウントの削除");
-  }, []);
+  const authUser = useAuthUser();
+  const { user } = useUser();
+
+  const handleDeleteQinMemo = useCallback(async () => {
+    try {
+      const idToken = await authUser.getIdToken();
+      await fetch(`${API_URL}/v1/users/${user?.id}/service`, {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${idToken}` },
+      });
+      await authUser.signOut();
+    } catch (error) {
+      console.error(error);
+    }
+  }, [authUser, user?.id]);
+
+  const handleDeleteQinAccount = useCallback(async () => {
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/users/${user?.id}`, {
+      method: "DELETE",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
+    await authUser.signOut();
+  }, [authUser, user?.id]);
 
   return (
     <Layout left="back" center="account">
@@ -61,7 +81,4 @@ const SettingsQinDelete: NextPage = () => {
   );
 };
 
-export default withAuthUser({
-  whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-  whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-})(SettingsQinDelete);
+export default withUser(SettingsQinDelete);

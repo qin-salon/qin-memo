@@ -6,13 +6,11 @@ import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
 import { Fragment, memo, useCallback } from "react";
-import { QinAccountIcon } from "src/components/icon/QinAccountIcon";
-import { QinMemoIcon } from "src/components/icon/QinMemoIcon";
+import { QinAccountIcon } from "src/components/icons/QinAccountIcon";
+import { QinMemoIcon } from "src/components/icons/QinMemoIcon";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
-import { EXAMPLE_USER_01 } from "src/models/user";
-
-const user = EXAMPLE_USER_01;
+import { useUser } from "src/domains/auth";
 
 type Right = "profile" | JSX.Element;
 
@@ -106,6 +104,7 @@ Right.displayName = "Right";
 
 const UserMenu: VFC = () => {
   const AuthUser = useAuthUser();
+  const { user } = useUser();
   const handleSignOut = useCallback(() => {
     return AuthUser.signOut();
   }, [AuthUser]);
@@ -117,8 +116,8 @@ const UserMenu: VFC = () => {
           <>
             <Popover.Button className="flex rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
               <Avatar
-                alt={user.name}
-                src={user.avatarUrl}
+                alt={user?.name}
+                src={user?.avatarUrl}
                 width={40}
                 height={40}
                 className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
@@ -146,16 +145,16 @@ const UserMenu: VFC = () => {
                       <Link href="/settings/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
                           <Avatar
-                            alt={user.name}
-                            src={user.avatarUrl}
+                            alt={user?.name}
+                            src={user?.avatarUrl}
                             width={56}
                             height={56}
                             className={clsx(ICON_SIZE, "overflow-hidden rounded-full")}
                             noDialog
                           />
                           <div className="ml-4">
-                            <p className="text-base font-bold">しまぶー</p>
-                            <p className="text-sm text-gray-400">@shimabu</p>
+                            <p className="text-base font-bold">{user?.name}</p>
+                            <p className="text-sm text-gray-400">@{user?.accountId}</p>
                           </div>
                         </a>
                       </Link>

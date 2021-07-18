@@ -1,15 +1,20 @@
 import { XIcon } from "@heroicons/react/outline";
-import type { VFC } from "react";
+import { useAuthUser } from "next-firebase-auth";
+import type { Dispatch, SetStateAction, VFC } from "react";
 import { Error } from "src/components/shared/Error";
-import { EXAMPLE_USER_01 } from "src/models/user";
+import { useUser } from "src/domains/auth";
 import type { SearchHistoryType } from "src/types/types";
+import { API_URL } from "src/utils/constants";
 import type { SWRResponse } from "swr";
 import useSWR from "swr";
 
-const user = EXAMPLE_USER_01;
+type SearchHistoriesProps = {
+  setKeyword: Dispatch<SetStateAction<string>>;
+};
 
-export const SearchHistories: VFC = () => {
-  const { data, error, mutate } = useSWR<SearchHistoryType[]>(`/users/${user.id}/searchHistories`);
+export const SearchHistories: VFC<SearchHistoriesProps> = (props) => {
+  const { user } = useUser();
+  const { data, error, mutate } = useSWR<SearchHistoryType[]>(`${API_URL}/v1/users/${user?.id}/searchHistories`);
 
   if (error) {
     return <Error />;
@@ -21,10 +26,10 @@ export const SearchHistories: VFC = () => {
 
   return (
     <ul className="space-y-1">
-      {data.map((serchHistory) => {
+      {data.map((searchHistory) => {
         return (
-          <li key={serchHistory.id}>
-            <HistoryItem {...serchHistory} mutate={mutate} />
+          <li key={searchHistory.id}>
+            <HistoryItem {...searchHistory} mutate={mutate} setKeyword={props.setKeyword} />
           </li>
         );
       })}
@@ -32,18 +37,22 @@ export const SearchHistories: VFC = () => {
   );
 };
 
-type HistoryItemProps = SearchHistoryType & { mutate: SWRResponse<SearchHistoryType[], Error>["mutate"] };
+type HistoryItemProps = SearchHistoryType & { mutate: SWRResponse<SearchHistoryType[], Error>["mutate"] } & {
+  setKeyword: Dispatch<SetStateAction<string>>;
+};
 
 const HistoryItem: VFC<HistoryItemProps> = (props) => {
+  const authUser = useAuthUser();
   const handleHistoryClick = async () => {
-    // TODO: 検索結果のアイテムをクリックしたときの処理
-    alert(`${props.keyword}で検索`);
+    props.setKeyword(props.keyword);
   };
 
   const handleHistoryDeleteClick = async () => {
     // deleteメソッド
-    await fetch(`/users/${user.id}/searchHistories/${props.id}`, {
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/searchHistories/${props.id}`, {
       method: "delete",
+      headers: { authorization: `Bearer ${idToken}` },
     });
     // 検索履歴を取得し直す
     await props.mutate();

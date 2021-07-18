@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
-import { AppleIcon } from "src/components/icon/AppleIcon";
-import { GoogleIcon } from "src/components/icon/GoogleIcon";
+import { AppleIcon } from "src/components/icons/AppleIcon";
+import { GoogleIcon } from "src/components/icons/GoogleIcon";
 import { Button } from "src/components/shared/Button";
 import { Layout } from "src/components/shared/Layout";
 import { List } from "src/components/shared/List";
@@ -25,7 +25,7 @@ const SettingsQinAccount: NextPage = () => {
             {
               label: (
                 <div className="flex items-center">
-                  <GoogleIcon />
+                  <GoogleIcon className="w-6 h-6" />
                   <div className="flex-1 ml-3 font-bold">Google</div>
                 </div>
               ),
@@ -38,7 +38,7 @@ const SettingsQinAccount: NextPage = () => {
             {
               label: (
                 <div className="flex items-center">
-                  <AppleIcon />
+                  <AppleIcon className="w-6 h-6" />
                   <div className="flex-1 ml-3 font-bold">Apple</div>
                 </div>
               ),
