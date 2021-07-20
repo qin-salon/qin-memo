@@ -46,28 +46,28 @@ const useDeleteNoteDialog = (note: NoteType) => {
   return { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo };
 };
 
-const sleep = (msec: number) => {
-  return new Promise((resolve) => {
-    return setTimeout(resolve, msec);
-  });
-};
-
 export const useNote = (note: NoteType) => {
+  const authUser = useAuthUser();
   const { isShowMenu, handleOpenMenu, handleCloseMenu } = useNoteMenu();
   const { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo } =
     useDeleteNoteDialog(note);
   const [isPublic, setIsPublic] = useState(note.public);
-  const authUser = useAuthUser();
 
   const handleTogglePublicState = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${note.id}/public`, {
+    const promise = fetch(`${API_URL}/v1/notes/${note.id}/public`, {
       method: "patch",
       headers: { authorization: `Bearer ${idToken}` },
     });
-    handleCloseMenu();
-    await sleep(200);
-    setIsPublic(!isPublic);
+    toast.promise(promise, {
+      loading: "処理中",
+      success: () => {
+        setIsPublic(!isPublic);
+        handleCloseMenu();
+        return "公開しました";
+      },
+      error: "失敗しました",
+    });
   }, [authUser, handleCloseMenu, isPublic, note.id]);
 
   // ヘッダーの右メニュー部分
@@ -93,14 +93,7 @@ export const useNote = (note: NoteType) => {
           labelColor: "blue",
           icon: isPublic ? <EyeOffIcon /> : <EyeIcon />,
           iconColor: "blue",
-          onClick: () => {
-            handleTogglePublicState();
-            if (isPublic) {
-              toast("非公開にしました");
-            } else {
-              toast.success("公開しました");
-            }
-          },
+          onClick: handleTogglePublicState,
         },
         {
           label: "削除する",
