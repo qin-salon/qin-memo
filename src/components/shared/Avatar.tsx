@@ -37,7 +37,8 @@ export const Avatar: VFC<ImagePropsSrcUndefinedable> = (props) => {
 
   if (props.noDialog) {
     const { noDialog: _, alt, ...others } = props;
-    return <Image {...others} alt={alt} />;
+    /* next/imageがキャッシュした過去の画像が表示するため、いったんimgタグで代用 */
+    return <img {...(others as BlobImage)} alt={alt} />;
   }
 
   return <DialogImage {...props} />;
@@ -55,7 +56,8 @@ export const DialogImage: VFC<NextImageProps> = (props) => {
   return (
     <>
       <button className="contents" onClick={handleOpen}>
-        <Image {...props} alt={props.alt} />
+        {/* next/imageがキャッシュした過去の画像が表示するため、いったんimgタグで代用 */}
+        <img {...(props as BlobImage)} alt={props.alt} />
       </button>
 
       <Transition as={Fragment} show={isShow}>

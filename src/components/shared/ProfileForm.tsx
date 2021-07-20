@@ -9,6 +9,7 @@ import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Button";
 import { Input } from "src/components/shared/Input";
 import { useUser } from "src/domains/auth";
+import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
 const createAvatarUrl = (userId?: string) => {
@@ -20,7 +21,7 @@ const createAvatarUrl = (userId?: string) => {
 export const ProfileForm: VFC = () => {
   // TODO: ここhooksにまとめたい
   const authUser = useAuthUser();
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const [selectedFile, setSelectedFile] = useState<File>();
   const [imageUrl, setImageUrl] = useState<string>();
   const nameRef = useRef<HTMLInputElement>(null);
@@ -45,7 +46,7 @@ export const ProfileForm: VFC = () => {
         return;
       }
       if (selectedFile) {
-        await firebase.storage().ref(user?.id).put(selectedFile, { cacheControl: "public, maxage=1, s-maxage=1" });
+        await firebase.storage().ref(user?.id).put(selectedFile);
       }
       const idToken = await authUser.getIdToken();
       const body = {
@@ -53,17 +54,19 @@ export const ProfileForm: VFC = () => {
         accountId: accountIdRef.current?.value,
         avatarUrl: createAvatarUrl(user?.id),
       };
-      await fetch(`${API_URL}/v1/users/${user?.id}`, {
+      const res = await fetch(`${API_URL}/v1/users/${user?.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify(body),
       });
+      const data: UserType = await res.json();
+      setUser(data);
       toast.success("保存しました");
     } catch (error) {
       console.error(error);
       toast.success("失敗しました");
     }
-  }, [authUser, selectedFile, user?.id]);
+  }, [authUser, selectedFile, setUser, user?.id]);
 
   // TOOD: アイコンの設定がまだ
   return (
