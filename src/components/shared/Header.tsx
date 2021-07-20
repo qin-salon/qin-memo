@@ -19,7 +19,7 @@ const ICON_SIZE = "w-10 h-10";
 export type HeaderProps = {
   left?: "back" | "close" | "memo" | JSX.Element;
   center?: "account" | string | JSX.Element;
-  right?: ("profile" | JSX.Element)[];
+  right?: ("profile" | JSX.Element | undefined)[];
 };
 
 export const Header = memo<HeaderProps>((props) => {

@@ -72,17 +72,12 @@ export const useNote = (note: NoteType) => {
 
   // ヘッダーの右メニュー部分
   const headerRight = useMemo(() => {
-    if (isPublic) {
-      return [
+    return [
+      isPublic ? (
         <span key="public" className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">
           公開中
-        </span>,
-        <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
-          <DotsCircleHorizontalIcon className="w-5 h-5" />
-        </Button>,
-      ];
-    }
-    return [
+        </span>
+      ) : undefined,
       <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
         <DotsCircleHorizontalIcon className="w-5 h-5" />
       </Button>,
