@@ -4,7 +4,7 @@ import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import type { NoteMenuProps } from "src/components/NoteMenu";
-import { Button } from "src/components/shared/Button";
+import { Button } from "src/components/shared/Buttons";
 import { TwitterIcon } from "src/components/shared/Icons";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";

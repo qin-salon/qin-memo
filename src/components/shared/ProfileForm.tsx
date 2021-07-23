@@ -6,7 +6,7 @@ import type { ChangeEvent, VFC } from "react";
 import { useCallback, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { Avatar } from "src/components/shared/Avatar";
-import { Button } from "src/components/shared/Button";
+import { Button } from "src/components/shared/Buttons";
 import { Input } from "src/components/shared/Input";
 import { useUser } from "src/domains/auth";
 import type { UserType } from "src/types/types";

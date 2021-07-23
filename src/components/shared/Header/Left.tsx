@@ -2,7 +2,7 @@ import { ChevronLeftIcon, XIcon } from "@heroicons/react/outline";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { memo, useCallback } from "react";
-import { Button } from "src/components/shared/Button";
+import { Button } from "src/components/shared/Buttons";
 import { QinMemoIcon } from "src/components/shared/Icons";
 
 import { ICON_SIZE } from "./constants";

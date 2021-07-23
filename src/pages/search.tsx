@@ -6,7 +6,7 @@ import { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
-import { Button } from "src/components/shared/Button";
+import { Button } from "src/components/shared/Buttons";
 import { InputSearch } from "src/components/shared/InputSearch";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/domains/auth";

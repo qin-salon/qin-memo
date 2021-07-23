@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import type { ReactNode, VFC } from "react";
 import { Fragment, useRef } from "react";
-import { Button } from "src/components/shared/Button";
+import { Button } from "src/components/shared/Buttons";
 
 type MenuDialogProps = {
   children: ReactNode;
