@@ -1,108 +1,19 @@
 import { Popover, Transition } from "@headlessui/react";
-import { ChevronLeftIcon, CogIcon, LogoutIcon, XIcon } from "@heroicons/react/outline";
+import { CogIcon, LogoutIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
-import { Fragment, memo, useCallback } from "react";
-import { QinAccountIcon } from "src/components/icons/QinAccountIcon";
-import { QinMemoIcon } from "src/components/icons/QinMemoIcon";
+import { Fragment, useCallback } from "react";
 import { Avatar } from "src/components/shared/Avatar";
-import { Button } from "src/components/shared/Button";
 import { useUser } from "src/domains/auth";
 
-type Right = "profile" | JSX.Element;
+import { ICON_SIZE } from "./constants";
 
-const ICON_SIZE = "w-10 h-10";
-
-export type HeaderProps = {
-  left?: "back" | "close" | "memo" | JSX.Element;
-  center?: "account" | string | JSX.Element;
-  right?: ("profile" | JSX.Element | undefined)[];
-};
-
-export const Header = memo<HeaderProps>((props) => {
-  return (
-    <header className="flex items-center">
-      <Left left={props.left} />
-
-      <div className="flex flex-1 justify-center px-2">
-        <Center center={props.center} />
-      </div>
-
-      <Right right={props.right} />
-    </header>
-  );
-});
-Header.displayName = "Header";
-
-const Left = memo<Pick<HeaderProps, "left">>((props) => {
-  const router = useRouter();
-  const handleClick = useCallback(() => {
-    const prevPath = sessionStorage.getItem("prevPath");
-    return prevPath ? router.back() : router.push("/");
-  }, [router]);
-
-  if (!props.left) {
-    return <div className={ICON_SIZE} />;
-  }
-  if (props.left === "back" || props.left === "close") {
-    return (
-      <Button variant="ghost" className={ICON_SIZE} onClick={handleClick}>
-        {props.left === "back" ? <ChevronLeftIcon className="w-5 h-5" /> : null}
-        {props.left === "close" ? <XIcon className="w-5 h-5" /> : null}
-      </Button>
-    );
-  }
-  if (props.left === "memo") {
-    return (
-      <Link href="/">
-        <a>
-          <QinMemoIcon className="w-28 sm:w-32" />
-        </a>
-      </Link>
-    );
-  }
-  return props.left;
-});
-Left.displayName = "Left";
-
-const Center = memo<Pick<HeaderProps, "center">>((props) => {
-  if (!props.center) {
-    return null;
-  }
-  if (props.center === "account") {
-    return (
-      <Link href="/settings/qin">
-        <a>
-          <QinAccountIcon className="h-5 sm:h-6" />
-        </a>
-      </Link>
-    );
-  }
-  if (typeof props.center === "string") {
-    return <div className="text-xl font-bold">{props.center}</div>;
-  }
-  return props.center;
-});
-Center.displayName = "Center";
-
-const Right = memo<Pick<HeaderProps, "right">>((props) => {
-  if (!props.right) {
-    return <div className={ICON_SIZE} />;
-  }
-  return (
-    <div className="flex items-center space-x-2 sm:space-x-3">
-      {props.right.map((item, i) => {
-        return <Fragment key={i}>{item === "profile" ? <UserMenu /> : item}</Fragment>;
-      })}
-    </div>
-  );
-});
-Right.displayName = "Right";
-
-const UserMenu: VFC = () => {
+/**
+ * @package
+ */
+export const UserMenu: VFC = () => {
   const AuthUser = useAuthUser();
   const { user } = useUser();
   const handleSignOut = useCallback(() => {
