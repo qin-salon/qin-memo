@@ -1,5 +1,8 @@
 import type { VFC } from "react";
 
+/**
+ * @package
+ */
 export const TwitterIcon: VFC<{ className?: string }> = (props) => {
   return (
     <svg className={props.className} fill="currentColor" viewBox="-2 -2 24 24" aria-hidden="true">

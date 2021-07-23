@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import { TwitterIcon } from "src/components/icons/TwitterIcon";
 import type { NoteMenuProps } from "src/components/NoteMenu";
 import { Button } from "src/components/shared/Button";
+import { TwitterIcon } from "src/components/shared/Icons";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
