@@ -12,8 +12,7 @@ import { useUser } from "src/domains/auth";
 import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
-const createAvatarUrl = (userId?: string) => {
-  if (!userId) return;
+const createAvatarUrl = (userId: string) => {
   const filePath = encodeURIComponent(`thumbnails/${userId}_200x200`);
   return `${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_URL}/${filePath}?alt=media`;
 };
@@ -23,6 +22,7 @@ export const ProfileForm: VFC = () => {
   const authUser = useAuthUser();
   const { user, setUser } = useUser();
   const [selectedFile, setSelectedFile] = useState<File>();
+  const [isLoading, setIsLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
   const nameRef = useRef<HTMLInputElement>(null);
   const accountIdRef = useRef<HTMLInputElement>(null);
@@ -31,44 +31,49 @@ export const ProfileForm: VFC = () => {
     imageRef.current?.click();
   }, []);
 
-  const handleFileChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target?.files?.item(0);
-    if (file) {
-      setSelectedFile(file);
-      const url = URL.createObjectURL(file);
-      setImageUrl(url);
-    }
+    if (!file) return;
+    setSelectedFile(file);
+    const url = URL.createObjectURL(file);
+    setImageUrl(url);
   }, []);
 
-  const handleSave = useCallback(async () => {
-    try {
-      if (!nameRef.current?.value || !accountIdRef.current?.value) {
-        return;
-      }
-      if (selectedFile) {
-        await firebase.storage().ref(user?.id).put(selectedFile);
-      }
-      const idToken = await authUser.getIdToken();
-      const body = {
-        name: nameRef.current.value,
-        accountId: accountIdRef.current?.value,
-        avatarUrl: createAvatarUrl(user?.id),
-      };
-      const res = await fetch(`${API_URL}/v1/users/${user?.id}`, {
-        method: "PUT",
-        headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      const data: UserType = await res.json();
-      setUser(data);
-      toast.success("保存しました");
-    } catch (error) {
-      console.error(error);
-      toast.success("失敗しました");
+  const handleChangeUser = useCallback(async () => {
+    if (!nameRef.current?.value || !accountIdRef.current?.value || !user) {
+      return;
     }
-  }, [authUser, selectedFile, setUser, user?.id]);
+    if (selectedFile) {
+      await firebase.storage().ref(user.id).put(selectedFile);
+    }
+    const idToken = await authUser.getIdToken();
+    const body = {
+      name: nameRef.current.value,
+      accountId: accountIdRef.current?.value,
+      avatarUrl: createAvatarUrl(user.id),
+    };
+    const res = await fetch(`${API_URL}/v1/users/${user.id}`, {
+      method: "PUT",
+      headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
+    const json: UserType = await res.json();
+    return json;
+  }, [authUser, selectedFile, user]);
 
-  // TOOD: アイコンの設定がまだ
+  const handleSave = useCallback(async () => {
+    setIsLoading(true);
+    await toast.promise(handleChangeUser(), {
+      loading: "処理中",
+      success: (data) => {
+        setUser(data);
+        return "保存しました";
+      },
+      error: "失敗しました",
+    });
+    setIsLoading(false);
+  }, [handleChangeUser, setUser]);
+
   return (
     <div>
       <div className="space-y-6 sm:space-y-8">
@@ -82,7 +87,7 @@ export const ProfileForm: VFC = () => {
               height={96}
               className="overflow-hidden w-24 h-24 rounded-full"
             />
-            <input ref={imageRef} type="file" className="hidden" onChange={handleFileChange} />
+            <input ref={imageRef} type="file" className="hidden" onChange={handleChangeFile} />
             <Button variant="solid-gray" className="py-2.5 px-5 mt-4" onClick={handleOpenFileDialog}>
               アイコンを{user ? "変更する" : "設定する"}
             </Button>
@@ -94,12 +99,12 @@ export const ProfileForm: VFC = () => {
 
       <div className="mt-12 space-y-4">
         {user ? (
-          <Button variant="solid-blue" className="p-3 w-full" onClick={handleSave}>
+          <Button variant="solid-blue" className="p-3 w-full" onClick={handleSave} disabled={isLoading}>
             保存する
           </Button>
         ) : (
           <>
-            <Button variant="solid-blue" className="p-3 w-full">
+            <Button variant="solid-blue" className="p-3 w-full" disabled={isLoading}>
               登録してはじめる
             </Button>
             <Button variant="solid-gray" className="p-3 w-full">
