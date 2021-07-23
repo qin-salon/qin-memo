@@ -3,7 +3,7 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: { project: "./tsconfig.json" },
   env: { es2021: true, browser: true, jest: true, node: true },
-  plugins: ["simple-import-sort", "tailwindcss"],
+  plugins: ["simple-import-sort", "tailwindcss", "import-access"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -37,6 +37,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "import/newline-after-import": "error",
     "import/no-default-export": "error",
+    "import-access/jsdoc": "error",
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "tailwindcss/classnames-order": "warn",

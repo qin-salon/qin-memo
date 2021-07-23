@@ -1,22 +1,12 @@
 import clsx from "clsx";
-import type { LinkProps } from "next/link";
-import Link from "next/link";
-import type { ButtonHTMLAttributes, ForwardedRef, ReactNode } from "react";
-import { forwardRef, useMemo } from "react";
+import { useMemo } from "react";
 
-type Props = (ButtonHTMLAttributes<HTMLButtonElement> | LinkProps) & {
-  children: ReactNode;
-  className?: string;
-  variant?: "outline" | "ghost" | "solid-blue" | "solid-red" | "solid-gray" | "solid-white" | "solid-black";
-};
+import type { ButtonVariant } from "./types";
 
-const isLink = (props: ButtonHTMLAttributes<HTMLButtonElement> | LinkProps): props is LinkProps => {
-  return "href" in props;
-};
-
-export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>((props, ref) => {
-  const { children, className, variant, ...rest } = props;
-
+/**
+ * @package
+ */
+export const useButtonClass = (className?: string, variant?: ButtonVariant) => {
   const classes = useMemo(() => {
     return clsx(
       "grid place-items-center font-bold rounded-full focus-visible:ring-2 transition duration-200 ease-in-out focus:outline-none",
@@ -39,21 +29,5 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>((
     );
   }, [className, variant]);
 
-  if (isLink(rest)) {
-    return (
-      <Link {...rest}>
-        <a ref={ref as ForwardedRef<HTMLAnchorElement>} className={classes}>
-          {children}
-        </a>
-      </Link>
-    );
-  }
-
-  return (
-    <button type="button" ref={ref as ForwardedRef<HTMLButtonElement>} {...rest} className={classes}>
-      {children}
-    </button>
-  );
-});
-
-Button.displayName === "Button";
+  return classes;
+};
