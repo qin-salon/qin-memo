@@ -3,7 +3,7 @@ import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
-import { RecursiveList } from "src/components/shared/List";
+import { RecursiveList } from "src/components/shared/Lists";
 import { useUser, withUser } from "src/domains/auth";
 import { API_URL } from "src/utils/constants";
 

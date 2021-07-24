@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { Button } from "src/components/shared/Buttons";
 import { AppleIcon, GoogleIcon } from "src/components/shared/Icons";
 import { Layout } from "src/components/shared/Layout";
-import { List } from "src/components/shared/List";
+import { List } from "src/components/shared/Lists";
 
 const SettingsQinAccount: NextPage = () => {
   const handleGoogle = useCallback(() => {

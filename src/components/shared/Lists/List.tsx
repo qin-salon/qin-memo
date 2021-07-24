@@ -1,33 +1,14 @@
 import { ChevronRightIcon, ExternalLinkIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import Link from "next/link";
-import type { DOMAttributes, VFC } from "react";
+import type { VFC } from "react";
 
-export type AllOrNone<T> = T | { [Key in keyof T]?: never };
+import type { ListProps } from "./types";
+import { hasButton, isLink } from "./types";
 
-type Link = {
-  label: string | JSX.Element;
-  href: string;
-};
-
-type ComponentButton = { label: string | JSX.Element; button: JSX.Element };
-
-type AllButton = { label: string | JSX.Element; onClick: DOMAttributes<HTMLButtonElement>["onClick"] };
-
-type Button = ComponentButton | AllButton;
-
-type ListItem = Link | Button;
-
-type ListProps = { title?: string | JSX.Element; items: [ListItem, ...ListItem[]] };
-
-const isLink = (item: ListItem): item is Link => {
-  return "href" in item;
-};
-
-const hasButton = (item: Button): item is ComponentButton => {
-  return "button" in item;
-};
-
+/**
+ * @package
+ */
 export const List: VFC<ListProps> = (props) => {
   return (
     <div className="space-y-1">
@@ -79,23 +60,5 @@ export const List: VFC<ListProps> = (props) => {
         })}
       </ul>
     </div>
-  );
-};
-
-type RecursiveListProps = {
-  list: [ListProps, ...ListProps[]];
-};
-
-export const RecursiveList: VFC<RecursiveListProps> = (props) => {
-  return (
-    <ul className="space-y-8">
-      {props.list.map((listItems, i) => {
-        return (
-          <li key={i}>
-            <List {...listItems} />
-          </li>
-        );
-      })}
-    </ul>
   );
 };

@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { Avatar } from "src/components/shared/Avatar";
 import { Layout } from "src/components/shared/Layout";
-import { List } from "src/components/shared/List";
+import { List } from "src/components/shared/Lists";
 import { useUser, withUser } from "src/domains/auth";
 
 const SettingsQin: NextPage = () => {
