@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/outline";
 import { useAuthUser } from "next-firebase-auth";
 import type { Dispatch, SetStateAction, VFC } from "react";
 import { Error } from "src/components/shared/Error";
-import { useUser } from "src/domains/auth";
+import { useUser } from "src/contexts/user";
 import type { SearchHistoryType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import type { SWRResponse } from "swr";

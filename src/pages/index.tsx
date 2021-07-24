@@ -8,7 +8,7 @@ import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
 import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
-import { useUser, withUser } from "src/domains/auth";
+import { useUser, withUser } from "src/contexts/user";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 

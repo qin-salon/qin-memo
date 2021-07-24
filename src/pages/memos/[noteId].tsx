@@ -7,7 +7,7 @@ import { ConfirmDialog } from "src/components/ConfirmDialog";
 import { MenuDialog } from "src/components/MenuDialog";
 import { NoteMenu } from "src/components/NoteMenu";
 import { Layout } from "src/components/shared/Layout";
-import { withUser } from "src/domains/auth";
+import { withUser } from "src/contexts/user";
 import { useNote } from "src/hooks/useNote";
 import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";

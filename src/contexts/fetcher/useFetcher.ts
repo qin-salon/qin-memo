@@ -1,12 +1,10 @@
 import { useAuthUser } from "next-firebase-auth";
-import type { ReactNode, VFC } from "react";
 import { useCallback } from "react";
-import { SWRConfig } from "swr";
 
 /**
  * @package
  */
-export const SWRProvider: VFC<{ children: ReactNode }> = (props) => {
+export const useFetcher = () => {
   const authUser = useAuthUser();
   const fetcher = useCallback(
     async (url: string) => {
@@ -21,5 +19,5 @@ export const SWRProvider: VFC<{ children: ReactNode }> = (props) => {
     [authUser]
   );
 
-  return <SWRConfig value={{ fetcher }}>{props.children}</SWRConfig>;
+  return fetcher;
 };

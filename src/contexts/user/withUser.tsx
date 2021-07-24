@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { AuthAction, withAuthUser } from "next-firebase-auth";
+import { useFetcher } from "src/contexts/fetcher";
+import { SWRConfig } from "swr";
 
-import { SWRProvider } from "./SWRProvider";
-import { UserFetcher } from "./UserFetcher";
+import { useUserFetch } from "./useUserFetch";
 
 /**
  * @package
@@ -12,12 +13,12 @@ export const withUser = (Component: NextPage) => {
     whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
     whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
   })((props) => {
+    useUserFetch();
+    const fetcher = useFetcher();
     return (
-      <UserFetcher>
-        <SWRProvider>
-          <Component {...props} />
-        </SWRProvider>
-      </UserFetcher>
+      <SWRConfig value={{ fetcher }}>
+        <Component {...props} />
+      </SWRConfig>
     );
   });
 };

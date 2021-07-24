@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
 import { Input } from "src/components/shared/Forms";
-import { useUser } from "src/domains/auth";
+import { useUser } from "src/contexts/user";
 import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 

@@ -1,15 +1,14 @@
 import { useAuthUser } from "next-firebase-auth";
-import type { VFC } from "react";
 import { useCallback, useEffect } from "react";
 import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
-import { useUser } from "./UserProvider";
+import { useUser } from "./useUser";
 
 /**
  * @package
  */
-export const UserFetcher: VFC<{ children: JSX.Element }> = (props) => {
+export const useUserFetch = () => {
   const { user, setUser } = useUser();
   const authUser = useAuthUser();
 
@@ -67,6 +66,4 @@ export const UserFetcher: VFC<{ children: JSX.Element }> = (props) => {
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
-
-  return props.children;
 };
