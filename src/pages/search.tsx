@@ -7,13 +7,13 @@ import { useCallback, useState } from "react";
 import { SearchNoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
 import { Button } from "src/components/shared/Buttons";
-import { InputSearch } from "src/components/shared/InputSearch";
+import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/domains/auth";
 import type { SearchHistoryType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
-const Search: NextPage = () => {
+const SearchPage: NextPage = () => {
   const authUser = useAuthUser();
   const { user } = useUser();
   const [value, setValue] = useState("");
@@ -62,7 +62,7 @@ const Search: NextPage = () => {
       left="back"
       center={
         <form className="flex-1" onSubmit={handleSubmit}>
-          <InputSearch placeholder="検索" value={value} onChange={handleChange} autoFocus />
+          <Search placeholder="検索" value={value} onChange={handleChange} autoFocus />
         </form>
       }
       right={right}
@@ -78,4 +78,4 @@ const Search: NextPage = () => {
   );
 };
 
-export default withUser(Search);
+export default withUser(SearchPage);

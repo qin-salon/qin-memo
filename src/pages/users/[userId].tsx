@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import { UserNoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
-import { InputSearch } from "src/components/shared/InputSearch";
+import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/domains/auth";
 import type { NoteType } from "src/types/types";
@@ -57,7 +57,7 @@ const UsersUserId: NextPage = () => {
 
         <Link href="/search">
           <a className="block">
-            <InputSearch placeholder="メモを検索する" />
+            <Search placeholder="メモを検索する" />
           </a>
         </Link>
 

@@ -8,6 +8,9 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   error?: string;
 };
 
+/**
+ * @package
+ */
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <div className="block">

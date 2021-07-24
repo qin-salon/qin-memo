@@ -3,7 +3,10 @@ import type { InputHTMLAttributes, VFC } from "react";
 
 type Props = InputHTMLAttributes<HTMLInputElement>;
 
-export const InputSearch: VFC<Props> = (props) => {
+/**
+ * @package
+ */
+export const Search: VFC<Props> = (props) => {
   return (
     <label className="block relative">
       <div className="grid absolute top-0 z-0 place-items-center w-14 h-10">
