@@ -9,11 +9,17 @@ type ContextType = {
 
 const UserContext = createContext<ContextType | undefined>(undefined);
 
+/**
+ * @package
+ */
 export const UserProvider: VFC<{ children: ReactNode }> = (props) => {
   const [user, setUser] = useState<UserType | undefined>();
   return <UserContext.Provider value={{ user, setUser }}>{props.children}</UserContext.Provider>;
 };
 
+/**
+ * @package
+ */
 export const useUser = () => {
   const context = useContext(UserContext);
   if (context === undefined) {

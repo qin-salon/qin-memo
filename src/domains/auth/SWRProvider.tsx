@@ -3,6 +3,9 @@ import type { ReactNode, VFC } from "react";
 import { useCallback } from "react";
 import { SWRConfig } from "swr";
 
+/**
+ * @package
+ */
 export const SWRProvider: VFC<{ children: ReactNode }> = (props) => {
   const authUser = useAuthUser();
   const fetcher = useCallback(

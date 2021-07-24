@@ -1,2 +1,4 @@
-export { UserProvider, useUser } from "./UserProvider";
-export { withUser } from "./withUser";
+import { UserProvider, useUser } from "./UserProvider";
+import { withUser } from "./withUser";
+
+export { UserProvider, useUser, withUser };
