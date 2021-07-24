@@ -7,6 +7,11 @@ import { Right } from "./Right";
 /**
  * @package
  */
+export type HeaderProps = Left & Center & Right;
+
+/**
+ * @package
+ */
 export const Header = memo<Left & Center & Right>((props) => {
   return (
     <header className="flex items-center">
