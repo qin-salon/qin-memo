@@ -31,6 +31,7 @@
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "clsx": "^1.1.1",
+    "date-fns": "^2.23.0",
     "firebase": "^8.8.0",
     "firebase-admin": "^9.11.0",
     "http-proxy": "^1.18.1",
