@@ -66,7 +66,7 @@ export const useNote = (note: NoteType) => {
         loading: "処理中",
         success: () => {
           setIsPublic(!isPublic);
-          return isPublic ? "非公開にしました" : "公開にしました";
+          return isPublic ? "非公開にしました" : "公開しました";
         },
         error: "失敗しました",
       });
