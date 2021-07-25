@@ -20,12 +20,14 @@ export const NoteListItem: VFC<NoteListItemProps> = (props) => {
         <div className="text-sm sm:text-base font-bold truncate">{title}</div>
         <div className="mt-0.5 text-sm truncate">{props.note.excerpt.replace(title, "")}</div>
 
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex justify-between items-end mt-4 h-6">
           <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
             {format_yyyyMd(props.note.updatedOn)}
           </time>
           {props.note.public ? (
-            <div className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">公開中</div>
+            <div className="grid place-content-center px-2.5 h-full text-xs font-bold text-white bg-orange-400 rounded-full">
+              公開中
+            </div>
           ) : null}
         </div>
       </a>
