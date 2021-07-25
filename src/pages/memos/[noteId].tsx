@@ -3,8 +3,7 @@ import { AuthAction, useAuthUser, withAuthUserTokenSSR } from "next-firebase-aut
 import type { ChangeEvent } from "react";
 import { useCallback, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { ConfirmDialog } from "src/components/ConfirmDialog";
-import { MenuDialog } from "src/components/MenuDialog";
+import { ConfirmDialog, MenuDialog } from "src/components/Dialogs";
 import { NoteMenu } from "src/components/NoteMenu";
 import { Layout } from "src/components/shared/Layout";
 import { withUser } from "src/contexts/user";

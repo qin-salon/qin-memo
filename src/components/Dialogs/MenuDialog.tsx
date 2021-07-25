@@ -10,6 +10,9 @@ type MenuDialogProps = {
   onClose: () => void;
 };
 
+/**
+ * @package
+ */
 export const MenuDialog: VFC<MenuDialogProps> = (props) => {
   const buttonRef = useRef(null);
 
