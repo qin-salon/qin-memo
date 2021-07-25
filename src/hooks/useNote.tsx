@@ -52,23 +52,29 @@ export const useNote = (note: NoteType) => {
   const { isShowDeleteNoteDialog, handleOpenDeleteNoteDialog, handleCloseDeleteNoteDialog, handleDeleteMemo } =
     useDeleteNoteDialog(note);
   const [isPublic, setIsPublic] = useState(note.public);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleTogglePublicState = useCallback(async () => {
-    const idToken = await authUser.getIdToken();
-    const promise = fetch(`${API_URL}/v1/notes/${note.id}/public`, {
-      method: "patch",
-      headers: { authorization: `Bearer ${idToken}` },
-    });
-    toast.promise(promise, {
-      loading: "処理中",
-      success: () => {
-        setIsPublic(!isPublic);
-        handleCloseMenu();
-        return "公開しました";
-      },
-      error: "失敗しました",
-    });
-  }, [authUser, handleCloseMenu, isPublic, note.id]);
+    setIsLoading(true);
+    try {
+      const idToken = await authUser.getIdToken();
+      const promise = fetch(`${API_URL}/v1/notes/${note.id}/public`, {
+        method: "patch",
+        headers: { authorization: `Bearer ${idToken}` },
+      });
+      await toast.promise(promise, {
+        loading: "処理中",
+        success: () => {
+          setIsPublic(!isPublic);
+          return isPublic ? "非公開にしました" : "公開にしました";
+        },
+        error: "失敗しました",
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    setIsLoading(false);
+  }, [authUser, isPublic, note.id]);
 
   // ヘッダーの右メニュー部分
   const headerRight = useMemo(() => {
@@ -94,6 +100,7 @@ export const useNote = (note: NoteType) => {
           icon: isPublic ? <EyeOffIcon /> : <EyeIcon />,
           iconColor: "blue",
           onClick: handleTogglePublicState,
+          disabled: isLoading,
         },
         {
           label: "削除する",
@@ -104,9 +111,10 @@ export const useNote = (note: NoteType) => {
             handleOpenDeleteNoteDialog();
             handleCloseMenu();
           },
+          disabled: isLoading,
         },
       ],
-      isPublic ? undefined : "以下は公開後に操作ができます",
+      isPublic ? "メモをシェアしよう" : "以下は公開後に操作できます",
       [
         {
           label: "Twitterでシェアする",
@@ -119,7 +127,7 @@ export const useNote = (note: NoteType) => {
             }&text=${"メモを書きました"}&via=${"QinMemo"}`;
             window.open(url, "_blank", "noreferrer");
           },
-          disabled: !isPublic,
+          disabled: !isPublic || isLoading,
         },
         {
           label: "リンクをコピーする",
@@ -129,11 +137,11 @@ export const useNote = (note: NoteType) => {
             toast("コピーしました");
             handleCloseMenu();
           },
-          disabled: !isPublic,
+          disabled: !isPublic || isLoading,
         },
       ],
     ];
-  }, [handleCloseMenu, handleOpenDeleteNoteDialog, handleTogglePublicState, isPublic]);
+  }, [handleCloseMenu, handleOpenDeleteNoteDialog, handleTogglePublicState, isLoading, isPublic]);
 
   return {
     headerRight,
