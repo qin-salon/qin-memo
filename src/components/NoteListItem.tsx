@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { VFC } from "react";
 import type { ListNoteType } from "src/types/types";
+import { format_yyyyMd } from "src/utils/date";
 
 type NoteListItemProps = { note: ListNoteType };
 
@@ -20,7 +21,9 @@ export const NoteListItem: VFC<NoteListItemProps> = (props) => {
         <div className="mt-0.5 text-sm truncate">{props.note.excerpt.replace(title, "")}</div>
 
         <div className="flex justify-between items-center mt-4">
-          <time className="text-sm font-bold text-gray-400">{props.note.updatedOn}</time>
+          <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
+            {format_yyyyMd(props.note.updatedOn)}
+          </time>
           {props.note.public ? (
             <div className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">公開中</div>
           ) : null}
