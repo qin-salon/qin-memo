@@ -54,27 +54,32 @@ export const useNote = (note: NoteType) => {
   const [isPublic, setIsPublic] = useState(note.public);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleTogglePublicState = useCallback(async () => {
-    setIsLoading(true);
+  const togglePublicStatus = useCallback(async () => {
     try {
       const idToken = await authUser.getIdToken();
-      const promise = fetch(`${API_URL}/v1/notes/${note.id}/public`, {
+      const res = await fetch(`${API_URL}/v1/notes/${note.id}/public`, {
         method: "patch",
         headers: { authorization: `Bearer ${idToken}` },
       });
-      await toast.promise(promise, {
-        loading: "処理中",
-        success: () => {
-          setIsPublic(!isPublic);
-          return isPublic ? "非公開にしました" : "公開しました";
-        },
-        error: "失敗しました",
-      });
+      const data = await res.json();
+      return data.public;
     } catch (error) {
       console.error(error);
     }
+  }, [authUser, note.id]);
+
+  const handleClickPublicBtn = useCallback(async () => {
+    setIsLoading(true);
+    await toast.promise(togglePublicStatus(), {
+      loading: "処理中",
+      success: (publicStatus) => {
+        setIsPublic(publicStatus);
+        return publicStatus ? "公開しました" : "非公開にしました";
+      },
+      error: "失敗しました",
+    });
     setIsLoading(false);
-  }, [authUser, isPublic, note.id]);
+  }, [togglePublicStatus]);
 
   // ヘッダーの右メニュー部分
   const headerRight = useMemo(() => {
@@ -99,7 +104,7 @@ export const useNote = (note: NoteType) => {
           labelColor: "blue",
           icon: isPublic ? <EyeOffIcon /> : <EyeIcon />,
           iconColor: "blue",
-          onClick: handleTogglePublicState,
+          onClick: handleClickPublicBtn,
           disabled: isLoading,
         },
         {
@@ -127,7 +132,8 @@ export const useNote = (note: NoteType) => {
             }&text=${"メモを書きました"}&via=${"QinMemo"}`;
             window.open(url, "_blank", "noreferrer");
           },
-          disabled: !isPublic || isLoading,
+          disabled: !isPublic,
+          disabledColor: !isPublic,
         },
         {
           label: "リンクをコピーする",
@@ -137,11 +143,12 @@ export const useNote = (note: NoteType) => {
             toast("コピーしました");
             handleCloseMenu();
           },
-          disabled: !isPublic || isLoading,
+          disabled: !isPublic,
+          disabledColor: !isPublic,
         },
       ],
     ];
-  }, [handleCloseMenu, handleOpenDeleteNoteDialog, handleTogglePublicState, isLoading, isPublic]);
+  }, [handleCloseMenu, handleOpenDeleteNoteDialog, handleClickPublicBtn, isLoading, isPublic]);
 
   return {
     headerRight,
