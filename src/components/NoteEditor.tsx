@@ -13,7 +13,7 @@ export const NoteEditor = (props: NoteType) => {
   const debounced = useDebouncedCallback(async (value) => {
     try {
       const idToken = await authUser.getIdToken();
-      await fetch(`${API_URL}/v1/notaes/${props.id}`, {
+      await fetch(`${API_URL}/v1/notes/${props.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value.trim() }),
