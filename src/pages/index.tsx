@@ -57,12 +57,14 @@ const Index: NextPage = () => {
             height={64}
             className="overflow-hidden w-16 h-16 rounded-full"
           />
-          <div className="flex flex-col">
-            <span className="font-bold">{user?.name}</span>
-            <Link href="/settings/qin/user/edit">
-              <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
-            </Link>
-          </div>
+          {user?.name ? (
+            <div className="flex flex-col">
+              <span className="font-bold">{user.name}</span>
+              <Link href="/settings/qin/user/edit">
+                <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
+              </Link>
+            </div>
+          ) : null}
         </div>
 
         <Link href="/search">
