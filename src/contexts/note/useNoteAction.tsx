@@ -5,6 +5,9 @@ import type { ListNoteType, NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import { mutate } from "swr";
 
+/**
+ * @package
+ */
 export const useNoteAction = (note: NoteType) => {
   const authUser = useAuthUser();
   const { user } = useUser();
