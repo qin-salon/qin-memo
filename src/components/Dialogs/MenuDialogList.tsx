@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { DOMAttributes, VFC } from "react";
 
-type MenuItem = {
+type MenuListItem = {
   label: string;
   labelColor?: "blue" | "red";
   icon: JSX.Element;
@@ -11,11 +11,17 @@ type MenuItem = {
   disabledColor?: boolean;
 };
 
-export type NoteMenuProps = {
-  menu: (MenuItem[] | string | undefined)[];
+/**
+ * @package
+ */
+export type MenuDialogListProps = {
+  menu: (MenuListItem[] | string | undefined)[];
 };
 
-export const NoteMenu: VFC<NoteMenuProps> = (props) => {
+/**
+ * @package
+ */
+export const MenuDialogList: VFC<MenuDialogListProps> = (props) => {
   return (
     <div className="space-y-5">
       {props.menu.map((item, i) => {

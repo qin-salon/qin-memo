@@ -1,15 +1,16 @@
+import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { AuthAction, useAuthUser, withAuthUserTokenSSR } from "next-firebase-auth";
 import type { ChangeEvent } from "react";
 import { useCallback, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-import { ConfirmDialog, MenuDialog } from "src/components/Dialogs";
-import { NoteMenu } from "src/components/NoteMenu";
+import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
-import { withUser } from "src/contexts/user";
-import { useNote } from "src/hooks/useNote";
-import type { NoteType } from "src/types/types";
+import { NoteAction } from "src/components/shared/NoteAction";
+import { useUser, withUser } from "src/contexts/user";
+import type { ListNoteType, NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
+import useSWR, { mutate as mutateUsersNotes } from "swr";
 
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
@@ -24,16 +25,60 @@ export const getServerSideProps = withAuthUserTokenSSR({
 
 const MemosNoteId: NextPage<NoteType> = (props) => {
   const authUser = useAuthUser();
-  const {
-    headerRight,
-    menu,
-    isShowMenu,
-    handleCloseMenu,
-    handleDeleteMemo,
-    isShowDeleteNoteDialog,
-    handleCloseDeleteNoteDialog,
-  } = useNote(props);
+  const { user } = useUser();
+  const [isShowMenu, setIsShowMenu] = useState(false);
   const [content, setContent] = useState(props.content);
+  const { data, mutate } = useSWR(`${API_URL}/v1/notes/${props.id}`, { initialData: props });
+
+  const handleOpenMenu = useCallback(() => {
+    setIsShowMenu(true);
+  }, []);
+
+  const handleCloseMenu = useCallback(() => {
+    setIsShowMenu(false);
+  }, []);
+
+  const togglePublicStatus = useCallback(async () => {
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/notes/${props.id}/public`, {
+      method: "patch",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
+    await mutate();
+    mutateUsersNotes(
+      `${API_URL}/v1/users/${user?.id}/notes`,
+      (notes: ListNoteType[]) => {
+        if (!notes) return;
+        const target = notes.filter((note) => {
+          return note.id === props.id;
+        })[0];
+        const others = notes.filter((note) => {
+          return note.id !== props.id;
+        });
+        return [{ ...target, public: !target.public }, ...others];
+      },
+      false
+    );
+  }, [authUser, mutate, props.id, user?.id]);
+
+  const deleteNote = useCallback(async () => {
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/notes/${props.id}`, {
+      method: "delete",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
+    mutateUsersNotes(
+      `${API_URL}/v1/users/${user?.id}/notes`,
+      (notes: ListNoteType[]) => {
+        if (!notes) return;
+        return notes.filter((note) => {
+          return note.id !== props.id;
+        });
+      },
+      false
+    );
+  }, [authUser, props.id, user?.id]);
+
   const handleChangeContent = useCallback(
     async (event: ChangeEvent<HTMLTextAreaElement>) => {
       setContent(event.currentTarget.value);
@@ -53,9 +98,21 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
 
   return (
     <>
-      <Layout left="memo" right={headerRight}>
-        <div className="flex flex-col min-h-screen">
-          <label htmlFor="memo" className="flex-1 pb-20 cursor-text">
+      <Layout
+        left="memo"
+        right={[
+          data?.public ? (
+            <span key="public" className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">
+              公開中
+            </span>
+          ) : undefined,
+          <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
+            <DotsCircleHorizontalIcon className="w-5 h-5" />
+          </Button>,
+        ]}
+      >
+        <div className="flex flex-col h-[calc(100vh-168px)] sm:h-[calc(100vh-192px)]">
+          <label htmlFor="memo" className="flex-1 cursor-text">
             <TextareaAutosize
               id="memo"
               style={{ caretColor: "#3B82F6" }}
@@ -69,18 +126,12 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
         </div>
       </Layout>
 
-      <MenuDialog show={isShowMenu} onClose={handleCloseMenu}>
-        <NoteMenu menu={menu} />
-      </MenuDialog>
-
-      <ConfirmDialog
-        show={isShowDeleteNoteDialog}
-        onClose={handleCloseDeleteNoteDialog}
-        onClickOk={handleDeleteMemo}
-        title="メモを削除"
-        description="復元できませんがよろしいですか？"
-        buttonText="削除する"
-        buttonColor="red"
+      <NoteAction
+        public={data?.public}
+        isShowMenu={isShowMenu}
+        onCloseMenu={handleCloseMenu}
+        togglePublicStatus={togglePublicStatus}
+        deleteNote={deleteNote}
       />
     </>
   );
