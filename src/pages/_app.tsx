@@ -3,9 +3,9 @@ import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
+import { useAddClassToBodyElem } from "src/contexts/useAddClassToBodyElem";
 import { UserProvider } from "src/contexts/user";
-import { useAddClassToBodyElem } from "src/hooks/useAddClassToBodyElem";
-import { useSessionRouter } from "src/hooks/useSessionRouter";
+import { useSessionRouter } from "src/contexts/useSessionRouter";
 import { initAuth } from "src/utils/initAuth";
 
 if (process.env.NODE_ENV === "development") {
