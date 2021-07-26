@@ -7,10 +7,12 @@ import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
 import { NoteAction } from "src/components/shared/NoteAction";
-import { useUser, withUser } from "src/contexts/user";
-import type { ListNoteType, NoteType } from "src/types/types";
+import { withUser } from "src/contexts/user";
+import { useNoteAction } from "src/hooks/useNoteAction";
+import { useNoteDialog } from "src/hooks/useNoteDialog";
+import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
-import useSWR, { mutate as mutateUsersNotes } from "swr";
+import useSWR from "swr";
 
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
@@ -25,59 +27,10 @@ export const getServerSideProps = withAuthUserTokenSSR({
 
 const MemosNoteId: NextPage<NoteType> = (props) => {
   const authUser = useAuthUser();
-  const { user } = useUser();
-  const [isShowMenu, setIsShowMenu] = useState(false);
   const [content, setContent] = useState(props.content);
-  const { data, mutate } = useSWR(`${API_URL}/v1/notes/${props.id}`, { initialData: props });
-
-  const handleOpenMenu = useCallback(() => {
-    setIsShowMenu(true);
-  }, []);
-
-  const handleCloseMenu = useCallback(() => {
-    setIsShowMenu(false);
-  }, []);
-
-  const togglePublicStatus = useCallback(async () => {
-    const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${props.id}/public`, {
-      method: "patch",
-      headers: { authorization: `Bearer ${idToken}` },
-    });
-    await mutate();
-    mutateUsersNotes(
-      `${API_URL}/v1/users/${user?.id}/notes`,
-      (notes: ListNoteType[]) => {
-        if (!notes) return;
-        const target = notes.filter((note) => {
-          return note.id === props.id;
-        })[0];
-        const others = notes.filter((note) => {
-          return note.id !== props.id;
-        });
-        return [{ ...target, public: !target.public }, ...others];
-      },
-      false
-    );
-  }, [authUser, mutate, props.id, user?.id]);
-
-  const deleteNote = useCallback(async () => {
-    const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${props.id}`, {
-      method: "delete",
-      headers: { authorization: `Bearer ${idToken}` },
-    });
-    mutateUsersNotes(
-      `${API_URL}/v1/users/${user?.id}/notes`,
-      (notes: ListNoteType[]) => {
-        if (!notes) return;
-        return notes.filter((note) => {
-          return note.id !== props.id;
-        });
-      },
-      false
-    );
-  }, [authUser, props.id, user?.id]);
+  const { data } = useSWR(`${API_URL}/v1/notes/${props.id}`, { initialData: props });
+  const { isShowMenu, handleOpenMenu, handleCloseMenu } = useNoteDialog();
+  const noteAction = useNoteAction(data ?? props);
 
   const handleChangeContent = useCallback(
     async (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -126,13 +79,7 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
         </div>
       </Layout>
 
-      <NoteAction
-        public={data?.public}
-        isShowMenu={isShowMenu}
-        onCloseMenu={handleCloseMenu}
-        togglePublicStatus={togglePublicStatus}
-        deleteNote={deleteNote}
-      />
+      <NoteAction public={data?.public} isShowMenu={isShowMenu} onCloseMenu={handleCloseMenu} {...noteAction} />
     </>
   );
 };
