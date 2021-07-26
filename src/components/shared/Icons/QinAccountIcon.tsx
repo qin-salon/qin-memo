@@ -1,5 +1,5 @@
 import type { VFC } from "react";
-import { useGetIconFillColor } from "src/hooks/useTheme";
+import { useGetIconFillColor } from "src/contexts/useTheme";
 
 /**
  * @package
