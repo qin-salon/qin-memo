@@ -3,12 +3,11 @@ import { NoteListItem } from "src/components/NoteListItem";
 import { Error } from "src/components/shared/Error";
 import type { ListNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
-import type { SWRResponse } from "swr";
 import useSWR from "swr";
 
-type NoteListProps = SWRResponse<ListNoteType[], any>;
+type NoteListProps = { data?: ListNoteType[]; error?: Error };
 
-const NoteList: VFC<NoteListProps> = (props) => {
+export const NoteList: VFC<NoteListProps> = (props) => {
   if (props.error) {
     return <Error />;
   }
@@ -49,12 +48,7 @@ const NoteList: VFC<NoteListProps> = (props) => {
   );
 };
 
-export const UserNoteList: VFC<{ userId: string }> = (props) => {
-  const res = useSWR<ListNoteType[]>(`${API_URL}/v1/users/${props.userId}/notes`);
-  return <NoteList {...res} />;
-};
-
 export const SearchNoteList: VFC<{ userId: string; keyword: string }> = (props) => {
-  const res = useSWR(`${API_URL}/v1/users/${props.userId}/notes/search?q=${props.keyword}`);
-  return <NoteList {...res} />;
+  const { data, error } = useSWR(`${API_URL}/v1/users/${props.userId}/notes/search?q=${props.keyword}`);
+  return <NoteList {...{ data, error }} />;
 };

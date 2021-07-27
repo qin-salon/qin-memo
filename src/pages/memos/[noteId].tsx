@@ -50,5 +50,4 @@ const MemosNoteId: NextPage<NoteType> = (props) => {
   );
 };
 
-// TODO: 修正必要
-export default withUser(MemosNoteId as any);
+export default withUser(MemosNoteId);

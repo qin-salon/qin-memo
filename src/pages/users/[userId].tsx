@@ -1,36 +1,64 @@
-import type { NextPage } from "next";
-import Link from "next/link";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
-import { UserNoteList } from "src/components/NoteList";
+import { NoteList } from "src/components/NoteList";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
-import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/contexts/user";
-import type { NoteType } from "src/types/types";
+import type { ListNoteType, UserType } from "src/types/types";
+import { isNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
-const UsersUserId: NextPage = () => {
-  const authUser = useAuthUser();
+type Props = { user: UserType; note: ListNoteType[] };
+
+const getJson = async (url: string) => {
+  const res = await fetch(url);
+  const json = await res.json();
+  return json;
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return { paths: [], fallback: "blocking" };
+};
+
+export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
+  const [user, note] = await Promise.all<UserType, ListNoteType[]>([
+    getJson(`${API_URL}/v1/users/${ctx.params?.userId}`),
+    getJson(`${API_URL}/v1/users/${ctx.params?.userId}/notes`),
+  ]);
+
+  if (!user.id) {
+    return { notFound: true };
+  }
+
+  return { props: { user, note }, revalidate: 10 };
+};
+
+const UsersUserId: NextPage<Props> = (props) => {
   const router = useRouter();
-  const { user } = useUser();
+  const authUser = useAuthUser();
+  const { user: my } = useUser();
+
   const handleCreateMemo = useCallback(async () => {
+    if (!my?.id) return;
     try {
-      if (!user?.id) return;
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/v1/users/${user.id}/notes`, {
+      const res = await fetch(`${API_URL}/v1/users/${my.id}/notes`, {
         method: "POST",
         headers: { authorization: `Bearer ${idToken}` },
       });
-      // TODO: typeguard
-      const data: NoteType = await res.json();
+      const data = await res.json();
+      if (!isNoteType(data)) {
+        throw new Error("Failed to create memo");
+      }
       await router.push(`/memos/${data.id}`);
     } catch (error) {
       console.error(error);
     }
-  }, [authUser, router, user?.id]);
+  }, [authUser, my?.id, router]);
+
   return (
     <Layout
       left="memo"
@@ -44,25 +72,18 @@ const UsersUserId: NextPage = () => {
       <div className="space-y-7">
         <div className="flex items-center space-x-4">
           <Avatar
-            src={user?.avatarUrl}
-            alt={user?.name}
+            src={props.user.avatarUrl}
+            alt={props.user.name}
             width={64}
             height={64}
             className="overflow-hidden w-16 h-16 rounded-full"
           />
           <div className="flex flex-col">
-            <span className="font-bold">{user?.name}</span>
+            <span className="font-bold">{props.user.name}</span>
           </div>
         </div>
 
-        <Link href="/search">
-          <a className="block">
-            <Search placeholder="メモを検索する" />
-          </a>
-        </Link>
-
-        {/* TODO:修正必要かも */}
-        {user ? <UserNoteList userId={user.id} /> : null}
+        <NoteList data={props.note} />
       </div>
     </Layout>
   );

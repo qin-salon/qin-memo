@@ -8,7 +8,7 @@ import { useUserFetch } from "./useUserFetch";
 /**
  * @package
  */
-export const withUser = (Component: NextPage) => {
+export const withUser = (Component: NextPage<any>) => {
   return withAuthUser({
     whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
     whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
