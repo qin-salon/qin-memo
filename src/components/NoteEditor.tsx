@@ -4,14 +4,17 @@ import type { ChangeEvent } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
-import type { NoteType } from "src/types/types";
+import { useUser } from "src/contexts/user";
+import type { ListNoteType, NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
+import { mutate } from "swr";
 import { useDebouncedCallback } from "use-debounce";
 
 export const NoteEditor = (props: NoteType) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
   const authUser = useAuthUser();
+  const { user } = useUser();
 
   const saveNote = useCallback(
     async (value: string) => {
@@ -21,9 +24,28 @@ export const NoteEditor = (props: NoteType) => {
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value.trim() }),
       });
+      await mutate(`${API_URL}/v1/users/${user?.id}/notes`);
     },
-    [authUser, props.id]
+    [authUser, props.id, user?.id]
   );
+
+  const deleteNote = useCallback(async () => {
+    const idToken = await authUser.getIdToken();
+    await fetch(`${API_URL}/v1/notes/${props.id}`, {
+      method: "delete",
+      headers: { authorization: `Bearer ${idToken}` },
+    });
+    await mutate(
+      `${API_URL}/v1/users/${user?.id}/notes`,
+      (data: ListNoteType[]) => {
+        if (!data) return;
+        return data.filter(({ id }) => {
+          return id !== props.id;
+        });
+      },
+      false
+    );
+  }, [authUser, props.id, user?.id]);
 
   const debounced = useDebouncedCallback(async (value: string) => {
     try {
@@ -42,14 +64,22 @@ export const NoteEditor = (props: NoteType) => {
   );
 
   const handleBlur = useCallback(async () => {
-    if (ref.current?.value) {
+    if (ref.current?.value === undefined) return;
+    if (ref.current.value.trim() === "") {
+      await deleteNote();
+    } else {
       await saveNote(ref.current.value);
     }
-  }, [saveNote]);
+  }, [deleteNote, saveNote]);
 
   useEffect(() => {
     router.beforePopState(({ url }) => {
-      if (ref.current?.value && url === "/") {
+      if (url !== "/" || ref.current?.value === undefined) {
+        return true;
+      }
+      if (ref.current.value.trim() === "") {
+        deleteNote();
+      } else {
         saveNote(ref.current.value);
       }
       return true;
@@ -70,6 +100,7 @@ export const NoteEditor = (props: NoteType) => {
         placeholder="メモを入力する"
         autoComplete="off"
         minRows={16}
+        autoFocus
       />
     </label>
   );
