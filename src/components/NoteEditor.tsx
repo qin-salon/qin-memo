@@ -64,26 +64,37 @@ export const NoteEditor = (props: NoteType) => {
   );
 
   const handleBlur = useCallback(async () => {
-    if (ref.current?.value === undefined) return;
-    if (ref.current.value.trim() === "") {
+    const val = ref.current?.value;
+    if (val === undefined || (val.trim() !== "" && val === props.content)) {
+      return;
+    }
+    if (val.trim() === "") {
       await deleteNote();
     } else {
-      await saveNote(ref.current.value);
+      await saveNote(val);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deleteNote, saveNote]);
 
   useEffect(() => {
     router.beforePopState(({ url }) => {
-      if (url !== "/" || ref.current?.value === undefined) {
+      const val = ref.current?.value;
+      if (url !== "/" || val === undefined || (val.trim() !== "" && val === props.content)) {
         return true;
       }
-      if (ref.current.value.trim() === "") {
+      if (val.trim() === "") {
         deleteNote();
       } else {
-        saveNote(ref.current.value);
+        saveNote(val);
       }
       return true;
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deleteNote, saveNote]);
+
+  useEffect(() => {
+    if (!props.content || !ref.current) return;
+    ref.current.setSelectionRange(props.content.length, props.content.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
