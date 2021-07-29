@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { ForwardedRef } from "react";
 import { forwardRef } from "react";
 
 import type { AnchorType } from "./types";
@@ -13,7 +12,7 @@ export const Anchor = forwardRef<HTMLAnchorElement, AnchorType>((props, ref) => 
   const classes = useButtonClass(className, variant);
   return (
     <Link {...rest}>
-      <a ref={ref as ForwardedRef<HTMLAnchorElement>} className={classes}>
+      <a ref={ref} className={classes}>
         {children}
       </a>
     </Link>

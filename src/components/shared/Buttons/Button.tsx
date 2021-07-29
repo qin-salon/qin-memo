@@ -1,4 +1,3 @@
-import type { ForwardedRef } from "react";
 import { forwardRef } from "react";
 
 import type { ButtonType } from "./types";
@@ -11,7 +10,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonType>((props, ref) => 
   const { children, className, variant, ...rest } = props;
   const classes = useButtonClass(className, variant);
   return (
-    <button type="button" ref={ref as ForwardedRef<HTMLButtonElement>} {...rest} className={classes}>
+    <button type="button" ref={ref} {...rest} className={classes}>
       {children}
     </button>
   );
