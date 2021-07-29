@@ -1,8 +1,8 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { useAuthUser } from "next-firebase-auth";
-import type { ChangeEvent, FormEvent, MouseEvent } from "react";
-import { useCallback, useState } from "react";
+import type { FormEvent, MouseEvent } from "react";
+import { useCallback, useRef, useState } from "react";
 import { NoteList } from "src/components/NoteList";
 import { SearchHistories } from "src/components/SearchHistories";
 import { Button } from "src/components/shared/Buttons";
@@ -18,7 +18,7 @@ type NotesState = { data?: ListNoteType[]; error?: Error };
 const SearchPage: NextPage = () => {
   const authUser = useAuthUser();
   const { user } = useUser();
-  const [value, setValue] = useState("");
+  const ref = useRef<HTMLInputElement>(null);
   const [notes, setNotes] = useState<NotesState | undefined>();
   const {
     data: histories,
@@ -29,20 +29,18 @@ const SearchPage: NextPage = () => {
     revalidateOnReconnect: false,
   });
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.currentTarget.value);
-  }, []);
-
   const handleClose = useCallback((_e: MouseEvent<HTMLButtonElement>) => {
-    setValue("");
     setNotes(undefined);
+    if (!ref.current) return;
+    ref.current.value = "";
+    ref.current.focus();
   }, []);
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!user) return;
-      const keyword = value.trim();
+      const keyword = ref.current?.value.trim();
       if (!keyword) {
         setNotes(undefined);
         return;
@@ -71,13 +69,13 @@ const SearchPage: NextPage = () => {
         console.error(error);
       }
     },
-    [authUser, mutate, user, value]
+    [authUser, mutate, user]
   );
 
   const handleClickItem = useCallback(
     async (keyword: string) => {
-      if (!user) return;
-      setValue(keyword);
+      if (!user || !ref.current) return;
+      ref.current.value = keyword;
       const idToken = await authUser.getIdToken();
       const res = await fetch(`${API_URL}/v1/users/${user.id}/notes/search?q=${keyword}`, {
         headers: { authorization: `Bearer ${idToken}` },
@@ -107,7 +105,7 @@ const SearchPage: NextPage = () => {
       left="back"
       center={
         <form className="flex-1" onSubmit={handleSubmit}>
-          <Search placeholder="検索" value={value} onChange={handleChange} autoFocus />
+          <Search ref={ref} placeholder="検索" autoFocus />
         </form>
       }
       right={
