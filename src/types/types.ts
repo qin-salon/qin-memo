@@ -32,6 +32,7 @@ export type ListNoteType = {
 export type SearchHistoryType = {
   id: number;
   keyword: string;
+  createdOn: string;
 };
 
 export const isNoteType = (data: any): data is NoteType => {

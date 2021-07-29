@@ -58,7 +58,7 @@ export const NoteEditor = (props: NoteType) => {
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
-      return debounced(e.target.value);
+      return debounced(e.currentTarget.value);
     },
     [debounced]
   );
