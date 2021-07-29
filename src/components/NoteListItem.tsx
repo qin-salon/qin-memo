@@ -3,34 +3,33 @@ import type { VFC } from "react";
 import type { ListNoteType } from "src/types/types";
 import { format_yyyyMd } from "src/utils/date";
 
-type NoteListItemProps = { note: ListNoteType };
-
-// タイトルの取得（改行コードまでをタイトルとする）
-const pattarn = "(^.*)(\n)";
-const getTitle = (excTitle: RegExpMatchArray | null) => {
-  return String(excTitle ? excTitle[0] : "");
+// Get first and second line of string
+const getFirstAndSecondLine = (str: string) => {
+  const [first, second] = str.split("\n").filter(Boolean);
+  return [first, second ?? "\n"];
 };
 
-export const NoteListItem: VFC<NoteListItemProps> = (props) => {
-  const title = getTitle(props.note.excerpt.match(pattarn));
+export const NoteListItem: VFC<ListNoteType> = (props) => {
+  const [first, second] = getFirstAndSecondLine(props.excerpt);
 
   return (
-    <Link href={`/memos/${props.note.id}`}>
-      <a className="block py-3 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow">
-        <div className="text-sm sm:text-base font-bold truncate">{title}</div>
-        <div className="mt-0.5 text-sm truncate">{props.note.excerpt.replace(title, "")}</div>
-
-        <div className="flex justify-between items-end mt-4 h-6">
-          <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
-            {format_yyyyMd(props.note.updatedOn)}
-          </time>
-          {props.note.public ? (
-            <div className="grid place-content-center px-2.5 h-full text-xs font-bold text-white bg-orange-400 rounded-full">
-              公開中
-            </div>
-          ) : null}
-        </div>
-      </a>
-    </Link>
+    <article>
+      <Link href={`/memos/${props.id}`}>
+        <a className="block py-3 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow">
+          <h1 className="text-sm sm:text-base font-bold truncate">{first}</h1>
+          <p className="mt-0.5 text-sm truncate whitespace-pre-line">{second}</p>
+          <div className="flex justify-between items-end mt-4 h-6">
+            <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
+              {format_yyyyMd(props.updatedOn)}
+            </time>
+            {props.public ? (
+              <div className="grid place-content-center px-2.5 h-full text-xs font-bold text-white bg-orange-400 rounded-full">
+                公開中
+              </div>
+            ) : null}
+          </div>
+        </a>
+      </Link>
+    </article>
   );
 };
