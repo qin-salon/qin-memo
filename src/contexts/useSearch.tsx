@@ -69,6 +69,8 @@ export const useSearch = () => {
     async (keyword: string) => {
       if (!user || !ref.current) return;
       ref.current.value = keyword;
+      ref.current.focus();
+      ref.current.setSelectionRange(keyword.length, keyword.length);
       const idToken = await authUser.getIdToken();
       const res = await fetch(`${API_URL}/v1/users/${user.id}/notes/search?q=${keyword}`, {
         headers: { authorization: `Bearer ${idToken}` },
