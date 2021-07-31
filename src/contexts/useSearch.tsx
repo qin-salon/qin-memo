@@ -53,7 +53,7 @@ export const useSearch = () => {
           });
           const data: SearchHistoryType = await res.json();
           if (!histories) return [data];
-          return [data, ...histories];
+          return [data, ...histories.slice(0, 9)];
         }, false);
       } catch (error) {
         setNotes((prevData) => {
