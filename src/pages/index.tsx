@@ -2,23 +2,20 @@ import type { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
-import { NoteList } from "src/components/NoteList";
+import { Suspense, useCallback } from "react";
+import { NoteListSuspense } from "src/components/NoteListSuspense";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
 import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/contexts/user";
-import type { ListNoteType } from "src/types/types";
 import { isNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
-import useSWR from "swr";
 
 const Index: NextPage = () => {
   const router = useRouter();
   const authUser = useAuthUser();
   const { user } = useUser();
-  const { data, error } = useSWR<ListNoteType[]>(user?.id ? `${API_URL}/v1/users/${user.id}/notes` : null);
 
   const handleCreateMemo = useCallback(async () => {
     if (!user?.id) return;
@@ -72,9 +69,27 @@ const Index: NextPage = () => {
           </a>
         </Link>
 
-        <NoteList {...{ data, error }} />
+        <Suspense fallback={<Loading />}>
+          <NoteListSuspense id={user?.id} />
+        </Suspense>
       </div>
     </Layout>
+  );
+};
+
+const Loading = () => {
+  return (
+    <ul className="space-y-5">
+      {[1, 2, 3, 4, 5].map((v) => {
+        return (
+          <li key={v} className="py-4 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow animate-pulse">
+            <div className="w-3/4 h-3.5 sm:h-4 bg-gray-200 dark:bg-gray-600 rounded"></div>
+            <div className="mt-2.5 h-3.5 bg-gray-200 dark:bg-gray-600 rounded"></div>
+            <div className="mt-6 w-16 h-3.5 bg-gray-200 dark:bg-gray-600 rounded"></div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
