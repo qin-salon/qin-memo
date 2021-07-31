@@ -103,8 +103,7 @@ export const NoteEditor = (props: NoteType) => {
       <TextareaAutosize
         ref={ref}
         id="memo"
-        style={{ caretColor: "#3B82F6" }}
-        className="w-full text-lg sm:text-xl bg-transparent border-none focus:ring-0 resize-none"
+        className="w-full text-lg leading-loose bg-transparent border-none focus:ring-0 resize-none"
         defaultValue={props.content}
         onChange={handleChange}
         onBlur={handleBlur}
