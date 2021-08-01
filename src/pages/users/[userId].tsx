@@ -1,10 +1,11 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { ListNoteType } from "src/api/handler/note/type";
+import type { UserType } from "src/api/handler/user/type";
 import { NoteList } from "src/components/NoteList";
 import { NoteWriteButton } from "src/components/NoteWriteButton";
 import { Avatar } from "src/components/shared/Avatar";
 import { Layout } from "src/components/shared/Layout";
 import { withUser } from "src/contexts/user";
-import type { ListNoteType, UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
 type Props = { user: UserType; note: ListNoteType[] };

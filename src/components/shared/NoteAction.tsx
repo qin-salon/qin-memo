@@ -1,7 +1,7 @@
 import type { VFC } from "react";
+import type { NoteType } from "src/api/handler/note/type";
 import { ConfirmDialog, MenuDialog, MenuDialogList } from "src/components/Dialogs";
 import { useNoteMenu } from "src/contexts/note";
-import type { NoteType } from "src/types/types";
 
 type NoteActionProps = {
   public?: NoteType["public"];

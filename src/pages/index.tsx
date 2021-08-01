@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import type { ListNoteType } from "src/api/handler/note/type";
 import { NoteList } from "src/components/NoteList";
 import { NoteWriteButton } from "src/components/NoteWriteButton";
 import { Avatar } from "src/components/shared/Avatar";
 import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/contexts/user";
-import type { ListNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 

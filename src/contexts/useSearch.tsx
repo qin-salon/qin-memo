@@ -1,8 +1,9 @@
 import { useAuthUser } from "next-firebase-auth";
 import type { FormEvent, MouseEvent } from "react";
 import { useCallback, useRef, useState } from "react";
+import type { ListNoteType } from "src/api/handler/note/type";
+import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
 import { useUser } from "src/contexts/user";
-import type { ListNoteType, SearchHistoryType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 

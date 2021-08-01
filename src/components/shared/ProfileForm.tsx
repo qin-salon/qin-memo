@@ -5,11 +5,11 @@ import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, VFC } from "react";
 import { useCallback, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
 import { Input } from "src/components/shared/Forms";
 import { useUser } from "src/contexts/user";
-import type { UserType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
 const createAvatarUrl = (userId: string) => {

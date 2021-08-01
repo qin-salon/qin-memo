@@ -1,7 +1,7 @@
 import type { VFC } from "react";
+import type { ListNoteType } from "src/api/handler/note/type";
 import { NoteListItem } from "src/components/NoteListItem";
 import { Error } from "src/components/shared/Error";
-import type { ListNoteType } from "src/types/types";
 
 type NoteListProps = { data?: ListNoteType[]; error?: Error };
 

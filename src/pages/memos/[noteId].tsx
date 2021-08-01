@@ -1,13 +1,13 @@
 import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
+import type { NoteType } from "src/api/handler/note/type";
 import { NoteEditor } from "src/components/NoteEditor";
 import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
 import { NoteAction } from "src/components/shared/NoteAction";
 import { useNoteAction, useNoteDialog } from "src/contexts/note";
 import { withUser } from "src/contexts/user";
-import type { NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 

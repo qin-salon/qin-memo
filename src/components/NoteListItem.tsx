@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { VFC } from "react";
-import type { ListNoteType } from "src/types/types";
+import type { ListNoteType } from "src/api/handler/note/type";
 import { format_yyyyMd } from "src/utils/date";
 
 // Get first and second line of string

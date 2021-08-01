@@ -1,6 +1,6 @@
 import type { Dispatch, ReactNode, SetStateAction, VFC } from "react";
 import { createContext, useState } from "react";
-import type { UserType } from "src/types/types";
+import type { UserType } from "src/api/handler/user/type";
 
 type ContextType = {
   user?: UserType;

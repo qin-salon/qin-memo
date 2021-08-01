@@ -1,7 +1,7 @@
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
+import type { ListNoteType, NoteType } from "src/api/handler/note/type";
 import { useUser } from "src/contexts/user";
-import type { ListNoteType, NoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import { mutate } from "swr";
 
