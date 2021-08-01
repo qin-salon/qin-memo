@@ -9,8 +9,17 @@ import { withUser } from "src/contexts/user";
 import { useSearch } from "src/contexts/useSearch";
 
 const SearchPage: NextPage = () => {
-  const { ref, notes, handleClose, handleSubmit, handleClickItem, handleDeleteHistory, histories, historiesError } =
-    useSearch();
+  const {
+    inputRef,
+    buttonRef,
+    notes,
+    handleClose,
+    handleSubmit,
+    handleClickItem,
+    handleDeleteHistory,
+    histories,
+    historiesError,
+  } = useSearch();
 
   return (
     <Layout
@@ -18,13 +27,13 @@ const SearchPage: NextPage = () => {
       left="back"
       center={
         <form className="flex-1" onSubmit={handleSubmit}>
-          <Search ref={ref} placeholder="検索" autoFocus />
+          <Search ref={inputRef} placeholder="検索" autoFocus />
         </form>
       }
       right={
         notes
           ? [
-              <Button key="delete" variant="ghost" className="w-10 h-10" onClick={handleClose}>
+              <Button ref={buttonRef} key="delete" variant="ghost" className="w-10 h-10" onClick={handleClose}>
                 <XIcon className="w-5 h-5" />
               </Button>,
             ]

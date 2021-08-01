@@ -11,7 +11,8 @@ type NotesState = { data?: ListNoteType[]; error?: Error };
 export const useSearch = () => {
   const authUser = useAuthUser();
   const { user } = useUser();
-  const ref = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [notes, setNotes] = useState<NotesState | undefined>();
   const {
     data: histories,
@@ -24,16 +25,16 @@ export const useSearch = () => {
 
   const handleClose = useCallback((_e: MouseEvent<HTMLButtonElement>) => {
     setNotes(undefined);
-    if (!ref.current) return;
-    ref.current.value = "";
-    ref.current.focus();
+    if (!inputRef.current) return;
+    inputRef.current.value = "";
+    inputRef.current.focus();
   }, []);
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!user) return;
-      const keyword = ref.current?.value.trim();
+      const keyword = inputRef.current?.value.trim();
       if (!keyword) {
         setNotes(undefined);
         return;
@@ -67,16 +68,15 @@ export const useSearch = () => {
 
   const handleClickItem = useCallback(
     async (keyword: string) => {
-      if (!user || !ref.current) return;
-      ref.current.value = keyword;
-      ref.current.focus();
-      ref.current.setSelectionRange(keyword.length, keyword.length);
+      if (!user || !inputRef.current) return;
+      inputRef.current.value = keyword;
       const idToken = await authUser.getIdToken();
       const res = await fetch(`${API_URL}/v1/users/${user.id}/notes/search?q=${keyword}`, {
         headers: { authorization: `Bearer ${idToken}` },
       });
       const data = await res.json();
       setNotes({ data, error: undefined });
+      buttonRef.current?.focus();
     },
     [authUser, user]
   );
@@ -94,5 +94,15 @@ export const useSearch = () => {
     });
   };
 
-  return { ref, notes, handleClose, handleSubmit, handleClickItem, handleDeleteHistory, histories, historiesError };
+  return {
+    inputRef,
+    buttonRef,
+    notes,
+    handleClose,
+    handleSubmit,
+    handleClickItem,
+    handleDeleteHistory,
+    histories,
+    historiesError,
+  };
 };
