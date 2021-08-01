@@ -1,14 +1,10 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { useRouter } from "next/router";
-import { useAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
 import { NoteList } from "src/components/NoteList";
+import { NoteWriteButton } from "src/components/NoteWriteButton";
 import { Avatar } from "src/components/shared/Avatar";
-import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
-import { useUser, withUser } from "src/contexts/user";
+import { withUser } from "src/contexts/user";
 import type { ListNoteType, UserType } from "src/types/types";
-import { isNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 
 type Props = { user: UserType; note: ListNoteType[] };
@@ -37,38 +33,8 @@ export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (
 };
 
 const UsersUserId: NextPage<Props> = (props) => {
-  const router = useRouter();
-  const authUser = useAuthUser();
-  const { user: my } = useUser();
-
-  const handleCreateMemo = useCallback(async () => {
-    if (!my?.id) return;
-    try {
-      const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/v1/users/${my.id}/notes`, {
-        method: "POST",
-        headers: { authorization: `Bearer ${idToken}` },
-      });
-      const data = await res.json();
-      if (!isNoteType(data)) {
-        throw new Error("Failed to create memo");
-      }
-      await router.push(`/memos/${data.id}`);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [authUser, my?.id, router]);
-
   return (
-    <Layout
-      left="memo"
-      right={[
-        <Button key="write memo" variant="solid-blue" onClick={handleCreateMemo} className="px-4 h-10">
-          メモを書く
-        </Button>,
-        "profile",
-      ]}
-    >
+    <Layout left="memo" right={[<NoteWriteButton key="note" />, "profile"]}>
       <div className="space-y-7">
         <div className="flex items-center space-x-4">
           <Avatar

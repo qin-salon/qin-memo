@@ -1,53 +1,21 @@
 import type { NextPage } from "next";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
 import { NoteList } from "src/components/NoteList";
+import { NoteWriteButton } from "src/components/NoteWriteButton";
 import { Avatar } from "src/components/shared/Avatar";
-import { Button } from "src/components/shared/Buttons";
 import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/contexts/user";
 import type { ListNoteType } from "src/types/types";
-import { isNoteType } from "src/types/types";
 import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 
 const Index: NextPage = () => {
-  const router = useRouter();
-  const authUser = useAuthUser();
   const { user } = useUser();
-  const { data, error } = useSWR<ListNoteType[]>(user?.id ? `${API_URL}/v1/users/${user.id}/notes` : null);
-
-  const handleCreateMemo = useCallback(async () => {
-    if (!user?.id) return;
-    try {
-      const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/v1/users/${user.id}/notes`, {
-        method: "POST",
-        headers: { authorization: `Bearer ${idToken}` },
-      });
-      const data = await res.json();
-      if (!isNoteType(data)) {
-        throw new Error("Failed to create memo");
-      }
-      await router.push(`/memos/${data.id}`);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [authUser, router, user?.id]);
+  const { data, error } = useSWR<ListNoteType[]>(`${API_URL}/v1/notes`);
 
   return (
-    <Layout
-      left="memo"
-      right={[
-        <Button key="write memo" variant="solid-blue" onClick={handleCreateMemo} className="px-4 h-10">
-          メモを書く
-        </Button>,
-        "profile",
-      ]}
-    >
+    <Layout left="memo" right={[<NoteWriteButton key="write" />, "profile"]}>
       <div className="space-y-7">
         <div className="flex items-center space-x-4">
           <Avatar
