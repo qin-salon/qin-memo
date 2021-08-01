@@ -8,9 +8,9 @@ import { UserProvider } from "src/contexts/user";
 import { useSessionRouter } from "src/contexts/useSessionRouter";
 import { initAuth } from "src/utils/initAuth";
 
-if (process.env.NODE_ENV === "development") {
-  // require("src/mocks");
-}
+// if (process.env.NODE_ENV === "development") {
+//   require("src/api");
+// }
 
 initAuth();
 
