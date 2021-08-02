@@ -1,8 +1,8 @@
 import { setupWorker } from "msw";
 
-import { handler } from "./handler";
+import * as handler from "./handler";
 
 /**
  * @package
  */
-export const worker = setupWorker(...handler);
+export const worker = setupWorker(...Object.values(handler));

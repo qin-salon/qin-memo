@@ -1,9 +1,4 @@
-import { authHandler } from "./auth";
-import { noteHandler } from "./note";
-import { searchHistoryHandler } from "./searchHistory";
-import { userHandler } from "./user";
-
-/**
- * @package
- */
-export const handler = [...authHandler, ...noteHandler, ...userHandler, ...searchHistoryHandler];
+export * from "./auth";
+export * from "./note";
+export * from "./searchHistory";
+export * from "./user";

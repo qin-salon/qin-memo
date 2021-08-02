@@ -1,7 +1,2 @@
-import { postApiSignin } from "./|api|signin";
-import { postApiSignout } from "./|api|signout";
-
-/**
- * @package
- */
-export const authHandler = [postApiSignin, postApiSignout];
+export * from "./|api|signin";
+export * from "./|api|signout";

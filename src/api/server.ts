@@ -1,8 +1,8 @@
 import { setupServer } from "msw/node";
 
-import { handler } from "./handler";
+import * as handler from "./handler";
 
 /**
  * @package
  */
-export const server = setupServer(...handler);
+export const server = setupServer(...Object.values(handler));
