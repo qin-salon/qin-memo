@@ -15,10 +15,10 @@ export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 })(async (props) => {
   const idToken = await props.AuthUser.getIdToken();
-  const response = await fetch(`${API_URL}/notes/${props.params?.noteId}`, {
+  const res = await fetch(`${API_URL}/notes/${props.params?.noteId}`, {
     headers: { authorization: `Bearer ${idToken}` },
   });
-  const data = await response.json();
+  const data = await res.json();
   return { props: data };
 });
 

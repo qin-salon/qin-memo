@@ -1,27 +1,33 @@
 import { rest } from "msw";
+import { API_URL } from "src/api/endpoint";
 
-import { EXAMPLE_NOTE } from "./data";
+import { EXAMPLE_NOTE_DB } from "./data";
 import type { NoteType } from "./type";
 
-const endpoint = "/notes/:noteId";
+const endpoint = `${API_URL}/notes/:noteId`;
 
 /**
  * @package 特定のメモの情報を取得する
  */
 export const getNotesNoteId = rest.get<never, NoteType, { noteId: string }>(endpoint, (req, res, ctx) => {
   const { noteId } = req.params;
-  return res(ctx.delay(1000), ctx.status(200), ctx.json({ ...EXAMPLE_NOTE, id: noteId }));
+  const note = EXAMPLE_NOTE_DB.find(({ id }) => {
+    return id === noteId;
+  });
+  const response = note || {
+    id: "foo",
+    content: "",
+    public: false,
+    updatedOn: new Date().toISOString(),
+  };
+  return res(ctx.delay(1000), ctx.status(200), ctx.json(response));
 });
 
 /**
  * @package 特定のメモを更新する
  */
-export const putNotesNoteId = rest.put<string, NoteType, { noteId: string }>(endpoint, (req, res, ctx) => {
-  const { noteId } = req.params;
-  const body: Pick<NoteType, "content"> = JSON.parse(req.body);
-  // eslint-disable-next-line no-console
-  console.log(body.content);
-  return res(ctx.delay(1000), ctx.status(200), ctx.json({ ...EXAMPLE_NOTE, id: noteId }));
+export const putNotesNoteId = rest.put<string, undefined, Pick<NoteType, "content">>(endpoint, (_req, res, ctx) => {
+  return res(ctx.delay(1000), ctx.status(200));
 });
 
 /**

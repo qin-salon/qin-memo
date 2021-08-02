@@ -36,6 +36,8 @@ export const NoteList: VFC<NoteListProps> = (props) => {
   return (
     <ul className="space-y-5">
       {props.data.map((note) => {
+        if (!note.excerpt) return null;
+
         return (
           <li key={note.id}>
             <article>

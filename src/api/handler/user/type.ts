@@ -5,5 +5,3 @@ export type UserType = {
   accountId: string;
   enabledQinMemo: boolean;
 };
-
-export type UserPutRequest = UserType | Pick<UserType, "id" | "name"> | Pick<UserType, "id" | "avatarUrl">;

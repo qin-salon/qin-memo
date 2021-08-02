@@ -1,11 +1,11 @@
+import { deleteSearchHistoriesSearchHistoriesId } from "./|searchHistories|:searchHistoriesId";
 import { getUsersUserIdSearchHistories, postUsersUserIdSearchHistories } from "./|users|:userId|searchHistories";
-import { deleteUsersUserIdSearchHistoriesSearchHistoriesId } from "./|users|:userId|searchHistories|:searchHistoriesId";
 
 /**
  * @package
  */
 export const searchHistoryHandler = [
+  deleteSearchHistoriesSearchHistoriesId,
   getUsersUserIdSearchHistories,
   postUsersUserIdSearchHistories,
-  deleteUsersUserIdSearchHistoriesSearchHistoriesId,
 ];
