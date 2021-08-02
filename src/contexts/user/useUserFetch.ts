@@ -1,7 +1,7 @@
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useEffect } from "react";
 import { API_URL } from "src/api/endpoint";
-import type { UserType } from "src/api/handler/user/type";
+import { isUserType } from "src/api/handler/user/type";
 
 import { useUser } from "./useUser";
 
@@ -38,13 +38,17 @@ export const useUserFetch = () => {
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),
         });
-        // TODO: ここはtypeguard
-        const json: UserType = await res.json();
+        const json = await res.json();
+        if (!isUserType(json)) {
+          throw new Error("Failed to create user");
+        }
         return setUser(json);
       }
 
-      // TODO: ここはtypeguard
-      const userData: UserType = await res.json();
+      const userData = await res.json();
+      if (!isUserType(userData)) {
+        throw new Error("Failed to get user");
+      }
 
       if (!userData.enabledQinMemo) {
         const body = { enabledQinMemo: true };
@@ -53,7 +57,10 @@ export const useUserFetch = () => {
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),
         });
-        const json: UserType = await res.json();
+        const json = await res.json();
+        if (!isUserType(json)) {
+          throw new Error("Failed to enable qin memo");
+        }
         return setUser(json);
       }
 
