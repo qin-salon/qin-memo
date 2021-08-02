@@ -49,7 +49,7 @@ export const useProfileForm = () => {
     const body = {
       name: nameRef.current.value,
       accountId: accountIdRef.current?.value,
-      avatarUrl: createAvatarUrl(user.id),
+      avatarUrl: selectedFile ? createAvatarUrl(user.id) : undefined,
     };
     const res = await fetch(`${API_URL}/users/${user.id}`, {
       method: "PUT",

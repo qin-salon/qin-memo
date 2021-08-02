@@ -6,6 +6,7 @@ import { useUser, withUser } from "src/context/user";
 
 const SettingsQin: NextPage = () => {
   const { user } = useUser();
+
   return (
     <Layout left="close" center="account">
       <div className="flex flex-col items-center">

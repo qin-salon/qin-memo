@@ -29,7 +29,7 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
     setText(e.target.value);
   }, []);
 
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback(async () => {
     if (text === "ok") {
       toast.error("大文字で入力してください");
       return;
@@ -38,7 +38,7 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
       toast.error("テキストに誤りがあります");
       return;
     }
-    toast.promise(props.onClickOk(), {
+    await toast.promise(props.onClickOk(), {
       loading: "処理中",
       success: "削除しました",
       error: "失敗しました",
