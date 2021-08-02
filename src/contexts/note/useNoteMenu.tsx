@@ -4,7 +4,7 @@ import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import type { NoteType } from "src/api/handler/note/type";
 import type { MenuDialogListProps } from "src/components/Dialogs";
-import { TwitterIcon } from "src/components/shared/Icons";
+import { TwitterIcon } from "src/components/Icons";
 
 type UseNoteMenuProps = {
   public?: NoteType["public"];

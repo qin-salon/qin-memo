@@ -1,3 +1,1 @@
-import { useFetcher } from "./useFetcher";
-
-export { useFetcher };
+export { useFetcher } from "./useFetcher";
