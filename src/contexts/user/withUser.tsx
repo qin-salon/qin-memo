@@ -1,9 +1,26 @@
 import type { NextPage } from "next";
-import { AuthAction, withAuthUser } from "next-firebase-auth";
-import { useFetcher } from "src/contexts/fetcher";
+import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
+import { useCallback } from "react";
 import { SWRConfig } from "swr";
 
 import { useUserFetch } from "./useUserFetch";
+
+const useFetcher = () => {
+  const authUser = useAuthUser();
+  const fetcher = useCallback(
+    async (url: string) => {
+      const idToken = await authUser.getIdToken();
+      const res = await fetch(url, { headers: { authorization: `Bearer ${idToken}` } });
+      if (res.status !== 200 && res.status !== 201) {
+        throw new Error();
+      }
+      const json = await res.json();
+      return json;
+    },
+    [authUser]
+  );
+  return fetcher;
+};
 
 /**
  * @package

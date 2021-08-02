@@ -1,1 +1,0 @@
-export { useFetcher } from "./useFetcher";

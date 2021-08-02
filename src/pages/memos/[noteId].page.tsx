@@ -5,12 +5,13 @@ import { API_URL } from "src/api/endpoint";
 import type { NoteType } from "src/api/handler/note/type";
 import { Button } from "src/components/Buttons";
 import { Layout } from "src/components/Layout";
-import { useNoteAction, useNoteDialog } from "src/contexts/note";
 import { withUser } from "src/contexts/user";
 import useSWR from "swr";
 
 import { NoteAction } from "./NoteAction";
 import { NoteEditor } from "./NoteEditor";
+import { useNoteAction } from "./useNoteAction";
+import { useNoteDialog } from "./useNoteDialog";
 
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
