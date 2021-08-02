@@ -1,6 +1,7 @@
 import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
+import { API_URL } from "src/api/endpoint";
 import type { NoteType } from "src/api/handler/note/type";
 import { NoteEditor } from "src/components/NoteEditor";
 import { Button } from "src/components/shared/Buttons";
@@ -8,14 +9,13 @@ import { Layout } from "src/components/shared/Layout";
 import { NoteAction } from "src/components/shared/NoteAction";
 import { useNoteAction, useNoteDialog } from "src/contexts/note";
 import { withUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.REDIRECT_TO_LOGIN,
 })(async (props) => {
   const idToken = await props.AuthUser.getIdToken();
-  const response = await fetch(`${API_URL}/v1/notes/${props.params?.noteId}`, {
+  const response = await fetch(`${API_URL}/notes/${props.params?.noteId}`, {
     headers: { authorization: `Bearer ${idToken}` },
   });
   const data = await response.json();
@@ -23,7 +23,7 @@ export const getServerSideProps = withAuthUserTokenSSR({
 });
 
 const MemosNoteId: NextPage<NoteType> = (props) => {
-  const { data } = useSWR(`${API_URL}/v1/notes/${props.id}`, { initialData: props });
+  const { data } = useSWR(`${API_URL}/notes/${props.id}`, { initialData: props });
   const { isShowMenu, handleOpenMenu, handleCloseMenu } = useNoteDialog();
   const noteAction = useNoteAction(data ?? props);
 

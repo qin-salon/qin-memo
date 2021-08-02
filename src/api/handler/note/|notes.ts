@@ -1,5 +1,5 @@
 import { rest } from "msw";
-import { API_URL } from "src/utils/constants";
+import { API_URL } from "src/api/endpoint";
 
 import { EXAMPLE_NOTE } from "./data";
 

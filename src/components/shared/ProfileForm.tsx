@@ -5,12 +5,12 @@ import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent, VFC } from "react";
 import { useCallback, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { API_URL } from "src/api/endpoint";
 import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/components/shared/Avatar";
 import { Button } from "src/components/shared/Buttons";
 import { Input } from "src/components/shared/Forms";
 import { useUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 
 const createAvatarUrl = (userId: string) => {
   const filePath = encodeURIComponent(`thumbnails/${userId}_200x200`);
@@ -52,7 +52,7 @@ export const ProfileForm: VFC = () => {
       accountId: accountIdRef.current?.value,
       avatarUrl: createAvatarUrl(user.id),
     };
-    const res = await fetch(`${API_URL}/v1/users/${user.id}`, {
+    const res = await fetch(`${API_URL}/users/${user.id}`, {
       method: "PUT",
       headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
       body: JSON.stringify(body),

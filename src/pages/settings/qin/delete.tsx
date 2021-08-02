@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
+import { API_URL } from "src/api/endpoint";
 import { Button } from "src/components/shared/Buttons";
 import { Layout } from "src/components/shared/Layout";
 import { RecursiveList } from "src/components/shared/Lists";
 import { useUser, withUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 
 const SettingsQinDelete: NextPage = () => {
   const authUser = useAuthUser();
@@ -14,7 +14,7 @@ const SettingsQinDelete: NextPage = () => {
   const handleDeleteQinMemo = useCallback(async () => {
     try {
       const idToken = await authUser.getIdToken();
-      await fetch(`${API_URL}/v1/users/${user?.id}/service`, {
+      await fetch(`${API_URL}/users/${user?.id}/service`, {
         method: "DELETE",
         headers: { authorization: `Bearer ${idToken}` },
       });
@@ -26,7 +26,7 @@ const SettingsQinDelete: NextPage = () => {
 
   const handleDeleteQinAccount = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/users/${user?.id}`, {
+    await fetch(`${API_URL}/users/${user?.id}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });

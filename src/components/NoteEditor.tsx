@@ -4,9 +4,9 @@ import type { ChangeEvent } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
+import { API_URL } from "src/api/endpoint";
 import type { ListNoteType, NoteType } from "src/api/handler/note/type";
 import { useUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 import { mutate } from "swr";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -19,24 +19,24 @@ export const NoteEditor = (props: NoteType) => {
   const saveNote = useCallback(
     async (value: string) => {
       const idToken = await authUser.getIdToken();
-      await fetch(`${API_URL}/v1/notes/${props.id}`, {
+      await fetch(`${API_URL}/notes/${props.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value.trim() }),
       });
-      await mutate(`${API_URL}/v1/users/${user?.id}/notes`);
+      await mutate(`${API_URL}/users/${user?.id}/notes`);
     },
     [authUser, props.id, user?.id]
   );
 
   const deleteNote = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${props.id}`, {
+    await fetch(`${API_URL}/notes/${props.id}`, {
       method: "delete",
       headers: { authorization: `Bearer ${idToken}` },
     });
     await mutate(
-      `${API_URL}/v1/users/${user?.id}/notes`,
+      `${API_URL}/users/${user?.id}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         return data.filter(({ id }) => {

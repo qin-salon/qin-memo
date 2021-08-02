@@ -1,7 +1,7 @@
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useEffect } from "react";
+import { API_URL } from "src/api/endpoint";
 import type { UserType } from "src/api/handler/user/type";
-import { API_URL } from "src/utils/constants";
 
 import { useUser } from "./useUser";
 
@@ -23,7 +23,7 @@ export const useUserFetch = () => {
       }
 
       const token = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/v1/users`, {
+      const res = await fetch(`${API_URL}/users`, {
         headers: { authorization: `Bearer ${token}` },
       });
 
@@ -33,7 +33,7 @@ export const useUserFetch = () => {
           name: authUser.displayName,
           avatarUrl: authUser.photoURL,
         };
-        const res = await fetch(`${API_URL}/v1/users`, {
+        const res = await fetch(`${API_URL}/users`, {
           method: "POST",
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),
@@ -48,7 +48,7 @@ export const useUserFetch = () => {
 
       if (!userData.enabledQinMemo) {
         const body = { enabledQinMemo: true };
-        const res = await fetch(`${API_URL}/v1/users/${userData?.id}`, {
+        const res = await fetch(`${API_URL}/users/${userData?.id}`, {
           method: "PUT",
           headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
           body: JSON.stringify(body),

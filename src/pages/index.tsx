@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Link from "next/link";
+import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import { NoteList } from "src/components/NoteList";
 import { NoteWriteButton } from "src/components/NoteWriteButton";
@@ -7,12 +8,11 @@ import { Avatar } from "src/components/shared/Avatar";
 import { Search } from "src/components/shared/Forms";
 import { Layout } from "src/components/shared/Layout";
 import { useUser, withUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 import useSWR from "swr";
 
 const Index: NextPage = () => {
   const { user } = useUser();
-  const { data, error } = useSWR<ListNoteType[]>(`${API_URL}/v1/notes`);
+  const { data, error } = useSWR<ListNoteType[]>(`${API_URL}/notes`);
 
   return (
     <Layout left="memo" right={[<NoteWriteButton key="write" />, "profile"]}>

@@ -1,4 +1,5 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { UserType } from "src/api/handler/user/type";
 import { NoteList } from "src/components/NoteList";
@@ -6,7 +7,6 @@ import { NoteWriteButton } from "src/components/NoteWriteButton";
 import { Avatar } from "src/components/shared/Avatar";
 import { Layout } from "src/components/shared/Layout";
 import { withUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 
 type Props = { user: UserType; note: ListNoteType[] };
 
@@ -22,8 +22,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
   const [user, note] = await Promise.all<UserType, ListNoteType[]>([
-    getJson(`${API_URL}/v1/users/${ctx.params?.userId}`),
-    getJson(`${API_URL}/v1/users/${ctx.params?.userId}/notes`),
+    getJson(`${API_URL}/users/${ctx.params?.userId}`),
+    getJson(`${API_URL}/users/${ctx.params?.userId}/notes`),
   ]);
 
   if (!user.id) {

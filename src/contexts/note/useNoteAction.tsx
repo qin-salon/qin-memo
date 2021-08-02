@@ -1,8 +1,8 @@
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
+import { API_URL } from "src/api/endpoint";
 import type { ListNoteType, NoteType } from "src/api/handler/note/type";
 import { useUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 import { mutate } from "swr";
 
 /**
@@ -14,13 +14,13 @@ export const useNoteAction = (note: NoteType) => {
 
   const togglePublicStatus = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${note.id}/public`, {
+    await fetch(`${API_URL}/notes/${note.id}/public`, {
       method: "patch",
       headers: { authorization: `Bearer ${idToken}` },
     });
-    mutate(`${API_URL}/v1/notes/${note.id}`, { ...note, public: !note.public }, false);
+    mutate(`${API_URL}/notes/${note.id}`, { ...note, public: !note.public }, false);
     mutate(
-      `${API_URL}/v1/users/${user?.id}/notes`,
+      `${API_URL}/users/${user?.id}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         const target = data.filter(({ id }) => {
@@ -37,12 +37,12 @@ export const useNoteAction = (note: NoteType) => {
 
   const deleteNote = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/v1/notes/${note.id}`, {
+    await fetch(`${API_URL}/notes/${note.id}`, {
       method: "delete",
       headers: { authorization: `Bearer ${idToken}` },
     });
     mutate(
-      `${API_URL}/v1/users/${user?.id}/notes`,
+      `${API_URL}/users/${user?.id}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         return data.filter(({ id }) => {

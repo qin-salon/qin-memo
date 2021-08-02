@@ -1,10 +1,10 @@
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
+import { API_URL } from "src/api/endpoint";
 import { isNoteType } from "src/api/handler/note/type";
 import { Button } from "src/components/shared/Buttons";
 import { useUser } from "src/contexts/user";
-import { API_URL } from "src/utils/constants";
 
 export const NoteWriteButton = () => {
   const router = useRouter();
@@ -15,7 +15,7 @@ export const NoteWriteButton = () => {
     if (!user?.id) return;
     try {
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/v1/users/${user.id}/notes`, {
+      const res = await fetch(`${API_URL}/users/${user.id}/notes`, {
         method: "POST",
         headers: { authorization: `Bearer ${idToken}` },
       });
