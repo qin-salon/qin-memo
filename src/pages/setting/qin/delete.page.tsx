@@ -1,37 +1,23 @@
 import type { NextPage } from "next";
-import { useAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
-import { API_URL } from "src/api/endpoint";
 import { Button } from "src/component/Button";
+import { InputConfirmDialog } from "src/component/Dialog";
 import { Layout } from "src/component/Layout";
 import { RecursiveList } from "src/component/List";
-import { useUser, withUser } from "src/context/user";
+import { withUser } from "src/context/user";
+
+import { useDeleteDialog } from "./useDelete";
 
 const SettingsQinDelete: NextPage = () => {
-  const authUser = useAuthUser();
-  const { user } = useUser();
-
-  const handleDeleteQinMemo = useCallback(async () => {
-    try {
-      const idToken = await authUser.getIdToken();
-      await fetch(`${API_URL}/users/${user?.id}/service`, {
-        method: "DELETE",
-        headers: { authorization: `Bearer ${idToken}` },
-      });
-      await authUser.signOut();
-    } catch (error) {
-      console.error(error);
-    }
-  }, [authUser, user?.id]);
-
-  const handleDeleteQinAccount = useCallback(async () => {
-    const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/users/${user?.id}`, {
-      method: "DELETE",
-      headers: { authorization: `Bearer ${idToken}` },
-    });
-    await authUser.signOut();
-  }, [authUser, user?.id]);
+  const {
+    isShowDeleteQinMemo,
+    handleDeleteQinMemo,
+    handleOpenDeleteQinMemoDialog,
+    handleCloseDeleteQinMemoDialog,
+    isShowDeleteQinAccount,
+    handleDeleteQinAccount,
+    handleOpenDeleteQinAccountDialog,
+    handleCloseDeleteQinAccountDialog,
+  } = useDeleteDialog();
 
   return (
     <Layout left="back" center="account">
@@ -49,7 +35,7 @@ const SettingsQinDelete: NextPage = () => {
                     <Button
                       variant="solid-gray"
                       className="py-2 px-5 text-sm text-red-500"
-                      onClick={handleDeleteQinMemo}
+                      onClick={handleOpenDeleteQinMemoDialog}
                     >
                       削除する
                     </Button>
@@ -61,12 +47,12 @@ const SettingsQinDelete: NextPage = () => {
               title: "Qinアカウントの削除",
               items: [
                 {
-                  label: "アカウントを削除",
+                  label: "アカウントごと削除する",
                   button: (
                     <Button
                       variant="solid-gray"
                       className="py-2 px-5 text-sm text-red-500"
-                      onClick={handleDeleteQinAccount}
+                      onClick={handleOpenDeleteQinAccountDialog}
                     >
                       削除する
                     </Button>
@@ -77,6 +63,22 @@ const SettingsQinDelete: NextPage = () => {
           ]}
         />
       </div>
+
+      <InputConfirmDialog
+        show={isShowDeleteQinMemo}
+        onClose={handleCloseDeleteQinMemoDialog}
+        onClickOk={handleDeleteQinMemo}
+        title="Qin Memoを削除"
+        buttonText="削除する"
+      />
+
+      <InputConfirmDialog
+        show={isShowDeleteQinAccount}
+        onClose={handleCloseDeleteQinAccountDialog}
+        onClickOk={handleDeleteQinAccount}
+        title="Qinアカウントの削除"
+        buttonText="削除する"
+      />
     </Layout>
   );
 };
