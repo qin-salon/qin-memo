@@ -21,6 +21,9 @@ const isBlob = (props: ImageProps): props is BlobImage => {
   return typeof props.src === "string" && props.src.startsWith("blob");
 };
 
+/**
+ * @package
+ */
 export const Avatar: VFC<ImagePropsSrcUndefinedable> = (props) => {
   if (!hasSrc(props)) {
     return (

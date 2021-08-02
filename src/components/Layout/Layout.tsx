@@ -1,12 +1,16 @@
 import type { ReactNode, VFC } from "react";
-import type { HeaderProps } from "src/components/Header";
-import { Header } from "src/components/Header";
+
+import type { HeaderProps } from "./Header";
+import { Header } from "./Header";
 
 type Props = HeaderProps & {
   children: ReactNode;
   isHeaderNarrow?: boolean;
 };
 
+/**
+ * @package
+ */
 export const Layout: VFC<Props> = (props) => {
   // eslint-disable-next-line react/destructuring-assignment
   const { children, isHeaderNarrow, ...headerProps } = props;

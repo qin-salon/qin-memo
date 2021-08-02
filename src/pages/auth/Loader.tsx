@@ -1,6 +1,6 @@
 import type { VFC } from "react";
 
-export const PageLoader: VFC = () => {
+export const Loader: VFC = () => {
   return (
     <div className="grid place-items-center pb-20 min-h-screen">
       <div className="grid gap-4 place-items-center">

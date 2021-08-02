@@ -1,4 +1,9 @@
-export const Error = () => {
+import type { VFC } from "react";
+
+/**
+ * @package
+ */
+export const Error: VFC = () => {
   return (
     <div className="space-y-2">
       <p>
