@@ -9,7 +9,7 @@ import { useSessionRouter } from "src/contexts/useSessionRouter";
 import { initAuth } from "src/utils/initAuth";
 
 // if (process.env.NODE_ENV === "development") {
-//   require("src/api");
+//   require("src/api/mock");
 // }
 
 initAuth();
