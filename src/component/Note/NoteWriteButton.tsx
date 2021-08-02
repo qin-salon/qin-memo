@@ -3,8 +3,8 @@ import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { API_URL } from "src/api/endpoint";
 import { isNoteType } from "src/api/handler/note/type";
-import { Button } from "src/components/Buttons";
-import { useUser } from "src/contexts/user";
+import { Button } from "src/component/Button";
+import { useUser } from "src/context/user";
 
 /**
  * @package

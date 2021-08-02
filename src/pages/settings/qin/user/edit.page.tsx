@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { Layout } from "src/components/Layout";
-import { withUser } from "src/contexts/user";
+import { Layout } from "src/component/Layout";
+import { withUser } from "src/context/user";
 
 import { ProfileForm } from "./ProfileForm";
 

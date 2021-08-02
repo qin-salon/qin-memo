@@ -3,9 +3,9 @@ import type { NextPage } from "next";
 import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
 import { API_URL } from "src/api/endpoint";
 import type { NoteType } from "src/api/handler/note/type";
-import { Button } from "src/components/Buttons";
-import { Layout } from "src/components/Layout";
-import { withUser } from "src/contexts/user";
+import { Button } from "src/component/Button";
+import { Layout } from "src/component/Layout";
+import { withUser } from "src/context/user";
 import useSWR from "swr";
 
 import { NoteAction } from "./NoteAction";

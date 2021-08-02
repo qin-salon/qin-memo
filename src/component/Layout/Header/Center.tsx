@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { memo } from "react";
-import { QinAccountIcon } from "src/components/Icons";
+import { QinAccountIcon } from "src/component/Icon";
 
 export type Center = {
   center?: "account" | string | JSX.Element;

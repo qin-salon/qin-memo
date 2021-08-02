@@ -1,6 +1,6 @@
 import { forwardRef } from "react";
 
-import type { ButtonType } from "./types";
+import type { ButtonType } from "./type";
 import { useButtonClass } from "./useButtonClass";
 
 /**

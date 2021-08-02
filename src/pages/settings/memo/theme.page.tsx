@@ -2,8 +2,8 @@ import { RadioGroup } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import type { NextPage } from "next";
-import { Layout } from "src/components/Layout";
-import { useTheme } from "src/contexts/theme";
+import { Layout } from "src/component/Layout";
+import { useTheme } from "src/context/theme";
 
 const SettingsMemoTheme: NextPage = () => {
   const { themes, isMounted, currentTheme, handleTheme } = useTheme();

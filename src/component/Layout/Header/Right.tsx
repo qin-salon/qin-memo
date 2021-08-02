@@ -1,6 +1,6 @@
 import { Fragment, memo } from "react";
 
-import { ICON_SIZE } from "./constants";
+import { ICON_SIZE } from "./constant";
 import { UserMenu } from "./UserMenu";
 
 /**

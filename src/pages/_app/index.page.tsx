@@ -3,7 +3,7 @@ import "tailwindcss/tailwind.css";
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { Toaster } from "react-hot-toast";
-import { UserProvider } from "src/contexts/user";
+import { UserProvider } from "src/context/user";
 
 import { initAuth } from "./initAuth";
 import { useAddClassToBodyElem } from "./useAddClassToBodyElem";

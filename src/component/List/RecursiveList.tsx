@@ -1,7 +1,7 @@
 import type { VFC } from "react";
 
 import { List } from "./List";
-import type { ListProps } from "./types";
+import type { ListProps } from "./type";
 
 type RecursiveListProps = {
   list: [ListProps, ...ListProps[]];

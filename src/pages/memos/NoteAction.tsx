@@ -1,6 +1,6 @@
 import type { VFC } from "react";
 import type { NoteType } from "src/api/handler/note/type";
-import { ConfirmDialog, MenuDialog, MenuDialogList } from "src/components/Dialogs";
+import { ConfirmDialog, MenuDialog, MenuDialogList } from "src/component/Dialog";
 
 import { useNoteMenu } from "./useNoteMenu";
 

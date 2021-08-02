@@ -3,8 +3,8 @@ import { useRouter } from "next/router";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import type { NoteType } from "src/api/handler/note/type";
-import type { MenuDialogListProps } from "src/components/Dialogs";
-import { TwitterIcon } from "src/components/Icons";
+import type { MenuDialogListProps } from "src/component/Dialog";
+import { TwitterIcon } from "src/component/Icon";
 
 type UseNoteMenuProps = {
   public?: NoteType["public"];

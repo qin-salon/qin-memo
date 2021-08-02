@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
-import { useUser } from "src/contexts/user";
+import { useUser } from "src/context/user";
 import useSWR from "swr";
 
 type NotesState = { data?: ListNoteType[]; error?: Error };

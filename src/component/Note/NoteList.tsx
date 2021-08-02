@@ -1,6 +1,6 @@
 import type { VFC } from "react";
 import type { ListNoteType } from "src/api/handler/note/type";
-import { Error } from "src/components/Error";
+import { Error } from "src/component/Error";
 
 import { NoteListItem } from "./NoteListItem";
 

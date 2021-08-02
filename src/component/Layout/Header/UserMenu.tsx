@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
 import { Fragment, useCallback } from "react";
-import { Avatar } from "src/components/Avatar";
-import { useUser } from "src/contexts/user";
+import { Avatar } from "src/component/Avatar";
+import { useUser } from "src/context/user";
 
-import { ICON_SIZE } from "./constants";
+import { ICON_SIZE } from "./constant";
 
 /**
  * @package

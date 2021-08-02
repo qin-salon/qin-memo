@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { API_URL } from "src/api/endpoint";
-import { Button } from "src/components/Buttons";
-import { Layout } from "src/components/Layout";
-import { RecursiveList } from "src/components/Lists";
-import { useUser, withUser } from "src/contexts/user";
+import { Button } from "src/component/Button";
+import { Layout } from "src/component/Layout";
+import { RecursiveList } from "src/component/List";
+import { useUser, withUser } from "src/context/user";
 
 const SettingsQinDelete: NextPage = () => {
   const authUser = useAuthUser();

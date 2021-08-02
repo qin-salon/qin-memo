@@ -3,8 +3,8 @@ import clsx from "clsx";
 import Link from "next/link";
 import type { VFC } from "react";
 
-import type { ListProps } from "./types";
-import { hasButton, isLink } from "./types";
+import type { ListProps } from "./type";
+import { hasButton, isLink } from "./type";
 
 /**
  * @package

@@ -3,8 +3,8 @@ import "firebase/auth";
 import firebase from "firebase/app";
 import type { VFC } from "react";
 import { useCallback } from "react";
-import { Button } from "src/components/Buttons";
-import { AppleIcon, GoogleIcon, QinMemoIcon } from "src/components/Icons";
+import { Button } from "src/component/Button";
+import { AppleIcon, GoogleIcon, QinMemoIcon } from "src/component/Icon";
 
 type SignProps = { page: "signin" | "signup" };
 

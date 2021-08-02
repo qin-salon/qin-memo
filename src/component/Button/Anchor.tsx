@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { forwardRef } from "react";
 
-import type { AnchorType } from "./types";
+import type { AnchorType } from "./type";
 import { useButtonClass } from "./useButtonClass";
 
 /**

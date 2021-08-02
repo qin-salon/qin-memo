@@ -1,7 +1,7 @@
 import { XIcon } from "@heroicons/react/outline";
 import type { VFC } from "react";
 import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
-import { Error } from "src/components/Error";
+import { Error } from "src/component/Error";
 
 type SearchHistoriesProps = {
   data?: SearchHistoryType[];

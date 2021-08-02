@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useMemo } from "react";
 
-import type { ButtonVariant } from "./types";
+import type { ButtonVariant } from "./type";
 
 /**
  * @package
