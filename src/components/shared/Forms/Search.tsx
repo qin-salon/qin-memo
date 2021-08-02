@@ -17,7 +17,7 @@ export const Search = forwardRef<HTMLInputElement, Props>((props, ref) => {
         type="text"
         ref={ref}
         {...props}
-        className="pl-12 m-0 my-auto w-full h-10 bg-gray-100 dark:bg-gray-700 dark:focus:bg-transparent rounded-full border-none focus:ring-2 focus:ring-blue-400"
+        className="pl-12 m-0 my-auto w-full h-10 bg-gray-100 dark:bg-gray-700 dark:focus:bg-transparent rounded-full border-none focus:ring-2 focus:ring-blue-400 cursor-text"
       />
     </label>
   );

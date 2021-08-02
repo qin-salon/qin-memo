@@ -38,7 +38,9 @@ export const NoteList: VFC<NoteListProps> = (props) => {
       {props.data.map((note) => {
         return (
           <li key={note.id}>
-            <NoteListItem {...note} />
+            <article>
+              <NoteListItem {...note} />
+            </article>
           </li>
         );
       })}
