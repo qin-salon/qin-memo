@@ -159,8 +159,8 @@ const SettingsMemoTerms: NextPage = () => {
           </li>
           <li>
             その他、弊サービスのプライバシーに対する考え方の詳細については、 プライバシーポリシー を参照してください。
-            <a target="_blank" rel="noopener noreferrer" href="https://memo.qin.sh/settings/memo/privacy">
-              https://memo.qin.sh/settings/memo/privacy
+            <a target="_blank" rel="noopener noreferrer" href="https://memo.qin.sh/setting/memo/privacy">
+              https://memo.qin.sh/setting/memo/privacy
             </a>
           </li>
         </ol>

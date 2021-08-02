@@ -17,6 +17,7 @@ export const Right = memo<Right>((props) => {
   if (!props.right) {
     return <div className={ICON_SIZE} />;
   }
+
   return (
     <div className="flex items-center space-x-2 sm:space-x-3">
       {props.right.map((item, i) => {

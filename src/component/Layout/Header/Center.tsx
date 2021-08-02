@@ -16,7 +16,7 @@ export const Center = memo<Center>((props) => {
 
   if (props.center === "account") {
     return (
-      <Link href="/settings/qin">
+      <Link href="/setting/qin">
         <a>
           <QinAccountIcon className="h-5 sm:h-6" />
         </a>

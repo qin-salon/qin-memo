@@ -3,10 +3,7 @@ import type { ReactNode, VFC } from "react";
 import type { HeaderProps } from "./Header";
 import { Header } from "./Header";
 
-type Props = HeaderProps & {
-  children: ReactNode;
-  isHeaderNarrow?: boolean;
-};
+type Props = HeaderProps & { children: ReactNode; isHeaderNarrow?: boolean };
 
 /**
  * @package

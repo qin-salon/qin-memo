@@ -26,7 +26,7 @@ export const NoteWriteButton = () => {
       if (!isNoteType(data)) {
         throw new Error("Failed to create memo");
       }
-      await router.push(`/memos/${data.id}`);
+      await router.push(`/memo/${data.id}`);
     } catch (error) {
       console.error(error);
     }

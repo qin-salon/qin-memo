@@ -1,4 +1,4 @@
-import { memo } from "react";
+import type { VFC } from "react";
 
 import { Center } from "./Center";
 import { Left } from "./Left";
@@ -12,7 +12,7 @@ export type HeaderProps = Left & Center & Right;
 /**
  * @package
  */
-export const Header = memo<Left & Center & Right>((props) => {
+export const Header: VFC<HeaderProps> = (props) => {
   return (
     <header className="flex items-center">
       <Left left={props.left} />
@@ -24,6 +24,4 @@ export const Header = memo<Left & Center & Right>((props) => {
       <Right right={props.right} />
     </header>
   );
-});
-
-Header.displayName = "Header";
+};

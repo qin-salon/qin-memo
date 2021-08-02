@@ -17,7 +17,7 @@ export const NoteListItem: VFC<ListNoteType> = (props) => {
   const [first, second] = getFirstAndSecondLine(props.excerpt);
 
   return (
-    <Link href={`/memos/${props.id}`}>
+    <Link href={`/memo/${props.id}`}>
       <a className="block py-3 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow">
         {first.length > 120 ? (
           <div className="line-clamp-2">

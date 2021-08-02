@@ -27,7 +27,7 @@ const Index: NextPage = () => {
           {user?.name ? (
             <div className="flex flex-col">
               <span className="font-bold">{user.name}</span>
-              <Link href="/settings/qin/user/edit">
+              <Link href="/setting/qin/user/edit">
                 <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
               </Link>
             </div>

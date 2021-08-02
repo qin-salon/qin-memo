@@ -53,7 +53,7 @@ export const UserMenu: VFC = () => {
                 >
                   <div className="overflow-hidden py-4 bg-white dark:bg-gray-800 rounded-2xl ring-1 ring-gray-400 ring-opacity-20 shadow-lg">
                     <div>
-                      <Link href="/settings/qin">
+                      <Link href="/setting/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
                           <Avatar
                             alt={user?.name}
@@ -71,7 +71,7 @@ export const UserMenu: VFC = () => {
                       </Link>
                     </div>
                     <div className="grid relative">
-                      <Link href="/settings/memo">
+                      <Link href="/setting/memo">
                         <a className="flex items-center py-2.5 px-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
                           <div className="flex flex-shrink-0 justify-center items-center">
                             <CogIcon className="w-7 h-7" />
