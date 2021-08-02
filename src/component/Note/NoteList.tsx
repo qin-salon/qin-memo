@@ -33,15 +33,17 @@ export const NoteList: VFC<NoteListProps> = (props) => {
     );
   }
 
-  if (props.data.length === 0) {
+  const notes = props.data.filter((note) => {
+    return note.excerpt;
+  });
+
+  if (notes.length === 0) {
     return <div>メモは見つかりませんでした。</div>;
   }
 
   return (
     <ul className="space-y-5">
-      {props.data.map((note) => {
-        if (!note.excerpt) return null;
-
+      {notes.map((note) => {
         return (
           <li key={note.id}>
             <article>
