@@ -12,12 +12,14 @@ const SettingsQin: NextPage = () => {
       <div className="flex flex-col items-center">
         <Avatar
           src={user?.avatarUrl}
-          alt={user?.name}
+          alt={user?.accountName}
           width={96}
           height={96}
           className="overflow-hidden w-24 h-24 rounded-full"
         />
-        <h1 className="mt-8 text-2xl font-bold">{user?.name ? `ようこそ、${user.name}さん` : "\u00A0"}</h1>
+        <h1 className="mt-8 text-2xl font-bold">
+          {user?.accountName ? `ようこそ、${user.accountName}さん` : "\u00A0"}
+        </h1>
         <p className="mt-2 text-sm opacity-70">Qinアカウントに関する各種設定ができます</p>
       </div>
 

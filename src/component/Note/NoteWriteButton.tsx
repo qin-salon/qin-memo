@@ -15,10 +15,10 @@ export const NoteWriteButton = () => {
   const { user } = useUser();
 
   const handleCreateMemo = useCallback(async () => {
-    if (!user?.id) return;
+    if (!user) return;
     try {
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/users/${user.id}/notes`, {
+      const res = await fetch(`${API_URL}/users/${user.userName}/notes`, {
         method: "POST",
         headers: { authorization: `Bearer ${idToken}` },
       });
@@ -30,7 +30,7 @@ export const NoteWriteButton = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [authUser, router, user?.id]);
+  }, [authUser, router, user]);
 
   return (
     <Button key="write memo" variant="solid-blue" onClick={handleCreateMemo} className="px-4 h-10">

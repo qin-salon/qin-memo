@@ -24,11 +24,7 @@ export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (
     getJson(`${API_URL}/users/${ctx.params?.userId}`),
     getJson(`${API_URL}/users/${ctx.params?.userId}/notes`),
   ]);
-
-  if (!user.id) {
-    return { notFound: true };
-  }
-
+  if (!user) return { notFound: true };
   return { props: { user, note }, revalidate: 10 };
 };
 
@@ -39,13 +35,13 @@ const UsersUserId: NextPage<Props> = (props) => {
         <div className="flex items-center space-x-4">
           <Avatar
             src={props.user.avatarUrl}
-            alt={props.user.name}
+            alt={props.user.accountName}
             width={64}
             height={64}
             className="overflow-hidden w-16 h-16 rounded-full"
           />
           <div className="flex flex-col">
-            <span className="font-bold">{props.user.name}</span>
+            <span className="font-bold">{props.user.accountName}</span>
           </div>
         </div>
 

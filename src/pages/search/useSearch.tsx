@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
+import { isSearchHistoryType } from "src/api/handler/searchHistory/type";
 import { useUser } from "src/context/user";
 import useSWR from "swr";
 
@@ -19,7 +20,7 @@ export const useSearch = () => {
     data: histories,
     error: historiesError,
     mutate,
-  } = useSWR<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.id}/searchHistories` : null, {
+  } = useSWR<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.userName}/searchHistories` : null, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
@@ -42,20 +43,29 @@ export const useSearch = () => {
       }
       try {
         const idToken = await authUser.getIdToken();
-        const res = await fetch(`${API_URL}/users/${user.id}/notes/search?q=${keyword}`, {
+        const res = await fetch(`${API_URL}/users/${user.userName}/notes/search?q=${keyword}`, {
           headers: { authorization: `Bearer ${idToken}` },
         });
+
         const data = await res.json();
         setNotes({ data, error: undefined });
         mutate(async (histories) => {
-          const res = await fetch(`${API_URL}/users/${user.id}/searchHistories`, {
-            method: "post",
-            headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
-            body: JSON.stringify({ keyword }),
-          });
-          const data: SearchHistoryType = await res.json();
-          if (!histories) return [data];
-          return [data, ...histories.slice(0, 9)];
+          try {
+            const res = await fetch(`${API_URL}/users/${user.userName}/searchHistories`, {
+              method: "post",
+              headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
+              body: JSON.stringify({ keyword }),
+            });
+            const data = await res.json();
+            if (!isSearchHistoryType(data)) {
+              throw new Error(data.message);
+            }
+            if (!histories) return [data];
+            return [data, ...histories.slice(0, 9)];
+          } catch (error) {
+            console.error(error);
+            return histories;
+          }
         }, false);
       } catch (error) {
         setNotes((prevData) => {
@@ -72,7 +82,7 @@ export const useSearch = () => {
       if (!user || !inputRef.current) return;
       inputRef.current.value = keyword;
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/users/${user.id}/notes/search?q=${keyword}`, {
+      const res = await fetch(`${API_URL}/users/${user.userName}/notes/search?q=${keyword}`, {
         headers: { authorization: `Bearer ${idToken}` },
       });
       const data = await res.json();

@@ -11,8 +11,16 @@ import { useProfileForm } from "./useProfileForm";
  */
 export const ProfileForm: VFC = () => {
   const { user } = useUser();
-  const { isLoading, imageUrl, nameRef, imageRef, accountIdRef, handleChangeFile, handleSave, handleOpenFileDialog } =
-    useProfileForm();
+  const {
+    isLoading,
+    imageUrl,
+    userNameRef,
+    accountNameRef,
+    imageRef,
+    handleChangeFile,
+    handleSave,
+    handleOpenFileDialog,
+  } = useProfileForm();
 
   return (
     <div>
@@ -22,7 +30,7 @@ export const ProfileForm: VFC = () => {
             <Avatar
               noDialog
               src={imageUrl ?? user?.avatarUrl}
-              alt={user?.name}
+              alt={user?.accountName}
               width={96}
               height={96}
               className="overflow-hidden w-24 h-24 rounded-full"
@@ -33,8 +41,8 @@ export const ProfileForm: VFC = () => {
             </Button>
           </div>
         </div>
-        <Input name="name" label="名前" defaultValue={user?.name} ref={nameRef} />
-        <Input name="accountId" label="ユーザー名" prefix="@" defaultValue={user?.accountId} ref={accountIdRef} />
+        <Input name="accountName" label="名前" defaultValue={user?.accountName} ref={accountNameRef} />
+        <Input name="userName" label="ユーザー名" prefix="@" defaultValue={user?.userName} ref={userNameRef} />
       </div>
 
       <div className="mt-12 space-y-4">

@@ -5,9 +5,9 @@ import type { UserType } from "./type";
  */
 export const EXAMPLE_USER: UserType = {
   id: "qinta",
-  name: "秦太",
+  userName: "qinta",
+  accountName: "秦太",
   avatarUrl: "/mocks/avatar01.jpg",
-  accountId: "qinta",
   enabledQinMemo: true,
 };
 
@@ -16,8 +16,8 @@ export const EXAMPLE_USER: UserType = {
  */
 export const EXAMPLE_USER_1: UserType = {
   id: "qinko",
-  name: "秦子",
+  userName: "qinko",
+  accountName: "秦子",
   avatarUrl: "/mocks/avatar02.jpg",
-  accountId: "qinko",
   enabledQinMemo: true,
 };

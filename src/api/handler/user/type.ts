@@ -1,8 +1,8 @@
 export type UserType = {
   id: string;
-  name: string;
+  userName: string;
+  accountName: string;
   avatarUrl: string;
-  accountId: string;
   enabledQinMemo: boolean;
 };
 

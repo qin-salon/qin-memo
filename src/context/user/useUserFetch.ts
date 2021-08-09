@@ -9,28 +9,21 @@ import { useUser } from "./useUser";
  * @package
  */
 export const useUserFetch = () => {
-  const { user, setUser } = useUser();
   const authUser = useAuthUser();
+  const { user, setUser } = useUser();
 
   const fetchUser = useCallback(async () => {
     try {
-      if (!authUser.id) {
-        return setUser(undefined);
-      }
-
-      if (user) {
-        return;
-      }
+      if (!authUser.id) return setUser(undefined);
+      if (user) return;
 
       const token = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/users`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
+      const res = await fetch(`${API_URL}/users`, { headers: { authorization: `Bearer ${token}` } });
 
       if (res.status === 404) {
         const body = {
           uid: authUser.id,
-          name: authUser.displayName,
+          accountName: authUser.displayName,
           avatarUrl: authUser.photoURL,
         };
         const res = await fetch(`${API_URL}/users`, {
@@ -39,6 +32,7 @@ export const useUserFetch = () => {
           body: JSON.stringify(body),
         });
         const json = await res.json();
+
         if (!isUserType(json)) {
           throw new Error("Failed to create user");
         }

@@ -27,7 +27,7 @@ export const UserMenu: VFC = () => {
           <>
             <Popover.Button className="flex rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
               <Avatar
-                alt={user?.name}
+                alt={user?.accountName}
                 src={user?.avatarUrl}
                 width={40}
                 height={40}
@@ -56,7 +56,7 @@ export const UserMenu: VFC = () => {
                       <Link href="/setting/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
                           <Avatar
-                            alt={user?.name}
+                            alt={user?.accountName}
                             src={user?.avatarUrl}
                             width={56}
                             height={56}
@@ -64,8 +64,8 @@ export const UserMenu: VFC = () => {
                             noDialog
                           />
                           <div className="ml-4">
-                            <p className="text-base font-bold">{user?.name}</p>
-                            <p className="text-sm text-gray-400">@{user?.accountId}</p>
+                            <p className="text-base font-bold">{user?.accountName}</p>
+                            <p className="text-sm text-gray-400">@{user?.userName}</p>
                           </div>
                         </a>
                       </Link>

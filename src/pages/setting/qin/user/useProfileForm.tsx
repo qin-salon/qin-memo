@@ -20,9 +20,9 @@ const createAvatarUrl = (userId: string) => {
 export const useProfileForm = () => {
   const authUser = useAuthUser();
   const { user, setUser } = useUser();
-  const nameRef = useRef<HTMLInputElement>(null);
+  const accountNameRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
-  const accountIdRef = useRef<HTMLInputElement>(null);
+  const userNameRef = useRef<HTMLInputElement>(null);
   const [selectedFile, setSelectedFile] = useState<File>();
   const [isLoading, setIsLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
@@ -39,7 +39,7 @@ export const useProfileForm = () => {
   }, []);
 
   const handleChangeUser = useCallback(async () => {
-    if (!nameRef.current?.value || !accountIdRef.current?.value || !user) {
+    if (!accountNameRef.current?.value || !userNameRef.current?.value || !user) {
       return;
     }
     if (selectedFile) {
@@ -47,11 +47,11 @@ export const useProfileForm = () => {
     }
     const idToken = await authUser.getIdToken();
     const body = {
-      name: nameRef.current.value,
-      accountId: accountIdRef.current?.value,
+      userName: userNameRef.current?.value,
+      accountName: accountNameRef.current.value,
       avatarUrl: selectedFile ? createAvatarUrl(user.id) : undefined,
     };
-    const res = await fetch(`${API_URL}/users/${user.id}`, {
+    const res = await fetch(`${API_URL}/users/${user.userName}`, {
       method: "PUT",
       headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
       body: JSON.stringify(body),
@@ -76,9 +76,9 @@ export const useProfileForm = () => {
   return {
     isLoading,
     imageUrl,
-    nameRef,
+    accountNameRef,
     imageRef,
-    accountIdRef,
+    userNameRef,
     handleChangeFile,
     handleSave,
     handleOpenFileDialog,

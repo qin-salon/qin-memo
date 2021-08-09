@@ -22,6 +22,7 @@ export const SearchHistories: VFC<SearchHistoriesProps> = (props) => {
   return (
     <ul className="space-y-1">
       {props.data.map((item) => {
+        if (!item.id) return null;
         const handleClickItem = () => {
           return props.onClickItem(item.keyword);
         };

@@ -19,14 +19,14 @@ const Index: NextPage = () => {
         <div className="flex items-center space-x-4">
           <Avatar
             src={user?.avatarUrl}
-            alt={user?.name}
+            alt={user?.accountName}
             width={64}
             height={64}
             className="overflow-hidden w-16 h-16 rounded-full"
           />
-          {user?.name ? (
+          {user?.accountName ? (
             <div className="flex flex-col">
-              <span className="font-bold">{user.name}</span>
+              <span className="font-bold">{user.accountName}</span>
               <Link href="/setting/qin/user/edit">
                 <a className="text-sm font-bold text-blue-500 hover:underline">プロフィール設定</a>
               </Link>
