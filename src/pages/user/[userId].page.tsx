@@ -5,7 +5,6 @@ import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/component/Avatar";
 import { Layout } from "src/component/Layout";
 import { NoteList, NoteWriteButton } from "src/component/Note";
-import { withUser } from "src/context/user";
 
 type Props = { user: UserType; note: ListNoteType[] };
 
@@ -51,4 +50,4 @@ const UsersUserId: NextPage<Props> = (props) => {
   );
 };
 
-export default withUser(UsersUserId);
+export default UsersUserId;
