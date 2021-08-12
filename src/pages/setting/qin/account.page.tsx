@@ -3,8 +3,8 @@ import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { Button } from "src/component/Button";
 import { AppleIcon, GoogleIcon } from "src/component/Icon";
-import { Layout } from "src/component/Layout";
 import { List } from "src/component/List";
+import { Layout } from "src/layout";
 
 const SettingsQinAccount: NextPage = () => {
   const handleGoogle = useCallback(() => {

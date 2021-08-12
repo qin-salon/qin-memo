@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { AuthAction, withAuthUser } from "next-firebase-auth";
-import { Layout } from "src/component/Layout";
+import { Layout } from "src/layout";
 
 import { ProfileForm } from "./ProfileForm";
 

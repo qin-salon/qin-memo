@@ -1,8 +1,8 @@
 import type { NextPage } from "next";
 import { Avatar } from "src/component/Avatar";
-import { Layout } from "src/component/Layout";
 import { List } from "src/component/List";
 import { useUser, withUser } from "src/context/user";
+import { Layout } from "src/layout";
 
 const SettingsQin: NextPage = () => {
   const { user } = useUser();

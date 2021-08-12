@@ -2,9 +2,9 @@ import { XIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
 import { Button } from "src/component/Button";
 import { Search } from "src/component/Form";
-import { Layout } from "src/component/Layout";
 import { NoteList } from "src/component/Note";
 import { withUser } from "src/context/user";
+import { Layout } from "src/layout";
 
 import { SearchHistories } from "./SearchHistories";
 import { useSearch } from "./useSearch";

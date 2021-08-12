@@ -3,8 +3,8 @@ import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/component/Avatar";
-import { Layout } from "src/component/Layout";
 import { NoteList, NoteWriteButton } from "src/component/Note";
+import { Layout } from "src/layout";
 
 type Props = { user: UserType; note: ListNoteType[] };
 
