@@ -35,7 +35,13 @@ export const ProfileForm: VFC = () => {
               height={96}
               className="overflow-hidden w-24 h-24 rounded-full"
             />
-            <input ref={imageRef} type="file" className="hidden" onChange={handleChangeFile} />
+            <input
+              ref={imageRef}
+              type="file"
+              className="hidden"
+              onChange={handleChangeFile}
+              accept="image/png, image/jpeg"
+            />
             <Button variant="solid-gray" className="py-2.5 px-5 mt-4" onClick={handleOpenFileDialog}>
               アイコンを{user ? "変更する" : "設定する"}
             </Button>
