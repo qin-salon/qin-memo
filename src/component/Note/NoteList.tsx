@@ -21,9 +21,9 @@ export const NoteList: VFC<NoteListProps> = (props) => {
           return (
             <li
               key={v}
-              className="py-4 px-4 sm:px-6 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow animate-pulse"
+              className="py-4 px-4 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow animate-pulse sm:px-6"
             >
-              <div className="w-3/4 h-3.5 sm:h-4 bg-gray-200 dark:bg-gray-600 rounded"></div>
+              <div className="w-3/4 h-3.5 bg-gray-200 dark:bg-gray-600 rounded sm:h-4"></div>
               <div className="mt-2.5 h-3.5 bg-gray-200 dark:bg-gray-600 rounded"></div>
               <div className="mt-6 w-16 h-3.5 bg-gray-200 dark:bg-gray-600 rounded"></div>
             </li>

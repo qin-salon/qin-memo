@@ -54,7 +54,7 @@ export const ConfirmDialog: VFC<Props> = (props) => {
             leaveFrom="opacity-100 translate-y-0 scale-100"
             leaveTo="opacity-0 translate-y-0 scale-95"
           >
-            <div className="inline-block overflow-hidden p-4 sm:p-6 w-10/12 max-w-sm text-left align-middle bg-white dark:bg-gray-800 rounded-2xl shadow-xl transition-all transform">
+            <div className="inline-block overflow-hidden p-4 w-10/12 max-w-sm text-left align-middle bg-white dark:bg-gray-800 rounded-2xl shadow-xl transition-all transform sm:p-6">
               <div className="text-center">
                 <Dialog.Title as="h3" className="font-bold leading-6">
                   {props.title}

@@ -42,7 +42,7 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
             &#8203;
           </span>
 
-          <div className="sm:inline-block fixed sm:static bottom-0 w-full sm:max-w-md sm:align-middle sm:transform">
+          <div className="fixed bottom-0 w-full sm:inline-block sm:static sm:max-w-md sm:align-middle sm:transform">
             <Transition.Child
               as={Fragment}
               enter="transform ease-in-out duration-300 sm:ease-out"
@@ -52,7 +52,7 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
               leaveFrom="translate-y-0 sm:opacity-100 sm:scale-100"
               leaveTo="translate-y-full sm:translate-y-0 sm:opacity-0 sm:scale-95"
             >
-              <div className="relative px-6 pt-20 pb-12 bg-white dark:bg-gray-800 sm:rounded-2xl rounded-t-3xl">
+              <div className="relative px-6 pt-20 pb-12 bg-white dark:bg-gray-800 rounded-t-3xl sm:rounded-2xl">
                 <Button ref={buttonRef} variant="ghost" className="absolute top-4 right-5 p-2" onClick={props.onClose}>
                   <span className="sr-only">Close panel</span>
                   <XIcon className="w-6 h-6" aria-hidden="true" />

@@ -49,7 +49,7 @@ export const UserMenu: VFC = () => {
               >
                 <Popover.Panel
                   static
-                  className="absolute left-full xl:-left-full 2xl:left-1/2 z-10 sm:px-0 pl-8 sm:pl-0 mt-2 w-screen max-w-xs sm:max-w-sm transform -translate-x-full xl:-translate-x-1/2"
+                  className="absolute left-full z-10 pl-8 mt-2 w-screen max-w-xs transform -translate-x-full sm:px-0 sm:pl-0 sm:max-w-sm xl:-left-full xl:-translate-x-1/2 2xl:left-1/2"
                 >
                   <div className="overflow-hidden py-4 bg-white dark:bg-gray-800 rounded-2xl ring-1 ring-gray-400 ring-opacity-20 shadow-lg">
                     <div>
