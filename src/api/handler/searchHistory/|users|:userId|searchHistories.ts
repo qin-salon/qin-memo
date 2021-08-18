@@ -28,7 +28,7 @@ export const postUsersUserIdSearchHistories = rest.post<{ keyword: string }, Sea
       ctx.json({
         id: Math.random(),
         keyword: req.body.keyword,
-        createdOn: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       })
     );
   }

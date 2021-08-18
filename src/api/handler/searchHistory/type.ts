@@ -1,7 +1,7 @@
 export type SearchHistoryType = {
   id: number;
   keyword: string;
-  createdOn: string;
+  createdAt: string;
 };
 
 export const isSearchHistoryType = (data: any): data is SearchHistoryType => {

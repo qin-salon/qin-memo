@@ -18,7 +18,7 @@ export const getNotesNoteId = rest.get<never, NoteType, { noteId: string }>(endp
     id: "foo",
     content: "",
     public: false,
-    updatedOn: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
   return res(ctx.delay(1000), ctx.status(200), ctx.json(response));
 });

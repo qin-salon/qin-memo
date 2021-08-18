@@ -4,7 +4,7 @@
 export type NoteSchema = {
   id: string;
   public: boolean;
-  updatedOn: string;
+  updatedAt: string;
   content: string;
   excerpt: string;
 };

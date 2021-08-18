@@ -31,7 +31,7 @@ export const NoteListItem: VFC<ListNoteType> = (props) => {
         )}
         <div className="flex justify-between items-end mt-4 h-6">
           <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
-            {format_yyyyMd(props.updatedOn)}
+            {format_yyyyMd(props.updatedAt)}
           </time>
           {props.public ? (
             <div className="grid place-content-center px-2.5 h-full text-xs font-bold text-white bg-orange-400 rounded-full">
