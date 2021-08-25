@@ -9,7 +9,7 @@ import { useUser, withUser } from "src/context/user";
 import { Layout } from "src/layout";
 import useSWR from "swr";
 
-const Index: NextPage = () => {
+const Root: NextPage = () => {
   const { user } = useUser();
   const { data, error } = useSWR<ListNoteType[]>(`${API_URL}/notes`);
 
@@ -45,4 +45,4 @@ const Index: NextPage = () => {
   );
 };
 
-export default withUser(Index);
+export default withUser(Root);

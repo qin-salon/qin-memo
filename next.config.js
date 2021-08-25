@@ -1,4 +1,10 @@
-module.exports = {
+/**
+ * @type {import('next').NextConfig}
+ **/
+const nextConfig = {
+  rewrites: async () => {
+    return [{ source: "/", destination: "/root" }];
+  },
   future: { strictPostcssConfiguration: true },
   pageExtensions: ["page.tsx", "page.ts"],
   i18n: { locales: ["ja"], defaultLocale: "ja" },
@@ -7,3 +13,5 @@ module.exports = {
   typescript: { ignoreDevErrors: true },
   poweredByHeader: false,
 };
+
+module.exports = nextConfig;
