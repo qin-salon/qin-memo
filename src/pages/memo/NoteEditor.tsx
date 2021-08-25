@@ -5,16 +5,14 @@ import { useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 import { API_URL } from "src/api/endpoint";
-import type { ListNoteType, NoteType } from "src/api/handler/note/type";
-import { useUser } from "src/context/user";
+import type { ListNoteType, NoteWithUserType } from "src/api/handler/note/type";
 import { mutate } from "swr";
 import { useDebouncedCallback } from "use-debounce";
 
-export const NoteEditor = (props: NoteType) => {
+export const NoteEditor = (props: NoteWithUserType) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
   const authUser = useAuthUser();
-  const { user } = useUser();
 
   const saveNote = useCallback(
     async (value: string) => {
@@ -24,9 +22,9 @@ export const NoteEditor = (props: NoteType) => {
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value.trim() }),
       });
-      await mutate(`${API_URL}/users/${user?.id}/notes`);
+      await mutate(`${API_URL}/users/${props.users.id}/notes`);
     },
-    [authUser, props.id, user?.id]
+    [authUser, props.id, props.users.id]
   );
 
   const deleteNote = useCallback(async () => {
@@ -36,7 +34,7 @@ export const NoteEditor = (props: NoteType) => {
       headers: { authorization: `Bearer ${idToken}` },
     });
     await mutate(
-      `${API_URL}/users/${user?.id}/notes`,
+      `${API_URL}/users/${props.users.id}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         return data.filter(({ id }) => {
@@ -45,7 +43,7 @@ export const NoteEditor = (props: NoteType) => {
       },
       false
     );
-  }, [authUser, props.id, user?.id]);
+  }, [authUser, props.id, props.users.id]);
 
   const debounced = useDebouncedCallback(async (value: string) => {
     try {

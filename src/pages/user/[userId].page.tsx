@@ -5,14 +5,9 @@ import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/component/Avatar";
 import { NoteList, NoteWriteButton } from "src/component/Note";
 import { Layout } from "src/layout";
+import { fetcher } from "src/util/fetcher";
 
 type Props = { user: UserType; note: ListNoteType[] };
-
-const getJson = async (url: string) => {
-  const res = await fetch(url);
-  const json = await res.json();
-  return json;
-};
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: "blocking" };
@@ -20,8 +15,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
   const [user, note] = await Promise.all<UserType, ListNoteType[]>([
-    getJson(`${API_URL}/users/${ctx.params?.userId}`),
-    getJson(`${API_URL}/users/${ctx.params?.userId}/notes`),
+    fetcher(`${API_URL}/users/${ctx.params?.userId}`),
+    fetcher(`${API_URL}/users/${ctx.params?.userId}/notes`),
   ]);
   if (!user) return { notFound: true };
   return { props: { user, note }, revalidate: 10 };

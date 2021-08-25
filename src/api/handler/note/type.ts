@@ -1,3 +1,5 @@
+import type { UserType } from "src/api/handler/user/type";
+
 /**
  * @package
  */
@@ -10,6 +12,10 @@ export type NoteSchema = {
 };
 
 export type NoteType = Omit<NoteSchema, "excerpt">;
+
+export type NoteWithUserType = NoteType & {
+  users: Omit<UserType, "enabledQinMemo">;
+};
 
 export type ListNoteType = Omit<NoteSchema, "content">;
 

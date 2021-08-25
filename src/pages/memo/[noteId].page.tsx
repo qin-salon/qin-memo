@@ -1,10 +1,13 @@
 import { DotsCircleHorizontalIcon } from "@heroicons/react/outline";
 import type { NextPage } from "next";
-import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
+import { AuthAction, useAuthUser, withAuthUser, withAuthUserTokenSSR } from "next-firebase-auth";
+import { useMemo } from "react";
 import { API_URL } from "src/api/endpoint";
-import type { NoteType } from "src/api/handler/note/type";
+import type { NoteWithUserType } from "src/api/handler/note/type";
+import type { UserType } from "src/api/handler/user/type";
 import { Button } from "src/component/Button";
 import { Layout } from "src/layout";
+import { fetcher } from "src/util/fetcher";
 import useSWR from "swr";
 
 import { NoteAction } from "./NoteAction";
@@ -17,39 +20,51 @@ export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.RENDER,
 })(async (props) => {
   const idToken = await props.AuthUser.getIdToken();
-  const res = await fetch(`${API_URL}/notes/${props.params?.noteId}`, {
-    headers: { authorization: `Bearer ${idToken}` },
-  });
-  const data = await res.json();
-  //TODO
-  return { props: { ...data, isEditable: false } };
+  const [note, user] = await Promise.all<NoteWithUserType, UserType>([
+    fetcher(`${API_URL}/notes/${props.params?.noteId}`, idToken),
+    fetcher(`${API_URL}/users`, idToken),
+  ]);
+  return { props: { note, isEditable: user.id === note.users.id } };
 });
 
-const MemosNoteId: NextPage<NoteType & { isEditable: boolean }> = (props) => {
-  // eslint-disable-next-line react/destructuring-assignment
-  const { isEditable, ...initialData } = props;
-  const { data } = useSWR(`${API_URL}/notes/${initialData.id}`, { initialData }) as { data: NoteType }; // TODO;
+type Props = {
+  note: NoteWithUserType;
+  isEditable: boolean;
+};
+
+const MemoNoteId: NextPage<Props> = (props) => {
+  const authUser = useAuthUser();
+  const { data } = useSWR<NoteWithUserType>(`${API_URL}/notes/${props.note.id}`, {
+    fetcher: async (url) => {
+      const idToken = await authUser.getIdToken();
+      return fetcher(url, idToken);
+    },
+    initialData: props.note,
+  });
   const { isShowMenu, handleOpenMenu, handleCloseMenu } = useNoteDialog();
-  const noteAction = useNoteAction(data ?? initialData);
+  const note = useMemo(() => {
+    return data ?? props.note;
+  }, [data, props.note]);
+  const noteAction = useNoteAction(note);
 
   return (
     <>
       <Layout
         left="memo"
         right={[
-          data?.public ? (
+          note.public ? (
             <span key="public" className="py-1 px-2.5 text-xs font-bold text-white bg-orange-400 rounded-full">
               公開中
             </span>
           ) : undefined,
-          isEditable ? (
+          props.isEditable ? (
             <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleOpenMenu}>
               <DotsCircleHorizontalIcon className="w-5 h-5" />
             </Button>
           ) : undefined,
         ]}
       >
-        {isEditable ? <NoteEditor {...data} /> : <NoteViewer {...data} />}
+        {props.isEditable ? <NoteEditor {...note} /> : <NoteViewer {...note} />}
       </Layout>
 
       <NoteAction public={data?.public} isShowMenu={isShowMenu} onCloseMenu={handleCloseMenu} {...noteAction} />
@@ -57,4 +72,4 @@ const MemosNoteId: NextPage<NoteType & { isEditable: boolean }> = (props) => {
   );
 };
 
-export default MemosNoteId;
+export default withAuthUser<Props>()(MemoNoteId);
