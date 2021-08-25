@@ -4,7 +4,7 @@ import { Layout } from "src/layout";
 
 import { ProfileForm } from "./ProfileForm";
 
-const SettingsQinUserNew: NextPage = () => {
+const SettingQinUserNew: NextPage = () => {
   return (
     <Layout center="account">
       <div className="space-y-8">
@@ -18,4 +18,4 @@ const SettingsQinUserNew: NextPage = () => {
 export default withAuthUser({
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-})(SettingsQinUserNew);
+})(SettingQinUserNew);

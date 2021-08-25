@@ -7,7 +7,7 @@ import { Layout } from "src/layout";
 
 import { useDeleteDialog } from "./useDelete";
 
-const SettingsQinDelete: NextPage = () => {
+const SettingQinDelete: NextPage = () => {
   const {
     isShowDeleteQinMemo,
     handleDeleteQinMemo,
@@ -83,4 +83,4 @@ const SettingsQinDelete: NextPage = () => {
   );
 };
 
-export default withUser(SettingsQinDelete);
+export default withUser(SettingQinDelete);

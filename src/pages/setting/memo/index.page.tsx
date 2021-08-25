@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { RecursiveList } from "src/component/List";
 import { Layout } from "src/layout";
 
-const SettingsMemo: NextPage = () => {
+const SettingMemo: NextPage = () => {
   return (
     <Layout left="close" center="マイページ">
       <RecursiveList
@@ -25,4 +25,4 @@ const SettingsMemo: NextPage = () => {
   );
 };
 
-export default SettingsMemo;
+export default SettingMemo;

@@ -4,7 +4,7 @@ import { List } from "src/component/List";
 import { useUser, withUser } from "src/context/user";
 import { Layout } from "src/layout";
 
-const SettingsQin: NextPage = () => {
+const SettingQin: NextPage = () => {
   const { user } = useUser();
 
   return (
@@ -37,4 +37,4 @@ const SettingsQin: NextPage = () => {
   );
 };
 
-export default withUser(SettingsQin);
+export default withUser(SettingQin);

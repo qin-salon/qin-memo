@@ -4,7 +4,7 @@ import { Layout } from "src/layout";
 
 import { ProfileForm } from "./ProfileForm";
 
-const SettingsQinUserEdit: NextPage = () => {
+const SettingQinUserEdit: NextPage = () => {
   return (
     <Layout left="back" center="account">
       <div className="space-y-8">
@@ -15,4 +15,4 @@ const SettingsQinUserEdit: NextPage = () => {
   );
 };
 
-export default withUser(SettingsQinUserEdit);
+export default withUser(SettingQinUserEdit);

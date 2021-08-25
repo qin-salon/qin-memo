@@ -6,7 +6,7 @@ import { AppleIcon, GoogleIcon } from "src/component/Icon";
 import { List } from "src/component/List";
 import { Layout } from "src/layout";
 
-const SettingsQinAccount: NextPage = () => {
+const SettingQinAccount: NextPage = () => {
   const handleGoogle = useCallback(() => {
     alert("Google");
   }, []);
@@ -57,4 +57,4 @@ const SettingsQinAccount: NextPage = () => {
 export default withAuthUser({
   whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
   whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-})(SettingsQinAccount);
+})(SettingQinAccount);

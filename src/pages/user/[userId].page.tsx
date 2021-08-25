@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (
   return { props: { user, note }, revalidate: 10 };
 };
 
-const UsersUserId: NextPage<Props> = (props) => {
+const UserUserId: NextPage<Props> = (props) => {
   return (
     <Layout left="memo" right={[<NoteWriteButton key="note" />, "profile"]}>
       <div className="space-y-7">
@@ -50,4 +50,4 @@ const UsersUserId: NextPage<Props> = (props) => {
   );
 };
 
-export default UsersUserId;
+export default UserUserId;
