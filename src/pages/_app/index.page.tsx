@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 
 import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
+import { memo } from "react";
 import { Toaster } from "react-hot-toast";
 import { UserProvider } from "src/context/user";
 import { initAuth } from "src/context/user/initAuth";
@@ -29,4 +30,4 @@ const App = (props: AppProps) => {
   );
 };
 
-export default App;
+export default memo(App);
