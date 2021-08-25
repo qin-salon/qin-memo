@@ -20,6 +20,10 @@ export const UserMenu: VFC = () => {
     return AuthUser.signOut();
   }, [AuthUser]);
 
+  if (!user) {
+    return null;
+  }
+
   return (
     <Popover className="grid">
       {({ open }) => {

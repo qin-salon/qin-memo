@@ -25,11 +25,12 @@ const useFetcher = () => {
 /**
  * @package
  */
-export const withUser = (Component: NextPage<any>) => {
-  return withAuthUser({
-    whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
-    whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
-  })((props) => {
+export const withUser = (Component: NextPage<any>, options?: Record<string, unknown>) => {
+  return withAuthUser(
+    options
+      ? options
+      : { whenUnauthedBeforeInit: AuthAction.SHOW_LOADER, whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN }
+  )((props) => {
     useUserFetch();
     const fetcher = useFetcher();
     return (

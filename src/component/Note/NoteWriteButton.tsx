@@ -15,7 +15,11 @@ export const NoteWriteButton = () => {
   const { user } = useUser();
 
   const handleCreateMemo = useCallback(async () => {
-    if (!user) return;
+    if (!user) {
+      await router.push(`/auth/signin`);
+      return;
+    }
+
     try {
       const idToken = await authUser.getIdToken();
       const res = await fetch(`${API_URL}/users/${user.userName}/notes`, {
