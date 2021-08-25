@@ -2,6 +2,10 @@ import type { ImageLoaderProps, ImageProps } from "next/image";
 import Image from "next/image";
 import type { VFC } from "react";
 
+const isExternal = (src: string) => {
+  return src.startsWith("http");
+};
+
 const loader = ({ src, width, quality }: ImageLoaderProps) => {
   const url = new URL(src);
   url.searchParams.append("w", width.toString());
@@ -10,7 +14,7 @@ const loader = ({ src, width, quality }: ImageLoaderProps) => {
 };
 
 const LoaderedImage: VFC<Omit<ImageProps, "src"> & { src: string }> = (props) => {
-  return <Image {...props} src={props.src} alt={props.alt} loader={loader} />;
+  return <Image {...props} src={props.src} alt={props.alt} loader={isExternal(props.src) ? loader : undefined} />;
 };
 
 /**
