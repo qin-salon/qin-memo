@@ -10,17 +10,29 @@ import { fetcher } from "src/util/fetcher";
 
 type Props = { user: UserType; note: ListNoteType[] };
 
+type ErrorResponse = { statusCode: number; error: string; message: string };
+
+const hasError = (res: any | ErrorResponse): res is ErrorResponse => {
+  return "error" in res;
+};
+
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
-  const [user, note] = await Promise.all<UserType, ListNoteType[]>([
-    fetcher(`${API_URL}/users/${ctx.params?.userId}`),
-    fetcher(`${API_URL}/users/${ctx.params?.userId}/notes`),
-  ]);
-  if (!user) return { notFound: true };
-  return { props: { user, note }, revalidate: 10 };
+  try {
+    const [user, note] = await Promise.all<UserType | ErrorResponse, ListNoteType[] | ErrorResponse>([
+      fetcher(`${API_URL}/users/${ctx.params?.userId}`),
+      fetcher(`${API_URL}/users/${ctx.params?.userId}/notes`),
+    ]);
+    if (hasError(user)) throw new Error(user.message);
+    if (hasError(note)) throw new Error(note.message);
+    return { props: { user, note }, revalidate: 10 };
+  } catch (error) {
+    console.error(error);
+    return { notFound: true };
+  }
 };
 
 const UserUserId: NextPage<Props> = (props) => {
