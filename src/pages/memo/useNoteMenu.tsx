@@ -1,82 +1,53 @@
 import { ClipboardCopyIcon, EyeIcon, EyeOffIcon, TrashIcon } from "@heroicons/react/outline";
-import { useRouter } from "next/router";
-import { useCallback, useMemo, useState } from "react";
+import type { Dispatch } from "react";
+import { useCallback, useMemo } from "react";
 import toast from "react-hot-toast";
 import type { NoteType } from "src/api/handler/note/type";
 import type { MenuDialogListProps } from "src/component/Dialog";
 import { TwitterIcon } from "src/component/Icon";
+import { useTogglePublicStatus } from "src/pages/memo/useTogglePublicStatus";
 
-type UseNoteMenuProps = {
-  public?: NoteType["public"];
-  onCloseMenu: () => void;
-  togglePublicStatus: () => Promise<any>;
-  deleteNote: () => Promise<any>;
+import type { DialogActionType } from "./useDialog";
+
+const shareOnShare = () => {
+  const url = `https://twitter.com/intent/tweet?url=${location.href}&text=${"メモを書きました"}&via=${"QinMemo"}`;
+  window.open(url, "_blank", "noreferrer");
+};
+
+const copyHref = async () => {
+  await navigator.clipboard.writeText(location.href);
+  toast("コピーしました");
 };
 
 /**
  * @package
  */
-export const useNoteMenu = (props: UseNoteMenuProps) => {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isShowDeleteDialog, setIsShowDeleteDialog] = useState(false);
+export const useNoteMenu = (note: NoteType, dispatch: Dispatch<DialogActionType>) => {
+  const { isLoading, handleTogglePublic } = useTogglePublicStatus(note);
 
-  const handleCloseDeleteDialog = useCallback(() => {
-    setIsShowDeleteDialog(false);
-  }, []);
+  const handleShareOnTwitter = useCallback(() => {
+    shareOnShare();
+    dispatch({ type: "HIDE_MENU_DIALOG" });
+  }, [dispatch]);
 
-  const handleClickPublic = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      await toast.promise(props.togglePublicStatus(), {
-        loading: "処理中",
-        success: props?.public ? "非公開にしました" : "公開しました",
-        error: "失敗しました",
-      });
-    } catch (error) {
-      console.error(error);
-    }
-    setIsLoading(false);
-  }, [props]);
+  const handleCopyHref = useCallback(async () => {
+    await copyHref();
+    dispatch({ type: "HIDE_MENU_DIALOG" });
+  }, [dispatch]);
 
-  const handleClickDelete = useCallback(() => {
-    setIsShowDeleteDialog(true);
-    props.onCloseMenu();
-  }, [props]);
-
-  const handleClickTwitterShare = useCallback(() => {
-    const url = `https://twitter.com/intent/tweet?url=${location.href}&text=${"メモを書きました"}&via=${"QinMemo"}`;
-    window.open(url, "_blank", "noreferrer");
-  }, []);
-
-  const handleClickCopy = useCallback(async () => {
-    await navigator.clipboard.writeText(location.href);
-    toast("コピーしました");
-    props.onCloseMenu();
-  }, [props]);
-
-  const handleDeleteNote = useCallback(async () => {
-    try {
-      await toast.promise(props.deleteNote(), {
-        loading: "処理中",
-        success: "削除しました",
-        error: "失敗しました",
-      });
-      await router.push("/");
-    } catch (error) {
-      console.error(error);
-    }
-  }, [props, router]);
+  const handleShowConfirmDialog = useCallback(async () => {
+    dispatch({ type: "SHOW_CONFIRM_DIALOG" });
+  }, [dispatch]);
 
   const menu = useMemo<MenuDialogListProps["menu"]>(() => {
     return [
       [
         {
-          label: props?.public ? "非公開にする" : "公開する",
+          label: note.public ? "非公開にする" : "公開する",
           labelColor: "blue",
-          icon: props?.public ? <EyeOffIcon /> : <EyeIcon />,
+          icon: note.public ? <EyeOffIcon /> : <EyeIcon />,
           iconColor: "blue",
-          onClick: handleClickPublic,
+          onClick: handleTogglePublic,
           disabled: isLoading,
         },
         {
@@ -84,30 +55,30 @@ export const useNoteMenu = (props: UseNoteMenuProps) => {
           labelColor: "red",
           icon: <TrashIcon />,
           iconColor: "red",
-          onClick: handleClickDelete,
+          onClick: handleShowConfirmDialog,
           disabled: isLoading,
         },
       ],
-      props?.public ? "メモをシェアしよう" : "以下は公開後に操作できます",
+      note.public ? "メモをシェアしよう" : "以下は公開後に操作できます",
       [
         {
           label: "Twitterでシェアする",
           icon: <TwitterIcon />,
           iconColor: "twitter",
-          onClick: handleClickTwitterShare,
-          disabled: !props?.public,
-          disabledColor: !props?.public,
+          onClick: handleShareOnTwitter,
+          disabled: !note.public,
+          disabledColor: !note.public,
         },
         {
           label: "リンクをコピーする",
           icon: <ClipboardCopyIcon />,
-          onClick: handleClickCopy,
-          disabled: !props?.public,
-          disabledColor: !props?.public,
+          onClick: handleCopyHref,
+          disabled: !note.public,
+          disabledColor: !note.public,
         },
       ],
     ];
-  }, [handleClickCopy, handleClickDelete, handleClickPublic, handleClickTwitterShare, isLoading, props?.public]);
+  }, [handleCopyHref, handleShareOnTwitter, handleShowConfirmDialog, handleTogglePublic, isLoading, note.public]);
 
-  return { isShowDeleteDialog, menu, handleDeleteNote, handleCloseDeleteDialog };
+  return { menu };
 };
