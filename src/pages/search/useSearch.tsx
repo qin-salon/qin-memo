@@ -6,7 +6,7 @@ import type { ListNoteType } from "src/api/handler/note/type";
 import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
 import { isSearchHistoryType } from "src/api/handler/searchHistory/type";
 import { useUser } from "src/context/user";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 type NotesState = { data?: ListNoteType[]; error?: Error };
 
@@ -20,7 +20,7 @@ export const useSearch = () => {
     data: histories,
     error: historiesError,
     mutate,
-  } = useSWR<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.userName}/searchHistories` : null, {
+  } = useSWRImmutable<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.userName}/searchHistories` : null, {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });

@@ -7,7 +7,7 @@ import { Button } from "src/component/Button";
 import { ConfirmDialog, MenuDialog, MenuDialogList } from "src/component/Dialog";
 import { Layout } from "src/layout";
 import { fetcher } from "src/util/fetcher";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 import { PublicLabel } from "./PublicLabel";
 import { Textarea } from "./Textarea";
@@ -69,14 +69,14 @@ const isUndefined = (data: NoteType | undefined): data is undefined => {
   return data === undefined;
 };
 
-const useFetchNote = (initialData: NoteType) => {
+const useFetchNote = (fallbackData: NoteType) => {
   const authUser = useAuthUser();
-  const { data } = useSWR<NoteType>(`${API_URL}/notes/${initialData.id}`, {
+  const { data } = useSWRImmutable<NoteType>(`${API_URL}/notes/${fallbackData.id}`, {
     fetcher: async (url) => {
       const idToken = await authUser.getIdToken();
       return fetcher(url, idToken);
     },
-    initialData,
+    fallbackData,
   });
 
   if (isUndefined(data)) {
