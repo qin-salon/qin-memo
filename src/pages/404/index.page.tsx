@@ -1,6 +1,6 @@
 import { NoteWriteButton } from "src/component/Note";
-import { withUser } from "src/context/user";
 import { Layout } from "src/layout";
+import { withUser } from "src/util/user";
 
 const Custom404 = () => {
   return (

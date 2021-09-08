@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import { Button } from "src/component/Button";
 import { InputConfirmDialog } from "src/component/Dialog";
 import { RecursiveList } from "src/component/List";
-import { withUser } from "src/context/user";
 import { Layout } from "src/layout";
+import { withUser } from "src/util/user";
 
 import { useDeleteDialog } from "./useDelete";
 

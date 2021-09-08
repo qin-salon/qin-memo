@@ -5,7 +5,7 @@ import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { SearchHistoryType } from "src/api/handler/searchHistory/type";
 import { isSearchHistoryType } from "src/api/handler/searchHistory/type";
-import { useUser } from "src/context/user";
+import { useUser } from "src/util/user";
 import useSWRImmutable from "swr/immutable";
 
 type NotesState = { data?: ListNoteType[]; error?: Error };

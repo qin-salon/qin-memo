@@ -3,8 +3,8 @@ import type { NextPage } from "next";
 import { Button } from "src/component/Button";
 import { Search } from "src/component/Form";
 import { NoteList } from "src/component/Note";
-import { withUser } from "src/context/user";
 import { Layout } from "src/layout";
+import { withUser } from "src/util/user";
 
 import { SearchHistories } from "./SearchHistories";
 import { useSearch } from "./useSearch";

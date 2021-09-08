@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import { withUser } from "src/context/user";
 import { Layout } from "src/layout";
+import { withUser } from "src/util/user";
 
 import { ProfileForm } from "./ProfileForm";
 

@@ -6,7 +6,7 @@ import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
 import { Fragment, useCallback } from "react";
 import { Avatar } from "src/component/Avatar";
-import { useUser } from "src/context/user";
+import { useUser } from "src/util/user";
 
 import { ICON_SIZE } from "./constant";
 

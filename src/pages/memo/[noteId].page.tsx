@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
 import { API_URL } from "src/api/endpoint";
 import type { NoteType } from "src/api/handler/note/type";
-import { withUser } from "src/context/user";
 import { fetcher } from "src/util/fetcher";
+import { withUser } from "src/util/user";
 
 import { NoteEditor } from "./NoteEditor";
 import { NoteViewer } from "./NoteViewer";

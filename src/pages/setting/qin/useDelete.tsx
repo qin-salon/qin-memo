@@ -1,7 +1,7 @@
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useState } from "react";
 import { API_URL } from "src/api/endpoint";
-import { useUser } from "src/context/user";
+import { useUser } from "src/util/user";
 
 /**
  * @package

@@ -2,7 +2,7 @@ import type { VFC } from "react";
 import { Avatar } from "src/component/Avatar";
 import { Button } from "src/component/Button";
 import { Input } from "src/component/Form";
-import { useUser } from "src/context/user";
+import { useUser } from "src/util/user";
 
 import { useProfileForm } from "./useProfileForm";
 

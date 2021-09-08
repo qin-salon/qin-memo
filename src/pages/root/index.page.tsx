@@ -5,8 +5,8 @@ import type { ListNoteType } from "src/api/handler/note/type";
 import { Avatar } from "src/component/Avatar";
 import { Search } from "src/component/Form";
 import { NoteList, NoteWriteButton } from "src/component/Note";
-import { useUser, withUser } from "src/context/user";
 import { Layout } from "src/layout";
+import { useUser, withUser } from "src/util/user";
 import useSWR from "swr";
 
 const Root: NextPage = () => {

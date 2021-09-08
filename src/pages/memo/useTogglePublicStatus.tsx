@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { API_URL } from "src/api/endpoint";
 import type { ListNoteType, NoteType } from "src/api/handler/note/type";
-import { useUser } from "src/context/user";
+import { useUser } from "src/util/user";
 import { mutate } from "swr";
 
 /**

@@ -4,9 +4,9 @@ import type { ListNoteType } from "src/api/handler/note/type";
 import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/component/Avatar";
 import { NoteList, NoteWriteButton } from "src/component/Note";
-import { withUser } from "src/context/user";
 import { Layout } from "src/layout";
 import { fetcher } from "src/util/fetcher";
+import { withUser } from "src/util/user";
 
 type Props = { user: UserType; note: ListNoteType[] };
 
