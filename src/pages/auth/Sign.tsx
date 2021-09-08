@@ -1,23 +1,21 @@
-import "firebase/auth";
-
-import firebase from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
 import type { VFC } from "react";
-import { useCallback } from "react";
 import { Button } from "src/component/Button";
 import { AppleIcon, GoogleIcon, QinMemoIcon } from "src/component/Icon";
 
 type SignProps = { page: "signin" | "signup" };
 
-export const Sign: VFC<SignProps> = (props) => {
-  const handleGoogleAuth = useCallback(() => {
-    const googleProvider = new firebase.auth.GoogleAuthProvider();
-    const auth = firebase.auth();
-    auth.signInWithRedirect(googleProvider);
-  }, []);
-  const handleAppleAuth = useCallback(() => {
-    alert("handleAppleAuth");
-  }, []);
+const handleGoogleAuth = () => {
+  const googleProvider = new GoogleAuthProvider();
+  const auth = getAuth();
+  signInWithRedirect(auth, googleProvider);
+};
 
+const handleAppleAuth = () => {
+  alert("handleAppleAuth");
+};
+
+export const Sign: VFC<SignProps> = (props) => {
   return (
     <div className="grid place-items-center w-screen h-screen bg-gray-200 dark:bg-gray-700">
       <div className="p-4">

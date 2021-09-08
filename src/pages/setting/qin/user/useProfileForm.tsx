@@ -1,6 +1,4 @@
-import "firebase/storage";
-
-import firebase from "firebase/app";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { useAuthUser } from "next-firebase-auth";
 import type { ChangeEvent } from "react";
 import { useCallback, useRef, useState } from "react";
@@ -43,7 +41,8 @@ export const useProfileForm = () => {
       return;
     }
     if (selectedFile) {
-      await firebase.storage().ref(user.id).put(selectedFile);
+      const storage = getStorage();
+      await uploadBytes(ref(storage, user.id), selectedFile);
     }
     const idToken = await authUser.getIdToken();
     const body = {
