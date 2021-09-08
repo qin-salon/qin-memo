@@ -1,5 +1,5 @@
 import { useTheme } from "next-themes";
-import { useMemo } from "react";
+import { useEffect, useState } from "react";
 
 import type { ExtendUseThemeProps } from "./type";
 
@@ -8,9 +8,15 @@ import type { ExtendUseThemeProps } from "./type";
  */
 export const useGetIconFillColor = () => {
   const { resolvedTheme } = useTheme() as ExtendUseThemeProps;
-  const fillColor = useMemo(() => {
-    return resolvedTheme === "light" ? "#070417" : "#fff";
-  }, [resolvedTheme]);
+  const [isMounted, setIsMounted] = useState(false);
 
-  return { fillColor };
+  useEffect(() => {
+    return setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return { fillColor: undefined };
+  }
+
+  return { fillColor: resolvedTheme === "light" ? "#070417" : "#fff" };
 };
