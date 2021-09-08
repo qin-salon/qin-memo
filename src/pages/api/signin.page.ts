@@ -1,6 +1,6 @@
 import type { NextApiHandler } from "next";
 import { setAuthCookies } from "next-firebase-auth";
-import { initAuth } from "src/context/user/initAuth";
+import { initAuth } from "src/util/initAuth";
 
 initAuth();
 

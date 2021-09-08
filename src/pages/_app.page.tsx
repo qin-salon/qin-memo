@@ -4,8 +4,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { memo } from "react";
 import { Toaster } from "react-hot-toast";
-import { UserProvider } from "src/context/user";
-import { initAuth } from "src/context/user/initAuth";
+import { initAuth } from "src/util/initAuth";
 
 import { useAddClassToBodyElem } from "./_app/useAddClassToBodyElem";
 import { useSessionRouter } from "./_app/useSessionRouter";
@@ -22,9 +21,7 @@ const App = (props: AppProps) => {
 
   return (
     <ThemeProvider attribute="class">
-      <UserProvider>
-        <props.Component {...props.pageProps} />
-      </UserProvider>
+      <props.Component {...props.pageProps} />
       <Toaster toastOptions={{ duration: 2500, className: "!rounded-full !py-1 !px-2.5 !text-sm font-bold" }} />
     </ThemeProvider>
   );

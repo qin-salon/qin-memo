@@ -3,14 +3,12 @@ import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { SWRConfig } from "swr";
 
-import { useUserFetch } from "./useUserFetch";
-
-const useFetcher = () => {
+export const useFetcher = () => {
   const authUser = useAuthUser();
   const fetcher = useCallback(
-    async (url: string) => {
+    async (key: string) => {
       const idToken = await authUser.getIdToken();
-      const res = await fetch(url, { headers: { authorization: `Bearer ${idToken}` } });
+      const res = await fetch(key, { headers: { authorization: `Bearer ${idToken}` } });
       if (res.status !== 200 && res.status !== 201) {
         throw new Error();
       }
@@ -19,6 +17,7 @@ const useFetcher = () => {
     },
     [authUser]
   );
+
   return fetcher;
 };
 
@@ -31,7 +30,6 @@ export const withUser = (Component: NextPage<any>, options?: Record<string, unkn
       ? options
       : { whenUnauthedBeforeInit: AuthAction.SHOW_LOADER, whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN }
   )((props) => {
-    useUserFetch();
     const fetcher = useFetcher();
     return (
       <SWRConfig value={{ fetcher }}>
