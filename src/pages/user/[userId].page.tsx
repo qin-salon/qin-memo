@@ -5,7 +5,6 @@ import type { UserType } from "src/api/handler/user/type";
 import { Avatar } from "src/component/Avatar";
 import { NoteList, NoteWriteButton } from "src/component/Note";
 import { Layout } from "src/layout";
-import { fetcher } from "src/util/fetcher";
 import { withUser } from "src/util/user";
 
 type Props = { user: UserType; note: ListNoteType[] };
@@ -16,15 +15,21 @@ const hasError = (res: any | ErrorResponse): res is ErrorResponse => {
   return "error" in res;
 };
 
+const fetchJson = async <T extends unknown>(input: RequestInfo, init?: RequestInit): Promise<T> => {
+  const res = await fetch(input, init);
+  const data = await res.json();
+  return data;
+};
+
 export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: "blocking" };
 };
 
 export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
   try {
-    const [user, note] = await Promise.all<UserType | ErrorResponse, ListNoteType[] | ErrorResponse>([
-      fetcher(`${API_URL}/users/${ctx.params?.userId}`),
-      fetcher(`${API_URL}/users/${ctx.params?.userId}/notes`),
+    const [user, note] = await Promise.all([
+      fetchJson<UserType | ErrorResponse>(`${API_URL}/users/${ctx.params?.userId}`),
+      fetchJson<ListNoteType[] | ErrorResponse>(`${API_URL}/users/${ctx.params?.userId}/notes`),
     ]);
     if (hasError(user)) throw new Error(user.message);
     if (hasError(note)) throw new Error(note.message);

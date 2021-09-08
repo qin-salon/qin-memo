@@ -11,7 +11,7 @@ import { PublicLabel } from "./PublicLabel";
  */
 export const NoteViewer: VFC<{ note: NoteType }> = (props) => {
   return (
-    <Layout left="memo" right={[PublicLabel()]}>
+    <Layout left="memo" right={[<PublicLabel key="publicLabel" />]}>
       <div className="space-y-7">
         <Link href={`/user/${props.note.users.userName}`}>
           <a className="flex items-center space-x-4 w-max">
