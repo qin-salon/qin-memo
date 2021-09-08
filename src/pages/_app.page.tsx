@@ -7,8 +7,8 @@ import { Toaster } from "react-hot-toast";
 import { UserProvider } from "src/context/user";
 import { initAuth } from "src/context/user/initAuth";
 
-import { useAddClassToBodyElem } from "./useAddClassToBodyElem";
-import { useSessionRouter } from "./useSessionRouter";
+import { useAddClassToBodyElem } from "./_app/useAddClassToBodyElem";
+import { useSessionRouter } from "./_app/useSessionRouter";
 
 // if (process.env.NODE_ENV === "development") {
 //   require("src/api/mock");
