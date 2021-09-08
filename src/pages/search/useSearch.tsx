@@ -68,10 +68,10 @@ export const useSearch = () => {
           }
         }, false);
       } catch (error) {
-        setNotes((prevData) => {
-          return { ...prevData, error };
-        });
         console.error(error);
+        setNotes((prevData) => {
+          return error instanceof Error ? { ...prevData, error } : prevData;
+        });
       }
     },
     [authUser, mutate, user]

@@ -9,15 +9,13 @@ export type NoteSchema = {
   updatedAt: string;
   content: string;
   excerpt: string;
+  isMine: boolean;
+  users: UserType;
 };
 
 export type NoteType = Omit<NoteSchema, "excerpt">;
 
-export type NoteWithUserType = NoteType & {
-  users: Omit<UserType, "enabledQinMemo">;
-};
-
-export type ListNoteType = Omit<NoteSchema, "content">;
+export type ListNoteType = Omit<NoteSchema, "content" | "isMine" | "users">;
 
 export const isNoteType = (data: any): data is NoteType => {
   return data.id !== undefined;

@@ -1,3 +1,6 @@
+// eslint-disable-next-line import-access/jsdoc
+import { EXAMPLE_USER, EXAMPLE_USER_1 } from "src/api/handler/user/data";
+
 import type { ListNoteType, NoteSchema } from "./type";
 
 /**
@@ -12,6 +15,8 @@ export const EXAMPLE_NOTE_DB: NoteSchema[] = [
       "ウェブサイト（英: website）は、World Wide Web (WWW) 上にあり、一般に特定のドメイン名の下にある複数のウェブページの集まりのこと。サイトと呼ばれることもある。企業などの団体が自身を紹介するため自ら構築したサイトを、その団体の公式サイトなどと呼ぶ。\n\nホ",
     public: true,
     updatedAt: "2021-07-31T14:10:30.538Z",
+    isMine: true,
+    users: EXAMPLE_USER,
   },
   {
     id: "9_0SrJE92WGz_fkd-tXGq",
@@ -21,6 +26,8 @@ export const EXAMPLE_NOTE_DB: NoteSchema[] = [
       "広義には、社会的ネットワークの構築の出来るサービスやウェブサイトであれば、ソーシャル・ネットワーキング・サービス（以下、SNS）またはソーシャル・ネットワーキング・サイトと定義される。この為、電子掲示板も広義的にはSNSに含まれることがある。\n\n狭義には、SNSとは人と人とのつな",
     public: false,
     updatedAt: "2021-07-31T06:37:03.004Z",
+    isMine: false,
+    users: EXAMPLE_USER_1,
   },
   {
     id: "i4j6fPibsWrI2jBt6YFNF",
@@ -30,6 +37,8 @@ export const EXAMPLE_NOTE_DB: NoteSchema[] = [
       "ドローン宅配便（ドローンたくはいびん）とは、小型の無人飛行機（ドローン）を用いた商品宅配サービスのことである。\n\n2013年12月ネット通販最大手のアメリカ企業のアマゾン・ドット・コムがドローンを使った商品の配送を検討していると公表し、注目を集めた[1]。アメリカ国内では、ドロー",
     public: true,
     updatedAt: "2021-07-31T02:34:04.460Z",
+    isMine: false,
+    users: EXAMPLE_USER_1,
   },
   {
     id: "glpgllyWmC08B6240RTLI",
@@ -39,6 +48,8 @@ export const EXAMPLE_NOTE_DB: NoteSchema[] = [
       "コンピュータープログラミングとは\n\n（英語: Computer Programming）とは、ある特定のコンピューティングの結果を得ることを目的として、実行可能なコンピュータープログラムを設計・構築するプロセスのことである。プログラミングが関係するタスクの例としては、アルゴリズム",
     public: false,
     updatedAt: "2021-07-31T06:09:29.729Z",
+    isMine: true,
+    users: EXAMPLE_USER,
   },
 ];
 

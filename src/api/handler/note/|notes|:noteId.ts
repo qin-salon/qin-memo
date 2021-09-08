@@ -13,14 +13,8 @@ export const getNotesNoteId = rest.get<never, NoteType, { noteId: string }>(endp
   const { noteId } = req.params;
   const note = EXAMPLE_NOTE_DB.find(({ id }) => {
     return id === noteId;
-  });
-  const response = note || {
-    id: "foo",
-    content: "",
-    public: false,
-    updatedAt: new Date().toISOString(),
-  };
-  return res(ctx.delay(1000), ctx.status(200), ctx.json(response));
+  }) as NoteType;
+  return res(ctx.delay(1000), ctx.status(200), ctx.json(note));
 });
 
 /**
