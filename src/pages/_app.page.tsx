@@ -4,7 +4,7 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { memo } from "react";
 import { Toaster } from "react-hot-toast";
-import { initAuth } from "src/util/initAuth";
+import { initAuth } from "src/util/auth";
 
 import { useAddClassToBodyElem } from "./_app/useAddClassToBodyElem";
 import { useSessionRouter } from "./_app/useSessionRouter";

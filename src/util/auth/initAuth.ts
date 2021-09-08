@@ -1,5 +1,8 @@
 import { init } from "next-firebase-auth";
 
+/**
+ * @package
+ */
 export const initAuth = () => {
   init({
     debug: false,
