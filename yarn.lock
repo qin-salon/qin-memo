@@ -1737,10 +1737,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.20.tgz#f7974863edd21d1f8a494a73e8e2b3658615c340"
   integrity sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
 
-"@types/node@16.7.13":
-  version "16.7.13"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.13.tgz#86fae356b03b5a12f2506c6cf6cd9287b205973f"
-  integrity sha512-pLUPDn+YG3FYEt/pHI74HmnJOWzeR+tOIQzUx93pi9M7D8OE7PSLr97HboXwk5F+JS+TLtWuzCOW97AHjmOXXA==
+"@types/node@16.9.0":
+  version "16.9.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.9.0.tgz#d9512fe037472dcb58931ce19f837348db828a62"
+  integrity sha512-nmP+VR4oT0pJUPFbKE4SXj3Yb4Q/kz3M9dSAO1GGMebRKWHQxLfDNmU/yh3xxCJha3N60nQ/JwXWwOE/ZSEVag==
 
 "@types/node@>=12.12.47", "@types/node@>=13.7.0":
   version "15.12.1"
@@ -8037,10 +8037,10 @@ tailwindcss@^2.1.2:
     reduce-css-calc "^2.1.8"
     resolve "^1.20.0"
 
-tailwindcss@^2.2.12:
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.2.12.tgz#878d01a20808c116d5f1b4d8a03cb856c007ea98"
-  integrity sha512-xB21XYyad1ZBATFHfSqe8hDHK7G+QLgErEy754h5gG+BcvrBoCBknaXGCDq9CXj9Azqz4zby3adCyY88kYRg0g==
+tailwindcss@^2.2.14:
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-2.2.14.tgz#7f71ce6783a5e9768bd0e2ad1cb48eefba42e2ca"
+  integrity sha512-gQQPKbV8qb8GthGhJGbRR+lKluSpFq+L78CJZLmqumEBKPMDkD+l5wFlOTzlOhWozG4S1I9AUSaPkD1EfnNsug==
   dependencies:
     arg "^5.0.1"
     bytes "^3.0.0"
