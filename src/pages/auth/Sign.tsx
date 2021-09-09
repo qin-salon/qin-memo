@@ -1,4 +1,4 @@
-import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithRedirect } from "firebase/auth";
 import type { VFC } from "react";
 import { Button } from "src/component/Button";
 import { AppleIcon, GoogleIcon, QinMemoIcon } from "src/component/Icon";
@@ -12,7 +12,9 @@ const handleGoogleAuth = () => {
 };
 
 const handleAppleAuth = () => {
-  alert("handleAppleAuth");
+  const provider = new OAuthProvider("apple.com");
+  const auth = getAuth();
+  signInWithRedirect(auth, provider);
 };
 
 export const Sign: VFC<SignProps> = (props) => {
