@@ -61,6 +61,17 @@ export const useSearch = () => {
               throw new Error(data.message);
             }
             if (!histories) return [data];
+            const sameKeywordItem = histories.find((history) => {
+              return history.keyword === data.keyword;
+            });
+            if (sameKeywordItem) {
+              return [
+                sameKeywordItem,
+                ...histories.filter((history) => {
+                  return history.keyword !== sameKeywordItem.keyword;
+                }),
+              ];
+            }
             return [data, ...histories.slice(0, 9)];
           } catch (error) {
             console.error(error);
