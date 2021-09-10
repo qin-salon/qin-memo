@@ -20,7 +20,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
       method: "patch",
       headers: { authorization: `Bearer ${idToken}` },
     });
-    mutate(`${API_URL}/notes/${note.id}`, { ...note, public: !note.public }, false);
+    mutate(`${API_URL}/notes/${note.id}`, { ...note, isPublic: !note.isPublic }, false);
     mutate(
       `${API_URL}/users/${user?.id}/notes`,
       (data: ListNoteType[]) => {
@@ -31,7 +31,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
         const others = data.filter(({ id }) => {
           return id !== note.id;
         });
-        return [{ ...target, public: !target.public }, ...others];
+        return [{ ...target, isPublic: !target.isPublic }, ...others];
       },
       false
     );
@@ -42,14 +42,14 @@ export const useTogglePublicStatus = (note: NoteType) => {
     try {
       await toast.promise(togglePublicStatus(), {
         loading: "処理中",
-        success: note.public ? "非公開にしました" : "公開しました",
+        success: note.isPublic ? "非公開にしました" : "公開しました",
         error: "失敗しました",
       });
     } catch (error) {
       console.error(error);
     }
     setIsLoading(false);
-  }, [note.public, togglePublicStatus]);
+  }, [note.isPublic, togglePublicStatus]);
 
   return { isLoading, handleTogglePublic };
 };

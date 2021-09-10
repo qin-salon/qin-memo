@@ -28,7 +28,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value.trim() }),
       });
-      await mutate(`${API_URL}/users/${user.id}/notes`);
+      await mutate(`${API_URL}/users/${user.userName}/notes`);
     },
     [authUser, props.note.id, user]
   );
@@ -41,7 +41,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
       headers: { authorization: `Bearer ${idToken}` },
     });
     await mutate(
-      `${API_URL}/users/${user.id}/notes`,
+      `${API_URL}/users/${user.userName}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         return data.filter(({ id }) => {

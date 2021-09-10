@@ -43,9 +43,9 @@ export const useNoteMenu = (note: NoteType, dispatch: Dispatch<DialogActionType>
     return [
       [
         {
-          label: note.public ? "非公開にする" : "公開する",
+          label: note.isPublic ? "非公開にする" : "公開する",
           labelColor: "blue",
-          icon: note.public ? <EyeOffIcon /> : <EyeIcon />,
+          icon: note.isPublic ? <EyeOffIcon /> : <EyeIcon />,
           iconColor: "blue",
           onClick: handleTogglePublic,
           disabled: isLoading,
@@ -59,26 +59,26 @@ export const useNoteMenu = (note: NoteType, dispatch: Dispatch<DialogActionType>
           disabled: isLoading,
         },
       ],
-      note.public ? "メモをシェアしよう" : "以下は公開後に操作できます",
+      note.isPublic ? "メモをシェアしよう" : "以下は公開後に操作できます",
       [
         {
           label: "Twitterでシェアする",
           icon: <TwitterIcon />,
           iconColor: "twitter",
           onClick: handleShareOnTwitter,
-          disabled: !note.public,
-          disabledColor: !note.public,
+          disabled: !note.isPublic,
+          disabledColor: !note.isPublic,
         },
         {
           label: "リンクをコピーする",
           icon: <ClipboardCopyIcon />,
           onClick: handleCopyHref,
-          disabled: !note.public,
-          disabledColor: !note.public,
+          disabled: !note.isPublic,
+          disabledColor: !note.isPublic,
         },
       ],
     ];
-  }, [handleCopyHref, handleShareOnTwitter, handleShowConfirmDialog, handleTogglePublic, isLoading, note.public]);
+  }, [handleCopyHref, handleShareOnTwitter, handleShowConfirmDialog, handleTogglePublic, isLoading, note.isPublic]);
 
   return { menu };
 };

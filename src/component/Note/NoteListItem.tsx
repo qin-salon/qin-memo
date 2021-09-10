@@ -33,7 +33,7 @@ export const NoteListItem: VFC<ListNoteType> = (props) => {
           <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
             {format_yyyyMd(props.updatedAt)}
           </time>
-          {props.public ? (
+          {props.isPublic ? (
             <div className="grid place-content-center px-2.5 h-full text-xs font-bold text-white bg-orange-400 rounded-full">
               公開中
             </div>

@@ -16,5 +16,5 @@ export const patchNotesNoteIdPublic = rest.patch<never, NoteType, { noteId: stri
   if (!note) {
     return res(ctx.status(404));
   }
-  return res(ctx.delay(1000), ctx.status(200), ctx.json({ ...note, public: !note.public }));
+  return res(ctx.delay(1000), ctx.status(200), ctx.json({ ...note, isPublic: !note.isPublic }));
 });

@@ -7,7 +7,7 @@ import type { UserType } from "src/api/handler/user/type";
 export const enabledQinMemo = async (idToken: string, user?: UserType): Promise<void> => {
   if (!user) return;
   try {
-    const res = await fetch(`${API_URL}/users/${user.id}`, {
+    const res = await fetch(`${API_URL}/users/${user.userName}`, {
       method: "PUT",
       headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
       body: JSON.stringify({ enabledQinMemo: true }),

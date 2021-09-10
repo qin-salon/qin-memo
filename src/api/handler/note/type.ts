@@ -5,7 +5,7 @@ import type { UserType } from "src/api/handler/user/type";
  */
 export type NoteSchema = {
   id: string;
-  public: boolean;
+  isPublic: boolean;
   updatedAt: string;
   content: string;
   excerpt: string;

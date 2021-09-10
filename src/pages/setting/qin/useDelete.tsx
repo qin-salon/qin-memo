@@ -37,12 +37,12 @@ export const useDeleteDialog = () => {
   }, []);
   const handleDeleteQinAccount = useCallback(async () => {
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/users/${user?.id}`, {
+    await fetch(`${API_URL}/users/${user?.userName}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     await authUser.signOut();
-  }, [authUser, user?.id]);
+  }, [authUser, user?.userName]);
 
   return {
     isShowDeleteQinMemo,

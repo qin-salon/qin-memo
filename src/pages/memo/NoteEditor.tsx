@@ -38,7 +38,7 @@ export const NoteEditor: VFC<{ note: NoteType }> = (props) => {
       <Layout
         left="memo"
         right={[
-          note.public ? <PublicLabel /> : undefined,
+          note.isPublic ? <PublicLabel /> : undefined,
           <Button key="menu" variant="ghost" className="w-10 h-10" onClick={handleShowMenuDialog}>
             <DotsCircleHorizontalIcon className="w-5 h-5" />
           </Button>,
