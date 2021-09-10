@@ -1,16 +1,11 @@
-import { fireEvent, render } from "@testing-library/react";
-import Home from "src/pages";
+/**
+ * @jest-environment jsdom
+ */
+import { render } from "@testing-library/react";
 
-describe("Home page", () => {
+describe("Test page", () => {
   it("matches snapshot", () => {
-    const { asFragment } = render(<Home />, {});
+    const { asFragment } = render(<div>test</div>, {});
     expect(asFragment()).toMatchSnapshot();
-  });
-
-  it("clicking button triggers alert", () => {
-    const { getByText } = render(<Home />, {});
-    window.alert = jest.fn();
-    fireEvent.click(getByText("Button"));
-    expect(window.alert).toHaveBeenCalledWith("Hello, World!");
   });
 });

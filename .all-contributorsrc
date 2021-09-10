@@ -11,7 +11,135 @@
       "avatar_url": "https://avatars2.githubusercontent.com/u/8220973?v=4",
       "profile": "https://youtube.com/c/shimabu_it",
       "contributions": [
+        "doc",
+        "projectManagement",
+        "review"
+      ]
+    },
+    {
+      "login": "satoru-hirai",
+      "name": "sa hi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/62086450?v=4",
+      "profile": "https://github.com/satoru-hirai",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ippo012",
+      "name": "Ippo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/9071515?v=4",
+      "profile": "https://github.com/ippo012",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "reachscript-jak",
+      "name": "Takumi Okada",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/44320334?v=4",
+      "profile": "https://freelance-jak.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mike3104",
+      "name": "mike",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/64879464?v=4",
+      "profile": "https://github.com/mike3104",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "reeve0930",
+      "name": "reeve0930",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38152917?v=4",
+      "profile": "https://fe-notes.work/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "magatakohei",
+      "name": "magako",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65271262?v=4",
+      "profile": "https://github.com/magatakohei",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Takanaka123",
+      "name": "Takanaka123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/76854640?v=4",
+      "profile": "https://github.com/Takanaka123",
+      "contributions": [
         "doc"
+      ]
+    },
+    {
+      "login": "abc123931",
+      "name": "abc123931",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15182311?v=4",
+      "profile": "https://github.com/abc123931",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "yamatsum",
+      "name": "yamatsum",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42740055?v=4",
+      "profile": "https://github.com/yamatsum",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "takasaki376",
+      "name": "takasaki376",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75880059?v=4",
+      "profile": "https://github.com/takasaki376",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "yuji-bvb",
+      "name": "yuji-bvb",
+      "avatar_url": "https://avatars.githubusercontent.com/u/69225541?v=4",
+      "profile": "https://github.com/yuji-bvb",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "aluco-hirata",
+      "name": "aluco-hirata",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57079195?v=4",
+      "profile": "https://hirata-tech-blog.vercel.app/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kondo-tomonori1001",
+      "name": "KON",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59102541?v=4",
+      "profile": "https://github.com/kondo-tomonori1001",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "wi-tech",
+      "name": "wi-tech",
+      "avatar_url": "https://avatars.githubusercontent.com/u/75743359?v=4",
+      "profile": "https://github.com/wi-tech",
+      "contributions": [
+        "code"
       ]
     }
   ],
