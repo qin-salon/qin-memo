@@ -1,10 +1,15 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { AuthAction, withAuthUser } from "next-firebase-auth";
 import { useCallback } from "react";
 import { Button } from "src/component/Button";
 import { AppleIcon, GoogleIcon } from "src/component/Icon";
 import { List } from "src/component/List";
 import { Layout } from "src/layout";
+
+// いったんSNS連携機能は実装しないため、404にしておく
+export const getServerSideProps: GetServerSideProps = async () => {
+  return { notFound: true };
+};
 
 const SettingQinAccount: NextPage = () => {
   const handleGoogle = useCallback(() => {

@@ -28,7 +28,8 @@ const SettingQin: NextPage = () => {
           title="全般"
           items={[
             { label: "プロフィール", href: "/setting/qin/user/edit" },
-            { label: "アカウントの連携", href: "/setting/qin/account" },
+            // いったんSNS連携機能は実装しないため、隠しておく
+            // { label: "アカウントの連携", href: "/setting/qin/account" },
             { label: "データの削除", href: "/setting/qin/delete" },
           ]}
         />
