@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import type { VFC } from "react";
 
 import { Center } from "./Center";
@@ -13,6 +14,11 @@ export type HeaderProps = Left & Center & Right;
  * @package
  */
 export const Header: VFC<HeaderProps> = (props) => {
+  const router = useRouter();
+  if (router.query.client === "app") {
+    return null;
+  }
+
   return (
     <header className="flex items-center">
       <Left left={props.left} />
