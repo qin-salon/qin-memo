@@ -1,4 +1,5 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { NextSeo } from "next-seo";
 import { API_URL } from "src/api/endpoint";
 import type { ListNoteType } from "src/api/handler/note/type";
 import type { UserType } from "src/api/handler/user/type";
@@ -42,24 +43,27 @@ export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (
 
 const UserUserId: NextPage<Props> = (props) => {
   return (
-    <Layout left="memo" right={[<NoteWriteButton key="note" />, "profile"]}>
-      <div className="space-y-7">
-        <div className="flex items-center space-x-4">
-          <Avatar
-            src={props.user.avatarUrl}
-            alt={props.user.accountName}
-            width={64}
-            height={64}
-            className="overflow-hidden w-16 h-16 rounded-full"
-          />
-          <div className="flex flex-col">
-            <span className="font-bold">{props.user.accountName}</span>
+    <>
+      <NextSeo title={props.user.accountName} />
+      <Layout left="memo" right={[<NoteWriteButton key="note" />, "profile"]}>
+        <div className="space-y-7">
+          <div className="flex items-center space-x-4">
+            <Avatar
+              src={props.user.avatarUrl}
+              alt={props.user.accountName}
+              width={64}
+              height={64}
+              className="overflow-hidden w-16 h-16 rounded-full"
+            />
+            <div className="flex flex-col">
+              <span className="font-bold">{props.user.accountName}</span>
+            </div>
           </div>
-        </div>
 
-        <NoteList data={props.note} />
-      </div>
-    </Layout>
+          <NoteList data={props.note} />
+        </div>
+      </Layout>
+    </>
   );
 };
 
