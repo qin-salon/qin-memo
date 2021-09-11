@@ -47,25 +47,28 @@ const MemoNoteId: NextPage<MemoNoteIdProps> = (props) => {
 
   return (
     <>
-      <NextSeo
-        title={title}
-        description={description}
-        openGraph={{
-          url,
-          description,
-          images: [{ url: props.note.users.avatarUrl, alt: props.note.users.accountName }],
-        }}
-      />
-
-      <BlogJsonLd
-        url={url}
-        title={title}
-        description={description}
-        images={[props.note.users.avatarUrl]}
-        datePublished={props.note.updatedAt}
-        dateModified={props.note.updatedAt}
-        authorName={props.note.users.accountName}
-      />
+      {props.note.isPublic ? (
+        <>
+          <NextSeo
+            title={title}
+            description={description}
+            openGraph={{
+              url,
+              description,
+              images: [{ url: props.note.users.avatarUrl, alt: props.note.users.accountName }],
+            }}
+          />
+          <BlogJsonLd
+            url={url}
+            title={title}
+            description={description}
+            images={[props.note.users.avatarUrl]}
+            datePublished={props.note.updatedAt}
+            dateModified={props.note.updatedAt}
+            authorName={props.note.users.accountName}
+          />
+        </>
+      ) : null}
 
       <SWRConfig value={{ fallback: props.fallback }}>
         {props.note.isMine ? <NoteEditor note={props.note} /> : <NoteViewer note={props.note} />}
