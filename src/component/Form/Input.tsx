@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> &
-  Omit<UseFormRegisterReturn, "ref"> & {
+  Omit<UseFormRegisterReturn, "ref" | "onChange" | "onBlur"> & {
     name: string;
     label?: string;
     prefix?: string;
