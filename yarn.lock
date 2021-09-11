@@ -3502,6 +3502,11 @@ escalade@^3.1.1:
   resolved "https://registry.yarnpkg.com/escalade/-/escalade-3.1.1.tgz#d8cfdc7000965c5a0174b4a82eaa5c0552742e40"
   integrity sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==
 
+escape-html@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
+  integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
+
 escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
@@ -4736,6 +4741,18 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
+
+interweave-autolink@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/interweave-autolink/-/interweave-autolink-4.4.3.tgz#848ef813f5a5f76cee1ed9ba8a6f6d76f229fc6c"
+  integrity sha512-wnqZwLBllo0nwNRrgPzwcL+y/HaNlsT0YE15QvLkryA/FOw6b8+Wl+eQfr7moEmQxrnYAHQDYR8+d6ADwYwufg==
+
+interweave@^12.8.0:
+  version "12.8.0"
+  resolved "https://registry.yarnpkg.com/interweave/-/interweave-12.8.0.tgz#1ee22f68b2fd06a2e1bee4b5f1829d15854c9583"
+  integrity sha512-qB5Q3Oeaz81DJkJF1YQze6sfDccA60HaUQE7NOYgQRFjfOVB1RwTS9Qst1N3LfAOxa+DPzok8od4vNYEDA2HQw==
+  dependencies:
+    escape-html "^1.0.3"
 
 is-arguments@^1.0.4:
   version "1.1.0"

@@ -36,6 +36,8 @@
     "firebase": "^9.0.2",
     "firebase-admin": "^9.11.1",
     "http-proxy": "^1.18.1",
+    "interweave": "^12.8.0",
+    "interweave-autolink": "^4.4.3",
     "next": "^11.1.2",
     "next-firebase-auth": "^1.0.0-canary.1",
     "next-seo": "^4.26.0",
