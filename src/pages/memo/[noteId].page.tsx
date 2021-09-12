@@ -18,7 +18,7 @@ export const getServerSideProps = withAuthUserTokenSSR({
   try {
     const idToken = await props.AuthUser.getIdToken();
     const NOTE_API_URL = `${API_URL}/notes/${props.params?.noteId}`;
-    const res = await fetch(NOTE_API_URL, { headers: { authorization: `Bearer ${idToken}` } });
+    const res = await fetch(NOTE_API_URL, idToken ? { headers: { authorization: `Bearer ${idToken}` } } : undefined);
     const note = await res.json();
     if (!isNoteType(note)) {
       throw new Error("No note");
