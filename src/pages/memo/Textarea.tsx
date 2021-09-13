@@ -115,7 +115,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
         placeholder="メモを入力する"
         autoComplete="off"
         minRows={16}
-        autoFocus
+        autoFocus={props.note.content === ""}
       />
     </label>
   );
