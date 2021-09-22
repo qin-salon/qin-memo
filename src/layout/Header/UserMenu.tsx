@@ -14,11 +14,11 @@ import { ICON_SIZE } from "./constant";
  * @package
  */
 export const UserMenu: VFC = () => {
-  const AuthUser = useAuthUser();
   const { user } = useUser();
+  const authUser = useAuthUser();
   const handleSignOut = useCallback(() => {
-    return AuthUser.signOut();
-  }, [AuthUser]);
+    return authUser.signOut();
+  }, [authUser]);
 
   if (!user) {
     return null;
