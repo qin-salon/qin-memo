@@ -10,14 +10,12 @@ type Props = HeaderProps & { children: ReactNode; isHeaderNarrow?: boolean };
  */
 export const Layout: VFC<Props> = (props) => {
   // eslint-disable-next-line react/destructuring-assignment
-  const { children, isHeaderNarrow, ...headerProps } = props;
+  const { children, ...rest } = props;
 
   return (
-    <div className="pb-20">
-      <div className={`mx-auto ${isHeaderNarrow ? "max-w-screen-sm" : "max-w-screen-lg"}`}>
-        <Header {...headerProps} />
-      </div>
-      <div className="px-4 mx-auto w-full max-w-screen-sm">{children}</div>
+    <div className="pt-4 pb-20 space-y-8 sm:space-y-14">
+      <Header {...rest} />
+      <main className="px-4 mx-auto w-full max-w-screen-sm">{children}</main>
     </div>
   );
 };
