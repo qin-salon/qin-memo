@@ -20,7 +20,7 @@ export const Header: VFC<HeaderProps> = (props) => {
   }
 
   return (
-    <header className="flex items-center">
+    <header className="flex items-center px-3 pt-4 pb-8 sm:px-4 sm:pb-14">
       <Left left={props.left} />
 
       <div className="flex flex-1 justify-center px-2">

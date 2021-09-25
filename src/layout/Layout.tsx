@@ -14,9 +14,7 @@ export const Layout: VFC<Props> = (props) => {
 
   return (
     <div className="pb-20">
-      <div
-        className={`px-3 pt-4 pb-8 mx-auto sm:px-4 sm:pb-14 ${isHeaderNarrow ? "max-w-screen-sm" : "max-w-screen-lg"}`}
-      >
+      <div className={`mx-auto ${isHeaderNarrow ? "max-w-screen-sm" : "max-w-screen-lg"}`}>
         <Header {...headerProps} />
       </div>
       <div className="px-4 mx-auto w-full max-w-screen-sm">{children}</div>
