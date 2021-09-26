@@ -10,7 +10,7 @@ import { useTogglePublicStatus } from "src/pages/memo/useTogglePublicStatus";
 import type { DialogActionType } from "./useDialog";
 
 const shareOnShare = () => {
-  const url = `https://twitter.com/intent/tweet?url=${location.href}&text=${"メモを書きました"}&via=${"QinMemo"}`;
+  const url = `https://twitter.com/intent/tweet?url=${location.href}&hashtags=${"QinMemo"}`;
   window.open(url, "_blank", "noreferrer");
 };
 
