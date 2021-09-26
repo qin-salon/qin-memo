@@ -1,8 +1,7 @@
 import { useAuthUser } from "next-firebase-auth";
 import { API_URL } from "src/api/endpoint";
+import type { UserType } from "src/api/handler/user/type";
 import useSWRImmutable from "swr/immutable";
-
-import { getUser } from "./getUser";
 
 /**
  * @package
@@ -12,13 +11,15 @@ export const useUser = () => {
   const {
     data: user,
     mutate: setUser,
+    error,
     ...rest
-  } = useSWRImmutable(authUser.id ? `${API_URL}/users` : null, {
-    fetcher: async (key) => {
-      const user = await getUser(key, authUser);
-      return user;
-    },
-  });
+  } = useSWRImmutable<UserType>(authUser.id ? `${API_URL}/users` : null);
 
-  return { user, setUser, ...rest };
+  return {
+    user,
+    setUser,
+    isLoading: !user && !error,
+    error,
+    ...rest,
+  };
 };

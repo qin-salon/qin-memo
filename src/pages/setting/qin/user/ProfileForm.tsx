@@ -1,4 +1,6 @@
+import { useAuthUser } from "next-firebase-auth";
 import type { VFC } from "react";
+import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Avatar } from "src/component/Avatar";
 import { Button } from "src/component/Button";
@@ -6,9 +8,9 @@ import { Input } from "src/component/Form";
 import { useUser } from "src/util/user";
 
 import { useFile } from "./useFile";
-import { useUpdateUser } from "./useUpdateUser";
+import { useUpsertUser } from "./useUpsertUser";
 
-export type UserUpdateForm = { accountName: string; userName: string };
+export type UserForm = { accountName: string; userName: string };
 
 type ProfileFormProps = { accountName?: string; userName?: string };
 
@@ -16,21 +18,28 @@ type ProfileFormProps = { accountName?: string; userName?: string };
  * @package
  */
 export const ProfileForm: VFC<ProfileFormProps> = () => {
+  const authUser = useAuthUser();
+  const handleSignOut = useCallback(() => {
+    return authUser.signOut();
+  }, [authUser]);
   const { user } = useUser();
   const { selectedFile, imageUrl, imageRef, handleChangeFile, handleOpenFileDialog } = useFile();
-  const { isUpdating, updateUser } = useUpdateUser(selectedFile);
-  const { register, handleSubmit, formState } = useForm<UserUpdateForm>({
-    defaultValues: { accountName: user?.accountName ?? "", userName: user?.userName ?? "" },
+  const { isUpserting, upsertUser } = useUpsertUser(selectedFile);
+  const { register, handleSubmit, formState } = useForm<UserForm>({
+    defaultValues: {
+      accountName: user?.accountName ?? authUser.displayName ?? "",
+      userName: user?.userName ?? "",
+    },
   });
 
   return (
-    <form onSubmit={handleSubmit(updateUser)}>
+    <form onSubmit={handleSubmit(upsertUser)}>
       <div className="space-y-6 sm:space-y-8">
         <div>
           <div className="flex justify-start items-center space-x-6">
             <Avatar
               noDialog
-              src={imageUrl ?? user?.avatarUrl}
+              src={imageUrl ?? user?.avatarUrl ?? authUser.photoURL ?? ""}
               alt={user?.accountName}
               width={96}
               height={96}
@@ -54,7 +63,7 @@ export const ProfileForm: VFC<ProfileFormProps> = () => {
           {...register("accountName", {
             required: { value: true, message: "入力必須です" },
             maxLength: { value: 64, message: "64文字以下にする必要があります" },
-            minLength: { value: 4, message: "4文字以上にする必要があります" },
+            minLength: { value: 2, message: "2文字以上にする必要があります" },
           })}
           error={formState.errors.accountName?.message}
         />
@@ -74,15 +83,15 @@ export const ProfileForm: VFC<ProfileFormProps> = () => {
 
       <div className="mt-12 space-y-4">
         {user ? (
-          <Button type="submit" variant="solid-blue" className="p-3 w-full" disabled={isUpdating}>
+          <Button type="submit" variant="solid-blue" className="p-3 w-full" disabled={isUpserting}>
             保存する
           </Button>
         ) : (
           <>
-            <Button type="submit" variant="solid-blue" className="p-3 w-full" disabled={isUpdating}>
+            <Button type="submit" variant="solid-blue" className="p-3 w-full" disabled={isUpserting}>
               登録してはじめる
             </Button>
-            <Button variant="solid-gray" className="p-3 w-full">
+            <Button variant="solid-gray" className="p-3 w-full" onClick={handleSignOut}>
               登録せずに終了する
             </Button>
           </>

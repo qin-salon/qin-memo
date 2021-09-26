@@ -11,13 +11,16 @@ import { ProfileForm } from "./ProfileForm";
 export const getServerSideProps = withAuthUserTokenSSR({
   whenUnauthed: AuthAction.RENDER,
 })(async (props) => {
+  const USER_API_URL = `${API_URL}/users`;
+
   try {
     const idToken = await props.AuthUser.getIdToken();
-    const USER_API_URL = `${API_URL}/users`;
     const res = await fetch(USER_API_URL, { headers: { authorization: `Bearer ${idToken}` } });
     if (!res.ok) throw new Error("User api request failed");
+
     const user = await res.json();
     if (!isUserType(user)) throw new Error("User not found");
+
     return { props: { fallback: { [USER_API_URL]: user } } };
   } catch (error) {
     console.error(error);

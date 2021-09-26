@@ -1,15 +1,19 @@
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import { AuthAction, useAuthUser, withAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
+import type { ReactNode, VFC } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { SWRConfig } from "swr";
+
+import { useUser } from "./useUser";
 
 export const useFetcher = () => {
   const authUser = useAuthUser();
-  const fetcher = useCallback(
+  return useCallback(
     async (key: string) => {
       const idToken = await authUser.getIdToken();
       const res = await fetch(key, { headers: { authorization: `Bearer ${idToken}` } });
-      if (res.status !== 200 && res.status !== 201) {
+      if (!res.ok) {
         throw new Error();
       }
       const json = await res.json();
@@ -17,8 +21,43 @@ export const useFetcher = () => {
     },
     [authUser]
   );
+};
 
-  return fetcher;
+const NEW_USER_PAGE = "/setting/qin/user/new";
+const WHITE_LIST_PAGES = ["/user/[userId]", "/memo/[noteId]"];
+
+const UserController: VFC<{ children: ReactNode }> = (props) => {
+  const router = useRouter();
+  const { user, isLoading } = useUser();
+
+  const isNewUserPage = useMemo(() => {
+    return router.pathname === NEW_USER_PAGE;
+  }, [router.pathname]);
+
+  const isWhiteListPage = useMemo(() => {
+    return WHITE_LIST_PAGES.includes(router.pathname);
+  }, [router.pathname]);
+
+  useEffect(() => {
+    if (isLoading) {
+      return;
+    }
+    if (user && isNewUserPage) {
+      router.push("/");
+      return;
+    }
+    if (!user && !isNewUserPage) {
+      router.push(NEW_USER_PAGE);
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, isNewUserPage, user]);
+
+  if (user || isNewUserPage || isWhiteListPage) {
+    return <>{props.children}</>;
+  }
+
+  return null;
 };
 
 /**
@@ -28,12 +67,18 @@ export const withUser = (Component: NextPage<any>, options?: Record<string, unkn
   return withAuthUser(
     options
       ? options
-      : { whenUnauthedBeforeInit: AuthAction.SHOW_LOADER, whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN }
+      : {
+          whenUnauthedBeforeInit: AuthAction.SHOW_LOADER,
+          whenUnauthedAfterInit: AuthAction.REDIRECT_TO_LOGIN,
+        }
   )((props) => {
     const fetcher = useFetcher();
+
     return (
       <SWRConfig value={{ fetcher }}>
-        <Component {...props} />
+        <UserController>
+          <Component {...props} />
+        </UserController>
       </SWRConfig>
     );
   });
