@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiHandler } from "next";
 
-const androidAuth = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler: NextApiHandler = async (req, res) => {
   const redirect = `intent://callback?${new URLSearchParams(req.body).toString()}#Intent;package=${
     process.env.ANDROID_PACKAGE_NAME
   };scheme=signinwithapple;end`;
@@ -8,5 +8,4 @@ const androidAuth = async (req: NextApiRequest, res: NextApiResponse) => {
   res.redirect(307, redirect);
 };
 
-// eslint-disable-next-line import/no-default-export
-export default androidAuth;
+export default handler;
