@@ -5,6 +5,7 @@ declare namespace NodeJS {
     readonly COOKIE_SECRET_PREVIOUS: string;
     readonly FIREBASE_PRIVATE_KEY: string;
     readonly FIREBASE_CLIENT_EMAIL: string;
+    readonly ANDROID_PACKAGE_NAME: string;
     readonly NEXT_PUBLIC_FIREBASE_API_KEY: string;
     readonly NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: string;
     readonly NEXT_PUBLIC_FIREBASE_PROJECT_ID: string;
