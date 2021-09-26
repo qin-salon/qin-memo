@@ -18,7 +18,7 @@ initAuth();
 
 const App = (props: AppProps) => {
   useSessionRouter(props.router.asPath);
-  useAddClassToBodyElem("dark:bg-gray-800");
+  useAddClassToBodyElem("dark:bg-gray-800 dark:text-white");
 
   return (
     <ThemeProvider attribute="class">
@@ -44,7 +44,7 @@ const App = (props: AppProps) => {
         }}
       />
       <props.Component {...props.pageProps} />
-      <Toaster toastOptions={{ duration: 2500, className: "!rounded-full !py-1 !px-2.5 !text-sm font-bold" }} />
+      <Toaster toastOptions={{ className: "!rounded-full !py-1 !px-2.5 !text-sm font-bold" }} />
     </ThemeProvider>
   );
 };
