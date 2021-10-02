@@ -37,7 +37,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
     if (!user) return;
     const idToken = await authUser.getIdToken();
     await fetch(`${API_URL}/notes/${props.note.id}`, {
-      method: "delete",
+      method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     await mutate(

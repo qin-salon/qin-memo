@@ -52,7 +52,7 @@ export const useSearch = () => {
         mutate(async (histories) => {
           try {
             const res = await fetch(`${API_URL}/users/${user.userName}/searchHistories`, {
-              method: "post",
+              method: "POST",
               headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
               body: JSON.stringify({ keyword }),
             });
@@ -111,7 +111,7 @@ export const useSearch = () => {
     }, false);
     const idToken = await authUser.getIdToken();
     fetch(`${API_URL}/searchHistories/${id}`, {
-      method: "delete",
+      method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
   };

@@ -17,7 +17,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
   const togglePublicStatus = useCallback(async () => {
     const idToken = await authUser.getIdToken();
     await fetch(`${API_URL}/notes/${note.id}/public`, {
-      method: "patch",
+      method: "PATCH",
       headers: { authorization: `Bearer ${idToken}` },
     });
     mutate(`${API_URL}/notes/${note.id}`, { ...note, isPublic: !note.isPublic }, false);

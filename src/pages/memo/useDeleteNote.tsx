@@ -18,7 +18,7 @@ export const useDeleteNote = (note: NoteType) => {
   const deleteNote = useCallback(async () => {
     const idToken = await authUser.getIdToken();
     await fetch(`${API_URL}/notes/${note.id}`, {
-      method: "delete",
+      method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     mutate(
