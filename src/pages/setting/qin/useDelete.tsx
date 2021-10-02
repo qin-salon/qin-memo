@@ -19,13 +19,14 @@ export const useDeleteDialog = () => {
     setIsShowDeleteQinMemo(false);
   }, []);
   const handleDeleteQinMemo = useCallback(async () => {
+    if (!user) return;
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/users/${user?.id}/service`, {
+    await fetch(`${API_URL}/users/${user.userName}/service`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     await authUser.signOut();
-  }, [authUser, user?.id]);
+  }, [authUser, user]);
 
   // account
   const [isShowDeleteQinAccount, setIsShowDeleteQinAccount] = useState(false);
@@ -36,13 +37,14 @@ export const useDeleteDialog = () => {
     setIsShowDeleteQinAccount(false);
   }, []);
   const handleDeleteQinAccount = useCallback(async () => {
+    if (!user) return;
     const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/users/${user?.userName}`, {
+    await fetch(`${API_URL}/users/${user.userName}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     await authUser.signOut();
-  }, [authUser, user?.userName]);
+  }, [authUser, user]);
 
   return {
     isShowDeleteQinMemo,
