@@ -26,11 +26,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths: [], fallback: "blocking" };
 };
 
-export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (ctx) => {
+export const getStaticProps: GetStaticProps<Props, { userName: string }> = async (ctx) => {
   try {
     const [user, note] = await Promise.all([
-      fetchJson<UserType | ErrorResponse>(`${API_URL}/users/${ctx.params?.userId}`),
-      fetchJson<ListNoteType[] | ErrorResponse>(`${API_URL}/users/${ctx.params?.userId}/notes`),
+      fetchJson<UserType | ErrorResponse>(`${API_URL}/users/${ctx.params?.userName}`),
+      fetchJson<ListNoteType[] | ErrorResponse>(`${API_URL}/users/${ctx.params?.userName}/notes`),
     ]);
     if (hasError(user)) throw new Error(user.message);
     if (hasError(note)) throw new Error(note.message);
@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps<Props, { userId: string }> = async (
   }
 };
 
-const UserUserId: NextPage<Props> = (props) => {
+const UserUserName: NextPage<Props> = (props) => {
   return (
     <>
       <NextSeo title={props.user.accountName} />
@@ -67,4 +67,4 @@ const UserUserId: NextPage<Props> = (props) => {
   );
 };
 
-export default withUser(UserUserId, {});
+export default withUser(UserUserName, {});

@@ -24,7 +24,7 @@ export const useFetcher = () => {
 };
 
 const NEW_USER_PAGE = "/setting/qin/user/new";
-const WHITE_LIST_PAGES = ["/user/[userId]", "/memo/[noteId]"];
+const WHITE_LIST_PAGES = ["/user/[userName]", "/memo/[noteId]"];
 
 const UserController: VFC<{ children: ReactNode }> = (props) => {
   const router = useRouter();
