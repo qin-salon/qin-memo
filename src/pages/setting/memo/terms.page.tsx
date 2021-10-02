@@ -296,7 +296,7 @@ const SettingMemoTerms: NextPage = () => {
           </li>
         </ol>
 
-        <time>2020 年 9 月 25 日 改定</time>
+        <time>2021 年 10 月 1 日 改定</time>
       </div>
     </Layout>
   );
