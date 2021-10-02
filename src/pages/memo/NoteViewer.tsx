@@ -30,7 +30,7 @@ export const NoteViewer: VFC<{ note: NoteType }> = (props) => {
             </div>
           </a>
         </Link>
-        <p className="text-lg leading-loose whitespace-pre-wrap">
+        <p className="text-lg leading-loose whitespace-pre-wrap break-words">
           <Interweave
             content={props.note.content}
             matchers={[
