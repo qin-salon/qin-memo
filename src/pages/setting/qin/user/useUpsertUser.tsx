@@ -4,6 +4,7 @@ import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useState } from "react";
 import toast from "react-hot-toast";
 import { API_URL } from "src/api/endpoint";
+import type { UserType } from "src/api/handler/user/type";
 import { isUserType } from "src/api/handler/user/type";
 import { useUser } from "src/util/user";
 
@@ -32,7 +33,17 @@ export const useUpsertUser = (selectedFile?: File) => {
   const onSubmit = useCallback(
     async (formData: UserForm) => {
       if (!authUser.id) {
-        throw new Error("uid (authUser.id) is not defined");
+        await router.push("/auth/signin");
+        throw new Error("再度ログインする必要があります");
+      }
+
+      // ユーザー名の重複が無いか確認
+      if (user?.userName !== formData.userName) {
+        const getUserResponse = await fetch(`${API_URL}/users/${formData.userName}`);
+        const searchedUser: UserType | undefined = await getUserResponse.json();
+        if (formData.userName === searchedUser?.userName) {
+          throw new Error("既に存在するユーザー名です");
+        }
       }
 
       // 画像の登録処理
@@ -58,11 +69,11 @@ export const useUpsertUser = (selectedFile?: File) => {
       // レスポンスの処理
       const data = await res.json();
       if (!isUserType(data)) {
-        throw new Error("Failed to create user");
+        throw new Error();
       }
       return data;
     },
-    [authUser, selectedFile, user]
+    [authUser, router, selectedFile, user]
   );
 
   const upsertUser = useCallback(
@@ -72,11 +83,14 @@ export const useUpsertUser = (selectedFile?: File) => {
         loading: "処理中",
         success: (data) => {
           setUser(data);
+          setIsUpserting(false);
           return user ? "保存しました" : "登録しました";
         },
-        error: "失敗しました",
+        error: (error) => {
+          setIsUpserting(false);
+          return error.message ?? "失敗しました";
+        },
       });
-      setIsUpserting(false);
 
       // 新規登録の場合はリダイレクト
       if (!user) {
