@@ -14,16 +14,10 @@ export const NoteListItem: VFC<ListNoteType> = (props) => {
   return (
     <Link href={`/memo/${props.id}`}>
       <a className="block py-3 px-4 w-full bg-gray-100 dark:bg-gray-700 rounded-xl shadow sm:px-6">
-        {first.length > 120 ? (
-          <div className="line-clamp-2">
-            <h1 className="text-sm first-line:font-bold leading-relaxed sm:first-line:text-base">{props.excerpt}</h1>
-          </div>
-        ) : (
-          <div>
-            <h1 className="text-sm font-bold leading-relaxed truncate sm:text-base">{first}</h1>
-            <p className="text-sm leading-relaxed truncate">{second}</p>
-          </div>
-        )}
+        <div>
+          <h1 className="text-sm font-bold leading-relaxed truncate sm:text-base">{first}</h1>
+          <p className="text-sm leading-relaxed truncate">{second}</p>
+        </div>
         <div className="flex justify-between items-end mt-4 h-6">
           <time className="space-x-4 text-sm font-bold tracking-wide text-gray-400">
             {format_yyyyMd(props.updatedAt)}
