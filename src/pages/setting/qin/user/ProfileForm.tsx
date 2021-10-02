@@ -75,7 +75,7 @@ export const ProfileForm: VFC<ProfileFormProps> = () => {
             required: { value: true, message: "入力必須です" },
             maxLength: { value: 16, message: "16文字以下にする必要があります" },
             minLength: { value: 4, message: "4文字以上にする必要があります" },
-            pattern: { value: /^[A-Za-z0-9_]+$/i, message: "半角英数字だけご使用できます" },
+            pattern: { value: /^[A-Za-z0-9_]+$/i, message: "半角英数字と_だけご使用できます" },
           })}
           error={formState.errors.userName?.message}
         />
