@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { API_URL } from "src/api/endpoint";
 import type { ListNoteType, NoteType } from "src/api/handler/note/type";
 import { useUser } from "src/util/user";
-import { mutate } from "swr";
+import { useSWRConfig } from "swr";
 
 /**
  * @package
@@ -14,6 +14,7 @@ export const useDeleteNote = (note: NoteType) => {
   const router = useRouter();
   const authUser = useAuthUser();
   const { user } = useUser();
+  const { mutate } = useSWRConfig();
 
   const deleteNote = useCallback(async () => {
     if (!user) return;
@@ -22,17 +23,17 @@ export const useDeleteNote = (note: NoteType) => {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
-    mutate(
-      `${API_URL}/users/${user.userName}/notes`,
-      (data: ListNoteType[]) => {
-        if (!data) return;
-        return data.filter(({ id }) => {
+    await mutate(
+      `${API_URL}/notes`,
+      (notes: ListNoteType[]) => {
+        if (!notes) return;
+        return notes.filter(({ id }) => {
           return id !== note.id;
         });
       },
       false
     );
-  }, [authUser, note.id, user]);
+  }, [authUser, mutate, note.id, user]);
 
   const handleDeleteNote = useCallback(async () => {
     try {

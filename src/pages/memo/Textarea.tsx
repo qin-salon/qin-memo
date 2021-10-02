@@ -5,9 +5,9 @@ import { useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 import { API_URL } from "src/api/endpoint";
-import type { ListNoteType, NoteType } from "src/api/handler/note/type";
+import type { ListNoteType, NoteType, NoteTypeWithExcerpt } from "src/api/handler/note/type";
 import { useUser } from "src/util/user";
-import { mutate } from "swr";
+import { useSWRConfig } from "swr";
 import { useDebouncedCallback } from "use-debounce";
 
 /**
@@ -18,39 +18,38 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
   const router = useRouter();
   const authUser = useAuthUser();
   const { user } = useUser();
+  const { mutate } = useSWRConfig();
 
   const saveNote = useCallback(
-    async (value: string) => {
+    async (value?: string) => {
       if (!user) return;
       const idToken = await authUser.getIdToken();
-      await fetch(`${API_URL}/notes/${props.note.id}`, {
+      const res = await fetch(`${API_URL}/notes/${props.note.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
-        body: JSON.stringify({ content: value.trim() }),
+        body: JSON.stringify({ content: value ? value.trim() : "" }),
       });
-      await mutate(`${API_URL}/users/${user.userName}/notes`);
+      const updatedNote: NoteTypeWithExcerpt | undefined = await res.json();
+      await mutate(
+        `${API_URL}/notes`,
+        async (notes: ListNoteType[]) => {
+          if (notes && updatedNote) {
+            return [
+              updatedNote,
+              ...notes.filter((note) => {
+                return note.id !== updatedNote.id;
+              }),
+            ];
+          }
+          const res = await fetch(`${API_URL}/notes`, { headers: { authorization: `Bearer ${idToken}` } });
+          const data = await res.json();
+          return data;
+        },
+        false
+      );
     },
-    [authUser, props.note.id, user]
+    [authUser, mutate, props.note.id, user]
   );
-
-  const deleteNote = useCallback(async () => {
-    if (!user) return;
-    const idToken = await authUser.getIdToken();
-    await fetch(`${API_URL}/notes/${props.note.id}`, {
-      method: "DELETE",
-      headers: { authorization: `Bearer ${idToken}` },
-    });
-    await mutate(
-      `${API_URL}/users/${user.userName}/notes`,
-      (data: ListNoteType[]) => {
-        if (!data) return;
-        return data.filter(({ id }) => {
-          return id !== props.note.id;
-        });
-      },
-      false
-    );
-  }, [authUser, props.note.id, user]);
 
   const debounced = useDebouncedCallback(async (value: string) => {
     try {
@@ -59,7 +58,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
       toast.error("エラーが発生したため保存に失敗しました。時間を空けてから再度お試しください。");
       console.error(error);
     }
-  }, 1500);
+  }, 1000);
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -69,33 +68,17 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
   );
 
   const handleBlur = useCallback(async () => {
-    const val = ref.current?.value;
-    if (val === undefined || (val.trim() !== "" && val === props.note.content)) {
-      return;
-    }
-    if (val.trim() === "") {
-      await deleteNote();
-    } else {
-      await saveNote(val);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteNote, saveNote]);
+    await saveNote(ref.current?.value);
+  }, [saveNote]);
 
   useEffect(() => {
     router.beforePopState(({ url }) => {
-      const val = ref.current?.value;
-      if (url !== "/" || val === undefined || (val.trim() !== "" && val === props.note.content)) {
-        return true;
-      }
-      if (val.trim() === "") {
-        deleteNote();
-      } else {
-        saveNote(val);
-      }
+      if (url !== "/") return true;
+      saveNote(ref.current?.value);
       return true;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteNote, saveNote]);
+  }, [saveNote]);
 
   useEffect(() => {
     if (!props.note.content || !ref.current) return;
