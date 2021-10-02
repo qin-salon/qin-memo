@@ -15,6 +15,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
   const { user } = useUser();
 
   const togglePublicStatus = useCallback(async () => {
+    if (!user) return;
     const idToken = await authUser.getIdToken();
     await fetch(`${API_URL}/notes/${note.id}/public`, {
       method: "PATCH",
@@ -22,7 +23,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
     });
     mutate(`${API_URL}/notes/${note.id}`, { ...note, isPublic: !note.isPublic }, false);
     mutate(
-      `${API_URL}/users/${user?.id}/notes`,
+      `${API_URL}/users/${user.userName}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         const target = data.filter(({ id }) => {
@@ -35,7 +36,7 @@ export const useTogglePublicStatus = (note: NoteType) => {
       },
       false
     );
-  }, [authUser, note, user?.id]);
+  }, [authUser, note, user]);
 
   const handleTogglePublic = useCallback(async () => {
     setIsLoading(true);

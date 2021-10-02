@@ -16,13 +16,14 @@ export const useDeleteNote = (note: NoteType) => {
   const { user } = useUser();
 
   const deleteNote = useCallback(async () => {
+    if (!user) return;
     const idToken = await authUser.getIdToken();
     await fetch(`${API_URL}/notes/${note.id}`, {
       method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
     mutate(
-      `${API_URL}/users/${user?.id}/notes`,
+      `${API_URL}/users/${user.userName}/notes`,
       (data: ListNoteType[]) => {
         if (!data) return;
         return data.filter(({ id }) => {
@@ -31,7 +32,7 @@ export const useDeleteNote = (note: NoteType) => {
       },
       false
     );
-  }, [authUser, note.id, user?.id]);
+  }, [authUser, note.id, user]);
 
   const handleDeleteNote = useCallback(async () => {
     try {

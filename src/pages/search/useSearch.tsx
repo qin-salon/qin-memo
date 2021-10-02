@@ -20,10 +20,10 @@ export const useSearch = () => {
     data: histories,
     error: historiesError,
     mutate,
-  } = useSWRImmutable<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.userName}/searchHistories` : null, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  } = useSWRImmutable<SearchHistoryType[]>(
+    user?.userName ? `${API_URL}/users/${user.userName}/searchHistories` : null,
+    { revalidateOnFocus: false, revalidateOnReconnect: false }
+  );
 
   const handleClose = useCallback((_e: MouseEvent<HTMLButtonElement>) => {
     setNotes(undefined);
