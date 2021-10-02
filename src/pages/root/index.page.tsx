@@ -39,7 +39,7 @@ const Root: NextPage = () => {
           </a>
         </Link>
 
-        <NoteList {...{ data, error }} />
+        <NoteList data={data} error={error} />
       </div>
     </Layout>
   );
