@@ -31,23 +31,27 @@ export const NoteViewer: VFC<{ note: NoteType }> = (props) => {
           </a>
         </Link>
         <p className="text-lg leading-loose whitespace-pre-wrap break-words">
-          <Interweave
-            content={props.note.content}
-            matchers={[
-              new UrlMatcher("url", { validateTLD: false }, (urlProps) => {
-                return (
-                  <a
-                    href={urlProps.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 underline cursor-pointer"
-                  >
-                    {urlProps.children}
-                  </a>
-                );
-              }),
-            ]}
-          />
+          {props.note.content ? (
+            <Interweave
+              content={props.note.content}
+              matchers={[
+                new UrlMatcher("url", { validateTLD: false }, (urlProps) => {
+                  return (
+                    <a
+                      href={urlProps.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline cursor-pointer"
+                    >
+                      {urlProps.children}
+                    </a>
+                  );
+                }),
+              ]}
+            />
+          ) : (
+            "まだメモは書かれていないようです。"
+          )}
         </p>
       </div>
     </Layout>
