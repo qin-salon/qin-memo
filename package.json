@@ -33,7 +33,7 @@
     "@tailwindcss/typography": "0.4.1",
     "clsx": "1.1.1",
     "date-fns": "2.24.0",
-    "firebase": "9.1.1",
+    "firebase": "9.1.3",
     "firebase-admin": "9.12.0",
     "http-proxy": "1.18.1",
     "interweave": "12.8.0",
