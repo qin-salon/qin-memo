@@ -73,7 +73,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
 
   useEffect(() => {
     router.beforePopState(({ url }) => {
-      if (url !== "/") return true;
+      if (url !== "/root") return true;
       saveNote(ref.current?.value);
       return true;
     });
