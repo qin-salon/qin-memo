@@ -1,6 +1,4 @@
 {
-  "extends": ["config:base"],
-  "automerge": true,
-  "vulnerabilityAlerts": { "enabled": true },
-  "lockFileMaintenance": { "enabled": true }
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>hatena/renovate-config"]
 }
