@@ -16,7 +16,7 @@ const hasError = (res: any | ErrorResponse): res is ErrorResponse => {
   return "error" in res;
 };
 
-const fetchJson = async <T extends unknown>(input: RequestInfo, init?: RequestInit): Promise<T> => {
+const fetchJson = async <T,>(input: RequestInfo, init?: RequestInit): Promise<T> => {
   const res = await fetch(input, init);
   const data = await res.json();
   return data;
