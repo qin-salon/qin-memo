@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
-import type { ChangeEvent, VFC } from "react";
+import type { ChangeEventHandler, FocusEventHandler, VFC } from "react";
 import { useCallback, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
@@ -16,6 +16,36 @@ import { useDebouncedCallback } from "use-debounce";
 export const Textarea: VFC<{ note: NoteType }> = (props) => {
   const ref = useRef<HTMLTextAreaElement>(null);
   const router = useRouter();
+  const { saveNote, handleChange, handleBlur } = useNote(props.note);
+
+  useEffect(() => {
+    router.beforePopState(({ url }) => {
+      if (url !== "/root") return true;
+      saveNote(ref.current?.value);
+      return true;
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [saveNote]);
+
+  return (
+    <label htmlFor="memo" className="block">
+      <TextareaAutosize
+        ref={ref}
+        id="memo"
+        className="w-full text-lg leading-loose bg-transparent border-none focus:ring-0 resize-none"
+        defaultValue={props.note.content}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        placeholder="メモを入力する"
+        autoComplete="off"
+        minRows={16}
+        autoFocus={props.note.content === ""}
+      />
+    </label>
+  );
+};
+
+const useNote = (note: NoteType) => {
   const authUser = useAuthUser();
   const { user } = useUser();
   const { mutate } = useSWRConfig();
@@ -23,8 +53,9 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
   const saveNote = useCallback(
     async (value?: string) => {
       if (!user) return;
+      if (value && value === note.content) return;
       const idToken = await authUser.getIdToken();
-      const res = await fetch(`${API_URL}/notes/${props.note.id}`, {
+      const res = await fetch(`${API_URL}/notes/${note.id}`, {
         method: "PUT",
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value ? value.trim() : "" }),
@@ -48,7 +79,7 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
         false
       );
     },
-    [authUser, mutate, props.note.id, user]
+    [authUser, mutate, note, user]
   );
 
   const debounced = useDebouncedCallback(async (value: string) => {
@@ -60,46 +91,19 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
     }
   }, 1000);
 
-  const handleChange = useCallback(
-    (e: ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = useCallback<ChangeEventHandler<HTMLTextAreaElement>>(
+    (e) => {
       return debounced(e.currentTarget.value);
     },
     [debounced]
   );
 
-  const handleBlur = useCallback(async () => {
-    await saveNote(ref.current?.value);
-  }, [saveNote]);
-
-  useEffect(() => {
-    router.beforePopState(({ url }) => {
-      if (url !== "/root") return true;
-      saveNote(ref.current?.value);
-      return true;
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [saveNote]);
-
-  useEffect(() => {
-    if (!props.note.content || !ref.current) return;
-    ref.current.setSelectionRange(props.note.content.length, props.note.content.length);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <label htmlFor="memo" className="block">
-      <TextareaAutosize
-        ref={ref}
-        id="memo"
-        className="w-full text-lg leading-loose bg-transparent border-none focus:ring-0 resize-none"
-        defaultValue={props.note.content}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        placeholder="メモを入力する"
-        autoComplete="off"
-        minRows={16}
-        autoFocus={props.note.content === ""}
-      />
-    </label>
+  const handleBlur = useCallback<FocusEventHandler<HTMLTextAreaElement>>(
+    (e) => {
+      saveNote(e.currentTarget.value);
+    },
+    [saveNote]
   );
+
+  return { saveNote, handleChange, handleBlur };
 };
