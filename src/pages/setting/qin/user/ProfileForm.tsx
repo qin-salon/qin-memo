@@ -43,7 +43,7 @@ export const ProfileForm: VFC<ProfileFormProps> = () => {
               alt={user?.accountName}
               width={96}
               height={96}
-              className="overflow-hidden w-24 h-24 rounded-full"
+              className="w-24 h-24"
             />
             <input
               ref={imageRef}
