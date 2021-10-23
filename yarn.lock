@@ -4773,10 +4773,10 @@ interweave-autolink@4.4.3:
   resolved "https://registry.yarnpkg.com/interweave-autolink/-/interweave-autolink-4.4.3.tgz#848ef813f5a5f76cee1ed9ba8a6f6d76f229fc6c"
   integrity sha512-wnqZwLBllo0nwNRrgPzwcL+y/HaNlsT0YE15QvLkryA/FOw6b8+Wl+eQfr7moEmQxrnYAHQDYR8+d6ADwYwufg==
 
-interweave@12.8.0:
-  version "12.8.0"
-  resolved "https://registry.yarnpkg.com/interweave/-/interweave-12.8.0.tgz#1ee22f68b2fd06a2e1bee4b5f1829d15854c9583"
-  integrity sha512-qB5Q3Oeaz81DJkJF1YQze6sfDccA60HaUQE7NOYgQRFjfOVB1RwTS9Qst1N3LfAOxa+DPzok8od4vNYEDA2HQw==
+interweave@12.9.0:
+  version "12.9.0"
+  resolved "https://registry.yarnpkg.com/interweave/-/interweave-12.9.0.tgz#35c5724b413288609c33b433173c1b762dc8e6ec"
+  integrity sha512-VGz82ndwMdi15jtQreE8je4OGCw6GJuCmhdxh1Tu3AzT2f7OXliHCc66e2sv/Yu6vRZdSbIXBRP0jshGbXuidg==
   dependencies:
     escape-html "^1.0.3"
 

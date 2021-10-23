@@ -36,7 +36,7 @@
     "firebase": "9.1.1",
     "firebase-admin": "9.12.0",
     "http-proxy": "1.18.1",
-    "interweave": "12.8.0",
+    "interweave": "12.9.0",
     "interweave-autolink": "4.4.3",
     "next": "11.1.2",
     "next-firebase-auth": "1.0.0-canary.1",
