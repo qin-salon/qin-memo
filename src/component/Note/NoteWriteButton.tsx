@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
 import { useCallback, useState } from "react";
+import toast from "react-hot-toast";
 import { API_URL } from "src/api/endpoint";
 import { isNoteType } from "src/api/handler/note/type";
 import { Button } from "src/component/Button";
@@ -35,9 +36,10 @@ export const NoteWriteButton = () => {
       }
       await router.push(`/memo/${data.id}`);
     } catch (error) {
+      toast.error("メモの作成に失敗しました。時間を空けてから再度お試しください。");
+      setIsLoading(false);
       console.error(error);
     }
-    setIsLoading(false);
   }, [authUser, router, user]);
 
   return (
