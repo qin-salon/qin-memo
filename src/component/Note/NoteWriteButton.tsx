@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useAuthUser } from "next-firebase-auth";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { API_URL } from "src/api/endpoint";
 import { isNoteType } from "src/api/handler/note/type";
 import { Button } from "src/component/Button";
@@ -13,10 +13,13 @@ export const NoteWriteButton = () => {
   const router = useRouter();
   const authUser = useAuthUser();
   const { user } = useUser();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCreateMemo = useCallback(async () => {
+    setIsLoading(true);
     if (!user) {
       await router.push(`/auth/signin`);
+      setIsLoading(false);
       return;
     }
 
@@ -34,10 +37,11 @@ export const NoteWriteButton = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   }, [authUser, router, user]);
 
   return (
-    <Button key="write memo" variant="solid-blue" onClick={handleCreateMemo} className="px-4 h-10">
+    <Button key="write memo" className="px-4 h-10" variant="solid-blue" onClick={handleCreateMemo} disabled={isLoading}>
       メモを書く
     </Button>
   );
