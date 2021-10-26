@@ -54,7 +54,7 @@
     "@testing-library/react": "12.1.2",
     "@types/http-proxy": "1.17.7",
     "@types/jest": "27.0.2",
-    "@types/node": "16.11.4",
+    "@types/node": "16.11.6",
     "@types/react": "17.0.31",
     "@typescript-eslint/eslint-plugin": "5.1.0",
     "@typescript-eslint/parser": "5.1.0",
