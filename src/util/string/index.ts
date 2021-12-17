@@ -1,0 +1,1 @@
+export { getFirstAndSecondLine } from "./getFirstAndSecondLine";

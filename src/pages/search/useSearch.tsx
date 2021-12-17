@@ -20,10 +20,10 @@ export const useSearch = () => {
     data: histories,
     error: historiesError,
     mutate,
-  } = useSWRImmutable<SearchHistoryType[]>(user?.id ? `${API_URL}/users/${user.userName}/searchHistories` : null, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  } = useSWRImmutable<SearchHistoryType[]>(
+    user?.userName ? `${API_URL}/users/${user.userName}/searchHistories` : null,
+    { revalidateOnFocus: false, revalidateOnReconnect: false }
+  );
 
   const handleClose = useCallback((_e: MouseEvent<HTMLButtonElement>) => {
     setNotes(undefined);
@@ -52,7 +52,7 @@ export const useSearch = () => {
         mutate(async (histories) => {
           try {
             const res = await fetch(`${API_URL}/users/${user.userName}/searchHistories`, {
-              method: "post",
+              method: "POST",
               headers: { "content-type": "application/json", authorization: `Bearer ${idToken}` },
               body: JSON.stringify({ keyword }),
             });
@@ -111,7 +111,7 @@ export const useSearch = () => {
     }, false);
     const idToken = await authUser.getIdToken();
     fetch(`${API_URL}/searchHistories/${id}`, {
-      method: "delete",
+      method: "DELETE",
       headers: { authorization: `Bearer ${idToken}` },
     });
   };

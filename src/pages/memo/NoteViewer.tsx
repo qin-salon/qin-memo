@@ -1,3 +1,5 @@
+import Interweave from "interweave";
+import { UrlMatcher } from "interweave-autolink";
 import Link from "next/link";
 import type { VFC } from "react";
 import type { NoteType } from "src/api/handler/note/type";
@@ -28,7 +30,29 @@ export const NoteViewer: VFC<{ note: NoteType }> = (props) => {
             </div>
           </a>
         </Link>
-        <p className="text-lg leading-loose whitespace-pre-wrap">{props.note.content}</p>
+        <p className="text-lg leading-loose whitespace-pre-wrap break-words">
+          {props.note.content ? (
+            <Interweave
+              content={props.note.content}
+              matchers={[
+                new UrlMatcher("url", { validateTLD: false }, (urlProps) => {
+                  return (
+                    <a
+                      href={urlProps.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 underline cursor-pointer"
+                    >
+                      {urlProps.children}
+                    </a>
+                  );
+                }),
+              ]}
+            />
+          ) : (
+            "まだメモは書かれていないようです。"
+          )}
+        </p>
       </div>
     </Layout>
   );

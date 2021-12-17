@@ -1,13 +1,15 @@
 import clsx from "clsx";
 import type { InputHTMLAttributes } from "react";
 import { forwardRef } from "react";
+import type { UseFormRegisterReturn } from "react-hook-form";
 
-type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  name: string;
-  label?: string;
-  prefix?: string;
-  error?: string;
-};
+type InputProps = InputHTMLAttributes<HTMLInputElement> &
+  Omit<UseFormRegisterReturn, "ref" | "onChange" | "onBlur"> & {
+    name: string;
+    label?: string;
+    prefix?: string;
+    error?: string;
+  };
 
 /**
  * @package

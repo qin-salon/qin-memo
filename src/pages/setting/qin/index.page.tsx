@@ -10,13 +10,7 @@ const SettingQin: NextPage = () => {
   return (
     <Layout left="close" center="account">
       <div className="flex flex-col items-center">
-        <Avatar
-          src={user?.avatarUrl}
-          alt={user?.accountName}
-          width={96}
-          height={96}
-          className="overflow-hidden w-24 h-24 rounded-full"
-        />
+        <Avatar src={user?.avatarUrl} alt={user?.accountName} width={96} height={96} className="w-24 h-24" />
         <h1 className="mt-8 text-2xl font-bold">
           {user?.accountName ? `ようこそ、${user.accountName}さん` : "\u00A0"}
         </h1>

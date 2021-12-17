@@ -7,11 +7,11 @@ import { Search } from "src/component/Form";
 import { NoteList, NoteWriteButton } from "src/component/Note";
 import { Layout } from "src/layout";
 import { useUser, withUser } from "src/util/user";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 const Root: NextPage = () => {
   const { user } = useUser();
-  const { data, error } = useSWR<ListNoteType[]>(`${API_URL}/notes`);
+  const { data, error } = useSWRImmutable<ListNoteType[]>(`${API_URL}/notes`);
 
   return (
     <Layout left="memo" right={[<NoteWriteButton key="write" />, "profile"]}>
@@ -39,7 +39,7 @@ const Root: NextPage = () => {
           </a>
         </Link>
 
-        <NoteList {...{ data, error }} />
+        <NoteList data={data} error={error} />
       </div>
     </Layout>
   );

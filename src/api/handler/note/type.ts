@@ -15,6 +15,8 @@ export type NoteSchema = {
 
 export type NoteType = Omit<NoteSchema, "excerpt">;
 
+export type NoteTypeWithExcerpt = NoteSchema;
+
 export type ListNoteType = Omit<NoteSchema, "content" | "isMine" | "users">;
 
 export const isNoteType = (data: any): data is NoteType => {

@@ -27,10 +27,10 @@ const SettingQinDelete: NextPage = () => {
         <RecursiveList
           list={[
             {
-              title: "Qinサービスの削除",
+              title: "サービスの削除",
               items: [
                 {
-                  label: "Qin Memoを削除",
+                  label: "Qin Memoのデータを削除",
                   button: (
                     <Button
                       variant="solid-gray"
@@ -44,10 +44,10 @@ const SettingQinDelete: NextPage = () => {
               ],
             },
             {
-              title: "Qinアカウントの削除",
+              title: "アカウントの削除",
               items: [
                 {
-                  label: "アカウントごと削除する",
+                  label: "Qinアカウントの削除",
                   button: (
                     <Button
                       variant="solid-gray"
@@ -68,7 +68,7 @@ const SettingQinDelete: NextPage = () => {
         show={isShowDeleteQinMemo}
         onClose={handleCloseDeleteQinMemoDialog}
         onClickOk={handleDeleteQinMemo}
-        title="Qin Memoを削除"
+        title="Qin Memoのデータを削除"
         buttonText="削除する"
       />
 
