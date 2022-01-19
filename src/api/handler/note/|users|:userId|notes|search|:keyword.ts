@@ -9,7 +9,7 @@ const endpoint = `${API_URL}/users/:userId/notes/search`;
 /**
  * @package ユーザーのメモ一覧を検索して取得する
  */
-export const getUsersUserIdNotesSearchKeyword = rest.get<string, ListNoteType[], { userId: string; keyword: string }>(
+export const getUsersUserIdNotesSearchKeyword = rest.get<string, { userId: string; keyword: string }, ListNoteType[]>(
   endpoint,
   (req, res, ctx) => {
     const query = req.url.searchParams.get("q");

@@ -4,7 +4,6 @@ module.exports = {
   settings: { tailwindcss: { groupByResponsive: true } },
   plugins: ["simple-import-sort", "tailwindcss", "import-access"],
   extends: [
-    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:tailwindcss/recommended",

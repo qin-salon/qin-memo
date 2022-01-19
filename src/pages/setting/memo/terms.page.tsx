@@ -4,7 +4,7 @@ import { Layout } from "src/layout";
 const SettingMemoTerms: NextPage = () => {
   return (
     <Layout left="back" center="利用規約">
-      <div className="mx-auto prose prose-blue dark:prose-light">
+      <div className="mx-auto prose prose-blue dark:prose-invert">
         <p>
           本規約は、合同会社Qin（以下「弊社」とします）が提供するブログサービス『Qin
           Memo』（以下「本サービス」とします）について、その利用者との間に適用されるものです。

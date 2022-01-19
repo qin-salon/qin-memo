@@ -9,13 +9,13 @@ const endpoint = `${API_URL}/users`;
 /**
  * @package 自分のユーザー情報を取得する
  */
-export const getUsers = rest.get<string, UserType, never>(endpoint, (_req, res, ctx) => {
+export const getUsers = rest.get<string, never, UserType>(endpoint, (_req, res, ctx) => {
   return res(ctx.delay(1000), ctx.status(201), ctx.json(EXAMPLE_USER));
 });
 
 /**
  * @package ユーザーを作成する
  */
-export const postUsers = rest.post<string, UserType, never>(endpoint, (_req, res, ctx) => {
+export const postUsers = rest.post<string, never, UserType>(endpoint, (_req, res, ctx) => {
   return res(ctx.delay(1000), ctx.status(201), ctx.json(EXAMPLE_USER));
 });

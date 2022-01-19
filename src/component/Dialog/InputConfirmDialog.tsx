@@ -46,7 +46,7 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
   }, [props, text]);
 
   return (
-    <Transition.Root show={props.show} as={Fragment}>
+    <Transition show={props.show} as={Fragment}>
       <Dialog
         static
         className="overflow-y-auto fixed inset-0 z-10"
@@ -54,7 +54,7 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
         onClose={handleClose}
         initialFocus={buttonRef}
       >
-        <div className="text-center">
+        <div className="flex justify-center items-center min-h-screen">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-200"
@@ -64,12 +64,8 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-40" />
           </Transition.Child>
-
-          <span className="inline-block h-screen align-middle" aria-hidden="true">
-            &#8203;
-          </span>
 
           <Transition.Child
             as={Fragment}
@@ -80,7 +76,7 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
             leaveFrom="opacity-100 translate-y-0 scale-100"
             leaveTo="opacity-0 translate-y-0 scale-95"
           >
-            <div className="inline-block overflow-hidden p-4 w-10/12 max-w-sm text-left align-middle bg-white dark:bg-gray-800 rounded-2xl shadow-xl transition-all transform sm:p-6">
+            <div className="inline-block overflow-hidden z-10 p-4 w-10/12 max-w-sm text-left align-middle bg-white dark:bg-gray-800 rounded-2xl shadow-xl transition-all sm:p-6">
               <div className="text-center">
                 <Dialog.Title as="h3" className="font-bold leading-6">
                   {props.title}
@@ -106,6 +102,6 @@ export const InputConfirmDialog: VFC<Props> = (props) => {
           </Transition.Child>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 };

@@ -9,7 +9,7 @@ const endpoint = `${API_URL}/notes/:noteId`;
 /**
  * @package 特定のメモの情報を取得する
  */
-export const getNotesNoteId = rest.get<never, NoteType, { noteId: string }>(endpoint, (req, res, ctx) => {
+export const getNotesNoteId = rest.get<never, { noteId: string }, NoteType>(endpoint, (req, res, ctx) => {
   const { noteId } = req.params;
   const note = EXAMPLE_NOTE_DB.find(({ id }) => {
     return id === noteId;
@@ -20,14 +20,14 @@ export const getNotesNoteId = rest.get<never, NoteType, { noteId: string }>(endp
 /**
  * @package 特定のメモを更新する
  */
-export const putNotesNoteId = rest.put<string, undefined, Pick<NoteType, "content">>(endpoint, (_req, res, ctx) => {
+export const putNotesNoteId = rest.put<string, Pick<NoteType, "content">, undefined>(endpoint, (_req, res, ctx) => {
   return res(ctx.delay(1000), ctx.status(200));
 });
 
 /**
  * @package 特定のメモを削除する
  */
-export const deleteNotesNoteId = rest.delete<never, Pick<NoteType, "id">, { noteId: string }>(
+export const deleteNotesNoteId = rest.delete<never, { noteId: string }, Pick<NoteType, "id">>(
   endpoint,
   (req, res, ctx) => {
     const { noteId } = req.params;

@@ -29,7 +29,7 @@ export const UserMenu: VFC = () => {
       {({ open }) => {
         return (
           <>
-            <Popover.Button className="flex rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus:outline-none">
+            <Popover.Button className="flex rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
               <Avatar
                 alt={user?.accountName}
                 src={user?.avatarUrl}
@@ -53,9 +53,9 @@ export const UserMenu: VFC = () => {
               >
                 <Popover.Panel
                   static
-                  className="absolute left-full z-10 pl-8 mt-2 w-screen max-w-xs transform -translate-x-full sm:px-0 sm:pl-0 sm:max-w-sm xl:-left-full xl:-translate-x-1/2 2xl:left-1/2"
+                  className="absolute left-full z-10 pl-8 mt-2 w-screen max-w-xs -translate-x-full sm:px-0 sm:max-w-sm xl:-left-full xl:-translate-x-1/2 2xl:left-1/2"
                 >
-                  <div className="overflow-hidden py-4 bg-white dark:bg-gray-800 rounded-2xl ring-1 ring-gray-400 ring-opacity-20 shadow-lg">
+                  <div className="overflow-hidden py-4 bg-white dark:bg-gray-800 rounded-2xl ring-1 ring-gray-200 dark:ring-gray-700 shadow-lg">
                     <div>
                       <Link href="/setting/qin">
                         <a className="flex items-center p-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
@@ -77,7 +77,7 @@ export const UserMenu: VFC = () => {
                     <div className="grid relative">
                       <Link href="/setting/memo">
                         <a className="flex items-center py-2.5 px-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none">
-                          <div className="flex flex-shrink-0 justify-center items-center">
+                          <div className="flex shrink-0 justify-center items-center">
                             <CogIcon className="w-7 h-7" />
                           </div>
                           <p className="ml-4 font-bold">設定</p>
@@ -88,7 +88,7 @@ export const UserMenu: VFC = () => {
                         className="flex items-center py-2.5 px-4 hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-gray-700 dark:focus-visible:bg-gray-700 focus:outline-none"
                         onClick={handleSignOut}
                       >
-                        <div className="flex flex-shrink-0 justify-center items-center">
+                        <div className="flex shrink-0 justify-center items-center">
                           <LogoutIcon className="ml-0.5 w-7 h-7 text-red-500" />
                         </div>
                         <p className="ml-4 font-bold text-red-500">ログアウト</p>

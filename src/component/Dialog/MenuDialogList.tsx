@@ -45,7 +45,7 @@ export const MenuDialogList: VFC<MenuDialogListProps> = (props) => {
                       "flex items-center py-3 px-6 w-full text-left bg-gray-100 focus:bg-gray-200 dark:bg-gray-700 dark:focus:bg-gray-600 focus:outline-none",
                       {
                         "hover:bg-gray-200 dark:hover:bg-gray-600": !props.disabledColor,
-                        "text-gray-400 text-opacity-50 cursor-not-allowed": props.disabledColor,
+                        "text-gray-400 opacity-50 cursor-not-allowed": props.disabledColor,
                       }
                     )}
                     onClick={props.onClick}
@@ -60,7 +60,7 @@ export const MenuDialogList: VFC<MenuDialogListProps> = (props) => {
                       {props.label}
                     </div>
                     <div
-                      className={clsx("flex-shrink-0 w-5 h-5", {
+                      className={clsx("shrink-0 w-5 h-5", {
                         "text-blue-500": !props.disabledColor && props.iconColor === "blue",
                         "text-red-500": !props.disabledColor && props.iconColor === "red",
                         "text-blue-400": !props.disabledColor && props.iconColor === "twitter",

@@ -43,7 +43,7 @@ export const List: VFC<ListProps> = (props) => {
               <li key={i}>
                 <div className={className}>
                   <div className="flex-1">{item.label}</div>
-                  <div className="flex-shrink-0">{item.button}</div>
+                  <div className="shrink-0">{item.button}</div>
                 </div>
               </li>
             );
