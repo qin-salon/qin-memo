@@ -18,14 +18,24 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
   const router = useRouter();
   const { saveNote, handleChange, handleBlur } = useNote(props.note);
 
+  const handleWindowClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    saveNote(ref.current?.value);
+  };
+  const handleRouteChange = () => {
+    saveNote(ref.current?.value);
+  };
+
   useEffect(() => {
-    router.beforePopState(({ url }) => {
-      if (url !== "/root") return true;
-      saveNote(ref.current?.value);
-      return true;
-    });
+    if (window) window.addEventListener("beforeunload", handleWindowClose);
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    return () => {
+      if (window) window.removeEventListener("beforeunload", handleWindowClose);
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [saveNote]);
+  }, []);
 
   return (
     <label htmlFor="memo" className="block">
