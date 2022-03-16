@@ -34,7 +34,7 @@ export const SearchHistories: VFC<SearchHistoriesProps> = (props) => {
             <button type="button" className="flex-1 p-2.5 text-left" onClick={handleClickItem}>
               <span className="break-all line-clamp-1">{item.keyword}</span>
             </button>
-            <button type="button" className="grid flex-shrink-0 place-items-center w-9 h-9" onClick={handleDelete}>
+            <button type="button" className="grid shrink-0 place-items-center w-9 h-9" onClick={handleDelete}>
               <XIcon className="w-5 h-5 text-gray-300" />
             </button>
           </li>

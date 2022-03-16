@@ -34,7 +34,7 @@ export const DialogImage: VFC<{ children: ReactNode; src?: string; alt?: string 
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              <Dialog.Overlay className="fixed inset-0 bg-gray-500 opacity-75 transition-opacity" />
             </Transition.Child>
 
             <Transition.Child

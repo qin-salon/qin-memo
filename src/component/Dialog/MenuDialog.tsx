@@ -17,7 +17,7 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
   const buttonRef = useRef(null);
 
   return (
-    <Transition.Root show={props.show} as={Fragment}>
+    <Transition show={props.show} as={Fragment}>
       <Dialog
         static
         open={props.show}
@@ -27,7 +27,6 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
       >
         <div className="min-h-screen text-center">
           <Transition.Child
-            // as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -35,14 +34,14 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
+            <Dialog.Overlay className="fixed inset-0 bg-black opacity-40" />
           </Transition.Child>
 
           <span className="hidden sm:inline-block sm:h-screen sm:align-middle" aria-hidden="true">
             &#8203;
           </span>
 
-          <div className="fixed bottom-0 w-full sm:inline-block sm:static sm:max-w-md sm:align-middle sm:transform">
+          <div className="fixed bottom-0 w-full sm:inline-block sm:static sm:max-w-md sm:align-middle">
             <Transition.Child
               as={Fragment}
               enter="transform ease-in-out duration-300 sm:ease-out"
@@ -63,6 +62,6 @@ export const MenuDialog: VFC<MenuDialogProps> = (props) => {
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   );
 };

@@ -19,7 +19,7 @@ const SettingMemoTheme: NextPage = () => {
               key={theme.id}
               value={theme.id}
               className={({ active, checked }) => {
-                return clsx("-mx-4 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer focus:outline-none", {
+                return clsx("-mx-4 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none cursor-pointer", {
                   "bg-gray-100 dark:bg-gray-700": checked || active,
                 });
               }}

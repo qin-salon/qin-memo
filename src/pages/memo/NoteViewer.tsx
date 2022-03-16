@@ -1,4 +1,4 @@
-import Interweave from "interweave";
+import { Interweave } from "interweave";
 import { UrlMatcher } from "interweave-autolink";
 import Link from "next/link";
 import type { VFC } from "react";

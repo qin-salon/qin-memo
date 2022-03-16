@@ -4,7 +4,6 @@ module.exports = {
   settings: { tailwindcss: { groupByResponsive: true } },
   plugins: ["simple-import-sort", "tailwindcss", "import-access"],
   extends: [
-    "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:tailwindcss/recommended",
@@ -47,7 +46,7 @@ module.exports = {
     "@typescript-eslint/naming-convention": [
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
-      { selector: ["property", "method"], format: ["camelCase"] },
+      { selector: ["classProperty", "method"], format: ["camelCase"] },
       {
         selector: "variable",
         types: ["boolean"],

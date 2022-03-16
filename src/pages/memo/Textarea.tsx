@@ -18,20 +18,13 @@ export const Textarea: VFC<{ note: NoteType }> = (props) => {
   const router = useRouter();
   const { saveNote, handleChange, handleBlur } = useNote(props.note);
 
-  const handleWindowClose = (e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    saveNote(ref.current?.value);
-  };
   const handleRouteChange = () => {
     saveNote(ref.current?.value);
   };
 
   useEffect(() => {
-    if (window) window.addEventListener("beforeunload", handleWindowClose);
     router.events.on("routeChangeStart", handleRouteChange);
-
     return () => {
-      if (window) window.removeEventListener("beforeunload", handleWindowClose);
       router.events.off("routeChangeStart", handleRouteChange);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -70,6 +63,7 @@ const useNote = (note: NoteType) => {
         headers: { authorization: `Bearer ${idToken}`, "content-type": "application/json" },
         body: JSON.stringify({ content: value ? value.trim() : "" }),
       });
+      if (!res.ok) return;
       const updatedNote: NoteTypeWithExcerpt | undefined = await res.json();
       await mutate(
         `${API_URL}/notes`,

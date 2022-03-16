@@ -9,7 +9,7 @@ const endpoint = `${API_URL}/notes/:noteId/public`;
 /**
  * @package 特定のメモを公開する
  */
-export const patchNotesNoteIdPublic = rest.patch<never, NoteType, { noteId: string }>(endpoint, (req, res, ctx) => {
+export const patchNotesNoteIdPublic = rest.patch<never, { noteId: string }, NoteType>(endpoint, (req, res, ctx) => {
   const note = EXAMPLE_NOTE_DB.find(({ id }) => {
     return id === req.params.noteId;
   });

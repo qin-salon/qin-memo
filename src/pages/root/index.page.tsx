@@ -34,7 +34,7 @@ const Root: NextPage = () => {
           ) : null}
         </div>
         <Link href="/search">
-          <a className="block rounded-full focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none">
+          <a className="block rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400">
             <Search placeholder="メモを検索する" disabled />
           </a>
         </Link>

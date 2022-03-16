@@ -29,7 +29,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
             type="text"
             id={rest.name}
             className={clsx(
-              "py-6 pr-5 mt-0.5 w-full h-10 font-bold bg-gray-100 dark:bg-gray-700 dark:focus:bg-gray-600 rounded-full border-none focus:ring-2 focus:ring-blue-400 focus:outline-none",
+              "py-6 pr-5 mt-0.5 w-full h-10 font-bold bg-gray-100 dark:bg-gray-700 dark:focus:bg-gray-600 rounded-full border-none focus:outline-none focus:ring-2 focus:ring-blue-400",
               rest.prefix ? "pl-10" : "pl-5",
               className
             )}
