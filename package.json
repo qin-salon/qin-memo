@@ -17,11 +17,6 @@
     "env": "vc env pull .env.local",
     "prepare": "husky install"
   },
-  "babel": {
-    "presets": [
-      "next/babel"
-    ]
-  },
   "prettier": {
     "printWidth": 120
   },
@@ -41,7 +36,6 @@
     "date-fns": "2.28.0",
     "firebase": "9.6.8",
     "firebase-admin": "10.0.2",
-    "http-proxy": "1.18.1",
     "interweave": "13.0.0",
     "interweave-autolink": "5.0.0",
     "next": "12.1.0",
@@ -58,14 +52,12 @@
   },
   "devDependencies": {
     "@testing-library/react": "12.1.4",
-    "@types/http-proxy": "1.17.8",
     "@types/jest": "27.4.1",
     "@types/node": "17.0.21",
     "@types/react": "17.0.40",
     "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.15.0",
     "autoprefixer": "10.4.3",
-    "babel-jest": "27.5.1",
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",
     "eslint-config-prettier": "8.5.0",
@@ -77,9 +69,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-tailwindcss": "3.5.0",
     "husky": "7.0.4",
-    "identity-obj-proxy": "3.0.0",
     "jest": "27.5.1",
-    "jest-watch-typeahead": "1.0.0",
     "lint-staged": "12.3.5",
     "msw": "0.39.2",
     "npm-run-all": "4.1.5",
