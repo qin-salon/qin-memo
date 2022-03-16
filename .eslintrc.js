@@ -46,7 +46,7 @@ module.exports = {
     "@typescript-eslint/naming-convention": [
       "error",
       { selector: ["typeAlias", "typeParameter"], format: ["PascalCase"] },
-      { selector: ["property", "method"], format: ["camelCase"] },
+      { selector: ["classProperty", "method"], format: ["camelCase"] },
       {
         selector: "variable",
         types: ["boolean"],

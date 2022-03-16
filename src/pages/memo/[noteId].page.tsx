@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { AuthAction, withAuthUserTokenSSR } from "next-firebase-auth";
-import { BlogJsonLd, NextSeo } from "next-seo";
+import { ArticleJsonLd, NextSeo } from "next-seo";
 import { useMemo } from "react";
 import { API_URL } from "src/api/endpoint";
 import type { NoteType } from "src/api/handler/note/type";
@@ -58,7 +58,7 @@ const MemoNoteId: NextPage<MemoNoteIdProps> = (props) => {
               images: [{ url: props.note.users.avatarUrl, alt: props.note.users.accountName }],
             }}
           />
-          <BlogJsonLd
+          <ArticleJsonLd
             url={url}
             title={title}
             description={description}
